@@ -7,19 +7,19 @@
   --bg:#f3f5f7; --panel:#ffffff; --ink:#15202b; --muted:#5b6875; --line:#d9dfe5; --soft:#e9edf1;
   --accent:#1f5f8b; --accent-ink:#ffffff; --band:#223445; --band-ink:#eef3f7;
   --on:#1e8a4c; --on-bg:#dff2e7; --risk:#b7791f; --risk-bg:#fbf0d9; --off:#c0392b; --off-bg:#fbe3e0;
-  --done:#6b7785; --done-bg:#e6eaee; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
+  --done:#6b7785; --done-bg:#e6eaee; --pause:#2f63b0; --pause-bg:#e1eafa; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
   --f-disp:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#7fa8ec; --pause-bg:#1d2b45; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#7fa8ec; --pause-bg:#1d2b45; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:20px 60px}
@@ -71,11 +71,27 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .moved{background:var(--moved-bg);color:var(--moved)}
 .date{font:12px var(--f-mono);white-space:nowrap;font-variant-numeric:tabular-nums}
 .date.late{color:var(--off);font-weight:500}
-.strip{display:grid;grid-template-columns:repeat(12,9px);gap:2px}
-.strip i{height:12px;border-radius:2px;background:var(--soft)}
-.strip i.green{background:var(--on)}.strip i.yellow{background:var(--risk)}.strip i.red{background:var(--off)}
-.strip i.complete{background:var(--done)}.strip i.planned{background:none;border:1px dashed var(--plan)}.strip i.na{background:var(--soft)}
-.strip i.now{box-shadow:0 0 0 1px var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(12,15px);gap:3px}
+.strip i,.strip .c{display:block;width:15px;height:15px;border-radius:3px;background:var(--soft);border:0;padding:0}
+.strip .c{cursor:pointer}
+.strip .c:hover{outline:2px solid var(--accent);outline-offset:1px}
+.strip .green{background:var(--on)}.strip .yellow{background:var(--risk)}.strip .red{background:var(--off)}
+.strip .complete{background:var(--done)}.strip .planned{background:none;border:1px dashed var(--plan)}.strip .na{background:var(--soft)}
+.strip .now{box-shadow:0 0 0 1.5px var(--ink)}
+.mh{font:600 9px var(--f-mono);color:var(--muted)}.mh span{text-align:center}
+td.upd{width:300px;min-width:220px;font-size:12px;color:var(--muted)}
+td.upd .clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink)}
+td.upd .d{font:11px var(--f-mono)}
+.s-completed{background:var(--on-bg);color:var(--on)}.s-paused{background:var(--pause-bg);color:var(--pause)}
+tr.act.completed .ttl,tr.act.closed .ttl{color:var(--muted)}
+tr.act.closed .ttl{text-decoration:line-through;text-decoration-color:var(--line)}
+tr.act.paused .ttl{font-style:italic}
+.pop{position:absolute;z-index:25;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 20px rgb(0 0 0 / .18);padding:6px;display:grid;grid-template-columns:repeat(2,auto);gap:4px}
+.pop .hd{grid-column:1/-1;font-size:11px;color:var(--muted);padding:2px 4px}
+.pop button{display:flex;gap:6px;align-items:center;background:none;border:1px solid transparent;border-radius:4px;padding:4px 8px;color:var(--ink);font-size:12px;text-align:left}
+.pop button:hover,.pop button.sel{border-color:var(--line);background:var(--soft)}
+.pop .strip{display:inline-grid;grid-template-columns:15px}
+.viewbar{font-size:12px;color:var(--muted);margin-top:6px}
 .empty{padding:40px 16px;text-align:center;color:var(--muted)}
 .addrow{padding:8px 14px}
 /* drawer */
@@ -98,7 +114,7 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:30;font-size:13px}
 .ro{font-size:12px;color:var(--risk);}
 .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--muted);align-items:center;margin-top:8px}
-.legend .strip{grid-template-columns:9px}
+.legend .strip{grid-template-columns:15px}
 @media (max-width:640px){.fgrid{grid-template-columns:1fr} input[type=search]{width:100%}.filters label{flex:1 1 40%}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -118,10 +134,11 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
     <label>Objective<select id="f-obj"></select></label>
     <label>Owner<select id="f-owner"></select></label>
     <label>Region<select id="f-region"></select></label>
-    <label>Status<select id="f-status"><option value="">All</option><option value="open">Open</option><option value="closed">Closed</option></select></label>
+    <label>Status<select id="f-status"><option value="">All</option><option value="open">Open</option><option value="paused">Paused (parking lot)</option><option value="completed">Completed</option><option value="closed">Closed (won't do)</option></select></label>
+    <label>Completed in<select id="f-done"><option value="">Any time</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="60">Last 60 days</option><option value="90">Last 90 days</option></select></label>
     <label>Schedule<select id="f-health"><option value="">All</option><option value="on">On track</option><option value="risk">At risk</option><option value="off">Off track</option><option value="none">Not rated</option><option value="late">Past due</option><option value="moved">Date moved</option></select></label>
     <label>Group by<select id="f-group"><option value="tree">Priority &amp; objective</option><option value="owner">Owner</option><option value="region">Region</option><option value="flat">None</option></select></label>
-    <label>Sort<select id="f-sort"><option value="order">Plan order</option><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option></select></label>
+    <label>Sort<select id="f-sort"><option value="order">Plan order</option><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option><option value="done">Recently completed</option></select></label>
     <button class="btn" id="f-clear" type="button">Clear</button>
   </div>
   <div class="legend">
@@ -134,6 +151,7 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
     <span class="strip"><i class="na"></i></span>Not active
   </div>
 
+  <div class="viewbar" id="viewbar"></div>
   <main id="main"><div class="empty">Loading the tracker…</div></main>
 </div>
 
@@ -145,20 +163,24 @@ const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'
 const HL={on:'On track',risk:'At risk',off:'Off track',none:'Not rated'};
 const HRANK={off:0,risk:1,none:2,on:3};
 const CODES={'':'—',green:'On track',yellow:'At risk',red:'Off track',complete:'Complete',planned:'Planned',na:'Not active'};
+const STAT={open:'Open',paused:'Paused',completed:'Completed',closed:"Closed (won't do)"};
+const HCODE={green:'on',yellow:'risk',red:'off'};
 const S={pri:{},obj:{},act:{},notes:{}};
-let db=null,user=null,uid=null,canWrite=true,names={},openId=null,kpiFilter='';
+let db=null,user=null,uid=null,canWrite=true,names={},openId=null,view='';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today=()=>new Date().toISOString().slice(0,10);
 const fmt=d=>{if(!d)return '—';const [y,m,dd]=d.split('-');return `${dd} ${M[+m-1]} ${y.slice(2)}`};
 const split=s=>String(s||'').split(/[,\/&]| and /i).map(x=>x.trim().replace(/\?$/,'')).filter(Boolean);
-const normR=r=>{const u=r.toUpperCase();return u==='LATAM'?'LATAM':r};
+const normR=r=>{const u=r.toUpperCase();return u==='LATAM'?'LATAM':u==='GLOBAL'?'Global':r};
 function toast(t){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2400)}
-const isLate=a=>a.status!=='closed'&&a.targetDate&&a.targetDate<today();
+const isLate=a=>a.status==='open'&&a.targetDate&&a.targetDate<today();
 const isMoved=a=>(a.dateHistory||[]).length>0&&a.originalDate&&a.targetDate!==a.originalDate;
+const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10)};
 
+const FILTERS=['q','pri','obj','owner','region','status','done','health'];
 function prefs(){try{return JSON.parse(localStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
-function savePrefs(){try{const o={};['q','pri','obj','owner','region','status','health','group','sort'].forEach(k=>o[k]=$('#f-'+k).value);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+function savePrefs(){try{const o={view};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
 
 function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
 function objsOf(pid){return Object.values(S.obj).filter(o=>o.priorityId===pid).sort((a,b)=>a.order-b.order)}
@@ -174,59 +196,68 @@ function refreshFilters(){
   fillSelect('region',[...reg].sort().map(x=>[x,x]).concat([['__none','(No region)']]));
 }
 
+/* Dropdown filters define the record set AND the counts at the top. */
 function filtered(){
   const f=k=>$('#f-'+k).value, q=f('q').toLowerCase();
   return Object.values(S.act).filter(a=>{
     if(f('pri')&&a.priorityId!==f('pri'))return false;
     if(f('obj')&&a.objectiveId!==f('obj'))return false;
     if(f('owner')){if(f('owner')==='__none'?split(a.owner).length:!split(a.owner).includes(f('owner')))return false}
-    if(f('region')){const r=split(a.region).map(normR);if(f('region')==='__none'?r.length:!(r.includes(f('region'))||r.includes('Global')))return false}
+    if(f('region')){const r=split(a.region).map(normR);if(f('region')==='__none'?r.length:!r.includes(f('region')))return false}
     if(f('status')&&a.status!==f('status'))return false;
+    if(f('done')&&!(a.status==='completed'&&(a.completedAt||'').slice(0,10)>=daysAgo(+f('done'))))return false;
     const h=f('health');
-    if(h==='late'?!isLate(a):h==='moved'?!isMoved(a):h&&a.health!==h)return false;
-    if(kpiFilter==='late'&&!isLate(a))return false;
-    if(kpiFilter==='moved'&&!isMoved(a))return false;
+    if(h==='late'?!isLate(a):h==='moved'?!isMoved(a):h&&!(a.status==='open'&&a.health===h))return false;
     if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true});
 }
-function sorter(){const s=$('#f-sort').value;return (a,b)=>{
+/* Count tiles are a view on top of the filtered set. Clicking one never changes the counts. */
+const VIEWS={'':['Actions',()=>true],open:['Open',a=>a.status==='open'],paused:['Paused',a=>a.status==='paused'],
+  completed:['Completed',a=>a.status==='completed'],closed:['Closed',a=>a.status==='closed'],
+  on:['On track',a=>a.status==='open'&&a.health==='on'],risk:['At risk',a=>a.status==='open'&&a.health==='risk'],
+  off:['Off track',a=>a.status==='open'&&a.health==='off'],late:['Past due',isLate],moved:['Date moved',isMoved]};
+function sorter(){const s=$('#f-sort').value;const rank={open:0,paused:1,completed:2,closed:3};return (a,b)=>{
   if(s==='date')return (a.targetDate||'9999').localeCompare(b.targetDate||'9999');
-  if(s==='health')return (a.status==='closed')-(b.status==='closed')||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
+  if(s==='health')return (rank[a.status]??0)-(rank[b.status]??0)||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
   if(s==='updated')return (b.updatedAt||'').localeCompare(a.updatedAt||'');
+  if(s==='done')return (b.completedAt||'').localeCompare(a.completedAt||'');
   const oa=S.obj[a.objectiveId],ob=S.obj[b.objectiveId];
   return (a.priorityId||'').localeCompare(b.priorityId||'')||(oa?.order??0)-(ob?.order??0)||a.order-b.order}}
 
 function notesFor(pid){return Object.values(S.notes).filter(n=>n.parentId===pid)}
 function lastNote(a){const n=notesFor(a.id).sort((x,y)=>y.at.localeCompare(x.at))[0];if(n)return {date:n.at.slice(0,10),text:n.text};return (a.history||[])[0]}
 
-function kpis(list){
-  const open=list.filter(a=>a.status==='open');
-  const k=[['',list.length,'Actions'],['open',open.length,'Open'],['closed',list.length-open.length,'Closed'],
-    ['on',open.filter(a=>a.health==='on').length,'On track'],['risk',open.filter(a=>a.health==='risk').length,'At risk'],
-    ['off',open.filter(a=>a.health==='off').length,'Off track'],['late',open.filter(isLate).length,'Past due'],['moved',list.filter(isMoved).length,'Date moved']];
-  $('#kpis').innerHTML=k.map(([key,n,l])=>`<button type="button" class="kpi ${key}" data-k="${key}" aria-pressed="${curKpi()===key&&key!==''}"><b>${n}</b><span>${l}</span></button>`).join('');
+function kpis(base){
+  $('#kpis').innerHTML=Object.entries(VIEWS).map(([key,[l,fn]])=>`<button type="button" class="kpi ${key}" data-k="${key}" aria-pressed="${view===key&&key!==''}" title="${key?'Show only these records. Counts stay the same.':'Show all filtered records'}"><b>${base.filter(fn).length}</b><span>${l}</span></button>`).join('');
+  const act=FILTERS.filter(k=>$('#f-'+k).value).map(k=>{const el=$('#f-'+k);return el.tagName==='SELECT'?el.options[el.selectedIndex].text:`“${el.value}”`});
+  $('#viewbar').textContent=(act.length?'Filters: '+act.join(' · '):'No filters applied')+(view?`. Showing ${VIEWS[view][0]} only (click the tile again to show all).`:'');
 }
-function curKpi(){const s=$('#f-status').value,h=$('#f-health').value;return h||s||''}
 
-function strip(a){const now=new Date().getFullYear()===2026?new Date().getMonth():-1;return `<span class="strip" title="${M.map(m=>m+': '+(CODES[a.months?.[m]||'']||'—')).join('\n')}">${M.map((m,i)=>`<i class="${a.months?.[m]||''}${i===now?' now':''}"></i>`).join('')}</span>`}
+const NOWM=new Date().getFullYear()===2026?new Date().getMonth():-1;
+function strip(a){return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${a.months?.[m]||''}${i===NOWM?' now':''}" data-cell="${a.id}" data-m="${m}" aria-label="${m}: ${CODES[a.months?.[m]||'']}" title="${m}: ${CODES[a.months?.[m]||'']}"></button>`).join('')}</span>`}
+function statusPill(a){return a.status==='open'?`<span class="pill h-${a.health||'none'}">${HL[a.health||'none']}</span>`:`<span class="pill s-${a.status}">${a.status==='closed'?'Closed':STAT[a.status]||a.status}</span>`}
 function row(a,ctx){
   const ln=lastNote(a);
   return `<tr class="act ${a.status}" data-id="${a.id}" tabindex="0">
-   <td class="ttl"><div>${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}${ln?`<div class="ctx" title="${esc(ln.text)}">${ln.date?fmt(ln.date)+': ':''}${esc(ln.text.length>90?ln.text.slice(0,88)+'…':ln.text)}</div>`:''}</td>
+   <td class="ttl"><div>${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}</td>
    <td>${esc(a.owner)||'<span class="ctx">—</span>'}</td>
    <td>${esc(a.region)||'<span class="ctx">—</span>'}</td>
-   <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}</td>
+   <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}${a.status==='completed'&&a.completedAt?`<div class="ctx">Done ${fmt(a.completedAt.slice(0,10))}</div>`:''}</td>
    <td>${strip(a)}</td>
-   <td>${a.status==='closed'?'<span class="pill s-closed">Closed</span>':`<span class="pill h-${a.health}">${HL[a.health]}</span>`}</td></tr>`}
-const THEAD=`<thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th>Jan–Dec</th><th>Status</th></tr></thead>`;
+   <td>${statusPill(a)}</td>
+   <td class="upd">${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
+const THEAD=`<thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
-  return `<span class="bar" title="Closed / on track / at risk / off track / not rated"><i style="width:${c(a=>a.status==='closed')}%;background:var(--done)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i></span>`}
+  return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--done)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
 
 function render(){
-  const list=filtered().sort(sorter()),g=$('#f-group').value,main=$('#main');
-  kpis(filtered.call?list:list);
+  const base=filtered();
+  if(!VIEWS[view])view='';
+  const list=base.filter(VIEWS[view][1]).sort(sorter()),g=$('#f-group').value,main=$('#main');
+  kpis(base);
   if(!Object.keys(S.pri).length){main.innerHTML=`<div class="empty">No priorities yet.${canWrite?' <button class="btn primary" data-add="pri">Add a priority</button>':''}</div>`;return}
-  const filtersOn=['q','pri','obj','owner','region','status','health'].some(k=>$('#f-'+k).value)||kpiFilter;
+  const filtersOn=FILTERS.some(k=>$('#f-'+k).value)||view;
+  const cnt=l=>`${l.filter(a=>a.status==='open').length} open · ${l.filter(a=>a.status==='paused').length} paused · ${l.length} total`;
   let h='';
   if(g==='tree'){
     for(const p of sortedPri()){
@@ -234,13 +265,13 @@ function render(){
       const objs=objsOf(p.id).filter(o=>!$('#f-obj').value||o.id===$('#f-obj').value);
       const pl=list.filter(a=>a.priorityId===p.id);
       if(filtersOn&&!pl.length)continue;
-      h+=`<section><div class="band"><h2>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span><span class="counts">${pl.filter(a=>a.status==='open').length} open · ${pl.length} total</span><button class="btn ghost" data-open="${p.id}">Notes (${(p.history||[]).length+notesFor(p.id).length})</button></div><div class="pri">`;
+      h+=`<section><div class="band"><h2>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span><span class="counts">${cnt(pl)}</span><button class="btn ghost" data-open="${p.id}">Notes (${(p.history||[]).length+notesFor(p.id).length})</button></div><div class="pri">`;
       for(const o of objs){
         const ol=pl.filter(a=>a.objectiveId===o.id);
         if(filtersOn&&!ol.length)continue;
-        h+=`<div class="obj"><div class="objhead"><h3>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${ol.filter(a=>a.status==='open').length} open / ${ol.length}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
+        h+=`<div class="obj"><div class="objhead"><h3>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${cnt(ol)}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
         if(ol.length){h+=`<div class="tblwrap"><table>${THEAD}<tbody>`;let grp=null;
-          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="6">${esc(grp)}</td></tr>`}h+=row(a)}
+          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="7">${esc(grp)}</td></tr>`}h+=row(a)}
           h+='</tbody></table></div>'}
         if(canWrite)h+=`<div class="addrow"><button class="btn ghost" data-add="act" data-obj="${o.id}">+ Add action</button></div>`;
         h+='</div>'}
@@ -249,13 +280,35 @@ function render(){
     if(canWrite&&!filtersOn)h+=`<div class="addrow"><button class="btn" data-add="pri">+ Add priority</button></div>`;
   }else{
     const buckets=new Map();
-    for(const a of list){const keys=g==='flat'?['All actions']:(g==='owner'?split(a.owner):split(a.region).map(normR));(keys.length?keys:['(Unassigned)']).forEach(k=>{if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(a)})}
+    for(const a of list){const keys=g==='flat'?['All actions']:(g==='owner'?split(a.owner):[...new Set(split(a.region).map(normR))]);(keys.length?keys:['(Unassigned)']).forEach(k=>{if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(a)})}
     const ks=[...buckets.keys()].sort((a,b)=>a.startsWith('(')-b.startsWith('(')||a.localeCompare(b));
     for(const k of ks){const bl=buckets.get(k);
-      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span>${healthBar(bl)}<span class="counts">${bl.filter(a=>a.status==='open').length} open · ${bl.length} total</span></div><div class="pri"><div class="tblwrap"><table>${THEAD}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
+      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span>${healthBar(bl)}<span class="counts">${cnt(bl)}</span></div><div class="pri"><div class="tblwrap"><table>${THEAD}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
   }
   main.innerHTML=h||'<div class="empty">No actions match these filters.</div>';
   if(openId)drawer(openId,true);
+}
+
+/* ---------- month color picker ---------- */
+let popFor=null;
+function closePop(){document.querySelector('.pop')?.remove();popFor=null}
+function openPop(btn){
+  closePop();if(!canWrite){toast('View only: you can’t change month status.');return}
+  const a=S.act[btn.dataset.cell],m=btn.dataset.m,cur=a.months?.[m]||'';popFor={id:a.id,m};
+  const el=document.createElement('div');el.className='pop';el.setAttribute('role','menu');
+  el.innerHTML=`<div class="hd">${m} · ${esc(a.title.slice(0,40))}</div>`+Object.entries(CODES).map(([k,l])=>`<button type="button" role="menuitem" data-code="${k}" class="${k===cur?'sel':''}"><span class="strip"><i class="${k}"></i></span>${k?l:'Clear'}</button>`).join('');
+  document.body.appendChild(el);
+  const r=btn.getBoundingClientRect(),w=el.offsetWidth,hgt=el.offsetHeight;
+  let left=r.left+window.scrollX+r.width/2-w/2;left=Math.max(8,Math.min(left,document.documentElement.clientWidth-w-8));
+  let top=r.top+window.scrollY-hgt-6;if(r.top-hgt-6<0)top=r.bottom+window.scrollY+6;
+  el.style.left=left+'px';el.style.top=top+'px';
+  (el.querySelector('button.sel')||el.querySelector('button'))?.focus();
+}
+async function pickCode(code){
+  if(!popFor)return;const {id,m}=popFor;closePop();const a=S.act[id];
+  const patch={months:{...(a.months||{}),[m]:code},...stamp()};
+  if(M.indexOf(m)===NOWM&&HCODE[code])patch.health=HCODE[code];
+  await write('actions',id,patch,`${m} set to ${CODES[code]}`);
 }
 
 /* ---------- drawer ---------- */
@@ -282,7 +335,7 @@ function drawer(id,refresh){
       <label class="full">Action<textarea id="d-title" rows="2" ${dis}>${esc(a.title)}</textarea></label>
       <label>Owner(s)<input id="d-owner" value="${esc(a.owner)}" placeholder="e.g. Justin, Kyle" ${dis}></label>
       <label>Region(s)<input id="d-region" value="${esc(a.region)}" placeholder="Global, NA, EMEA…" ${dis}></label>
-      <label>Status<select id="d-status" ${dis}><option value="open">Open</option><option value="closed">Closed</option></select></label>
+      <label>Status<select id="d-status" ${dis}>${Object.entries(STAT).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>
       <label>Schedule<select id="d-health" ${dis}>${Object.entries(HL).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>
       <label>Target date<input type="date" id="d-date" value="${esc(a.targetDate)}" ${dis}></label>
       <label>Original date<input type="date" id="d-orig" value="${esc(a.originalDate)}" ${dis}></label>
@@ -323,7 +376,10 @@ async function onField(e){
     const map={'d-title':'title','d-owner':'owner','d-region':'region','d-status':'status','d-health':'health','d-goal':'targetGoal','d-group':'group','d-orig':'originalDate'};
     if(map[t.id]){const v=t.value.trim();if(v===(a[map[t.id]]||''))return;
       const patch={[map[t.id]]:v,...stamp()};
-      if(t.id==='d-status'&&v==='closed')patch.months={...(a.months||{}),[M[new Date().getMonth()]]:'complete'};
+      if(t.id==='d-status'){
+        if(v==='completed'){patch.completedAt=new Date().toISOString();if(NOWM>=0)patch.months={...(a.months||{}),[M[NOWM]]:'complete'}}
+        else patch.completedAt='';
+        await write('actions',a.id,patch,`Marked ${STAT[v]}`);return}
       await write('actions',a.id,patch,'Saved');return}
     if(t.id==='d-obj'&&t.value!==a.objectiveId){await write('actions',a.id,{objectiveId:t.value,priorityId:S.obj[t.value].priorityId,...stamp()},'Moved to objective');return}
     if(t.id==='d-date'&&t.value!==a.targetDate){
@@ -359,6 +415,10 @@ async function addItem(b){
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
+  const cell=e.target.closest('[data-cell]'),code=e.target.closest('.pop [data-code]');
+  if(code){e.stopPropagation();return pickCode(code.dataset.code)}
+  if(cell){e.stopPropagation();return popFor&&popFor.id===cell.dataset.cell&&popFor.m===cell.dataset.m?closePop():openPop(cell)}
+  if(!e.target.closest('.pop'))closePop();
   const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
   if(t.matches('[data-close]'))return closeDrawer();
   if(t.matches('[data-open]'))return drawer(t.dataset.open);
@@ -367,17 +427,16 @@ document.addEventListener('click',e=>{
   if(t.id==='d-addnote')return addNote();
   if(t.id==='d-del')return delItem(t);
   if(t.matches('[data-delnote]'))return db.collection('notes').doc(t.dataset.delnote).delete().catch(()=>toast('Could not remove.'));
-  if(t.id==='f-clear'){['q','pri','obj','owner','region','status','health'].forEach(k=>$('#f-'+k).value='');kpiFilter='';refreshFilters();savePrefs();return render()}
-  if(t.matches('[data-k]')){const k=t.dataset.k;$('#f-status').value='';$('#f-health').value='';
-    if(curKpi()!==k||true){if(k==='open'||k==='closed')$('#f-status').value=k;else if(k){$('#f-status').value='open';$('#f-health').value=k==='moved'?'moved':k;if(k==='moved')$('#f-status').value=''}}
-    savePrefs();render()}
+  if(t.id==='f-clear'){FILTERS.forEach(k=>$('#f-'+k).value='');view='';refreshFilters();savePrefs();return render()}
+  if(t.matches('[data-k]')){const k=t.dataset.k;view=view===k?'':k;savePrefs();render()}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id)});
+window.addEventListener('resize',closePop);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&popFor){closePop();return}if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id)});
 $('#drawer-root').addEventListener('change',onField);
 $('#filters').addEventListener('input',e=>{if(e.target.id==='f-pri')refreshFilters();savePrefs();render()});
 
 /* ---------- boot ---------- */
-(function(){const p=prefs();refreshFilters();for(const k in p){const el=$('#f-'+k);if(el){el.value=p[k]}}})();
+(function(){const p=prefs();refreshFilters();view=p.view||'';for(const k in p){const el=$('#f-'+k);if(el){el.value=p[k]}}})();
 let loaded={pri:false,obj:false,act:false};
 function sub(col,key){
   db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>S[key][d.id]={id:d.id,...d.data()});loaded[key]=true;
