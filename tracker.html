@@ -1,0 +1,396 @@
+<title>UVNN Strategy Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky filter rail on top, priorities as bands, objectives as sections, actions as dense rows with a 12-month strip */
+:root{
+  --bg:#f3f5f7; --panel:#ffffff; --ink:#15202b; --muted:#5b6875; --line:#d9dfe5; --soft:#e9edf1;
+  --accent:#1f5f8b; --accent-ink:#ffffff; --band:#223445; --band-ink:#eef3f7;
+  --on:#1e8a4c; --on-bg:#dff2e7; --risk:#b7791f; --risk-bg:#fbf0d9; --off:#c0392b; --off-bg:#fbe3e0;
+  --done:#6b7785; --done-bg:#e6eaee; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
+  --f-disp:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
+  --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
+  --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
+  --done:#9aa6b2; --done-bg:#253240; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
+  --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
+  --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
+  --done:#9aa6b2; --done-bg:#253240; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:20px 60px}
+h1,h2,h3{font-family:var(--f-disp);text-wrap:balance;margin:0}
+h1{font-size:26px;font-weight:700;letter-spacing:.01em}
+.sub{color:var(--muted);font-size:13px}
+header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:end;justify-content:space-between;margin-bottom:16px}
+.kpis{display:flex;flex-wrap:wrap;gap:8px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 12px;min-width:84px;cursor:pointer;text-align:left;color:var(--ink);font:inherit}
+.kpi b{display:block;font:600 20px var(--f-mono);font-variant-numeric:tabular-nums}
+.kpi span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.kpi.on b{color:var(--on)}.kpi.risk b{color:var(--risk)}.kpi.off b{color:var(--off)}.kpi.moved b{color:var(--moved)}
+.kpi[aria-pressed="true"]{outline:2px solid var(--accent)}
+.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters label{display:flex;flex-direction:column;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);gap:2px}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:5px 7px;min-width:0}
+input[type=search]{width:200px}
+textarea{width:100%;resize:vertical}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:4px;padding:5px 10px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{border-color:transparent;background:none;color:var(--accent);padding:3px 6px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.conn{font-size:12px;color:var(--muted)}
+.band{margin-top:22px;background:var(--band);color:var(--band-ink);border-radius:6px 6px 0 0;padding:10px 14px;display:flex;gap:10px 16px;flex-wrap:wrap;align-items:baseline}
+.band h2{font-size:18px}.band .stmt{font-size:13px;opacity:.85;flex:1 1 300px;min-width:0}
+.band .btn.ghost{color:var(--band-ink);text-decoration:underline}
+.pri{background:var(--panel);border:1px solid var(--line);border-top:0;border-radius:0 0 6px 6px}
+.obj{border-top:1px solid var(--line)}
+.obj:first-child{border-top:0}
+.objhead{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:10px 14px;background:var(--soft)}
+.objhead h3{font-size:15px;font-weight:600;flex:1 1 260px;min-width:0}
+.bar{display:flex;height:6px;width:120px;border-radius:3px;overflow:hidden;background:var(--line)}
+.bar i{display:block}
+.counts{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:860px}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);text-align:left;font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:6px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
+tr.act{cursor:pointer}
+tr.act:hover td{background:var(--soft)}
+tr.act.closed .ttl{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding-top:10px;font-weight:600}
+.ttl{min-width:0}
+.ctx{font-size:11px;color:var(--muted)}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.h-on{background:var(--on-bg);color:var(--on)}.h-risk{background:var(--risk-bg);color:var(--risk)}.h-off{background:var(--off-bg);color:var(--off)}.h-none{background:var(--soft);color:var(--muted)}
+.s-closed{background:var(--done-bg);color:var(--done)}.s-open{background:none;border:1px solid var(--line);color:var(--ink)}
+.moved{background:var(--moved-bg);color:var(--moved)}
+.date{font:12px var(--f-mono);white-space:nowrap;font-variant-numeric:tabular-nums}
+.date.late{color:var(--off);font-weight:500}
+.strip{display:grid;grid-template-columns:repeat(12,9px);gap:2px}
+.strip i{height:12px;border-radius:2px;background:var(--soft)}
+.strip i.green{background:var(--on)}.strip i.yellow{background:var(--risk)}.strip i.red{background:var(--off)}
+.strip i.complete{background:var(--done)}.strip i.planned{background:none;border:1px dashed var(--plan)}.strip i.na{background:var(--soft)}
+.strip i.now{box-shadow:0 0 0 1px var(--ink)}
+.empty{padding:40px 16px;text-align:center;color:var(--muted)}
+.addrow{padding:8px 14px}
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgb(0 0 0 / .35);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--panel);z-index:21;border-left:1px solid var(--line);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dhead{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:start}
+.dhead .crumb{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.dbody{overflow-y:auto;padding:14px 16px;display:grid;gap:14px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fgrid label,.full{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;min-width:0}
+.fgrid .full{grid-column:1/-1}
+.sec h4{font:600 12px var(--f-disp);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px;color:var(--muted)}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.log li{border-left:3px solid var(--line);padding-left:10px}
+.log li.new{border-left-color:var(--accent)}
+.log .meta{font:11px var(--f-mono);color:var(--muted)}
+.monthsel{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.monthsel label{font-size:10px;display:flex;flex-direction:column;gap:2px;color:var(--muted)}
+.monthsel select{padding:3px}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:30;font-size:13px}
+.ro{font-size:12px;color:var(--risk);}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--muted);align-items:center;margin-top:8px}
+.legend .strip{grid-template-columns:9px}
+@media (max-width:640px){.fgrid{grid-template-columns:1fr} input[type=search]{width:100%}.filters label{flex:1 1 40%}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>UVNN 2026 Strategy Tracker</h1>
+      <div class="sub">Priorities → objectives → actions. Edits save for the whole team. <span class="conn" id="conn">Connecting…</span></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </header>
+
+  <div class="filters" id="filters">
+    <label>Search<input type="search" id="f-q" placeholder="Task, note, owner…"></label>
+    <label>Priority<select id="f-pri"></select></label>
+    <label>Objective<select id="f-obj"></select></label>
+    <label>Owner<select id="f-owner"></select></label>
+    <label>Region<select id="f-region"></select></label>
+    <label>Status<select id="f-status"><option value="">All</option><option value="open">Open</option><option value="closed">Closed</option></select></label>
+    <label>Schedule<select id="f-health"><option value="">All</option><option value="on">On track</option><option value="risk">At risk</option><option value="off">Off track</option><option value="none">Not rated</option><option value="late">Past due</option><option value="moved">Date moved</option></select></label>
+    <label>Group by<select id="f-group"><option value="tree">Priority &amp; objective</option><option value="owner">Owner</option><option value="region">Region</option><option value="flat">None</option></select></label>
+    <label>Sort<select id="f-sort"><option value="order">Plan order</option><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option></select></label>
+    <button class="btn" id="f-clear" type="button">Clear</button>
+  </div>
+  <div class="legend">
+    <span>Month strip:</span>
+    <span class="strip"><i class="green"></i></span>On track
+    <span class="strip"><i class="yellow"></i></span>At risk
+    <span class="strip"><i class="red"></i></span>Off track
+    <span class="strip"><i class="complete"></i></span>Complete
+    <span class="strip"><i class="planned"></i></span>Planned
+    <span class="strip"><i class="na"></i></span>Not active
+  </div>
+
+  <main id="main"><div class="empty">Loading the tracker…</div></main>
+</div>
+
+<div id="drawer-root"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const HL={on:'On track',risk:'At risk',off:'Off track',none:'Not rated'};
+const HRANK={off:0,risk:1,none:2,on:3};
+const CODES={'':'—',green:'On track',yellow:'At risk',red:'Off track',complete:'Complete',planned:'Planned',na:'Not active'};
+const S={pri:{},obj:{},act:{},notes:{}};
+let db=null,user=null,uid=null,canWrite=true,names={},openId=null,kpiFilter='';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=()=>new Date().toISOString().slice(0,10);
+const fmt=d=>{if(!d)return '—';const [y,m,dd]=d.split('-');return `${dd} ${M[+m-1]} ${y.slice(2)}`};
+const split=s=>String(s||'').split(/[,\/&]| and /i).map(x=>x.trim().replace(/\?$/,'')).filter(Boolean);
+const normR=r=>{const u=r.toUpperCase();return u==='LATAM'?'LATAM':r};
+function toast(t){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2400)}
+const isLate=a=>a.status!=='closed'&&a.targetDate&&a.targetDate<today();
+const isMoved=a=>(a.dateHistory||[]).length>0&&a.originalDate&&a.targetDate!==a.originalDate;
+
+function prefs(){try{return JSON.parse(localStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
+function savePrefs(){try{const o={};['q','pri','obj','owner','region','status','health','group','sort'].forEach(k=>o[k]=$('#f-'+k).value);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+
+function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
+function objsOf(pid){return Object.values(S.obj).filter(o=>o.priorityId===pid).sort((a,b)=>a.order-b.order)}
+
+function fillSelect(id,opts,keepAll='All'){const el=$('#f-'+id),v=el.value;el.innerHTML=`<option value="">${keepAll}</option>`+opts.map(([k,l])=>`<option value="${esc(k)}">${esc(l)}</option>`).join('');if([...el.options].some(o=>o.value===v))el.value=v}
+function refreshFilters(){
+  fillSelect('pri',sortedPri().map(p=>[p.id,p.name]));
+  const pv=$('#f-pri').value;
+  fillSelect('obj',sortedPri().filter(p=>!pv||p.id===pv).flatMap(p=>objsOf(p.id).map(o=>[o.id,o.name.length>60?o.name.slice(0,58)+'…':o.name])));
+  const own=new Set(),reg=new Set();
+  Object.values(S.act).forEach(a=>{split(a.owner).forEach(x=>own.add(x));split(a.region).forEach(x=>reg.add(normR(x)))});
+  fillSelect('owner',[...own].sort().map(x=>[x,x]).concat([['__none','(Unassigned)']]));
+  fillSelect('region',[...reg].sort().map(x=>[x,x]).concat([['__none','(No region)']]));
+}
+
+function filtered(){
+  const f=k=>$('#f-'+k).value, q=f('q').toLowerCase();
+  return Object.values(S.act).filter(a=>{
+    if(f('pri')&&a.priorityId!==f('pri'))return false;
+    if(f('obj')&&a.objectiveId!==f('obj'))return false;
+    if(f('owner')){if(f('owner')==='__none'?split(a.owner).length:!split(a.owner).includes(f('owner')))return false}
+    if(f('region')){const r=split(a.region).map(normR);if(f('region')==='__none'?r.length:!(r.includes(f('region'))||r.includes('Global')))return false}
+    if(f('status')&&a.status!==f('status'))return false;
+    const h=f('health');
+    if(h==='late'?!isLate(a):h==='moved'?!isMoved(a):h&&a.health!==h)return false;
+    if(kpiFilter==='late'&&!isLate(a))return false;
+    if(kpiFilter==='moved'&&!isMoved(a))return false;
+    if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    return true});
+}
+function sorter(){const s=$('#f-sort').value;return (a,b)=>{
+  if(s==='date')return (a.targetDate||'9999').localeCompare(b.targetDate||'9999');
+  if(s==='health')return (a.status==='closed')-(b.status==='closed')||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
+  if(s==='updated')return (b.updatedAt||'').localeCompare(a.updatedAt||'');
+  const oa=S.obj[a.objectiveId],ob=S.obj[b.objectiveId];
+  return (a.priorityId||'').localeCompare(b.priorityId||'')||(oa?.order??0)-(ob?.order??0)||a.order-b.order}}
+
+function notesFor(pid){return Object.values(S.notes).filter(n=>n.parentId===pid)}
+function lastNote(a){const n=notesFor(a.id).sort((x,y)=>y.at.localeCompare(x.at))[0];if(n)return {date:n.at.slice(0,10),text:n.text};return (a.history||[])[0]}
+
+function kpis(list){
+  const open=list.filter(a=>a.status==='open');
+  const k=[['',list.length,'Actions'],['open',open.length,'Open'],['closed',list.length-open.length,'Closed'],
+    ['on',open.filter(a=>a.health==='on').length,'On track'],['risk',open.filter(a=>a.health==='risk').length,'At risk'],
+    ['off',open.filter(a=>a.health==='off').length,'Off track'],['late',open.filter(isLate).length,'Past due'],['moved',list.filter(isMoved).length,'Date moved']];
+  $('#kpis').innerHTML=k.map(([key,n,l])=>`<button type="button" class="kpi ${key}" data-k="${key}" aria-pressed="${curKpi()===key&&key!==''}"><b>${n}</b><span>${l}</span></button>`).join('');
+}
+function curKpi(){const s=$('#f-status').value,h=$('#f-health').value;return h||s||''}
+
+function strip(a){const now=new Date().getFullYear()===2026?new Date().getMonth():-1;return `<span class="strip" title="${M.map(m=>m+': '+(CODES[a.months?.[m]||'']||'—')).join('\n')}">${M.map((m,i)=>`<i class="${a.months?.[m]||''}${i===now?' now':''}"></i>`).join('')}</span>`}
+function row(a,ctx){
+  const ln=lastNote(a);
+  return `<tr class="act ${a.status}" data-id="${a.id}" tabindex="0">
+   <td class="ttl"><div>${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}${ln?`<div class="ctx" title="${esc(ln.text)}">${ln.date?fmt(ln.date)+': ':''}${esc(ln.text.length>90?ln.text.slice(0,88)+'…':ln.text)}</div>`:''}</td>
+   <td>${esc(a.owner)||'<span class="ctx">—</span>'}</td>
+   <td>${esc(a.region)||'<span class="ctx">—</span>'}</td>
+   <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}</td>
+   <td>${strip(a)}</td>
+   <td>${a.status==='closed'?'<span class="pill s-closed">Closed</span>':`<span class="pill h-${a.health}">${HL[a.health]}</span>`}</td></tr>`}
+const THEAD=`<thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th>Jan–Dec</th><th>Status</th></tr></thead>`;
+function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
+  return `<span class="bar" title="Closed / on track / at risk / off track / not rated"><i style="width:${c(a=>a.status==='closed')}%;background:var(--done)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i></span>`}
+
+function render(){
+  const list=filtered().sort(sorter()),g=$('#f-group').value,main=$('#main');
+  kpis(filtered.call?list:list);
+  if(!Object.keys(S.pri).length){main.innerHTML=`<div class="empty">No priorities yet.${canWrite?' <button class="btn primary" data-add="pri">Add a priority</button>':''}</div>`;return}
+  const filtersOn=['q','pri','obj','owner','region','status','health'].some(k=>$('#f-'+k).value)||kpiFilter;
+  let h='';
+  if(g==='tree'){
+    for(const p of sortedPri()){
+      if($('#f-pri').value&&p.id!==$('#f-pri').value)continue;
+      const objs=objsOf(p.id).filter(o=>!$('#f-obj').value||o.id===$('#f-obj').value);
+      const pl=list.filter(a=>a.priorityId===p.id);
+      if(filtersOn&&!pl.length)continue;
+      h+=`<section><div class="band"><h2>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span><span class="counts">${pl.filter(a=>a.status==='open').length} open · ${pl.length} total</span><button class="btn ghost" data-open="${p.id}">Notes (${(p.history||[]).length+notesFor(p.id).length})</button></div><div class="pri">`;
+      for(const o of objs){
+        const ol=pl.filter(a=>a.objectiveId===o.id);
+        if(filtersOn&&!ol.length)continue;
+        h+=`<div class="obj"><div class="objhead"><h3>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${ol.filter(a=>a.status==='open').length} open / ${ol.length}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
+        if(ol.length){h+=`<div class="tblwrap"><table>${THEAD}<tbody>`;let grp=null;
+          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="6">${esc(grp)}</td></tr>`}h+=row(a)}
+          h+='</tbody></table></div>'}
+        if(canWrite)h+=`<div class="addrow"><button class="btn ghost" data-add="act" data-obj="${o.id}">+ Add action</button></div>`;
+        h+='</div>'}
+      if(canWrite&&!filtersOn)h+=`<div class="addrow"><button class="btn ghost" data-add="obj" data-pri="${p.id}">+ Add objective</button></div>`;
+      h+='</div></section>'}
+    if(canWrite&&!filtersOn)h+=`<div class="addrow"><button class="btn" data-add="pri">+ Add priority</button></div>`;
+  }else{
+    const buckets=new Map();
+    for(const a of list){const keys=g==='flat'?['All actions']:(g==='owner'?split(a.owner):split(a.region).map(normR));(keys.length?keys:['(Unassigned)']).forEach(k=>{if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(a)})}
+    const ks=[...buckets.keys()].sort((a,b)=>a.startsWith('(')-b.startsWith('(')||a.localeCompare(b));
+    for(const k of ks){const bl=buckets.get(k);
+      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span>${healthBar(bl)}<span class="counts">${bl.filter(a=>a.status==='open').length} open · ${bl.length} total</span></div><div class="pri"><div class="tblwrap"><table>${THEAD}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
+  }
+  main.innerHTML=h||'<div class="empty">No actions match these filters.</div>';
+  if(openId)drawer(openId,true);
+}
+
+/* ---------- drawer ---------- */
+async function resolveNames(ids){ids=[...new Set(ids.filter(x=>x&&!(x in names)))];if(!ids.length||!user)return;try{const ps=await user.profiles(ids);ids.forEach(i=>names[i]=ps?.[i]?.name||'')}catch{}}
+const who=id=>id?(names[id]||'Teammate'):'';
+function logHtml(item){
+  const live=notesFor(item.id).sort((a,b)=>b.at.localeCompare(a.at)).map(n=>`<li class="new"><div class="meta">${fmt(n.at.slice(0,10))} · ${esc(who(n.by))}${canWrite?` · <button class="btn ghost" data-delnote="${n.id}">Remove</button>`:''}</div>${esc(n.text)}</li>`);
+  const old=(item.history||[]).map(n=>`<li><div class="meta">${n.date?fmt(n.date):'Undated'} · from spreadsheet</div>${esc(n.text)}</li>`);
+  return live.concat(old).join('')||'<li class="ctx">No updates yet.</li>'}
+function noteForm(){return canWrite?`<div class="full"><textarea id="d-note" rows="3" placeholder="Add a dated update…"></textarea><div style="display:flex;gap:8px;margin-top:6px"><button class="btn primary" id="d-addnote" type="button">Add update</button></div></div>`:''}
+
+function drawer(id,refresh){
+  openId=id;const root=$('#drawer-root');
+  const a=S.act[id],o=S.obj[id],p=S.pri[id];const item=a||o||p;
+  if(!item){closeDrawer();return}
+  const keepNote=$('#d-note')?.value||'';
+  if(refresh&&document.activeElement&&root.contains(document.activeElement)&&document.activeElement.id!=='d-note'&&a){ // don't clobber an in-progress field edit
+    $('#d-log').innerHTML=logHtml(item);return}
+  resolveNames([...notesFor(id).map(n=>n.by),...(a?.dateHistory||[]).map(d=>d.by)]).then(()=>{if(openId===id&&!refresh)drawer(id,true)});
+  const dis=canWrite?'':'disabled';let body='';
+  if(a){
+    const pr=S.pri[a.priorityId],ob=S.obj[a.objectiveId];
+    body=`<div class="fgrid">
+      <label class="full">Action<textarea id="d-title" rows="2" ${dis}>${esc(a.title)}</textarea></label>
+      <label>Owner(s)<input id="d-owner" value="${esc(a.owner)}" placeholder="e.g. Justin, Kyle" ${dis}></label>
+      <label>Region(s)<input id="d-region" value="${esc(a.region)}" placeholder="Global, NA, EMEA…" ${dis}></label>
+      <label>Status<select id="d-status" ${dis}><option value="open">Open</option><option value="closed">Closed</option></select></label>
+      <label>Schedule<select id="d-health" ${dis}>${Object.entries(HL).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>
+      <label>Target date<input type="date" id="d-date" value="${esc(a.targetDate)}" ${dis}></label>
+      <label>Original date<input type="date" id="d-orig" value="${esc(a.originalDate)}" ${dis}></label>
+      <label class="full">Reason for date change (optional)<input id="d-reason" placeholder="Logged with the next date change" ${dis}></label>
+      <label class="full">Target goal / KPI<textarea id="d-goal" rows="2" ${dis}>${esc(a.targetGoal)}</textarea></label>
+      <label class="full">Sub-group<input id="d-group" value="${esc(a.group)}" placeholder="Optional heading inside the objective" ${dis}></label>
+      <label class="full">Objective<select id="d-obj" ${dis}>${sortedPri().map(pp=>`<optgroup label="${esc(pp.name)}">${objsOf(pp.id).map(oo=>`<option value="${oo.id}">${esc(oo.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+    </div>
+    <div class="sec"><h4>Monthly status</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
+    <div class="sec"><h4>Schedule changes</h4><ul class="log">${(a.dateHistory||[]).slice().reverse().map(d=>`<li><div class="meta">${d.at?fmt(d.at.slice(0,10)):'From spreadsheet'}${d.by?' · '+esc(who(d.by)):''}</div>${fmt(d.from)} → ${fmt(d.to)}${d.reason&&d.reason!=='From spreadsheet'?' · '+esc(d.reason):''}</li>`).join('')||'<li class="ctx">Target date has not changed.</li>'}</ul></div>
+    <div class="sec"><h4>Updates</h4>${noteForm()}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(a)}</ul></div>
+    ${canWrite?`<div class="sec" id="d-danger"><button class="btn" id="d-del" type="button">Delete action</button></div>`:''}`;
+    root.innerHTML=shell(`${esc(pr?.name||'')} · ${esc(ob?.name||'')}`,a.title,body);
+    $('#d-status').value=a.status;$('#d-health').value=a.health||'none';$('#d-obj').value=a.objectiveId;
+    root.querySelectorAll('[data-month]').forEach(s=>s.value=a.months?.[s.dataset.month]||'');
+  }else{
+    const isP=!!p;
+    body=`<div class="fgrid"><label class="full">Name<textarea id="d-name" rows="2" ${dis}>${esc(item.name)}</textarea></label>
+      ${isP?`<label class="full">Statement<textarea id="d-stmt" rows="3" ${dis}>${esc(item.statement)}</textarea></label>`:''}</div>
+      <div class="sec"><h4>Updates</h4>${noteForm()}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(item)}</ul></div>
+      ${canWrite?`<div class="sec"><button class="btn" id="d-del" type="button">Delete ${isP?'priority':'objective'}</button></div>`:''}`;
+    root.innerHTML=shell(isP?'Priority':`Objective · ${esc(S.pri[o.priorityId]?.name||'')}`,item.name,body);
+  }
+  if(keepNote&&$('#d-note'))$('#d-note').value=keepNote;
+}
+function shell(crumb,title,body){return `<div class="scrim" data-close></div><aside class="drawer" role="dialog" aria-label="Details"><div class="dhead"><div style="flex:1;min-width:0"><div class="crumb">${crumb}</div><h3 style="font-size:17px">${esc(title)}</h3>${canWrite?'':'<div class="ro">View only: you can read but not edit.</div>'}</div><button class="btn" data-close type="button">Close</button></div><div class="dbody">${body}</div></aside>`}
+function closeDrawer(){openId=null;$('#drawer-root').innerHTML=''}
+
+/* ---------- writes ---------- */
+async function write(col,id,data,msg){
+  if(!db){toast('Not connected, so this change was not saved.');return false}
+  try{await db.collection(col).doc(id).update(data);if(msg)toast(msg);return true}
+  catch(e){if(e?.code==='invalid_argument'&&!user?.can){canWrite=false;render()}toast(e?.code==='quota_exceeded'?'Storage is full. Delete old items and try again.':'Could not save. Check your access and try again.');return false}}
+const stamp=()=>({updatedAt:new Date().toISOString()});
+async function onField(e){
+  const t=e.target;if(!openId||!canWrite)return;const a=S.act[openId];
+  if(a){
+    const map={'d-title':'title','d-owner':'owner','d-region':'region','d-status':'status','d-health':'health','d-goal':'targetGoal','d-group':'group','d-orig':'originalDate'};
+    if(map[t.id]){const v=t.value.trim();if(v===(a[map[t.id]]||''))return;
+      const patch={[map[t.id]]:v,...stamp()};
+      if(t.id==='d-status'&&v==='closed')patch.months={...(a.months||{}),[M[new Date().getMonth()]]:'complete'};
+      await write('actions',a.id,patch,'Saved');return}
+    if(t.id==='d-obj'&&t.value!==a.objectiveId){await write('actions',a.id,{objectiveId:t.value,priorityId:S.obj[t.value].priorityId,...stamp()},'Moved to objective');return}
+    if(t.id==='d-date'&&t.value!==a.targetDate){
+      const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:uid||'',reason:$('#d-reason').value.trim()}];
+      await write('actions',a.id,{targetDate:t.value,originalDate:a.originalDate||a.targetDate||t.value,dateHistory:hist,...stamp()},'Target date changed and logged');return}
+    if(t.dataset.month){await write('actions',a.id,{months:{...(a.months||{}),[t.dataset.month]:t.value},...stamp()},'Saved');return}
+  }else{
+    const col=S.pri[openId]?'priorities':'objectives',it=S.pri[openId]||S.obj[openId];
+    if(t.id==='d-name'&&t.value.trim()!==it.name)await write(col,openId,{name:t.value.trim()},'Saved');
+    if(t.id==='d-stmt'&&t.value.trim()!==it.statement)await write(col,openId,{statement:t.value.trim()},'Saved');
+  }}
+async function addNote(){
+  const txt=$('#d-note').value.trim();if(!txt||!db)return;
+  try{await db.collection('notes').add({parentId:openId,text:txt,at:new Date().toISOString(),by:uid||''});$('#d-note').value='';
+    if(S.act[openId])await write('actions',openId,stamp());toast('Update added')}catch(e){toast('Could not add the update.')}}
+let pendingDel=null;
+async function delItem(btn){
+  if(pendingDel!==openId){pendingDel=openId;btn.textContent='Click again to confirm delete';btn.style.color='var(--off)';return}
+  pendingDel=null;const id=openId;
+  const col=S.act[id]?'actions':S.obj[id]?'objectives':'priorities';
+  if(col!=='actions'){const kids=col==='objectives'?Object.values(S.act).filter(a=>a.objectiveId===id):Object.values(S.obj).filter(o=>o.priorityId===id);
+    if(kids.length){toast(`Move or delete its ${kids.length} ${col==='objectives'?'actions':'objectives'} first.`);return}}
+  try{await db.collection(col).doc(id).delete();closeDrawer();toast('Deleted')}catch{toast('Could not delete.')}}
+async function addItem(b){
+  if(!db)return;const kind=b.dataset.add,id=(kind==='act'?'A':kind==='obj'?'O':'P')+Date.now().toString(36);
+  try{
+    if(kind==='pri'){await db.collection('priorities').doc(id).set({name:'New priority',statement:'',order:sortedPri().length+1,history:[]})}
+    else if(kind==='obj'){await db.collection('objectives').doc(id).set({priorityId:b.dataset.pri,name:'New objective',order:objsOf(b.dataset.pri).length+1,history:[]})}
+    else{const o=S.obj[b.dataset.obj];const n=Object.values(S.act).filter(a=>a.objectiveId===o.id).length;
+      await db.collection('actions').doc(id).set({objectiveId:o.id,priorityId:o.priorityId,order:n+1,title:'New action',group:'',owner:'',region:'',targetGoal:'',targetDate:'',originalDate:'',health:'none',status:'open',months:{},dateHistory:[],history:[],...stamp()})}
+    openId=id;setTimeout(()=>{drawer(id);const f=$('#d-title')||$('#d-name');f?.focus();f?.select()},300)}
+  catch{toast('Could not add. Check your access.')}}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
+  if(t.matches('[data-close]'))return closeDrawer();
+  if(t.matches('[data-open]'))return drawer(t.dataset.open);
+  if(t.matches('tr.act'))return drawer(t.dataset.id);
+  if(t.matches('[data-add]'))return addItem(t);
+  if(t.id==='d-addnote')return addNote();
+  if(t.id==='d-del')return delItem(t);
+  if(t.matches('[data-delnote]'))return db.collection('notes').doc(t.dataset.delnote).delete().catch(()=>toast('Could not remove.'));
+  if(t.id==='f-clear'){['q','pri','obj','owner','region','status','health'].forEach(k=>$('#f-'+k).value='');kpiFilter='';refreshFilters();savePrefs();return render()}
+  if(t.matches('[data-k]')){const k=t.dataset.k;$('#f-status').value='';$('#f-health').value='';
+    if(curKpi()!==k||true){if(k==='open'||k==='closed')$('#f-status').value=k;else if(k){$('#f-status').value='open';$('#f-health').value=k==='moved'?'moved':k;if(k==='moved')$('#f-status').value=''}}
+    savePrefs();render()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id)});
+$('#drawer-root').addEventListener('change',onField);
+$('#filters').addEventListener('input',e=>{if(e.target.id==='f-pri')refreshFilters();savePrefs();render()});
+
+/* ---------- boot ---------- */
+(function(){const p=prefs();refreshFilters();for(const k in p){const el=$('#f-'+k);if(el){el.value=p[k]}}})();
+let loaded={pri:false,obj:false,act:false};
+function sub(col,key){
+  db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>S[key][d.id]={id:d.id,...d.data()});loaded[key]=true;
+    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Live · changes sync for everyone';const p=prefs();refreshFilters();['pri','obj','owner','region'].forEach(k=>{if(p[k]&&[...$('#f-'+k).options].some(o=>o.value===p[k]))$('#f-'+k).value=p[k]});render()}},
+    err=>{$('#conn').textContent='Connection lost. Reload the page to reconnect.'})}
+(async()=>{
+  const [d,u]=await Promise.all([window.claude?.use('db'),window.claude?.use('user')].map(p=>Promise.resolve(p).catch(()=>null)));
+  db=d;user=u;
+  if(!db){$('#conn').textContent='';$('#main').innerHTML='<div class="empty">The shared tracker data is available when you are signed in to claude.ai with access to this page.</div>';return}
+  try{uid=await user?.id()}catch{}
+  try{const c=await user?.can?.('data.write');if(c===false)canWrite=false}catch{}
+  loaded.notes=true;
+  sub('priorities','pri');sub('objectives','obj');sub('actions','act');
+  db.collection('notes').onSnapshot(snap=>{S.notes={};snap.docs.forEach(d=>S.notes[d.id]={id:d.id,...d.data()});if(loaded.act)render()},()=>{});
+})();
+</script>

@@ -1,0 +1,5192 @@
+{
+ "priorities": [
+  {
+   "id": "P1",
+   "name": "Priority 1",
+   "statement": "Drive share gain through on time NPIs, commercial execution, and X-divisional partnerships",
+   "objectives": [
+    {
+     "id": "P1-O1",
+     "name": "Launch project Hornbill within committed timelines",
+     "actions": [
+      {
+       "id": "A1",
+       "title": "Full Hornbill Launch End of May Gate 4/5",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "2026-05-24",
+       "timeline": "2026-06-07",
+       "months": {
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "yellow",
+        "Jun": "complete",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-06-17",
+         "text": "passes 6/15"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Launch date shifted to 7 July, CTC/PRC scheduled for 15 June"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "supply risk has pushed launch date back 5 weeks"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "tracking 2 supply risks; timeline ramifications expected early next week"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "still on track. Planning to get gate review scheduled soon"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "received SVTs 1 wk early, tracking performance  closely"
+        },
+        {
+         "date": "2026-03-30",
+         "text": "on track"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "everything on track"
+        }
+       ],
+       "srcRow": 5
+      },
+      {
+       "id": "A2",
+       "title": "Achieve Gate 3 for Project Hornbill and prepare for on-time launch (May 2026)",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "2026-03-09",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [],
+       "srcRow": 6
+      },
+      {
+       "id": "A3",
+       "title": "Academic year end soft launch, (email, app note, lesson plan)",
+       "group": "",
+       "owner": "Lauren",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "green",
+        "May": "yellow",
+        "Jun": "complete",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-06-03",
+         "text": "With launch delay, suggest closing this. Not really changing strategy and working closely to get units out for hot opportunities"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "launch delayed. Small number of units can be used for hot opps"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "on track; getting demo unit to Janice for possible opp"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "on track"
+        }
+       ],
+       "srcRow": 7
+      },
+      {
+       "id": "A4",
+       "title": "Regional Trainings Completed",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "2026-06-30",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-06-17",
+         "text": "Americas training complete"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "NA training next week"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "EMEA training (successfully) completed"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "Planning ongoing"
+        }
+       ],
+       "srcRow": 8
+      },
+      {
+       "id": "A5",
+       "title": "Phase II launch",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "2026-09-01",
+       "timeline": "",
+       "months": {
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green"
+       },
+       "notes": [],
+       "srcRow": 9
+      },
+      {
+       "id": "A6",
+       "title": "PCBA Risk for forward buys",
+       "group": "",
+       "owner": "Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "red",
+        "Sep": "red"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Moving to red due to current quality RCA. Investigation underway but concerns around how this may affect Q4 ramp"
+        },
+        {
+         "date": "2026-09-03",
+         "text": "Risk seems to be mitigated for Q3 but open question surrounding risk for longer term. Leaving yellow while investigating"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "Moving up to red based on current Q3 supply risk based on circuit board. Second source investigation underway through Zollner"
+        },
+        {
+         "date": "2026-08-06",
+         "text": "Moving to yellow based on recent risk buy feedback from CMC"
+        },
+        {
+         "date": "2026-07-30",
+         "text": "No go on 32GB chips. Next updated expected late Aug after follow-up meeting."
+        },
+        {
+         "date": "2026-07-21",
+         "text": "LE approved investigation for 32GB GEN chips"
+        }
+       ],
+       "srcRow": 10
+      },
+      {
+       "id": "A7",
+       "title": "Establish and track monthly Launch KPI",
+       "group": "",
+       "owner": "Kelly",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Sep": "green",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Track Hornbill price realization, volume, yield/performance and supply/electronics risk before changing price."
+        }
+       ],
+       "srcRow": 11
+      }
+     ]
+    },
+    {
+     "id": "P1-O2",
+     "name": "Penetrate the Water Segment through focused market development",
+     "actions": [
+      {
+       "id": "A8",
+       "title": "Method & reagent cross reference cheatsheet",
+       "group": "Internal Tools",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "complete",
+        "Jul": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-17",
+         "text": "first draft complete with Hach reagents, currently discussing with Adnan"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Should be okay to release first draft by EOM"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Falling a bit behind with training prep. Will aim to complete by mid-June"
+        },
+        {
+         "date": "2026-05-05",
+         "text": "will be worked on and available at launch"
+        }
+       ],
+       "srcRow": 14
+      },
+      {
+       "id": "A9",
+       "title": "Cheat sheet for how to win - service, custom methods, security, battlecard",
+       "group": "Internal Tools",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "yellow",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-28",
+         "text": "Will continue to build out playbook through phase II (line 16), but first draft and trianing materials complete"
+        },
+        {
+         "date": "2026-05-05",
+         "text": "first draft of training completed. Will share out early next week for review"
+        }
+       ],
+       "srcRow": 15
+      },
+      {
+       "id": "A10",
+       "title": "Reagent partnerships",
+       "group": "Internal Tools",
+       "owner": "Kelly",
+       "region": "TBD",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "yellow",
+        "Sep": "planned",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-22",
+         "text": "Move to H2"
+        }
+       ],
+       "srcRow": 16
+      },
+      {
+       "id": "A11",
+       "title": "Use cases - water treatment plants, pharma manufacturer, food/bev manufacturer",
+       "group": "Internal Tools",
+       "owner": "Kelly",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-06-17",
+         "text": "Looping Kelly in to discussion; will be joint effort to build out throguh H2"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Completed and presented first draft at EMEA training. Will work to build out with Brian"
+        },
+        {
+         "date": "2026-05-05",
+         "text": "plan to first draft of personas with in-person trainings. Will work with WAI to build out through remainder of year"
+        }
+       ],
+       "srcRow": 17
+      },
+      {
+       "id": "A12",
+       "title": "In-depth how to win playbook",
+       "group": "Internal Tools",
+       "owner": "Kelly",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "yellow",
+        "Sep": "planned"
+       },
+       "notes": [],
+       "srcRow": 18
+      },
+      {
+       "id": "A13",
+       "title": "Cross-training with the WAI team",
+       "group": "Internal Tools",
+       "owner": "",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "yellow",
+        "Sep": "planned",
+        "Oct": "planned"
+       },
+       "notes": [],
+       "srcRow": 19
+      },
+      {
+       "id": "A14",
+       "title": "Brochures and getting start guides",
+       "group": "External Tools",
+       "owner": "Lauren/Kyle",
+       "region": "Global",
+       "targetGoal": "NA",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-06-24",
+         "text": "Brochures completed, working in fisher sci and translation should be done by end of week on main brochure and software"
+        },
+        {
+         "date": "2026-06-17",
+         "text": "Gave final brochure review, still on track"
+        },
+        {
+         "date": "2026-06-03",
+         "text": "On track to release by launch"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Possible light changes to G5 family brochure but 4/4 brochures created in TF, others created for Fisher Sci and being reviewed"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "2/4 done, software should finish today and G5 family in next few days. Second week of may will be sharing translations of G5 family brochure"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "Should be wrapping up most brochures for launch in next 7 -10 business days and then will be sharing with regions for set up on their side"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "GENESYS G5 Accessory complete. GENESYS Software layout starting, GENESYS G5 family and software brochure reviewing copy side pre-layout"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Accessory just about done, GENESYS Brochure should wrap end of month 2/11 - In process"
+        }
+       ],
+       "srcRow": 21
+      },
+      {
+       "id": "A15",
+       "title": "Application notes",
+       "group": "External Tools",
+       "owner": "Jenn EK",
+       "region": "Global",
+       "targetGoal": "NA",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-10",
+         "text": "On track. No additional updates."
+        },
+        {
+         "date": "2026-06-04",
+         "text": "App notes in progress and on track."
+        },
+        {
+         "date": "2026-05-06",
+         "text": "No updates. App notes on track."
+        },
+        {
+         "date": "2026-04-22",
+         "text": "Core UV and Micro UV app notes on track."
+        },
+        {
+         "date": "2026-04-09",
+         "text": "On Track for Hornbill notes (3 refresh note, 1 new notes, 2 in Experimentation), MicroUV-On Track"
+        }
+       ],
+       "srcRow": 22
+      },
+      {
+       "id": "A16",
+       "title": "detailed user guide",
+       "group": "External Tools",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "NA",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-06",
+         "text": "Done"
+        },
+        {
+         "date": "2026-04-20",
+         "text": "Working on last chapter"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Translation in system now, due in 22 business days"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "in process - translations are a bit behind but the user guide is on track"
+        }
+       ],
+       "srcRow": 23
+      },
+      {
+       "id": "A17",
+       "title": "Water Methods general brochure",
+       "group": "External Tools",
+       "owner": "Kyle",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "9.24 - Workign through food/bev updated ebook with some of this info. Will create additional water focused ebook once next app note is compelted, and when we can create executive summary of both water webinars"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "Aligned in pirority call, will look to create in Q4 with Food and Bev brochure starting first"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Haven't seen any materials ready yet, look to start in July?"
+        }
+       ],
+       "srcRow": 24
+      },
+      {
+       "id": "A18",
+       "title": "UVN/WAI joint application note",
+       "group": "External Tools",
+       "owner": "Jenn EK",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [],
+       "srcRow": 25
+      },
+      {
+       "id": "A19",
+       "title": "UVN/FSD joint activity",
+       "group": "External Tools",
+       "owner": "Kyle",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Aligning with teams marketing on Form questions and social/email teaser that we can launch in early Oct. Need to align on recording time for mid/late Oct"
+        },
+        {
+         "date": "2026-09-10",
+         "text": "Intake form draft completed on UVNN side, waiting to hear feedback/edits on FSD side."
+        },
+        {
+         "date": "2026-08-27",
+         "text": "Jenn helping to take the lead on webinar, creating abstract for mid November webinar"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "WAI has bowed out, partern with FSD on flyer and app note to align with a webinar"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "looking to create for phase two launch, will look to start crafting closer to July"
+        }
+       ],
+       "srcRow": 26
+      },
+      {
+       "id": "A20",
+       "title": "ROW - preapproved price supports - access to different reagent manufacturers",
+       "group": "Selling Strategy",
+       "owner": "",
+       "region": "ROW",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-04-22",
+         "text": "Including standard, loyalty, and new lab start up promos for H2"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "will work on with promo cycle, not yet started"
+        }
+       ],
+       "srcRow": 29
+      },
+      {
+       "id": "A21",
+       "title": "Post Y1 - how can we work with WAI to take over applicable customer base as they upgrade?",
+       "group": "Selling Strategy",
+       "owner": "Kelly",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [],
+       "srcRow": 30
+      },
+      {
+       "id": "A22",
+       "title": "Water based webinar (UVN only)",
+       "group": "Awareness and Marketing plan",
+       "owner": "Jenn/Kyle",
+       "region": "Global",
+       "targetGoal": "300 Leads, 50 SQO, $120,000",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-09-10",
+         "text": "Webinar aired on 9/9."
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Beer/water intake being worked on, will fill out intake for water webinar when lauren is back from China trip"
+        },
+        {
+         "date": "2026-06-17",
+         "text": "Planning 2 in H2 - one standalone, one beer/water focused with FSD"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Looking to fill out intake portion here in June, we will do recording side in late July or August"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "follow up meeting this afternoon, will look to start intake portion when Lauren is back from training in Germany"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Scheduled with Vendor. Will create intake in next month or so and then actual work will start around July"
+        }
+       ],
+       "srcRow": 32
+      },
+      {
+       "id": "A23",
+       "title": "Trade up when new genesys model is released  - Core UV Food and Bev Focus + QA/QC + water",
+       "group": "Awareness and Marketing plan",
+       "owner": "Kyle, Lauren",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "Trade up OFT being created now, should have end of July"
+        },
+        {
+         "date": "2026-07-09",
+         "text": "TF done, Fisher Sci in review, VWR entering review this week"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Loyalty flyers for Core and Micro H2 completed, will need to create a GENESYS G5 flyer for July"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "Loyalty flyers starting, web page updating in next few weeks. Will follow up with loyalty emails and social through out campaign"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "Looking to support through new lab start up as well, Lauren aligning on promo"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "will do targeted linkedin campaign to support"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "connect with mike to get target goal"
+        }
+       ],
+       "srcRow": 33
+      },
+      {
+       "id": "A24",
+       "title": "Fisher Sci US Promo/email feature Genesys",
+       "group": "Awareness and Marketing plan",
+       "owner": "Kyle",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "yellow",
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "Email shared on 7/10"
+        },
+        {
+         "date": "2026-07-09",
+         "text": "intake almost complete, will share with Katie today"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Aligning with Katie on next steps today"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "email info shared with team"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Provided some info Tuesday, need to check 1-2 emails from Katie to ensure fully update"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "emails being set up with CAD digital, will share file with Fisher sci in May once complete"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Introduction email set for 6/2, will resend to unopened on 6/9. Sending out discontinue letter asking customers to upgrade to existing customers on 6/10"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Scheduled for June will rerun in Sept"
+        }
+       ],
+       "srcRow": 34
+      },
+      {
+       "id": "A25",
+       "title": "UVN/FSD Joint Webinar",
+       "group": "Awareness and Marketing plan",
+       "owner": "Jenn/Kyle",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-10",
+         "text": "Intake form draft completed on UVNN side, waiting to hear feedback/edits on FSD side. Meeting 9/10 to check in with broader team."
+        }
+       ],
+       "srcRow": 35
+      },
+      {
+       "id": "A26",
+       "title": "Water-specific trade-up message (email? With WAI?)",
+       "group": "Awareness and Marketing plan",
+       "owner": "Kyle",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Sep": "planned",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "WAI backed out, I think we create an email for us talking about how it fits into several workflows and calling out other products so we can send to the widest range of water customers as possible. but avoid aligning with teams who aren't as active as we had hoped."
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Will start when starting flyer sometime in July"
+        }
+       ],
+       "srcRow": 36
+      },
+      {
+       "id": "A27",
+       "title": "Water Market Strategy",
+       "group": "Awareness and Marketing plan",
+       "owner": "Kelly",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "planned",
+        "Oct": "planned"
+       },
+       "notes": [],
+       "srcRow": 37
+      }
+     ]
+    },
+    {
+     "id": "P1-O3",
+     "name": "Launch ND Lite + v2.0 to protect against lower cost regional solutions",
+     "actions": [
+      {
+       "id": "A28",
+       "title": "ND Lite Plus v2.0 to Korea (25-40 incremental units annually)",
+       "group": "",
+       "owner": "Justin",
+       "region": "Korea",
+       "targetGoal": "36 Total Units Sold (LY6 (4) + Promo 15 (7) + 25)\n$208K",
+       "timeline": "Q4",
+       "months": {
+        "Mar": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-03-10",
+         "text": "18K for Q1"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Part numbers created, SMB submitted. Should hopefully go live with next SMB cycle at the end of the month"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "Baboucarr has approved so part numbers need to be created (will take a month or so)"
+        }
+       ],
+       "srcRow": 40
+      },
+      {
+       "id": "A29",
+       "title": "Evaluate expanding NDL+2 to additional geographise based on competitive threat",
+       "group": "",
+       "owner": "Justin",
+       "region": "India, SEA, Japan",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "red",
+        "Jun": "red",
+        "Jul": "yellow",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "After strategy call the general idea is to look at reskinnig NDLP 2.0 for APJ and EMEA with EMEA having an increase in price"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Surveying some EMEA dealers, will ask Japan again in call tonight"
+        },
+        {
+         "date": "2026-07-01",
+         "text": "Awaiting more info from Japan."
+        },
+        {
+         "date": "2026-05-26",
+         "text": "Japan sent request to see if they are interested"
+        },
+        {
+         "date": "2026-05-18",
+         "text": "SEA believes no incremental revenue would be seen this year. I followed up with what incremental units could be seen next year or what could be lost without implementation"
+        },
+        {
+         "date": "2026-05-06",
+         "text": "India not interested, believes too much canabilization will occur with Ultra. Still waiting to hear back from SEA on their review."
+        },
+        {
+         "date": "2026-04-20",
+         "text": "India and SEA sent request to see if they are interested in NanoDrop Lite Plus 2.0"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Will request incremental volumes and cannabilization risk from India and SEAT"
+        }
+       ],
+       "srcRow": 41
+      },
+      {
+       "id": "A30",
+       "title": "NanoDrop Mid initial business case",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-09-17",
+         "text": "Preapproval meeting scheduled next week"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "After strategy call the general idea is to look at reskinnig NDLP 2.0 for APJ and EMEA with EMEA having an increase in price to offset cannabilization"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Gathering some more VoS and pricing information"
+        }
+       ],
+       "srcRow": 42
+      },
+      {
+       "id": "A31",
+       "title": "Evaluate pricing market trials (via promotion in China and EMEA)",
+       "group": "",
+       "owner": "Justin",
+       "region": "EMEA, China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "yellow",
+        "Sep": "planned",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "I do not see any sales of the EMEA 20% off NDLP SKUs, it is likely EMEA is not using he promo part numbers and just discounting the standard SKUs, followed up with Marta as I have no way to track this if they do not use promo SKU. China has sold 17 NDLP 2.0 models since June 1."
+        }
+       ],
+       "srcRow": 43
+      },
+      {
+       "id": "A32",
+       "title": "ND Light Plus Commercial Expansion Decision",
+       "group": "",
+       "owner": "Justin",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-09-17",
+         "text": "Preapproval meeting next week"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "Work on NDLP 2.0 buisness case for APJ+EMEA"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Awaiting pricing strategy information to be finalized and additional feedback to come in from dealers"
+        }
+       ],
+       "srcRow": 44
+      }
+     ]
+    },
+    {
+     "id": "P1-O4",
+     "name": "Accelerate Pharma/Biopharma  share gain via NanoDrop Ultra and Fl",
+     "actions": [
+      {
+       "id": "A33",
+       "title": "enable global FL bundles to be sold",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "yellow",
+        "Jul": "red",
+        "Aug": "red",
+        "Sep": "red",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "No update"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "This is going be delayed. We have identified a fix for the invoicing issu but this has become a much bigger issue that effects many PNs from multiple product lines. Need a process in place to actually create one"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Go live dte should be July 10th"
+        },
+        {
+         "date": "2026-05-26",
+         "text": "IT is behind a few weeks due to surcharge issue - they shoudl be sending an updated timeline soon"
+        },
+        {
+         "date": "2026-05-18",
+         "text": "Followed up with IT to see if changes have been implemented into SAP"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "Should hear back from IT soon"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "Expect to be completed in mid-May"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Had meeting with IT, they are making progress on changes in SAP"
+        },
+        {
+         "date": "2026-04-02",
+         "text": "want to ensure attachment improves for kits and make sure its ND kits not Qbit kits being sold by BID"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "SMB team is trying to drive this - have a meeting tomorrow"
+        }
+       ],
+       "srcRow": 48
+      },
+      {
+       "id": "A34",
+       "title": "Support early innovation projects - NanoDrop Automation, in collaboration with CIC (Q1 DTC)",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global?",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [],
+       "srcRow": 49
+      },
+      {
+       "id": "A35",
+       "title": "Can we reduce minimum financing amount",
+       "group": "",
+       "owner": "Mike, Justin",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-04-09",
+         "text": "Kyle working on financing flyer. Thermo version created, need Fisher version"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "justin to let Mike know that 10K is approved for financing - Justin to confirm with financing that there's no end date and connect back with kyle for financing flyer/OFT"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "is 10K possible? Justin will follow up and ask"
+        }
+       ],
+       "srcRow": 50
+      },
+      {
+       "id": "A36",
+       "title": "Bundle NanoDrop with Cell Counter - sales cross training\n(look into bundling if attachment rate goes up)",
+       "group": "",
+       "owner": "Justin",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "Q3",
+       "months": {
+        "Mar": "green",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "red",
+        "Aug": "red",
+        "Sep": "red"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "No update, waiting for Dan's replacement to be selected"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "No update"
+        },
+        {
+         "date": "2026-05-18",
+         "text": "BID indicating not a high priority right now, will try to work with Dan to get something scheduled in Q3"
+        },
+        {
+         "date": "2026-05-06",
+         "text": "Followed up with BID, awaiting their feedback"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "Working on details of training, likely in Q3"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Connected with Countess PM on timing of this training, possibly Q2/3. Flyer was distributed out to the commercial teams"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "No update, still need to schedule training"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "need to schedule sales training next"
+        }
+       ],
+       "srcRow": 51
+      },
+      {
+       "id": "A37",
+       "title": "Update website - (ND1 discontinued awareness/redirection for customers looking for discontinued models)",
+       "group": "",
+       "owner": "Justin, Kyle",
+       "region": "Global",
+       "targetGoal": "•\tEngaged Page/Time Spent visits by 7% (161,125 Engaged Visits / 145 Sec)\n•\tIncrease in SEO interactions by 5% (156,267)\n•\tForm Fills increased by 5% (703 Hot Leads)\n•\tMQL to SQO on product page/form fills increased by 10% (59% converstion)",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-14",
+         "text": "Completed this initial side of work, looking to again update some Acclaro pro and other info for customers"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "PAT flyer in review, once that completes will add that workflow and SEO keywords to page"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Updated to include info about BID workflows, better access to product purchasing on home page. Doing one additional update to fix some issues with add to cart button"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "updated have been reviewed by brand and are in process. First set of copy I shared about 1.5 weeks ago was a bit to long but should be finished up in the next week"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "workfront was down but will get the redirect done by next week"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "need to get clarification from BID what it is they are hoping for"
+        }
+       ],
+       "srcRow": 52
+      },
+      {
+       "id": "A38",
+       "title": "Update website - ensure assays and instruments are tied in well together",
+       "group": "",
+       "owner": "Justin, Kyle",
+       "region": "Global",
+       "targetGoal": "NA",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-04-09",
+         "text": "Assay advertisment is at the top of the overview page, provided updated materials to explian workflow with Assays"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Part of work being done above, looking to improve visability on overview page which is the highest viewed by far. We have a promo on there currently"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "worked through some KPI's and powerpoint, finalizing in next day or two and then want to align with Zara and Matt"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "connecting this week with BID team on website updates"
+        }
+       ],
+       "srcRow": 53
+      },
+      {
+       "id": "A39",
+       "title": "Include in brochure wording and specs around low sensitivity with pico green assay with PN to purchase",
+       "group": "",
+       "owner": "Justin, Kyle",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-03-18",
+         "text": "Completed with disclaimer that availability through dealers for picogreen in your region may vary"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "dealers unable to sell picogreen so need to be careful with wording in brochure"
+        }
+       ],
+       "srcRow": 54
+      },
+      {
+       "id": "A40",
+       "title": "Identify a low end RNA fl kit for an app note",
+       "group": "",
+       "owner": "Justin, Jenn P, Brian",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "red",
+        "Sep": "red",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "This is on hold until the PD testing is complete"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "AT planning on sending prototypes over for testing early August 6/25: PD software update was just released. Need to wait for AT to send over a few units with the collimated light adjustment for testing to start."
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Software team pushed PD software release to end of June"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "PD software expected to be released in May"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Poor results, PD testing required 3/18: Next step is to re-assess Qubit RNA HS assay. If poor results, will look to enable photodiode for testing"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "RiboGreen data not looking good enough. Will need to move to a new kit."
+        }
+       ],
+       "srcRow": 55
+      },
+      {
+       "id": "A41",
+       "title": "Clear use-case messaging for biopharma workflows with NanoDrop Ultra ABS and FL",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "green",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "yellow"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "Working on draft to send to Kyle"
+        },
+        {
+         "date": "2026-06-25",
+         "text": "Will connect with Kyle on working on FL workflow brochure"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Decision tree graphic in progress, will need a flyer that includes NGS workflow info next"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "Most of this is covered in the GCM training I did, looking to potentially add a decision tree type graphic to the website and a graphic on assay range vs Qubit"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "In progress, will incorporate into training decks for EMEA/LATAM"
+        }
+       ],
+       "srcRow": 56
+      },
+      {
+       "id": "A42",
+       "title": "Post launch marketing assessment and Revised strategy",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "Awaiting PD testing"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Adding assay to instrument purchase for BID, awaiting PD testing, may need to assess price if we cannot improve spec limits"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "Assay flyer being added to the BOM of FL units"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "Commercial survey was sent out. One of the key findings for the FL models is that are pricing is too high considering Denovix beats us in the key spec that most customers care about which is low-end dynamic range. Additionally the commercial team had the lowest confidence in selling the FL Assays"
+        }
+       ],
+       "srcRow": 57
+      },
+      {
+       "id": "A43",
+       "title": "EMEA Training (Hands On)",
+       "group": "",
+       "owner": "Justin",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-04-30",
+         "text": "in progress and ready for training in a couple weeks"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "Traning to occur at tail-end of Hornbill training in May, focus around market overview for FL/Acclaro Pro, review of messaging, and hands-on trainign with all assays/Acclaro Pro"
+        }
+       ],
+       "srcRow": 58
+      },
+      {
+       "id": "A44",
+       "title": "Azo emails",
+       "group": "",
+       "owner": "Kyle",
+       "region": "NA/EMEA",
+       "targetGoal": "",
+       "timeline": "In bowler",
+       "months": {
+        "Apr": "green",
+        "May": "green",
+        "Jun": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "Continuing to send emails similar to GENESYS Series we are sending through Eloqua"
+        },
+        {
+         "date": "2026-07-09",
+         "text": "First email been out for several weeks, email two next week, last email end of July"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Third email in series ready, focusing on Acclaro pro and updating messaging"
+        },
+        {
+         "date": "2026-05-06",
+         "text": "Provided notes on last email, series in the works now"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Justin reviewing the third email here now"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "Newsletter sponsorship live, got series of emails and will share with Justin for light review"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "First two series of emails being worked on, aligning on PAT copy and will start third email soon"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Email series featuring NanoDrop Ultra. Will talk about feature, benifets, and use cases in email one linking back to markeitng page. Email two will focus on workflow with BID instruments and drive to contact form, Email three will focus on PAT workflow and drive to contact form. GENESYS Series being identified but more then likely introduction, software flexability focus, and then water or academia focus"
+        }
+       ],
+       "srcRow": 59
+      },
+      {
+       "id": "A45",
+       "title": "LATAM BID Training (Hands On)",
+       "group": "",
+       "owner": "Justin",
+       "region": "LATAM",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "red",
+        "Aug": "red",
+        "Sep": "red",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "BID now wants to postpone to 2027 as they do not have funding to send people to Wilmington. Asked if they want virtual training in the meantime."
+        },
+        {
+         "date": "2026-07-01",
+         "text": "Followed up with Valdo to get timing set"
+        },
+        {
+         "date": "2026-06-25",
+         "text": "Waiting on Valdo to confirm timing"
+        },
+        {
+         "date": "2026-05-06",
+         "text": "Training to be scheduled for July/August timeframe (after World Cup)"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "FH: Waiting for BID confirmation. 4/21: Targeting on-site training in WIlmington,DE in early July. Focus around market overview for FL/Acclaro Pro, review of messaging, and hands-on trainign with all assays/Acclaro Pro"
+        }
+       ],
+       "srcRow": 60
+      },
+      {
+       "id": "A46",
+       "title": "BPG Acclaro Pro Collaboration",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-05-14",
+         "text": "On hold until we can roll out IQ/OQ to support these pharma customers"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "discussed with all in one - BPG strong in upstream - trying to get a downstream contact"
+        },
+        {
+         "date": "2026-03-31",
+         "text": "working with PBG for inline solution with acclaro pro and investigating opportunity to partner further"
+        }
+       ],
+       "srcRow": 61
+      },
+      {
+       "id": "A47",
+       "title": "Add FL kit part numbers to NDUFL Quotes",
+       "group": "",
+       "owner": "Jaime",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "planned",
+        "Jun": "green",
+        "Jul": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-06-11",
+         "text": "Jamie will follow up with Lauren"
+        }
+       ],
+       "srcRow": 62
+      },
+      {
+       "id": "A48",
+       "title": "NanoDrop PV-1/PR-1 Supply Issue",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "yellow",
+        "Jun": "green",
+        "Jul": "red",
+        "Aug": "green",
+        "Sep": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "Millipore's new site has now produced all products at least one. Coporate and CIC are both investigating alternative suppliers"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Millipore has quality issue that effected their production of the PV-1 bulk, another issue tied to the poor knowledge transfer from their prior site. This issue has been resolved. Working with sourcing and corporate to have an alternative supplier setup."
+        }
+       ],
+       "srcRow": 63
+      },
+      {
+       "id": "A49",
+       "title": "Enable global sales bundles to be sold through SAP",
+       "group": "",
+       "owner": "Kelly",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jul": "red",
+        "Aug": "red",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [],
+       "srcRow": 64
+      },
+      {
+       "id": "A50",
+       "title": "Evaluate feasibility of higher specification FL performances",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-17",
+         "text": "CIC provied a solution and is working on prototypes to send for validation testing. Estimated 2 months."
+        },
+        {
+         "date": "2026-07-23",
+         "text": "3 test units are being sent from AT to Wilm Apps team and I believe should arrive next week. Apps team targeting to have data ready for the Wilmington strategy session"
+        }
+       ],
+       "srcRow": 65
+      },
+      {
+       "id": "A51",
+       "title": "ND FL Product technical feasiblity",
+       "group": "",
+       "owner": "Brian",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Confirm FL hardware feasibility and sensitivity, including RNA performance, and document the achievable performance envelope."
+        }
+       ],
+       "srcRow": 66
+      },
+      {
+       "id": "A52",
+       "title": "FL enhancement business case",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Build the FL business case: improved-performance option vs. fallback, including volume, pricing, cannibalization, margin transfer and AOP impact."
+        }
+       ],
+       "srcRow": 67
+      },
+      {
+       "id": "A53",
+       "title": "Clear Qubit positiong and transition plan",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Validate Qubit/DeNovix market size, business at risk, installed base and combo-promotion quote/win evidence. Build clear positioning and customer value for the product."
+        }
+       ],
+       "srcRow": 68
+      }
+     ]
+    },
+    {
+     "id": "P1-O5",
+     "name": "Drive Adoption of Acclaro Pro through targeted seeding",
+     "actions": [
+      {
+       "id": "A54",
+       "title": "SEO (acclaro pro, ND Marketing page)",
+       "group": "",
+       "owner": "Kyle",
+       "region": "Global",
+       "targetGoal": "Line 39",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-14",
+         "text": "Monitoring updates, cotinuing to see the same trend of slighty lower views month over month. Continue to strengthen GEO with the assumption that is stealing large portions of traffic"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Acclaro Pro performing well. We are transitiong to PMAX SEO which utilizes AI to better bid amount of dollars per day for each SEO campaign. Need to watch training from earlier and will set up in next week or two"
+        },
+        {
+         "date": "2026-03-30",
+         "text": "Refined keywords several times. Partnering with Product managers to update several low performing SEO pages with new messages/page locations"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Looking to allocate more dollars in Q2 - Q4"
+        },
+        {
+         "date": "2026-03-10",
+         "text": "Starting progromattic display test today as well 2/11: Refining keywords with SEO team, working through page improvements"
+        },
+        {
+         "date": "2026-01-27",
+         "text": "meet with BID to align, SEO generally good but can align between RNA/DNA pages and ours. Will test progromattic displays and GEO optimization in Q1"
+        }
+       ],
+       "srcRow": 73
+      },
+      {
+       "id": "A55",
+       "title": "Build reference customers and proof points for Acclaro Pro",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "green",
+        "May": "yellow",
+        "Jun": "red",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-01",
+         "text": "Done created 3 customer personas and an updated value prop powerpoint."
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Should be able to wrap this up in the next week or so already have two main customer personas"
+        },
+        {
+         "date": "2026-05-18",
+         "text": "In progress"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "In progress"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "in progess, working on customer personas"
+        }
+       ],
+       "srcRow": 74
+      },
+      {
+       "id": "A56",
+       "title": "Find partner for Acclaro Pro seeding program?",
+       "group": "",
+       "owner": "Kelly, Mike",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Feb": "yellow",
+        "Mar": "yellow",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "red",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-05-19",
+         "text": "Kashiv bio in NJ - interested in a demo and are considering AP or Solo VPE - trying to get a long term demo"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "new Acclaro pro flyer is helpful"
+        },
+        {
+         "date": "2026-04-02",
+         "text": "Mike is discussing with Abbvie to see if we can partner -"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "larger applications team has stalled on answering questions"
+        },
+        {
+         "date": "2026-02-16",
+         "text": "we should connect with fisher and BID to see how we can target their customers"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Kelly and Mike to discuss"
+        }
+       ],
+       "srcRow": 75
+      },
+      {
+       "id": "A57",
+       "title": "Acclaro Pro Workflow with CAD",
+       "group": "",
+       "owner": "Kyle",
+       "region": "Global",
+       "targetGoal": "NA",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-06-04",
+         "text": "Done"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Shared PAT for final review with MMAIO"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "We have materials with BID, need to get review of BPG/VIB alignment workflow"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "This and Demo flyer got combined a bit, align with Justin tomorrow but should be able to finish both in the next couple of business days"
+        },
+        {
+         "date": "2026-03-30",
+         "text": "we have a draft created but been diprioitizing compared to GENESYS and a few other items"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Looking to start design this week, should be able to track for first week of April - brainstorming how to best include BPG"
+        },
+        {
+         "date": "2026-03-10",
+         "text": "Had been depriotized a bit, will focus on this here and look to wrap by first week of April"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Rough draft created, working on flyer for PAT instruments with in CAD"
+        }
+       ],
+       "srcRow": 76
+      },
+      {
+       "id": "A58",
+       "title": "Create Acclaro Pro demo flyer?",
+       "group": "",
+       "owner": "Justin, Commercial leaders, Kyle",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "green",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-06-04",
+         "text": "Done"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Got some notes in, should be finalizing in coming days"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "Acclaro needs to be removed"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "Version completed but a bit to heavy on Acclaro Pro, I think it got combined with above. Creating another paired down version in next couple of business days"
+        },
+        {
+         "date": "2026-03-30",
+         "text": "I finally got draft to Justin last week (Kyle)"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "something basic with a QR code would be useful check with mike to see if this would make sense"
+        }
+       ],
+       "srcRow": 77
+      },
+      {
+       "id": "A59",
+       "title": "Academic Labs customer base list",
+       "group": "",
+       "owner": "Kyle/Mike",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "yellow",
+        "Feb": "yellow",
+        "Mar": "yellow",
+        "Apr": "red",
+        "May": "red",
+        "Jun": "red",
+        "Jul": "red",
+        "Aug": "red"
+       },
+       "notes": [
+        {
+         "date": "2026-09-16",
+         "text": "Met with team to enablement team to figure out process, got alignment that they could use list. Informed Sarah to keep here in the loop. Next step adding it to AOP?"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Will share with Babocurr here at end of week, aligning with Tim Meyer on my side here a bit still"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "review  links from Mike to reviw of internal tools that might be helpful"
+        },
+        {
+         "date": "2026-04-28",
+         "text": "unable to get funding - should we deprioritize?"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "putting together an email to send to fisher to see if they might be interested"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Shared business case with Mike for funding approval on his side, haven't heard anything on that side KM"
+        },
+        {
+         "date": "2026-03-10",
+         "text": "checked back in with Mike on approval from sales leadership"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Could we find a KOL to target?"
+        }
+       ],
+       "srcRow": 79
+      },
+      {
+       "id": "A60",
+       "title": "Find KOLs (2-3?)",
+       "group": "",
+       "owner": "Justin, Mike, Brian",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "yellow",
+        "Feb": "yellow",
+        "Mar": "yellow",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "red",
+        "Aug": "red",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "Still having trouble finding a KOL, will look to add something on website"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Have not received an email back yet. Tried a new contact from Eli Lilly. Novartis also just bought an Acclaro Pro model and I am trying to setup a call with them to discuss if they would like to collaborate but it is challenging when they already want to move forward with ordering. Reached out to NA commercial team to emphasis we need to be pulled in before a quote is sent"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Sent email to Eli Lilly to see how their demo went and if there is any interest in collab"
+        },
+        {
+         "date": "2026-05-06",
+         "text": "Olink did not appear to be willing to talk. No progress with Novartis as they had a communication issue with the instrument and have not been responding to technical support. New oppurtunities at a mab manufacturer Kashiv BioSciences who requested a demo and is willing to collaborate on a white paper. Additionally Eli Lilly interested in Acclaro Pro demo to test modified oligonucleotides (will offer collaboration if demo goes well).  4/21: Meeting with Olink and Brian potentially on Friday and Marta is following up with Kobis on the Novartis opportunity"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Justin to check back with brian around Olink -- Connect with Anna to look into internal bioprocessing design lab opening april '28 - see if we can target the biopharma customers coming there"
+        },
+        {
+         "date": "2026-03-10",
+         "text": "had meeting with team and Brian - Brian following up with Olink to see if we can use their data for AP"
+        }
+       ],
+       "srcRow": 80
+      },
+      {
+       "id": "A61",
+       "title": "Start discussion with Fisher Sci team i.e. IDIRs (segment directors)",
+       "group": "",
+       "owner": "Mike",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "yellow",
+        "Jun": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-04",
+         "text": "seeing how we can partner to drive acclaro pro and standardization across US"
+        },
+        {
+         "date": "2026-05-19",
+         "text": "call scheduled for next week"
+        },
+        {
+         "date": "2026-04-28",
+         "text": "Mike working to schedule"
+        },
+        {
+         "date": "2026-02-16",
+         "text": "we will set up a call with Mike and IDIR to get this rolling"
+        }
+       ],
+       "srcRow": 81
+      },
+      {
+       "id": "A62",
+       "title": "BCC Activities",
+       "group": "",
+       "owner": "Brian, Jenn P",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "yellow",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-07-16",
+         "text": "Acclaro Pro Tracker 4/22: A3 Tracker started4/9: Initial data from Protein Aggregation study Shared, Next steps-create A3 to track collaborations"
+        }
+       ],
+       "srcRow": 82
+      },
+      {
+       "id": "A63",
+       "title": "Develop 2026 strategic plan to drive Acclaro Pro Adoption",
+       "group": "",
+       "owner": "Brian, Justin, Jenn P",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-01",
+         "text": "A3 setup"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Internal testing done, will look to add to website/brochure"
+        },
+        {
+         "date": "2026-05-18",
+         "text": "ROI calculator done and flyer in works, will present on it in EMEA training, will also go over it with the NA team in their meeting when I am back. Additionally will send out to the rest of the commercial teams. Jenn P working on internal testing so we can present a similar R2 instrument to instrument spec that Repligen is pushing"
+        },
+        {
+         "date": "2026-05-07",
+         "text": "Feedback from meeting being incorporated into value prop messaging, working on ROI calculator, spec comparisons"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "Workshop meeting setup tomorrow"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Initial draft for complete"
+        }
+       ],
+       "srcRow": 83
+      },
+      {
+       "id": "A64",
+       "title": "Message/collateral review vs existing technologies, enhance attack approach",
+       "group": "",
+       "owner": "Kyle, Justin",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "green",
+        "Jun": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-14",
+         "text": "Working through playbook and sales level tools first, willl look to update webpage and social posts first, with Acclaro Pro flyer last since it was recently updated"
+        },
+        {
+         "date": "2026-04-21",
+         "text": "meeting today, making progress. Will setup a call with Kyle to review actions needed"
+        }
+       ],
+       "srcRow": 84
+      },
+      {
+       "id": "A65",
+       "title": "Bioprocessing trade show attendance",
+       "group": "",
+       "owner": "Kyle, Justin",
+       "region": "Global",
+       "targetGoal": "100K",
+       "timeline": "",
+       "months": {
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "green",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "Still aligning with purifications PM"
+        },
+        {
+         "date": "2026-06-25",
+         "text": "Have a meeting with the purification and PPA marketing director in July"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Already attending the only Biopharma show that VIB is going to this year (BPI-EAST). Kyle and I had a meeting with BPG, led to us being direct to FSD who is more directly involved in the downstream purfiication process. Have meeting tomorrow with FSD to discuss potential tradeshow collaboration"
+        }
+       ],
+       "srcRow": 85
+      },
+      {
+       "id": "A66",
+       "title": "Acclaro Pro Pricing and relaunch plan",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "planned",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Validate Acclaro Pro name/bundle/price and align the launch proposition with Matt/Kyle inputs."
+        }
+       ],
+       "srcRow": 86
+      },
+      {
+       "id": "A67",
+       "title": "Acclaro Pro New Sku developed",
+       "group": "",
+       "owner": "Justin/Brian",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "planned",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Align on development plan, begin project by Sep 30, prepare for full launch Q1"
+        }
+       ],
+       "srcRow": 87
+      }
+     ]
+    },
+    {
+     "id": "P1-O6",
+     "name": "Portfolio and Roadmap strategy",
+     "actions": [
+      {
+       "id": "A68",
+       "title": "Portfolio Pricing Corridors (Complete the regional list/transfer/ASP model and APR pricing file; show margin/volume trade-offs by region.)",
+       "group": "",
+       "owner": "Lauren/Justin",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "APR complete. LE to work with MD on corridor communications"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "APR review in progress. Will align on communication for corridors & discount shifts after APR submitted"
+        },
+        {
+         "date": "2026-08-06",
+         "text": "Most results in for core, although difficult to get all"
+        },
+        {
+         "date": "2026-07-30",
+         "text": "Results for core survey should be provided by EOW"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "In progress"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "In progress for discussion at WLM workshop. Micro being tracked above"
+        }
+       ],
+       "srcRow": 90
+      },
+      {
+       "id": "A69",
+       "title": "UV/VIS low End strategy and business case",
+       "group": "",
+       "owner": "Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "No update on feedback from AT. Revised market assumptions, aiming for Gate 0/1 in November"
+        },
+        {
+         "date": "2026-09-03",
+         "text": "Met with AT; will make breadboard by end of September. LE to work on next steps outline for both products and communicate through project call"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "looking to engage with AT based on workshop discussion, waiting on feedback from Ted"
+        },
+        {
+         "date": "2026-07-30",
+         "text": "Slides prepped for workshop discussion"
+        }
+       ],
+       "srcRow": 91
+      },
+      {
+       "id": "A70",
+       "title": "Refreshed Roadmap alignment with R&D",
+       "group": "",
+       "owner": "Brian/Lauren",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-09-03",
+         "text": "Alignment meeting scheduled for 9/15 align with RnD on prioritiy and implementation timing for product roadmapping"
+        }
+       ],
+       "srcRow": 92
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P2",
+   "name": "Priority 2",
+   "statement": "Drive engagement across Thermo Fisher enterprise to offer workflow solutions to customers",
+   "objectives": [
+    {
+     "id": "P2-O1",
+     "name": "Expand cross BU selling through targeted collaboration",
+     "actions": [
+      {
+       "id": "A71",
+       "title": "FSD - Nick Dotzenrod, Amanda Reynolds - standalone collab in addition to potential joint one with DIA  (update application note for beercraft, conduct joint webinar)",
+       "group": "",
+       "owner": "Kelly, Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "yellow",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-04-16",
+         "text": "shifting priority down, will still focus on current asks but shift to specific tactics"
+        },
+        {
+         "date": "2026-03-27",
+         "text": "had a team meeting and aggregating customer data and resources"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "cadence established"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "Building out connection - Kelly to set up monthly for team"
+        }
+       ],
+       "srcRow": 5
+      },
+      {
+       "id": "A72",
+       "title": "CMD/DIA - Paven Sandhu, Roland Tan - improved PFAS flyer",
+       "group": "",
+       "owner": "Kelly, Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "yellow",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-04-16",
+         "text": "shifting priority down, will still focus on current asks but shift to specific tactics"
+        },
+        {
+         "date": "2026-03-27",
+         "text": "had a team meeting and aggregating customer data and resources"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "cadence established"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "Building out connection - Kelly to set up monthly for team"
+        }
+       ],
+       "srcRow": 6
+      },
+      {
+       "id": "A73",
+       "title": "PA - Makesh Karpagavinayagam - identify if there are partnership opportunities",
+       "group": "",
+       "owner": "Kelly, Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-04-16",
+         "text": "deprioritizing partnership for now"
+        }
+       ],
+       "srcRow": 7
+      },
+      {
+       "id": "A74",
+       "title": "WAI - Chris Searle - co marketing for reagents/Brochure for instrument integrated with their other instruments",
+       "group": "",
+       "owner": "Kelly, Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "planned",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "Working with Kelly to engage for Q3"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "May be worth removing here, focus is more with Hornbill actions in Priority 1"
+        },
+        {
+         "date": "2026-06-17",
+         "text": "below still in progress"
+        },
+        {
+         "date": "2026-06-03",
+         "text": "Creating rules of engagement and contact sheet for launch; will focus on co-marketing for H2"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "meeting on 4/17"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "WAI team has committed to supporting us in training and marketing materials even though aquamate is still available this year"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "Lauren will set up time with Chris"
+        }
+       ],
+       "srcRow": 8
+      },
+      {
+       "id": "A75",
+       "title": "VIB - Suja Sukumaran - microplastics flyer, food and bev flyer, SPIF/promotion, Webinar",
+       "group": "",
+       "owner": "Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "red",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Aiming to follow up in Q4"
+        },
+        {
+         "date": "2026-09-03",
+         "text": "No progress; likely delayed because launches. Will follow up"
+        },
+        {
+         "date": "2026-08-06",
+         "text": "Re-engaged this week, more to come"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "LE to look into re-opening to have content for EOY"
+        },
+        {
+         "date": "2026-06-17",
+         "text": "no progress on this with primary focus being on completing standard launch material"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "Met this week, planned to map out ebook from existing F&B content, and then consider joint note later in the year"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "initial bandwidth discussion scheduled for next week"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "connection with Suja soon"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "Lauren will connct with Suja and set up follow up time"
+        }
+       ],
+       "srcRow": 9
+      },
+      {
+       "id": "A76",
+       "title": "Promote UVN/VIB cross-selling for Evolution and Genesys",
+       "group": "",
+       "owner": "Kelly, Lauren",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-04-30",
+         "text": "Kelly to follow up on NA side"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "waiting for approval - slightly delayed due to change in leadership"
+        },
+        {
+         "date": "2026-03-27",
+         "text": "creating governance structure for a q2 go live"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "meeting with finance partners for approval this week"
+        },
+        {
+         "date": "2026-02-23",
+         "text": "NA conversations being had with commercial team around feasibility of lead sharing spiff"
+        }
+       ],
+       "srcRow": 10
+      },
+      {
+       "id": "A77",
+       "title": "UV/Vib SPIFF program",
+       "group": "",
+       "owner": "",
+       "region": "EMEA",
+       "targetGoal": "230k USD",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-02-23",
+         "text": "In bowler"
+        }
+       ],
+       "srcRow": 11
+      }
+     ]
+    },
+    {
+     "id": "P2-O2",
+     "name": "Strengthen Offerings through enhanced BID Partnership",
+     "actions": [
+      {
+       "id": "A78",
+       "title": "Engage BID/GSS to enable the NDU service model for pharma customers",
+       "group": "",
+       "owner": "Kelly",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "yellow",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "yellow"
+       },
+       "notes": [
+        {
+         "date": "2026-07-22",
+         "text": "I think its live be there's a change in product management right in this moment so haven't been able to get clear communication around it - trying to follow up with other team members to get a better status update"
+        },
+        {
+         "date": "2026-06-18",
+         "text": "still on track for july go live"
+        },
+        {
+         "date": "2026-04-15",
+         "text": "BID targeting a July Go live of onside installation"
+        },
+        {
+         "date": "2026-03-27",
+         "text": "BID in agreement to do onsite IQOQ and working on proposal"
+        },
+        {
+         "date": "2026-03-03",
+         "text": "BID is conducting VOC and waiting for GSS to create proposal"
+        }
+       ],
+       "srcRow": 15
+      },
+      {
+       "id": "A79",
+       "title": "Develop new method for sales forecasting and pacing data",
+       "group": "",
+       "owner": "Dan, Matt",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "complete"
+       },
+       "notes": [],
+       "srcRow": 16
+      },
+      {
+       "id": "A80",
+       "title": "Establish regional pricing corridors by product and strategic guidance",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-01",
+         "text": "Survey collected from different regions. Will start meeting with EMEA dealers to refine the information"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Survey due Friday"
+        },
+        {
+         "date": "2026-05-26",
+         "text": "survey has been sent to commercial teams due next week. China and SEA have responded."
+        }
+       ],
+       "srcRow": 17
+      },
+      {
+       "id": "A81",
+       "title": "Align on transfer pricing",
+       "group": "",
+       "owner": "Justin",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Same as above"
+        }
+       ],
+       "srcRow": 18
+      },
+      {
+       "id": "A82",
+       "title": "IQ/OQ Rollout",
+       "group": "",
+       "owner": "Kelly",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "planned"
+       },
+       "notes": [],
+       "srcRow": 19
+      }
+     ]
+    },
+    {
+     "id": "P2-O3",
+     "name": "Enable NanoDrop into end-to-end model BID/RSD in EMEA",
+     "actions": [
+      {
+       "id": "A83",
+       "title": "Align on profit sharing and go to market model",
+       "group": "",
+       "owner": "Matt",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-03-26",
+         "text": "Final alignment and go live from BID"
+        }
+       ],
+       "srcRow": 22
+      },
+      {
+       "id": "A84",
+       "title": "IT setup for quote to cash and SKU go live in RSD",
+       "group": "",
+       "owner": "Paula",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-03-25",
+         "text": "Codes completed and ready to push live"
+        }
+       ],
+       "srcRow": 23
+      },
+      {
+       "id": "A85",
+       "title": "Sales force training and launch",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "green",
+        "Apr": "complete",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [],
+       "srcRow": 24
+      },
+      {
+       "id": "A86",
+       "title": "Ongoing KPI monitoring and optimization",
+       "group": "",
+       "owner": "Paula/Charlotte",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [],
+       "srcRow": 25
+      },
+      {
+       "id": "A87",
+       "title": "PROPOSED: Define and implement channel-shift guardrail reporting (BID→Fisher/RSD incremental vs baseline AOP; quantify displacement from other dealers)",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "complete",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [],
+       "srcRow": 26
+      },
+      {
+       "id": "A88",
+       "title": "Rules of engagement document creation for sales team?",
+       "group": "",
+       "owner": "Marta/Adnan",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [
+        {
+         "date": "2026-06-18",
+         "text": "check with US team if they have/need updated ROE"
+        }
+       ],
+       "srcRow": 27
+      }
+     ]
+    },
+    {
+     "id": "P2-O4",
+     "name": "Drive ownership and execution at the right levels among RSD stakeholders, enable strong mindshare",
+     "actions": [
+      {
+       "id": "A89",
+       "title": "Fisher Sci US New Lab start up promo",
+       "group": "",
+       "owner": "Kyle",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "green",
+        "Apr": "yellow",
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-27",
+         "text": "Info provided to Katie"
+        },
+        {
+         "date": "2026-05-06",
+         "text": "Info shared with Katie and aligned on a few small fixes Monday"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Fixes made on Monday to promo in WF request"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "Need Promo approvals to share with team"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "Messaging with Fisher Sci team, need to align on promos in by 4/22"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "Align on promo ideas tomorrow"
+        },
+        {
+         "date": "2026-04-02",
+         "text": "need to enter promo info by the 15th for fisher sci"
+        },
+        {
+         "date": "2026-03-30",
+         "text": "need to enter info by mid april, looking to align on promos with Jaime and Lauren"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Talked with Lauren and she is hoping Jaime can help drive promo that could be run"
+        },
+        {
+         "date": "2026-03-10",
+         "text": "need to enter by 4/10, aligning with Product/Commercial team on promo pricing now"
+        }
+       ],
+       "srcRow": 29
+      },
+      {
+       "id": "A90",
+       "title": "Partner with fisher inside sales team that covers academia to drive promotion",
+       "group": "",
+       "owner": "Mike, Jamie",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Feb": "complete",
+        "Apr": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-04-09",
+         "text": "Waiting for Fisher OFT email to be approved"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Jamie and Mike have training scheduled and working on the materials"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "have a call with inside sales director this week"
+        }
+       ],
+       "srcRow": 30
+      },
+      {
+       "id": "A91",
+       "title": "Fisher Market Share data",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "1.75M with fisher so Adnan asking for data from fisher to understand what kind of market share we have. The market share over the past 3 yaers (exc Implen) but like for like is declining from 47% to 43% to 32% for instruments only."
+        }
+       ],
+       "srcRow": 31
+      },
+      {
+       "id": "A92",
+       "title": "Genesys and Evo unit number data from last year",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "complete",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-12-16",
+         "text": "get data at end of month and then need time to analyze -- could we get that data from Baboucarr instead of the powerBI??. the number from Fisher data shows that over the 4 month period of the promotion, the numbers were up when compared to the previous year. promotion will be continued in 2026, but have been facing major hurdles in the set up '11/18 in progress '11/4 Want to compare data to see how promotions are working to understand if we want to continue - are we getting more leads/opportunities?"
+        }
+       ],
+       "srcRow": 32
+      },
+      {
+       "id": "A93",
+       "title": "Drive customer upgrade of Genesys 10",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "50k USD",
+       "timeline": "",
+       "months": {},
+       "notes": [
+        {
+         "date": "2026-04-30",
+         "text": "do we have contact of install base of units sold through fisher so we can reach out to these customers?Would Lucy have data for this ? (Lauren to check) - ask fisher to run a report as opp to drive sales - Adnan to reach out to sofia. 16/6 - Fisher will be using the new G5 to try and convert any customers stil using the G10"
+        }
+       ],
+       "srcRow": 33
+      },
+      {
+       "id": "A94",
+       "title": "Continue the Q4 25 Core UV promo and work with RSD to get this set up on their system",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "150k USD",
+       "timeline": "",
+       "months": {
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Data will be provided in H1 QBR on the success of the promotion as its only been running for a quarter"
+        }
+       ],
+       "srcRow": 34
+      }
+     ]
+    },
+    {
+     "id": "P2-O5",
+     "name": "Realign China Dealership Model/Micro UV Strategy",
+     "actions": [
+      {
+       "id": "A95",
+       "title": "Execute new partnership to support a strong NanoDrop GTM",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "Q3 6+6 Fcst:\nBkgs: 598K\nRev: 470K",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-09-16",
+         "text": "：Booking forecast 1.05M in Q3, QTD 1.03K; progressed 172K vs LW. Revenue forecast 1.1M(Including Backlog70K), QTD 1.03M ,progressed 259K vs LW."
+        },
+        {
+         "date": "2026-08-26",
+         "text": "：Booking forecast 900K in Q3, QTD 858K; progressed 237K vs LW. Revenue forecast 970K(Including Backlog70K), QTD 771K ,progressed 219K vs LW."
+        },
+        {
+         "date": "2026-08-05",
+         "text": "：Booking forecast 705K in Q3, QTD 617K; progressed 90K vs LW. Revenue forecast 779K , QTD 552K ,progressed 270K vs LW."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "：Booking forecast 639K in Q3, QTD 527K; progressed 220K vs LW. Revenue forecast 639K , QTD 288K ,progressed 140K vs LW."
+        },
+        {
+         "date": "2026-06-24",
+         "text": "：Booking forecast 600K, QTD 600K; progressed 46K vs LW. Revenue forecast 694K (includ. Gene 79K), QTD 694K ,progressed186K vs LW."
+        },
+        {
+         "date": "2026-06-10",
+         "text": "Booking forecast 600K, QTD 554K; progressed 333K vs LW. Revenue forecast 694K (includ. Gene 79K), QTD 508K ,progressed 232K vs LW."
+        }
+       ],
+       "srcRow": 37
+      },
+      {
+       "id": "A96",
+       "title": "Re-build Micro-UV Sales channels",
+       "group": "",
+       "owner": "Lisa Li",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "complete"
+       },
+       "notes": [],
+       "srcRow": 38
+      },
+      {
+       "id": "A97",
+       "title": "New dealer development and ramp-up",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "Target $300K+,\nYTD815K",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-06-02",
+         "text": "New dealer stocking orders in"
+        }
+       ],
+       "srcRow": 39
+      },
+      {
+       "id": "A98",
+       "title": "Existing dealers expand to Ultra full portfolio and sellout target",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "Target:$1.1M,\nYTD923K",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "complete",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-09-16",
+         "text": "：Q3 forecast 330K, QTD331K revenue, pacing 100%."
+        },
+        {
+         "date": "2026-08-26",
+         "text": "Q3 forecast 300K, QTD283K revenue, pacing 94%."
+        },
+        {
+         "date": "2026-08-05",
+         "text": "Q3 forecast 300K, QTD180K revenue, pacing 60%."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "Q3 forecast 285K, QTD100K revenue, pacing 35%."
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Q2 forecast 184K, pacing100%."
+        },
+        {
+         "date": "2026-06-10",
+         "text": "Q2 forecast 184K, pacing100%."
+        }
+       ],
+       "srcRow": 40
+      },
+      {
+       "id": "A99",
+       "title": "Support GeneCo inventory sellout and adhere to post-contract engagement rules",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "The agreement has been signed and sealed."
+        }
+       ],
+       "srcRow": 41
+      },
+      {
+       "id": "A100",
+       "title": "GeneCo after-discontinue inventory tracking",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [
+        {
+         "date": "",
+         "text": "Next Inventory report from GeneCo by end of Sep."
+        }
+       ],
+       "srcRow": 42
+      },
+      {
+       "id": "A101",
+       "title": "Accolaro Pro Sales Acceleration/ promo",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "Sellout target 10 units,\nYTD 3 Units",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-08-26",
+         "text": "：2 APs have placed order(Wuxi Biologitics).1unit delay to Q4."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "1unit delay to later Q3. 2 APs have placed order(Wuxi Biologitics). Q1: 1AP sold to Xinma Bio;"
+        }
+       ],
+       "srcRow": 43
+      },
+      {
+       "id": "A102",
+       "title": "Top bio/pharma accounts penetration",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [],
+       "srcRow": 44
+      }
+     ]
+    },
+    {
+     "id": "P2-O6",
+     "name": "Drive Sales through regional and Boutique Dealers",
+     "actions": []
+    },
+    {
+     "id": "P2-O7",
+     "name": "Enable dealers success through training marketing and collateral development",
+     "actions": [
+      {
+       "id": "A103",
+       "title": "Develop 1 academic success story NA and EMEA.",
+       "group": "",
+       "owner": "Kyle",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-05-27",
+         "text": "U of Toronto still having some set up issues?"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "seeing if there's a software issue"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "haven't heard anything else, should I ping again or Mike are you in contact recently?"
+        },
+        {
+         "date": "2026-04-16",
+         "text": "Janice was out for PTO for a bit, looking to connect now that she's back"
+        },
+        {
+         "date": "2026-04-02",
+         "text": "Kyle sitll communicating with U toronto to try and move this forward and connecting with Janice"
+        },
+        {
+         "date": "2026-03-10",
+         "text": "Depends on U Toronto timing, would like to get out by early May, if not possible will look to launch in September to align with academia"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Janice is doing final training with dealer and should be able to approach after"
+        },
+        {
+         "date": "2026-01-14",
+         "text": "round back closer to the end of Q1 with Janice and see if she can ask the dealer"
+        },
+        {
+         "date": "2026-11-12",
+         "text": "Still targeting U of Toronto, Hoping to start end of this year for something next year"
+        },
+        {
+         "date": "2026-10-08",
+         "text": "university of toronto teaching lab late Q4 (possibly into Q1 of next year)"
+        },
+        {
+         "date": "2026-09-08",
+         "text": "Hoping to align with the University of Toronto"
+        },
+        {
+         "date": "2026-08-13",
+         "text": "Need to round back with US possibly"
+        },
+        {
+         "date": "2026-07-08",
+         "text": "hoping to hear from LATAM by mid July"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "LATAM said they may have a contact at Pepsco"
+        },
+        {
+         "date": "2026-02-25",
+         "text": "Will reach out to regions and align by end of March"
+        }
+       ],
+       "srcRow": 50
+      },
+      {
+       "id": "A104",
+       "title": "Target multi unit teaching lab opportunities early in Q1",
+       "group": "",
+       "owner": "Mike",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "complete",
+        "Mar": "complete",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [],
+       "srcRow": 51
+      },
+      {
+       "id": "A105",
+       "title": "Partner with fisher inside sales team that covers academia to drive promotion",
+       "group": "",
+       "owner": "Mike, Jamie",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "complete",
+        "Mar": "green",
+        "Apr": "complete",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-02-11",
+         "text": "Jamie and Mike have training scheduled and working on the materials"
+        }
+       ],
+       "srcRow": 52
+      },
+      {
+       "id": "A106",
+       "title": "Marketing emails (OFT) focus on low special pricing for multiple units",
+       "group": "",
+       "owner": "Kelly, Kyle",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "complete",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-01-27",
+         "text": "this has been completed"
+        }
+       ],
+       "srcRow": 53
+      },
+      {
+       "id": "A107",
+       "title": "Develop QA/QC Case Study - collaborate with 1 key customer (e.g., Shasta).",
+       "group": "",
+       "owner": "Kyle",
+       "region": "NA",
+       "targetGoal": "200 Qualified leads, 20 SQO's\n$120K",
+       "timeline": "",
+       "months": {
+        "Jul": "green",
+        "Aug": "green",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-02",
+         "text": "adding question in external forms to ask customers if they'd be willing to speak about their experience with us"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Has not been priority with redo of Acclaro Pro messaging and focus on GENESYS. Will look to round back here at end of June"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Carry over from LY, has been a challange but will look to try and ask around again in the next week"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "LATAM and EU have fallen through, still trying to find for 2026"
+        }
+       ],
+       "srcRow": 54
+      },
+      {
+       "id": "A108",
+       "title": "Research Gate - core focused email",
+       "group": "",
+       "owner": "Kyle",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jul": "green",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-16",
+         "text": "Set up being worked on"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Adjusting dates slightly to mid July"
+        },
+        {
+         "date": "2026-02-11",
+         "text": "Booked, will focus on Hornbill"
+        }
+       ],
+       "srcRow": 55
+      },
+      {
+       "id": "A109",
+       "title": "Newsletter with promotions (quarterly)",
+       "group": "",
+       "owner": "Valdo",
+       "region": "LATAM",
+       "targetGoal": "$150K",
+       "timeline": "",
+       "months": {
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "planned",
+        "Jul": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-05-06",
+         "text": "FH: This action can be moved to blower. 03/18 FH: Everything has been approved, and we should start in April.- 2/11 have marketing approved for newsletter before March"
+        }
+       ],
+       "srcRow": 56
+      },
+      {
+       "id": "A110",
+       "title": "Evaluate and build action plan for EMEA dealer underperformance",
+       "group": "",
+       "owner": "Dimi",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "yellow"
+       },
+       "notes": [],
+       "srcRow": 57
+      }
+     ]
+    },
+    {
+     "id": "P2-O8",
+     "name": "Enable Boutique and Smaller Regional Dealers",
+     "actions": [
+      {
+       "id": "A111",
+       "title": "Strengthen accountability with channel partners in LATAM",
+       "group": "",
+       "owner": "Valdo",
+       "region": "LATAM",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-04",
+         "text": "aquamate discontinued is good for the dealers"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Switched dealers in Brazil, focus on driving uptake in Q2"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "FH: All Tier 1 and Tier 2 partners with regular MBRs, including forecast alignment and other actions."
+        }
+       ],
+       "srcRow": 60
+      },
+      {
+       "id": "A112",
+       "title": "Emphasize value-based selling and application-led engagement to strengthen competitive positioning",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "planned",
+        "Jun": "planned",
+        "Jul": "planned",
+        "Aug": "planned",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Ideas to shift to: focus on personas and build around these in trainings?"
+        }
+       ],
+       "srcRow": 61
+      },
+      {
+       "id": "A113",
+       "title": "Set up Core UV promotions with VWR",
+       "group": "",
+       "owner": "Adnan",
+       "region": "EMEA",
+       "targetGoal": "100k USD",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "complete",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Promotion went live in late Feb, now to track its performance"
+        }
+       ],
+       "srcRow": 62
+      },
+      {
+       "id": "A114",
+       "title": "Optimize channel landscape, grow mindshare with key partners",
+       "group": "",
+       "owner": "Kelly",
+       "region": "APJ & EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "planned",
+        "Jun": "planned",
+        "Jul": "planned",
+        "Aug": "planned",
+        "Sep": "planned"
+       },
+       "notes": [],
+       "srcRow": 63
+      },
+      {
+       "id": "A115",
+       "title": "Focus on ND Ultra with FL - discuss with factory on promo for Reagents",
+       "group": "",
+       "owner": "Marta",
+       "region": "EMEA",
+       "targetGoal": "100k USD",
+       "timeline": "",
+       "months": {
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-16",
+         "text": "check with Justin if possible in Q33/10: Marta aligned with team and getting assays to do some tests with demo units. Check back in several weeks '2/24 Kelly to investigate if we can do this without creating part numbers and to look into margins for reagents"
+        }
+       ],
+       "srcRow": 64
+      },
+      {
+       "id": "A116",
+       "title": "Genesys with Water Methods Software promo",
+       "group": "",
+       "owner": "Marta",
+       "region": "EMEA",
+       "targetGoal": "100k USD",
+       "timeline": "",
+       "months": {
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-18",
+         "text": "We will start with G5 launch"
+        }
+       ],
+       "srcRow": 65
+      },
+      {
+       "id": "A117",
+       "title": "Hands-on service training for new dealers in UK and refresh for others (Micro)",
+       "group": "",
+       "owner": "Marta",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-16",
+         "text": "we will organize it in US in August /September  6/11Marta working on scheduling this training with Jeff"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Mark to reach out to Teri and follow up"
+        },
+        {
+         "date": "2026-04-02",
+         "text": "Teri to reach out to Jeff to see if we can coordinate training /mentorship"
+        }
+       ],
+       "srcRow": 66
+      },
+      {
+       "id": "A118",
+       "title": "Track Brazil dealer management for improved sales",
+       "group": "",
+       "owner": "Valdo",
+       "region": "Latam",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "planned",
+        "Aug": "planned",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-06-04",
+         "text": "numbers in brazil have been low compared to mexico - onboarding a new dealer in Brazil - planning to start selling in Q4 - being trained now/getting demo units"
+        }
+       ],
+       "srcRow": 67
+      },
+      {
+       "id": "A119",
+       "title": "EMEA Demand Gen",
+       "group": "",
+       "owner": "Kyle",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [],
+       "srcRow": 68
+      },
+      {
+       "id": "A120",
+       "title": "ECM Alignment",
+       "group": "",
+       "owner": "Kyle",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-01-13",
+         "text": "Need to send final shipping info on pull up banner to Adnan"
+        },
+        {
+         "date": "2026-12-16",
+         "text": "updated some graphics and finalizing '12/2 wall graphic is created but might need an update based on fisher '11/18 would need NanoDrop pull out banner '11/18 Wall graphic should be fully sized, created a GENESYS table top. Need to align with team on final items this week"
+        },
+        {
+         "date": "2026-11-04",
+         "text": "Adding materials to ordering site, creating new wall graphic and additional table top sign for Evolution. Planning to have files all ready by end of Novemeber at the latest"
+        },
+        {
+         "date": "2026-10-21",
+         "text": "materials have been ordered"
+        }
+       ],
+       "srcRow": 69
+      },
+      {
+       "id": "A121",
+       "title": "More translated materials (GENESYS and Email focus)",
+       "group": "",
+       "owner": "Kyle",
+       "region": "EMEA",
+       "targetGoal": "Awareness",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "green",
+        "Sep": "yellow",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-16",
+         "text": "Translation tracking a bit slower then expected but in progress"
+        },
+        {
+         "date": "2026-09-02",
+         "text": "finalizing some of the page translations for GENESYS G5 in the coming week or two"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Has been lower on my list but will look to send some GENESYS emails out in German and French as testing very soon"
+        },
+        {
+         "date": "2026-06-30",
+         "text": "Aligning with regions on GENSYS materials, looking to make drip emails in two additional languages for August or September emails going forward"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "User guide in review now, will provide first four emails and social in rough draft for other languages, regions can edit and send for launch of G5"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "I will get some review copy shared by end of week"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Will focus on support for GENESYS G5 social posts first"
+        },
+        {
+         "date": "2026-04-14",
+         "text": "French, German, Spanish"
+        },
+        {
+         "date": "2026-03-30",
+         "text": "brainstorm idea, haven't met with team in month"
+        }
+       ],
+       "srcRow": 70
+      },
+      {
+       "id": "A122",
+       "title": "Procatively approach Pharma/Biopharma customer with Acclaro Pro",
+       "group": "",
+       "owner": "",
+       "region": "EMEA",
+       "targetGoal": "180k USD",
+       "timeline": "",
+       "months": {
+        "Jan": "na",
+        "Feb": "na",
+        "Mar": "na",
+        "Apr": "na",
+        "May": "na",
+        "Jun": "na",
+        "Jul": "na",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Moved to bowler"
+        }
+       ],
+       "srcRow": 71
+      },
+      {
+       "id": "A123",
+       "title": "request quote or add to cart website concerns this is in EMEA as well",
+       "group": "",
+       "owner": "Holger/Mark",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-06-24",
+         "text": "We've added a contact POD but it is below the fold of the page, don't have any other ideas for great solutions"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "The only option we have is a POD, it sits below the spec table, ticket is in and should be complete first week of June"
+        },
+        {
+         "date": "2026-04-02",
+         "text": "leads declining in ND - Holger calling out issues moving things from cart to purchase on the website related to BID"
+        }
+       ],
+       "srcRow": 72
+      },
+      {
+       "id": "A124",
+       "title": "Social Testing",
+       "group": "",
+       "owner": "Kyle",
+       "region": "EMEA",
+       "targetGoal": "25 leads, 2 SQO, $15K bookings",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "yellow",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "I believe there's no way for me to post in other regions, I did support by sharing out content and materials to teams for GENESYS Launch"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Need to round back with the teams"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "I'm the guinea pig for Youtube, I have provided some info and team should be providing ETA or asking for more info by end of week"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Working through createing Youtube ad's, digital CAD team should have more requirements for Tik Tok portion to begin"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "meeting with digital team about tik tok next week"
+        },
+        {
+         "date": "2026-04-14",
+         "text": "Check in to Tik Tok"
+        }
+       ],
+       "srcRow": 73
+      },
+      {
+       "id": "A125",
+       "title": "Short videos",
+       "group": "",
+       "owner": "Kyle",
+       "region": "EMEA",
+       "targetGoal": "Awareness",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "yellow",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-03",
+         "text": "Looking to now do GENESYS G5 first, will align with Lauren tomorrow on timing"
+        },
+        {
+         "date": "2026-08-05",
+         "text": "Starting these this month, team double checking insight pro needs"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "aligned on two in the priority meeting, may not wrap them both until closer to end of year"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Align in 6/3 priority meeting with larger apps team"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "I think we got a list of videos we need to prioritize?"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Mark and team to brainstorm if the videos should be on web or on email and kyle to connect with Lauren to discuss potentail content"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Who can I partner with/who would look to shoot any of these. I think last we talked about was gathering a list of ideas"
+        },
+        {
+         "date": "2026-04-14",
+         "text": "Academic style demo"
+        }
+       ],
+       "srcRow": 74
+      },
+      {
+       "id": "A126",
+       "title": "Share Discontinue or align on discontune",
+       "group": "",
+       "owner": "Kyle",
+       "region": "EMEA",
+       "targetGoal": "Awareness",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "7.23: discontinue email sent to user base internally, creating a trade up OFT that can be sent by regions or followed up via commerical team 7.9: Discontinue message ready to be sent to user base, can create a OFT version for sellers and dealers. Currently set for Mid August as a send date do we need an OFT or other version for dealers?"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Completed but not sending until around August as inventory sells out. I will send globally, do we need an OFT or other version for dealers?"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Made a few small tweaks to email with new discontinue/launch date and then removed info about GENESYS 30 to continue support of that instrument"
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Email done, Lauren is the letter side finished? Website will be updated week of 6/1 to redirect to new materials"
+        },
+        {
+         "date": "2026-04-14",
+         "text": "Align with them on copy (not as many people with GENESYS 10 reaching out, same in NA?)"
+        }
+       ],
+       "srcRow": 75
+      },
+      {
+       "id": "A127",
+       "title": "Promo flyer upgrade GENESYS",
+       "group": "",
+       "owner": "Kyle/Adnan",
+       "region": "EMEA",
+       "targetGoal": "100 leads, 10 SQO, $75K bookings",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "7.9: I have template creating, last I saw we were waiting for SKU"
+        },
+        {
+         "date": "2026-06-30",
+         "text": "Got loyalty numbers for GENESYS trade up flyer, need to create that today"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Thermo Fisher completed, Fisher Sci/VWR being reviewed and should be ready in roughly two weeks. Promo page in US updating on 7/1"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "H2 promo flyers finishing, will work on GENSYS G5 version in June"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Promo flyers being worked on, just realized I may need a GENESYS 20 - 180 Promo flyer for the month of June now..."
+        },
+        {
+         "date": "2026-04-30",
+         "text": "Launching with Phase 1"
+        },
+        {
+         "date": "2026-04-14",
+         "text": "Share with Adnan for approval on Fisher side"
+        }
+       ],
+       "srcRow": 76
+      },
+      {
+       "id": "A128",
+       "title": "Internal Spec document into customer facing",
+       "group": "",
+       "owner": "Kyle/Adnan",
+       "region": "EMEA",
+       "targetGoal": "Awareness",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "I think we got this one cleaned up, but let me know if you need any other versions Adnan"
+        },
+        {
+         "date": "2026-07-09",
+         "text": "additional materials needed?"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Started something before I left on PTO, will round back by 7/1"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Was planning on working for it now for G5, is it okay for us to wait until July now? 4/14: Update internal training document (create one larger one with GENESYS G5)"
+        }
+       ],
+       "srcRow": 77
+      },
+      {
+       "id": "A129",
+       "title": "Ensure Fisher and VWR are pushing GENESYS G5 once launched",
+       "group": "",
+       "owner": "Kyle/Adnan",
+       "region": "EMEA",
+       "targetGoal": "Awareness",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "green",
+        "Jul": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-23",
+         "text": "SKU's starting to show up on Fisher Sci UK, Marta can you check your region? Working with Adnan and Fisher team on continuing marketing materials and promotions for H2"
+        },
+        {
+         "date": "2026-07-09",
+         "text": "follow up meeting with Adnan Friday 7/10"
+        },
+        {
+         "date": "2026-06-30",
+         "text": "Aligning with Adnan in email, shared materials for approval with US side"
+        },
+        {
+         "date": "2026-06-24",
+         "text": "Shared another update of marketing materials, will have Fisher Sci pieces for brochures in next week"
+        },
+        {
+         "date": "2026-05-27",
+         "text": "Sharing Thermo Fisher, emails, social and several other finished pieces by end of week, want to give teams a month plus to plan for launch"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "Brochures completed, being put into review here shortly. Will share Thermo Fisher versions in the next week or two so teams can start to digest"
+        },
+        {
+         "date": "2026-04-14",
+         "text": "Can we get customer base from FIsher or VWR?"
+        }
+       ],
+       "srcRow": 78
+      },
+      {
+       "id": "A130",
+       "title": "Roll out 2H Promos",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-08-13",
+         "text": "Some weird blocking issue came through, but resolved now. Should be done"
+        },
+        {
+         "date": "2026-08-06",
+         "text": "SMBs released, but ND part numbers had block added for unknown reason. Investigating this"
+        },
+        {
+         "date": "2026-07-30",
+         "text": "SMBs should be released today/tomorrow"
+        },
+        {
+         "date": "2026-07-21",
+         "text": "On track to release next week; working with Mike for any issues"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "Delayed due to GTC hold up. Should be released by end of month. Working with SMB team to extend H1 PN effective date to allow for continuity"
+        },
+        {
+         "date": "2026-06-03",
+         "text": "On track for July release"
+        }
+       ],
+       "srcRow": 79
+      },
+      {
+       "id": "A131",
+       "title": "Manage final order allocations and drive appropriate stocking and dealer transition for Hornbill",
+       "group": "",
+       "owner": "Lauren",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "yellow"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Informed that we have enough parts to make 100 additional units; need to review cost/service need to see if worthwhile"
+        },
+        {
+         "date": "2026-09-03",
+         "text": "Will be starting weekly communications to team given low levels of stock"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "Still working through; orders seem to be handled as normal but need to keep managing legacy stock level"
+        },
+        {
+         "date": "2026-08-06",
+         "text": "Keeping this yellow based on ongoing confusing feedback from MSN team. Customer orders appear to be blocked from OM for unknown reason, LE investigating more"
+        },
+        {
+         "date": "2026-07-30",
+         "text": "Tracking ongoing. Main concern is now confusing over MSN placing STOs."
+        },
+        {
+         "date": "2026-07-21",
+         "text": "Risk with MSN providing information. Building spreadsheet to track as best as possible"
+        }
+       ],
+       "srcRow": 80
+      },
+      {
+       "id": "A132",
+       "title": "China Core UV Initiatives",
+       "group": "",
+       "owner": "Matt",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [],
+       "srcRow": 81
+      },
+      {
+       "id": "A133",
+       "title": "Drive distributor sellout > revenue target",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "> Q revenue target\nQ2-$455K\nQ3-$610K",
+       "timeline": "565K",
+       "months": {
+        "Mar": "complete",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-04-28",
+         "text": "QTD $134K sellout, complete 31% of Q2 revenue target $450K."
+        },
+        {
+         "date": "2026-05-26",
+         "text": "QTD $283K sellout, complete 63% of Q2 revenue target $450K."
+        },
+        {
+         "date": "2026-06-22",
+         "text": "QTD $455K sellout, complete Q2 revenue target."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "QTD $100K sellout, pacing 16%."
+        },
+        {
+         "date": "2026-08-03",
+         "text": "QTD$234K sellout,pacing  38%"
+        },
+        {
+         "date": "2026-09-15",
+         "text": "QTD$565k sellout,pacing 89%"
+        }
+       ],
+       "srcRow": 82
+      },
+      {
+       "id": "A134",
+       "title": "Academic win-rate",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": ">8%",
+       "timeline": "0.17",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "na",
+        "Sep": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Q1 sell-out was 30K, win rate - 12%, and the Q2 pipeline with a win rate above 50% currently stands at 90K."
+        },
+        {
+         "date": "2026-04-28",
+         "text": "Q2 Academic QTD pipeline $110K, sellout $18K"
+        },
+        {
+         "date": "2026-05-26",
+         "text": "：QTD pipeline $249K, sell out $107K"
+        },
+        {
+         "date": "2026-06-22",
+         "text": "QTD sell out $133K"
+        },
+        {
+         "date": "2026-07-22",
+         "text": "Q3 Pipeline $120K, QTD sell out $20K"
+        },
+        {
+         "date": "2026-08-03",
+         "text": "Q3 pipeline $ 175K,QTD sell out $ 79K"
+        },
+        {
+         "date": "2026-09-16",
+         "text": "Q3 pipeline $ 206K,QTD sell out $ 110K"
+        }
+       ],
+       "srcRow": 83
+      },
+      {
+       "id": "A135",
+       "title": "New dealers sellout target",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": ">$200K FY",
+       "timeline": "Q1:$30K\nQ2: $59K\nQ3:$20K",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Two new distributors in Guangdong are expected to generate 50K sellout in Q2."
+        },
+        {
+         "date": "2026-04-28",
+         "text": "QTD new dealer sellout $13K."
+        },
+        {
+         "date": "2026-05-26",
+         "text": "QTD new dealer sellout $52K."
+        },
+        {
+         "date": "2026-06-22",
+         "text": "QTD new dealer sellout $80K."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "QTD new dealer sellout $109K."
+        },
+        {
+         "date": "2026-09-15",
+         "text": "：QTD new dealer sellout $130K."
+        }
+       ],
+       "srcRow": 84
+      },
+      {
+       "id": "A136",
+       "title": "Booking pacing enhancement quarterly",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "Q3 M3＞100%",
+       "timeline": "",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "complete",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-04-28",
+         "text": "M1 in Q2- 21%"
+        },
+        {
+         "date": "2026-05-26",
+         "text": "M2 in Q2 - 65%"
+        },
+        {
+         "date": "2026-06-22",
+         "text": "M3 in Q2 ＞100%"
+        },
+        {
+         "date": "2026-07-22",
+         "text": "M1 in Q3 > 20%"
+        },
+        {
+         "date": "2026-08-03",
+         "text": "：M1 in Q3 -21%"
+        },
+        {
+         "date": "2026-09-15",
+         "text": "：M3 in Q3>100%"
+        }
+       ],
+       "srcRow": 85
+      },
+      {
+       "id": "A137",
+       "title": "Govt. upgrades projects SoW",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": ">10%",
+       "timeline": "in process",
+       "months": {
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "Two rounds of WeChat promotion completed on food & pharma solutions for regulatory market equipment upgrades — driving solution awareness and lead generation."
+        },
+        {
+         "date": "2026-04-28",
+         "text": "WeChat promotion for inspection institution equipment upgrades is going to publish this week."
+        },
+        {
+         "date": "2026-06-22",
+         "text": "：~$700K potential demands till now, ~$200K bidding intentions posted,with procurement expected to phase in during Q3."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "no update."
+        }
+       ],
+       "srcRow": 86
+      },
+      {
+       "id": "A138",
+       "title": "API Automation",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "$150K",
+       "timeline": "in process",
+       "months": {
+        "Jan": "green",
+        "Feb": "green",
+        "Mar": "green",
+        "Apr": "green",
+        "May": "green",
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "na",
+        "Sep": "na",
+        "Oct": "na",
+        "Nov": "na",
+        "Dec": "na"
+       },
+       "notes": [
+        {
+         "date": "",
+         "text": "The customer has started online debugging, and some issues are currently being jointly addressed with CIC"
+        },
+        {
+         "date": "2026-05-26",
+         "text": "New API project of 中粮太仓(COFCO) $30K in H2."
+        },
+        {
+         "date": "2026-06-22",
+         "text": "Waiting to sign NDA with 中粮太仓(COFCO) for 3D model. Sipper API support needed."
+        },
+        {
+         "date": "2026-07-22",
+         "text": "Sign the contract of 中粮太仓(COFCO) project with Zhongkong Group in Aug. Sipper API support needed."
+        }
+       ],
+       "srcRow": 87
+      }
+     ]
+    },
+    {
+     "id": "P2-O9",
+     "name": "India Initiatives",
+     "actions": [
+      {
+       "id": "A139",
+       "title": "NanoDrop Ultra GeM compliance",
+       "group": "",
+       "owner": "Justin",
+       "region": "India",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "green",
+        "Sep": "green"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "Nishi had requested update to signed documents, those have all been provided back to her. Reached out for a status update on the compliance process which has already started"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "India team working with the GEM officials, asked Arun for an update"
+        },
+        {
+         "date": "2026-07-01",
+         "text": "We have provided all necessary documents for GeM compliance"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Followed up to get clear timeline on excemption/filing"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Regulatory filing for exemption of video of MSN manufacturing site. Ultra PNs are already setup to ship from both MSN/CMC order management will need to flip when orders come in"
+        }
+       ],
+       "srcRow": 89
+      },
+      {
+       "id": "A140",
+       "title": "Evaluate NDU government promotions to convert NDL Sales",
+       "group": "",
+       "owner": "",
+       "region": "India",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "green",
+        "Jun": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-07-01",
+         "text": "SMB submitted and should be in place for H2"
+        },
+        {
+         "date": "2026-06-04",
+         "text": "Pricing approved for a NDU promotion for GeM orders, working on SMB"
+        },
+        {
+         "date": "2026-05-28",
+         "text": "Sent requst to India to provide price point they feel could save most of these orders"
+        }
+       ],
+       "srcRow": 90
+      }
+     ]
+    },
+    {
+     "id": "P2-O10",
+     "name": "ANZ Initiatives",
+     "actions": [
+      {
+       "id": "A141",
+       "title": "NanoDrop Pricing Guidance",
+       "group": "",
+       "owner": "Justin",
+       "region": "ANZ",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "May": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-05-28",
+         "text": "Sent 2025 ASP values and H2 promos that will be out shortly. Can this be closed?"
+        }
+       ],
+       "srcRow": 93
+      }
+     ]
+    },
+    {
+     "id": "P2-O11",
+     "name": "Portfolio Strategy Work",
+     "actions": [
+      {
+       "id": "A142",
+       "title": "Nanodrop Advertising Campaign (only one ND)",
+       "group": "",
+       "owner": "Kyle",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "green",
+        "Jul": "green",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Created imagery and eSig for teams. Shared with PR and secured and Q/A coming up in Oct. Have created SEO campaigns to drive awareness and additional traffic to the marketing pages through 2026 and into 2027 for a bit"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "Anniversary awareness campaign active, several third party partners helped post. PMAX Google ad active as well, building in several social posts for the rest of the year"
+        }
+       ],
+       "srcRow": 97
+      },
+      {
+       "id": "A143",
+       "title": "Finalize product value propositions, value pillars and ranked top-five benefits; use them as the spine for collateral/campaign refresh.",
+       "group": "",
+       "owner": "Kyle",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Finsihed working on Water materials with Kelly. Aligned with teams on content in toolkits."
+        }
+       ],
+       "srcRow": 98
+      },
+      {
+       "id": "A144",
+       "title": "Build turnkey dealer playbook/templates and improve content findability; align outputs to the GCM refresh window.",
+       "group": "",
+       "owner": "Kyle",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "green",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Working on first verions of marketing tool kits starting with water, and will look to have a rough draft to align on here in the first week of October"
+        }
+       ],
+       "srcRow": 99
+      },
+      {
+       "id": "A145",
+       "title": "Build internal battlecards and confirm legal/approval boundaries for a dealer-shareable version. (get legal clearance)",
+       "group": "",
+       "owner": "Matt",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Kyle shared two flyers with versions of aggresiveness for marketing compared to competitors"
+        }
+       ],
+       "srcRow": 100
+      },
+      {
+       "id": "A146",
+       "title": "Pull demo trends plus Fisher/BID e-commerce traffic/sales; use next-week checkpoint to assign timelines and decide web-price pilot vs. quote route.",
+       "group": "",
+       "owner": "Matt",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Aug": "green",
+        "Sep": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Kyle noticed products are assigned to us and FL kits are assigned to LSG, that's correct?"
+        }
+       ],
+       "srcRow": 101
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P3",
+   "name": "Priority 3",
+   "statement": "Define and execute tariff mitigation strategy, enable dual manufacturing option for key products",
+   "objectives": [
+    {
+     "id": "P3-O1",
+     "name": "Execute tariff mitigations and operational efficiency across manufacturing portfolio",
+     "actions": [
+      {
+       "id": "A147",
+       "title": "Drive tariff-mitigation actions for the Core UV portfolio",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [
+        {
+         "date": "",
+         "text": "Specific actions for China? -LE  NOT ACTIVE FOR 2026"
+        }
+       ],
+       "srcRow": 5
+      },
+      {
+       "id": "A148",
+       "title": "Optimize SIOP and advance China Direct 2.0 initiatives",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [],
+       "srcRow": 6
+      },
+      {
+       "id": "A149",
+       "title": "Optimize assay sourcing from BID, obtain export certification for CMC Shanghai",
+       "group": "",
+       "owner": "",
+       "region": "China",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [],
+       "srcRow": 7
+      }
+     ]
+    },
+    {
+     "id": "P3-O2",
+     "name": "Transition to Direct Shipments for tarrif mitigation and cost reduction",
+     "actions": [
+      {
+       "id": "A150",
+       "title": "Explore dropship to NA BID Customers",
+       "group": "",
+       "owner": "Kelly",
+       "region": "NA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "yellow",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "na"
+       },
+       "notes": [
+        {
+         "date": "2026-06-18",
+         "text": "have a team meeting scheduled to try and push this forward"
+        },
+        {
+         "date": "2026-05-12",
+         "text": "BID workign with It still - hoping for Q2 launch"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "BID working with IT"
+        }
+       ],
+       "srcRow": 10
+      },
+      {
+       "id": "A151",
+       "title": "Explore dropship to ROW BID customers",
+       "group": "",
+       "owner": "Kelly",
+       "region": "ROW",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {},
+       "notes": [],
+       "srcRow": 11
+      },
+      {
+       "id": "A152",
+       "title": "Direct LATAM shipment from CMC",
+       "group": "",
+       "owner": "Valdo?",
+       "region": "LATAM",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Feb": "planned",
+        "Mar": "yellow",
+        "Apr": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-03-18",
+         "text": "Kelly to follow up with Joel Seddon on this -  FH: We are awaiting instructions from the BU on how our partners should carry out the process."
+        }
+       ],
+       "srcRow": 12
+      }
+     ]
+    },
+    {
+     "id": "P3-O3",
+     "name": "Evaluate dual manufacturing option for key products",
+     "actions": [
+      {
+       "id": "A153",
+       "title": "Complete robust analysis dual-sourcing scoping for Genesys and and extended ND portfolio",
+       "group": "",
+       "owner": "",
+       "region": "Global",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "yellow",
+        "May": "red",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "green"
+       },
+       "notes": [],
+       "srcRow": 16
+      }
+     ]
+    },
+    {
+     "id": "P3-O4",
+     "name": "Service and Exchanged instrument solutions",
+     "actions": [
+      {
+       "id": "A154",
+       "title": "Accessory warranty business case",
+       "group": "",
+       "owner": "Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned"
+       },
+       "notes": [],
+       "srcRow": 19
+      },
+      {
+       "id": "A155",
+       "title": "Old instrument recycling program (can we do this for micro as well?)",
+       "group": "",
+       "owner": "Lauren",
+       "region": "",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Mar": "yellow",
+        "Apr": "green",
+        "May": "yellow",
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "yellow",
+        "Sep": "red"
+       },
+       "notes": [
+        {
+         "date": "2026-09-24",
+         "text": "Have been given initial no from MSN sourcing - will look into production support in Q4"
+        },
+        {
+         "date": "2026-08-27",
+         "text": "Working on workflow diagram to share with MSN team; will meet in early Sept"
+        },
+        {
+         "date": "2026-08-06",
+         "text": "Seems low lift, but need buy-in from MSN based on staffing. LE to type summary email and meet with supply chain next week"
+        },
+        {
+         "date": "2026-07-30",
+         "text": "Need a lot more details on process from CMD before MSN commits to resource to this. Unclear on effort needed. Follow up with CMD scheduled for next week"
+        },
+        {
+         "date": "2026-07-16",
+         "text": "Aligning with MSN team next week."
+        },
+        {
+         "date": "2026-06-03",
+         "text": "CMD route seems fair path, need to confirm SAP feasibility with MSN team"
+        },
+        {
+         "date": "2026-05-14",
+         "text": "issue with deployment due to reprioritization from corporate; connecting with CMD to see if we can combine forces, meeting schedule for 5/28"
+        },
+        {
+         "date": "2026-03-18",
+         "text": "Review meeting on 3/30"
+        },
+        {
+         "date": "2026-04-09",
+         "text": "approved for NA pilot. Working with corporate to roll out"
+        },
+        {
+         "date": "2026-04-22",
+         "text": "A bit behind with Hornbill. Will come back to when able"
+        },
+        {
+         "date": "2026-05-05",
+         "text": "Recycling has shifted from corporate perspective; have meeting with ICP team to discuss possible joint efforts in late May"
+        }
+       ],
+       "srcRow": 20
+      },
+      {
+       "id": "A156",
+       "title": "Investigate garage sale for refurbished Genesys\n (see Core derivatives for recycling)",
+       "group": "",
+       "owner": "Ebersol",
+       "region": "NA, LATAM?",
+       "targetGoal": "",
+       "timeline": "Q1",
+       "months": {
+        "Jul": "planned",
+        "Aug": "planned",
+        "Sep": "planned",
+        "Oct": "planned",
+        "Nov": "planned",
+        "Dec": "planned"
+       },
+       "notes": [
+        {
+         "date": "2026-01-14",
+         "text": "looking more into recycling"
+        },
+        {
+         "date": "2026-11-12",
+         "text": "consider this for next year"
+        }
+       ],
+       "srcRow": 21
+      }
+     ]
+    },
+    {
+     "id": "P3-O5",
+     "name": "Geographical Issues",
+     "actions": [
+      {
+       "id": "A157",
+       "title": "GeM restrictions impacting shipping abilities into India",
+       "group": "",
+       "owner": "Matt",
+       "region": "India",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Apr": "planned",
+        "May": "planned",
+        "Jun": "planned",
+        "Jul": "planned"
+       },
+       "notes": [],
+       "srcRow": 24
+      },
+      {
+       "id": "A158",
+       "title": "Export licenses limiting ability to sell into Iraq/ ME",
+       "group": "",
+       "owner": "Justin",
+       "region": "EMEA",
+       "targetGoal": "",
+       "timeline": "",
+       "months": {
+        "Jun": "yellow",
+        "Jul": "yellow",
+        "Aug": "complete"
+       },
+       "notes": [
+        {
+         "date": "2026-08-27",
+         "text": "GTC confirmed licencing not an issue for NDLP and NDE"
+        },
+        {
+         "date": "2026-07-23",
+         "text": "Aliceanne was investigating this and was suppose to provide an update but I have not yet seen one come in. Followed up with her and Marta"
+        }
+       ],
+       "srcRow": 25
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
