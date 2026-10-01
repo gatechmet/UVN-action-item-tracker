@@ -32,7 +32,8 @@
   "Aug": "red",
   "Jul": "green",
   "Jun": "green",
-  "Sep": "yellow"
+  "Sep": "yellow",
+  "Oct": "yellow"
  },
  "objectiveId": "P1-O1",
  "order": 6,
@@ -44,5 +45,5 @@
  "targetDate": "2026-09-30",
  "targetGoal": "",
  "title": "PCBA Risk for forward buys",
- "updatedAt": "2026-10-01T00:05:06.286Z"
+ "updatedAt": "2026-10-01T13:52:10.354Z"
 }
