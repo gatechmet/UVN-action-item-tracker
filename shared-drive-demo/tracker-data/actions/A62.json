@@ -1,0 +1,34 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-07-16",
+   "text": "Acclaro Pro Tracker 4/22: A3 Tracker started4/9: Initial data from Protein Aggregation study Shared, Next steps-create A3 to track collaborations"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "yellow",
+  "Dec": "planned",
+  "Jul": "green",
+  "Jun": "green",
+  "Mar": "green",
+  "May": "green",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O5",
+ "order": 9,
+ "originalDate": "2026-12-31",
+ "owner": "Brian, Jenn P",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "BCC Activities",
+ "updatedAt": ""
+}

@@ -1,0 +1,36 @@
+{
+ "completedAt": "2026-09-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-17",
+   "text": "Preapproval meeting next week"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "Work on NDLP 2.0 buisness case for APJ+EMEA"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Awaiting pricing strategy information to be finalized and additional feedback to come in from dealers"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O3",
+ "order": 5,
+ "originalDate": "2026-09-30",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "",
+ "status": "completed",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "ND Light Plus Commercial Expansion Decision",
+ "updatedAt": ""
+}

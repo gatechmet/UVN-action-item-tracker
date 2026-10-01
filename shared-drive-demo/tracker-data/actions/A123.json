@@ -1,0 +1,35 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-24",
+   "text": "We've added a contact POD but it is below the fold of the page, don't have any other ideas for great solutions"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "The only option we have is a POD, it sits below the spec table, ticket is in and should be complete first week of June"
+  },
+  {
+   "date": "2026-04-02",
+   "text": "leads declining in ND - Holger calling out issues moving things from cart to purchase on the website related to BID"
+  }
+ ],
+ "months": {
+  "Jun": "complete",
+  "May": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 13,
+ "originalDate": "2026-06-30",
+ "owner": "Holger/Mark",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "request quote or add to cart website concerns this is in EMEA as well",
+ "updatedAt": ""
+}

@@ -1,0 +1,41 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-03-18",
+   "text": "Completed with disclaimer that availability through dealers for picogreen in your region may vary"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "dealers unable to sell picogreen so need to be careful with wording in brochure"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "complete",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P1-O4",
+ "order": 7,
+ "originalDate": "2026-03-31",
+ "owner": "Justin, Kyle",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "Include in brochure wording and specs around low sensitivity with pico green assay with PN to purchase",
+ "updatedAt": ""
+}

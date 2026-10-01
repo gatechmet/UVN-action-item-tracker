@@ -1,0 +1,52 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "SKU's starting to show up on Fisher Sci UK, Marta can you check your region? Working with Adnan and Fisher team on continuing marketing materials and promotions for H2"
+  },
+  {
+   "date": "2026-07-09",
+   "text": "follow up meeting with Adnan Friday 7/10"
+  },
+  {
+   "date": "2026-06-30",
+   "text": "Aligning with Adnan in email, shared materials for approval with US side"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Shared another update of marketing materials, will have Fisher Sci pieces for brochures in next week"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Sharing Thermo Fisher, emails, social and several other finished pieces by end of week, want to give teams a month plus to plan for launch"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Brochures completed, being put into review here shortly. Will share Thermo Fisher versions in the next week or two so teams can start to digest"
+  },
+  {
+   "date": "2026-04-14",
+   "text": "Can we get customer base from FIsher or VWR?"
+  }
+ ],
+ "months": {
+  "Jul": "complete",
+  "Jun": "green",
+  "May": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 19,
+ "originalDate": "2026-07-31",
+ "owner": "Kyle/Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "Awareness",
+ "title": "Ensure Fisher and VWR are pushing GENESYS G5 once launched",
+ "updatedAt": ""
+}

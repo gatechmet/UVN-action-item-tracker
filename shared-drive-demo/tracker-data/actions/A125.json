@@ -1,0 +1,55 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-09-03",
+   "text": "Looking to now do GENESYS G5 first, will align with Lauren tomorrow on timing"
+  },
+  {
+   "date": "2026-08-05",
+   "text": "Starting these this month, team double checking insight pro needs"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "aligned on two in the priority meeting, may not wrap them both until closer to end of year"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Align in 6/3 priority meeting with larger apps team"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "I think we got a list of videos we need to prioritize?"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Mark and team to brainstorm if the videos should be on web or on email and kyle to connect with Lauren to discuss potentail content"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Who can I partner with/who would look to shoot any of these. I think last we talked about was gathering a list of ideas"
+  },
+  {
+   "date": "2026-04-14",
+   "text": "Academic style demo"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Oct": "planned",
+  "Sep": "yellow"
+ },
+ "objectiveId": "P2-O8",
+ "order": 15,
+ "originalDate": "2026-10-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "Awareness",
+ "title": "Short videos",
+ "updatedAt": ""
+}

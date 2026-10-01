@@ -1,0 +1,26 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "",
+   "text": "Validate Acclaro Pro name/bundle/price and align the launch proposition with Matt/Kyle inputs."
+  }
+ ],
+ "months": {
+  "Aug": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O5",
+ "order": 13,
+ "originalDate": "2026-09-30",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Acclaro Pro Pricing and relaunch plan",
+ "updatedAt": ""
+}

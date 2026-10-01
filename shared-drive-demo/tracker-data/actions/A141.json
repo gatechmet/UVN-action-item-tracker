@@ -1,0 +1,26 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-05-28",
+   "text": "Sent 2025 ASP values and H2 promos that will be out shortly. Can this be closed?"
+  }
+ ],
+ "months": {
+  "May": "complete"
+ },
+ "objectiveId": "P2-O10",
+ "order": 1,
+ "originalDate": "2026-05-31",
+ "owner": "Justin",
+ "priorityId": "P2",
+ "region": "ANZ",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "NanoDrop Pricing Guidance",
+ "updatedAt": ""
+}

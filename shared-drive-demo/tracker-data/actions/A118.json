@@ -1,0 +1,29 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-04",
+   "text": "numbers in brazil have been low compared to mexico - onboarding a new dealer in Brazil - planning to start selling in Q4 - being trained now/getting demo units"
+  }
+ ],
+ "months": {
+  "Aug": "planned",
+  "Jul": "planned",
+  "Jun": "green",
+  "May": "green",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O8",
+ "order": 8,
+ "originalDate": "2026-09-30",
+ "owner": "Valdo",
+ "priorityId": "P2",
+ "region": "Latam",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Track Brazil dealer management for improved sales",
+ "updatedAt": ""
+}

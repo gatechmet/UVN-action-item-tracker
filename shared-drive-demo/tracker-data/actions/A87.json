@@ -1,0 +1,28 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Aug": "na",
+  "Dec": "na",
+  "Jul": "na",
+  "Jun": "complete",
+  "May": "green",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O3",
+ "order": 5,
+ "originalDate": "2026-06-30",
+ "owner": "Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "PROPOSED: Define and implement channel-shift guardrail reporting (BID→Fisher/RSD incremental vs baseline AOP; quantify displacement from other dealers)",
+ "updatedAt": ""
+}

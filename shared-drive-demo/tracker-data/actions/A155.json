@@ -1,0 +1,71 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Have been given initial no from MSN sourcing - will look into production support in Q4"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "Working on workflow diagram to share with MSN team; will meet in early Sept"
+  },
+  {
+   "date": "2026-08-06",
+   "text": "Seems low lift, but need buy-in from MSN based on staffing. LE to type summary email and meet with supply chain next week"
+  },
+  {
+   "date": "2026-07-30",
+   "text": "Need a lot more details on process from CMD before MSN commits to resource to this. Unclear on effort needed. Follow up with CMD scheduled for next week"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "Aligning with MSN team next week."
+  },
+  {
+   "date": "2026-06-03",
+   "text": "CMD route seems fair path, need to confirm SAP feasibility with MSN team"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "issue with deployment due to reprioritization from corporate; connecting with CMD to see if we can combine forces, meeting schedule for 5/28"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Review meeting on 3/30"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "approved for NA pilot. Working with corporate to roll out"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "A bit behind with Hornbill. Will come back to when able"
+  },
+  {
+   "date": "2026-05-05",
+   "text": "Recycling has shifted from corporate perspective; have meeting with ICP team to discuss possible joint efforts in late May"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "Mar": "yellow",
+  "May": "yellow",
+  "Sep": "red"
+ },
+ "objectiveId": "P3-O4",
+ "order": 2,
+ "originalDate": "2026-09-30",
+ "owner": "Lauren",
+ "priorityId": "P3",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Old instrument recycling program (can we do this for micro as well?)",
+ "updatedAt": ""
+}

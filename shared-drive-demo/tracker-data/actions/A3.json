@@ -1,0 +1,49 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-06-03",
+   "text": "With launch delay, suggest closing this. Not really changing strategy and working closely to get units out for hot opportunities"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "launch delayed. Small number of units can be used for hot opps"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "on track; getting demo unit to Janice for possible opp"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "on track"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "na",
+  "Jan": "na",
+  "Jul": "na",
+  "Jun": "complete",
+  "Mar": "na",
+  "May": "yellow",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P1-O1",
+ "order": 3,
+ "originalDate": "2026-06-30",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "Academic year end soft launch, (email, app note, lesson plan)",
+ "updatedAt": ""
+}

@@ -1,0 +1,50 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "APR complete. LE to work with MD on corridor communications"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "APR review in progress. Will align on communication for corridors & discount shifts after APR submitted"
+  },
+  {
+   "date": "2026-08-06",
+   "text": "Most results in for core, although difficult to get all"
+  },
+  {
+   "date": "2026-07-30",
+   "text": "Results for core survey should be provided by EOW"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "In progress"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "In progress for discussion at WLM workshop. Micro being tracked above"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "May": "green",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O6",
+ "order": 1,
+ "originalDate": "2026-10-31",
+ "owner": "Lauren/Justin",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Portfolio Pricing Corridors (Complete the regional list/transfer/ASP model and APR pricing file; show margin/volume trade-offs by region.)",
+ "updatedAt": ""
+}

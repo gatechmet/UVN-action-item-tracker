@@ -1,0 +1,41 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-09",
+   "text": "Assay advertisment is at the top of the overview page, provided updated materials to explian workflow with Assays"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Part of work being done above, looking to improve visability on overview page which is the highest viewed by far. We have a promo on there currently"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "worked through some KPI's and powerpoint, finalizing in next day or two and then want to align with Zara and Matt"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "connecting this week with BID team on website updates"
+  }
+ ],
+ "months": {
+  "Apr": "complete",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green"
+ },
+ "objectiveId": "P1-O4",
+ "order": 6,
+ "originalDate": "2026-04-30",
+ "owner": "Justin, Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "NA",
+ "title": "Update website - ensure assays and instruments are tied in well together",
+ "updatedAt": ""
+}

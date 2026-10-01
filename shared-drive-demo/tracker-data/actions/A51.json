@@ -1,0 +1,28 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Confirm FL hardware feasibility and sensitivity, including RNA performance, and document the achievable performance envelope."
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O4",
+ "order": 19,
+ "originalDate": "2026-11-30",
+ "owner": "Brian",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-11-30",
+ "targetGoal": "",
+ "title": "ND FL Product technical feasiblity",
+ "updatedAt": ""
+}

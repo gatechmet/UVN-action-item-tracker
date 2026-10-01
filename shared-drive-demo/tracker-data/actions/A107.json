@@ -1,0 +1,41 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-02",
+   "text": "adding question in external forms to ask customers if they'd be willing to speak about their experience with us"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Has not been priority with redo of Acclaro Pro messaging and focus on GENESYS. Will look to round back here at end of June"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Carry over from LY, has been a challange but will look to try and ask around again in the next week"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "LATAM and EU have fallen through, still trying to find for 2026"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O7",
+ "order": 5,
+ "originalDate": "2026-11-30",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "NA",
+ "status": "open",
+ "targetDate": "2026-11-30",
+ "targetGoal": "200 Qualified leads, 20 SQO's\n$120K",
+ "title": "Develop QA/QC Case Study - collaborate with 1 key customer (e.g., Shasta).",
+ "updatedAt": ""
+}

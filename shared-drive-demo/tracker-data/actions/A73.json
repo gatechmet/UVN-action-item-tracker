@@ -1,0 +1,34 @@
+{
+ "completedAt": "",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-04-16",
+   "text": "deprioritizing partnership for now"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O1",
+ "order": 3,
+ "originalDate": "",
+ "owner": "Kelly, Lauren",
+ "priorityId": "P2",
+ "region": "",
+ "status": "closed",
+ "targetDate": "",
+ "targetGoal": "",
+ "title": "PA - Makesh Karpagavinayagam - identify if there are partnership opportunities",
+ "updatedAt": ""
+}

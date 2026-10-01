@@ -1,0 +1,48 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-04",
+   "text": "Done"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Got some notes in, should be finalizing in coming days"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "Acclaro needs to be removed"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "Version completed but a bit to heavy on Acclaro Pro, I think it got combined with above. Creating another paired down version in next couple of business days"
+  },
+  {
+   "date": "2026-03-30",
+   "text": "I finally got draft to Justin last week (Kyle)"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "something basic with a QR code would be useful check with mike to see if this would make sense"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Mar": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O5",
+ "order": 5,
+ "originalDate": "2026-05-31",
+ "owner": "Justin, Commercial leaders, Kyle",
+ "priorityId": "P1",
+ "region": "",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "Create Acclaro Pro demo flyer?",
+ "updatedAt": ""
+}

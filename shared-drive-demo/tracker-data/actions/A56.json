@@ -1,0 +1,55 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-05-19",
+   "text": "Kashiv bio in NJ - interested in a demo and are considering AP or Solo VPE - trying to get a long term demo"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "new Acclaro pro flyer is helpful"
+  },
+  {
+   "date": "2026-04-02",
+   "text": "Mike is discussing with Abbvie to see if we can partner -"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "larger applications team has stalled on answering questions"
+  },
+  {
+   "date": "2026-02-16",
+   "text": "we should connect with fisher and BID to see how we can target their customers"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Kelly and Mike to discuss"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Aug": "red",
+  "Dec": "planned",
+  "Feb": "yellow",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "Mar": "yellow",
+  "May": "yellow",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O5",
+ "order": 3,
+ "originalDate": "2026-12-31",
+ "owner": "Kelly, Mike",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Find partner for Acclaro Pro seeding program?",
+ "updatedAt": ""
+}

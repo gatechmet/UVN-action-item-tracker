@@ -1,0 +1,31 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-30",
+   "text": "in progress and ready for training in a couple weeks"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "Traning to occur at tail-end of Hornbill training in May, focus around market overview for FL/Acclaro Pro, review of messaging, and hands-on trainign with all assays/Acclaro Pro"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O4",
+ "order": 11,
+ "originalDate": "2026-05-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "EMEA Training (Hands On)",
+ "updatedAt": ""
+}

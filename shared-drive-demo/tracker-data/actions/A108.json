@@ -1,0 +1,35 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-16",
+   "text": "Set up being worked on"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Adjusting dates slightly to mid July"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Booked, will focus on Hornbill"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "green"
+ },
+ "objectiveId": "P2-O7",
+ "order": 6,
+ "originalDate": "2026-08-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Research Gate - core focused email",
+ "updatedAt": ""
+}

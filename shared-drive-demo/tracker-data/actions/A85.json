@@ -1,0 +1,32 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Apr": "complete",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "na",
+  "Jan": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "green",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O3",
+ "order": 3,
+ "originalDate": "2026-04-30",
+ "owner": "Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "",
+ "title": "Sales force training and launch",
+ "updatedAt": ""
+}

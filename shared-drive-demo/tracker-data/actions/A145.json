@@ -1,0 +1,26 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Kyle shared two flyers with versions of aggresiveness for marketing compared to competitors"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O11",
+ "order": 4,
+ "originalDate": "2026-09-30",
+ "owner": "Matt",
+ "priorityId": "P2",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Build internal battlecards and confirm legal/approval boundaries for a dealer-shareable version. (get legal clearance)",
+ "updatedAt": ""
+}

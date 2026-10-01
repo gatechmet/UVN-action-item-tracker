@@ -1,0 +1,46 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-07-01",
+   "text": "Done created 3 customer personas and an updated value prop powerpoint."
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Should be able to wrap this up in the next week or so already have two main customer personas"
+  },
+  {
+   "date": "2026-05-18",
+   "text": "In progress"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "In progress"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "in progess, working on customer personas"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Jul": "complete",
+  "Jun": "red",
+  "Mar": "yellow",
+  "May": "yellow"
+ },
+ "objectiveId": "P1-O5",
+ "order": 2,
+ "originalDate": "2026-07-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "",
+ "title": "Build reference customers and proof points for Acclaro Pro",
+ "updatedAt": ""
+}

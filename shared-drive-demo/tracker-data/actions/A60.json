@@ -1,0 +1,55 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "Still having trouble finding a KOL, will look to add something on website"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Have not received an email back yet. Tried a new contact from Eli Lilly. Novartis also just bought an Acclaro Pro model and I am trying to setup a call with them to discuss if they would like to collaborate but it is challenging when they already want to move forward with ordering. Reached out to NA commercial team to emphasis we need to be pulled in before a quote is sent"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Sent email to Eli Lilly to see how their demo went and if there is any interest in collab"
+  },
+  {
+   "date": "2026-05-06",
+   "text": "Olink did not appear to be willing to talk. No progress with Novartis as they had a communication issue with the instrument and have not been responding to technical support. New oppurtunities at a mab manufacturer Kashiv BioSciences who requested a demo and is willing to collaborate on a white paper. Additionally Eli Lilly interested in Acclaro Pro demo to test modified oligonucleotides (will offer collaboration if demo goes well).  4/21: Meeting with Olink and Brian potentially on Friday and Marta is following up with Kobis on the Novartis opportunity"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Justin to check back with brian around Olink -- Connect with Anna to look into internal bioprocessing design lab opening april '28 - see if we can target the biopharma customers coming there"
+  },
+  {
+   "date": "2026-03-10",
+   "text": "had meeting with team and Brian - Brian following up with Olink to see if we can use their data for AP"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Aug": "red",
+  "Feb": "yellow",
+  "Jan": "yellow",
+  "Jul": "red",
+  "Jun": "yellow",
+  "Mar": "yellow",
+  "May": "yellow",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O5",
+ "order": 7,
+ "originalDate": "2026-11-30",
+ "owner": "Justin, Mike, Brian",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "open",
+ "targetDate": "2026-11-30",
+ "targetGoal": "",
+ "title": "Find KOLs (2-3?)",
+ "updatedAt": ""
+}

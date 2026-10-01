@@ -1,0 +1,50 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-05-14",
+   "text": "Completed this initial side of work, looking to again update some Acclaro pro and other info for customers"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "PAT flyer in review, once that completes will add that workflow and SEO keywords to page"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Updated to include info about BID workflows, better access to product purchasing on home page. Doing one additional update to fix some issues with add to cart button"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "updated have been reviewed by brand and are in process. First set of copy I shared about 1.5 weeks ago was a bit to long but should be finished up in the next week"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "workfront was down but will get the redirect done by next week"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "need to get clarification from BID what it is they are hoping for"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O4",
+ "order": 5,
+ "originalDate": "2026-05-31",
+ "owner": "Justin, Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "•\tEngaged Page/Time Spent visits by 7% (161,125 Engaged Visits / 145 Sec)\n•\tIncrease in SEO interactions by 5% (156,267)\n•\tForm Fills increased by 5% (703 Hot Leads)\n•\tMQL to SQO on product page/form fills increased by 10% (59% converstion)",
+ "title": "Update website - (ND1 discontinued awareness/redirection for customers looking for discontinued models)",
+ "updatedAt": ""
+}

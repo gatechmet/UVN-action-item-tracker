@@ -1,0 +1,60 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Q1 sell-out was 30K, win rate - 12%, and the Q2 pipeline with a win rate above 50% currently stands at 90K."
+  },
+  {
+   "date": "2026-04-28",
+   "text": "Q2 Academic QTD pipeline $110K, sellout $18K"
+  },
+  {
+   "date": "2026-05-26",
+   "text": "：QTD pipeline $249K, sell out $107K"
+  },
+  {
+   "date": "2026-06-22",
+   "text": "QTD sell out $133K"
+  },
+  {
+   "date": "2026-07-22",
+   "text": "Q3 Pipeline $120K, QTD sell out $20K"
+  },
+  {
+   "date": "2026-08-03",
+   "text": "Q3 pipeline $ 175K,QTD sell out $ 79K"
+  },
+  {
+   "date": "2026-09-16",
+   "text": "Q3 pipeline $ 206K,QTD sell out $ 110K"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "Mar": "green",
+  "May": "green",
+  "Nov": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O8",
+ "order": 24,
+ "originalDate": "2026-07-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": ">8% · Timeline: 0.17",
+ "title": "Academic win-rate",
+ "updatedAt": ""
+}

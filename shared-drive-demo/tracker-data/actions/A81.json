@@ -1,0 +1,29 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "",
+   "text": "Same as above"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "yellow",
+  "Jun": "green",
+  "May": "green"
+ },
+ "objectiveId": "P2-O2",
+ "order": 4,
+ "originalDate": "2026-08-31",
+ "owner": "Justin",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Align on transfer pricing",
+ "updatedAt": ""
+}

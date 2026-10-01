@@ -1,0 +1,58 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "Working with Kelly to engage for Q3"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "May be worth removing here, focus is more with Hornbill actions in Priority 1"
+  },
+  {
+   "date": "2026-06-17",
+   "text": "below still in progress"
+  },
+  {
+   "date": "2026-06-03",
+   "text": "Creating rules of engagement and contact sheet for launch; will focus on co-marketing for H2"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "meeting on 4/17"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "WAI team has committed to supporting us in training and marketing materials even though aquamate is still available this year"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "Lauren will set up time with Chris"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "yellow",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "yellow",
+  "Jun": "green",
+  "Mar": "green",
+  "May": "green",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O1",
+ "order": 4,
+ "originalDate": "2026-10-31",
+ "owner": "Kelly, Lauren",
+ "priorityId": "P2",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "WAI - Chris Searle - co marketing for reagents/Brochure for instrument integrated with their other instruments",
+ "updatedAt": ""
+}

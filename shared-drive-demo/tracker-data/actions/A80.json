@@ -1,0 +1,37 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-07-01",
+   "text": "Survey collected from different regions. Will start meeting with EMEA dealers to refine the information"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Survey due Friday"
+  },
+  {
+   "date": "2026-05-26",
+   "text": "survey has been sent to commercial teams due next week. China and SEA have responded."
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "yellow",
+  "Jun": "green",
+  "May": "green"
+ },
+ "objectiveId": "P2-O2",
+ "order": 3,
+ "originalDate": "2026-08-31",
+ "owner": "Justin",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Establish regional pricing corridors by product and strategic guidance",
+ "updatedAt": ""
+}

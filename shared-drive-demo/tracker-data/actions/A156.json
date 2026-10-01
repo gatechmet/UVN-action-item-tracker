@@ -1,0 +1,35 @@
+{
+ "completedAt": "",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-01-14",
+   "text": "looking more into recycling"
+  },
+  {
+   "date": "2026-11-12",
+   "text": "consider this for next year"
+  }
+ ],
+ "months": {
+  "Aug": "planned",
+  "Dec": "planned",
+  "Jul": "planned",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P3-O4",
+ "order": 3,
+ "originalDate": "2026-12-31",
+ "owner": "Ebersol",
+ "priorityId": "P3",
+ "region": "NA, LATAM?",
+ "status": "paused",
+ "targetDate": "2026-12-31",
+ "targetGoal": "Timeline: Q1",
+ "title": "Investigate garage sale for refurbished Genesys\n (see Core derivatives for recycling)",
+ "updatedAt": "2026-10-01T00:35:33.929Z"
+}

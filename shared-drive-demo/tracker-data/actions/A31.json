@@ -1,0 +1,29 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "I do not see any sales of the EMEA 20% off NDLP SKUs, it is likely EMEA is not using he promo part numbers and just discounting the standard SKUs, followed up with Marta as I have no way to track this if they do not use promo SKU. China has sold 17 NDLP 2.0 models since June 1."
+  }
+ ],
+ "months": {
+  "Aug": "yellow",
+  "Jul": "green",
+  "Jun": "green",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O3",
+ "order": 4,
+ "originalDate": "2026-10-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "EMEA, China",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Evaluate pricing market trials (via promotion in China and EMEA)",
+ "updatedAt": ""
+}

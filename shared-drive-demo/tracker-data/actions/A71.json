@@ -1,0 +1,49 @@
+{
+ "completedAt": "",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-04-16",
+   "text": "shifting priority down, will still focus on current asks but shift to specific tactics"
+  },
+  {
+   "date": "2026-03-27",
+   "text": "had a team meeting and aggregating customer data and resources"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "cadence established"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "Building out connection - Kelly to set up monthly for team"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "yellow",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O1",
+ "order": 1,
+ "originalDate": "2026-03-31",
+ "owner": "Kelly, Lauren",
+ "priorityId": "P2",
+ "region": "",
+ "status": "closed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "FSD - Nick Dotzenrod, Amanda Reynolds - standalone collab in addition to potential joint one with DIA  (update application note for beercraft, conduct joint webinar)",
+ "updatedAt": ""
+}

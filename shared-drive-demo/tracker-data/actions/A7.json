@@ -1,0 +1,26 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Track Hornbill price realization, volume, yield/performance and supply/electronics risk before changing price."
+  }
+ ],
+ "months": {
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O1",
+ "order": 7,
+ "originalDate": "2026-10-31",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Establish and track monthly Launch KPI",
+ "updatedAt": ""
+}

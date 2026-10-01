@@ -1,0 +1,65 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Aiming to follow up in Q4"
+  },
+  {
+   "date": "2026-09-03",
+   "text": "No progress; likely delayed because launches. Will follow up"
+  },
+  {
+   "date": "2026-08-06",
+   "text": "Re-engaged this week, more to come"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "LE to look into re-opening to have content for EOY"
+  },
+  {
+   "date": "2026-06-17",
+   "text": "no progress on this with primary focus being on completing standard launch material"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "Met this week, planned to map out ebook from existing F&B content, and then consider joint note later in the year"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "initial bandwidth discussion scheduled for next week"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "connection with Suja soon"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "Lauren will connct with Suja and set up follow up time"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "yellow",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "yellow",
+  "Jun": "red",
+  "Mar": "green",
+  "May": "green",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O1",
+ "order": 5,
+ "originalDate": "2026-09-30",
+ "owner": "Lauren",
+ "priorityId": "P2",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "VIB - Suja Sukumaran - microplastics flyer, food and bev flyer, SPIF/promotion, Webinar",
+ "updatedAt": ""
+}

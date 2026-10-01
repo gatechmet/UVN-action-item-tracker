@@ -1,0 +1,68 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "No update"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "This is going be delayed. We have identified a fix for the invoicing issu but this has become a much bigger issue that effects many PNs from multiple product lines. Need a process in place to actually create one"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Go live dte should be July 10th"
+  },
+  {
+   "date": "2026-05-26",
+   "text": "IT is behind a few weeks due to surcharge issue - they shoudl be sending an updated timeline soon"
+  },
+  {
+   "date": "2026-05-18",
+   "text": "Followed up with IT to see if changes have been implemented into SAP"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "Should hear back from IT soon"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "Expect to be completed in mid-May"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Had meeting with IT, they are making progress on changes in SAP"
+  },
+  {
+   "date": "2026-04-02",
+   "text": "want to ensure attachment improves for kits and make sure its ND kits not Qbit kits being sold by BID"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "SMB team is trying to drive this - have a meeting tomorrow"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "red",
+  "Jul": "red",
+  "Jun": "yellow",
+  "Mar": "yellow",
+  "May": "green",
+  "Oct": "planned",
+  "Sep": "red"
+ },
+ "objectiveId": "P1-O4",
+ "order": 1,
+ "originalDate": "2026-10-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "enable global FL bundles to be sold",
+ "updatedAt": ""
+}

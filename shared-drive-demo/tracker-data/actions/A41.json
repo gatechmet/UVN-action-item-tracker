@@ -1,0 +1,46 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "Working on draft to send to Kyle"
+  },
+  {
+   "date": "2026-06-25",
+   "text": "Will connect with Kyle on working on FL workflow brochure"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Decision tree graphic in progress, will need a flyer that includes NGS workflow info next"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "Most of this is covered in the GCM training I did, looking to potentially add a decision tree type graphic to the website and a graphic on assay range vs Qubit"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "In progress, will incorporate into training decks for EMEA/LATAM"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "May": "green",
+  "Sep": "yellow"
+ },
+ "objectiveId": "P1-O4",
+ "order": 9,
+ "originalDate": "2026-09-30",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Clear use-case messaging for biopharma workflows with NanoDrop Ultra ABS and FL",
+ "updatedAt": ""
+}

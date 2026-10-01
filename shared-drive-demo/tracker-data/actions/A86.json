@@ -1,0 +1,28 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Apr": "green",
+  "Aug": "green",
+  "Dec": "planned",
+  "Jul": "green",
+  "Jun": "green",
+  "May": "green",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O3",
+ "order": 4,
+ "originalDate": "2026-12-31",
+ "owner": "Paula/Charlotte",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Ongoing KPI monitoring and optimization",
+ "updatedAt": ""
+}

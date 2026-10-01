@@ -1,0 +1,37 @@
+{
+ "completedAt": "2026-02-28T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-01-27",
+   "text": "this has been completed"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "complete",
+  "Jan": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "na",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O7",
+ "order": 4,
+ "originalDate": "2026-02-28",
+ "owner": "Kelly, Kyle",
+ "priorityId": "P2",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-02-28",
+ "targetGoal": "",
+ "title": "Marketing emails (OFT) focus on low special pricing for multiple units",
+ "updatedAt": ""
+}

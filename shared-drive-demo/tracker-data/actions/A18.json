@@ -1,0 +1,22 @@
+{
+ "dateHistory": [],
+ "group": "External Tools",
+ "health": "none",
+ "history": [],
+ "months": {
+  "Dec": "planned",
+  "Nov": "planned",
+  "Oct": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 11,
+ "originalDate": "2026-12-31",
+ "owner": "Jenn EK",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "UVN/WAI joint application note",
+ "updatedAt": ""
+}

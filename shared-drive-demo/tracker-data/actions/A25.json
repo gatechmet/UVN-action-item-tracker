@@ -1,0 +1,27 @@
+{
+ "dateHistory": [],
+ "group": "Awareness and Marketing plan",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-09-10",
+   "text": "Intake form draft completed on UVNN side, waiting to hear feedback/edits on FSD side. Meeting 9/10 to check in with broader team."
+  }
+ ],
+ "months": {
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 18,
+ "originalDate": "2026-11-30",
+ "owner": "Jenn/Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-11-30",
+ "targetGoal": "",
+ "title": "UVN/FSD Joint Webinar",
+ "updatedAt": ""
+}

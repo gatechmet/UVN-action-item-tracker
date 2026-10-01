@@ -1,0 +1,60 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-09-16",
+   "text": "Met with team to enablement team to figure out process, got alignment that they could use list. Informed Sarah to keep here in the loop. Next step adding it to AOP?"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Will share with Babocurr here at end of week, aligning with Tim Meyer on my side here a bit still"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "review  links from Mike to reviw of internal tools that might be helpful"
+  },
+  {
+   "date": "2026-04-28",
+   "text": "unable to get funding - should we deprioritize?"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "putting together an email to send to fisher to see if they might be interested"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Shared business case with Mike for funding approval on his side, haven't heard anything on that side KM"
+  },
+  {
+   "date": "2026-03-10",
+   "text": "checked back in with Mike on approval from sales leadership"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Could we find a KOL to target?"
+  }
+ ],
+ "months": {
+  "Apr": "red",
+  "Aug": "red",
+  "Feb": "yellow",
+  "Jan": "yellow",
+  "Jul": "red",
+  "Jun": "red",
+  "Mar": "yellow",
+  "May": "red"
+ },
+ "objectiveId": "P1-O5",
+ "order": 6,
+ "originalDate": "2026-08-31",
+ "owner": "Kyle/Mike",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "open",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Academic Labs customer base list",
+ "updatedAt": ""
+}

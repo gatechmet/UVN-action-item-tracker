@@ -1,0 +1,35 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-03-25",
+   "text": "Codes completed and ready to push live"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "complete",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O3",
+ "order": 2,
+ "originalDate": "2026-03-31",
+ "owner": "Paula",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "IT setup for quote to cash and SKU go live in RSD",
+ "updatedAt": ""
+}

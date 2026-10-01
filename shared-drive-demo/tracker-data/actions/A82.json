@@ -1,0 +1,24 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [],
+ "months": {
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Jun": "green",
+  "May": "green",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O2",
+ "order": 5,
+ "originalDate": "2026-09-30",
+ "owner": "Kelly",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "IQ/OQ Rollout",
+ "updatedAt": ""
+}

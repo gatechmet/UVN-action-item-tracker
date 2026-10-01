@@ -1,0 +1,30 @@
+{
+ "dateHistory": [],
+ "group": "Awareness and Marketing plan",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "WAI backed out, I think we create an email for us talking about how it fits into several workflows and calling out other products so we can send to the widest range of water customers as possible. but avoid aligning with teams who aren't as active as we had hoped."
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Will start when starting flyer sometime in July"
+  }
+ ],
+ "months": {
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 19,
+ "originalDate": "2026-10-31",
+ "owner": "Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Water-specific trade-up message (email? With WAI?)",
+ "updatedAt": ""
+}

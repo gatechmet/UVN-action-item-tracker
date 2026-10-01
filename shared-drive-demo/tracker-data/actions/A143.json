@@ -1,0 +1,27 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Finsihed working on Water materials with Kelly. Aligned with teams on content in toolkits."
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P2-O11",
+ "order": 2,
+ "originalDate": "2026-10-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Finalize product value propositions, value pillars and ranked top-five benefits; use them as the spine for collateral/campaign refresh.",
+ "updatedAt": ""
+}

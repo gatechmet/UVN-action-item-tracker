@@ -1,0 +1,25 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-06-16",
+   "text": "check with Justin if possible in Q33/10: Marta aligned with team and getting assays to do some tests with demo units. Check back in several weeks '2/24 Kelly to investigate if we can do this without creating part numbers and to look into margins for reagents"
+  }
+ ],
+ "months": {
+  "Dec": "planned"
+ },
+ "objectiveId": "P2-O8",
+ "order": 5,
+ "originalDate": "2026-12-31",
+ "owner": "Marta",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "100k USD",
+ "title": "Focus on ND Ultra with FL - discuss with factory on promo for Reagents",
+ "updatedAt": ""
+}

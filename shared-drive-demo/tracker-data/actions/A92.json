@@ -1,0 +1,37 @@
+{
+ "completedAt": "2026-01-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-12-16",
+   "text": "get data at end of month and then need time to analyze -- could we get that data from Baboucarr instead of the powerBI??. the number from Fisher data shows that over the 4 month period of the promotion, the numbers were up when compared to the previous year. promotion will be continued in 2026, but have been facing major hurdles in the set up '11/18 in progress '11/4 Want to compare data to see how promotions are working to understand if we want to continue - are we getting more leads/opportunities?"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "na",
+  "Jan": "complete",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "na",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O4",
+ "order": 4,
+ "originalDate": "2026-01-31",
+ "owner": "Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-01-31",
+ "targetGoal": "",
+ "title": "Genesys and Evo unit number data from last year",
+ "updatedAt": ""
+}

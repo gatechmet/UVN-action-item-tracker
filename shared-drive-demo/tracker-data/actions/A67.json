@@ -1,0 +1,29 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "",
+   "text": "Align on development plan, begin project by Sep 30, prepare for full launch Q1"
+  }
+ ],
+ "months": {
+  "Aug": "planned",
+  "Dec": "planned",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O5",
+ "order": 14,
+ "originalDate": "2026-12-31",
+ "owner": "Justin/Brian",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Acclaro Pro New Sku developed",
+ "updatedAt": ""
+}

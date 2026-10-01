@@ -1,0 +1,37 @@
+{
+ "completedAt": "2026-02-28T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Promotion went live in late Feb, now to track its performance"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "complete",
+  "Jan": "green",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "na",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O8",
+ "order": 3,
+ "originalDate": "2026-02-28",
+ "owner": "Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-02-28",
+ "targetGoal": "100k USD",
+ "title": "Set up Core UV promotions with VWR",
+ "updatedAt": ""
+}

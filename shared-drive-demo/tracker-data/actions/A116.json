@@ -1,0 +1,25 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-06-18",
+   "text": "We will start with G5 launch"
+  }
+ ],
+ "months": {
+  "Dec": "planned"
+ },
+ "objectiveId": "P2-O8",
+ "order": 6,
+ "originalDate": "2026-12-31",
+ "owner": "Marta",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "100k USD",
+ "title": "Genesys with Water Methods Software promo",
+ "updatedAt": ""
+}

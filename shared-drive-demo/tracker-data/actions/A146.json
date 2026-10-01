@@ -1,0 +1,26 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Kyle noticed products are assigned to us and FL kits are assigned to LSG, that's correct?"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O11",
+ "order": 5,
+ "originalDate": "2026-09-30",
+ "owner": "Matt",
+ "priorityId": "P2",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Pull demo trends plus Fisher/BID e-commerce traffic/sales; use next-week checkpoint to assign timelines and decide web-price pilot vs. quote route.",
+ "updatedAt": ""
+}

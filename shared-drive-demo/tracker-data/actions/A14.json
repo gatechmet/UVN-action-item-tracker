@@ -1,0 +1,60 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "External Tools",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-24",
+   "text": "Brochures completed, working in fisher sci and translation should be done by end of week on main brochure and software"
+  },
+  {
+   "date": "2026-06-17",
+   "text": "Gave final brochure review, still on track"
+  },
+  {
+   "date": "2026-06-03",
+   "text": "On track to release by launch"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Possible light changes to G5 family brochure but 4/4 brochures created in TF, others created for Fisher Sci and being reviewed"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "2/4 done, software should finish today and G5 family in next few days. Second week of may will be sharing translations of G5 family brochure"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "Should be wrapping up most brochures for launch in next 7 -10 business days and then will be sharing with regions for set up on their side"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "GENESYS G5 Accessory complete. GENESYS Software layout starting, GENESYS G5 family and software brochure reviewing copy side pre-layout"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Accessory just about done, GENESYS Brochure should wrap end of month 2/11 - In process"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "complete",
+  "Jun": "green",
+  "Mar": "green",
+  "May": "green"
+ },
+ "objectiveId": "P1-O2",
+ "order": 7,
+ "originalDate": "2026-07-31",
+ "owner": "Lauren/Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "NA",
+ "title": "Brochures and getting start guides",
+ "updatedAt": ""
+}

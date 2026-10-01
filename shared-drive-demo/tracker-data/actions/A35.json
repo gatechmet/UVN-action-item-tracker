@@ -1,0 +1,35 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-09",
+   "text": "Kyle working on financing flyer. Thermo version created, need Fisher version"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "justin to let Mike know that 10K is approved for financing - Justin to confirm with financing that there's no end date and connect back with kyle for financing flyer/OFT"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "is 10K possible? Justin will follow up and ask"
+  }
+ ],
+ "months": {
+  "Apr": "complete",
+  "Mar": "green"
+ },
+ "objectiveId": "P1-O4",
+ "order": 3,
+ "originalDate": "2026-04-30",
+ "owner": "Mike, Justin",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "",
+ "title": "Can we reduce minimum financing amount",
+ "updatedAt": ""
+}

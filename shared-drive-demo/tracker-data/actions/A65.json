@@ -1,0 +1,36 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "Still aligning with purifications PM"
+  },
+  {
+   "date": "2026-06-25",
+   "text": "Have a meeting with the purification and PPA marketing director in July"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Already attending the only Biopharma show that VIB is going to this year (BPI-EAST). Kyle and I had a meeting with BPG, led to us being direct to FSD who is more directly involved in the downstream purfiication process. Have meeting tomorrow with FSD to discuss potential tradeshow collaboration"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O5",
+ "order": 12,
+ "originalDate": "2026-09-30",
+ "owner": "Kyle, Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "100K",
+ "title": "Bioprocessing trade show attendance",
+ "updatedAt": ""
+}

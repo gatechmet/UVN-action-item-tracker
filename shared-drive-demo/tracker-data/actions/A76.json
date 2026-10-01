@@ -1,0 +1,51 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-30",
+   "text": "Kelly to follow up on NA side"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "waiting for approval - slightly delayed due to change in leadership"
+  },
+  {
+   "date": "2026-03-27",
+   "text": "creating governance structure for a q2 go live"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "meeting with finance partners for approval this week"
+  },
+  {
+   "date": "2026-02-23",
+   "text": "NA conversations being had with commercial team around feasibility of lead sharing spiff"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "green",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O1",
+ "order": 6,
+ "originalDate": "2026-03-31",
+ "owner": "Kelly, Lauren",
+ "priorityId": "P2",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "Promote UVN/VIB cross-selling for Evolution and Genesys",
+ "updatedAt": ""
+}

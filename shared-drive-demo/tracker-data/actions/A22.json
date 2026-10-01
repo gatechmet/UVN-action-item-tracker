@@ -1,0 +1,49 @@
+{
+ "completedAt": "2026-09-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "Awareness and Marketing plan",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-10",
+   "text": "Webinar aired on 9/9."
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Beer/water intake being worked on, will fill out intake for water webinar when lauren is back from China trip"
+  },
+  {
+   "date": "2026-06-17",
+   "text": "Planning 2 in H2 - one standalone, one beer/water focused with FSD"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Looking to fill out intake portion here in June, we will do recording side in late July or August"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "follow up meeting this afternoon, will look to start intake portion when Lauren is back from training in Germany"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Scheduled with Vendor. Will create intake in next month or so and then actual work will start around July"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O2",
+ "order": 15,
+ "originalDate": "2026-09-30",
+ "owner": "Jenn/Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-09-30",
+ "targetGoal": "300 Leads, 50 SQO, $120,000",
+ "title": "Water based webinar (UVN only)",
+ "updatedAt": ""
+}

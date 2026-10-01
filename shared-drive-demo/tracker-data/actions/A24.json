@@ -1,0 +1,56 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "Awareness and Marketing plan",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "Email shared on 7/10"
+  },
+  {
+   "date": "2026-07-09",
+   "text": "intake almost complete, will share with Katie today"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Aligning with Katie on next steps today"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "email info shared with team"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Provided some info Tuesday, need to check 1-2 emails from Katie to ensure fully update"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "emails being set up with CAD digital, will share file with Fisher sci in May once complete"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Introduction email set for 6/2, will resend to unopened on 6/9. Sending out discontinue letter asking customers to upgrade to existing customers on 6/10"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Scheduled for June will rerun in Sept"
+  }
+ ],
+ "months": {
+  "Jul": "complete",
+  "Jun": "green",
+  "May": "yellow"
+ },
+ "objectiveId": "P1-O2",
+ "order": 17,
+ "originalDate": "2026-07-31",
+ "owner": "Kyle",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "",
+ "title": "Fisher Sci US Promo/email feature Genesys",
+ "updatedAt": ""
+}
