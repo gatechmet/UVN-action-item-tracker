@@ -68,6 +68,7 @@ button{font:inherit;cursor:pointer}
 .seg button{background:var(--panel);border:0;border-right:1px solid var(--line);padding:7px 12px;color:var(--ink);font:500 13px var(--f-body)}
 .seg button:last-child{border-right:0}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg.sm{margin-left:auto}.seg.sm button{padding:3px 8px;font-size:11px}
 .mkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);align-items:center}
 .mkey i{display:inline-block;vertical-align:middle;margin-right:5px}
 .mkey .dot{width:9px;height:9px;border-radius:50%}.mkey .dot.up{background:var(--on)}.mkey .dot.down{background:var(--off)}
@@ -89,15 +90,16 @@ button{font:inherit;cursor:pointer}
 table.bgrid{border-collapse:separate;border-spacing:0;table-layout:auto;min-width:0;width:auto}
 table.bgrid th,table.bgrid td{border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);padding:0;white-space:nowrap;font-size:11px}
 table.bgrid thead th{position:sticky;top:0;background:var(--soft);z-index:2;padding:4px 6px;text-align:center;color:var(--muted);text-transform:none;letter-spacing:0}
-table.bgrid thead tr:nth-child(2) th{top:23px}
+
 table.bgrid thead th div{font-weight:400;font-size:10px}
 table.bgrid th.q{color:var(--ink);font-weight:600}
 table.bgrid .qs{border-left:2px solid var(--line)}
-table.bgrid .st{position:sticky;background:var(--panel);z-index:1}
+table.bgrid .st{position:sticky;background:var(--panel);z-index:1;background-clip:padding-box}
+table.bgrid tbody th.st,table.bgrid tbody td.st{background:var(--panel)}
 table.bgrid thead .st{z-index:3;background:var(--soft)}
-table.bgrid .st.m{left:0;min-width:190px;max-width:190px;white-space:normal;text-align:left;padding:4px 8px;font-size:12px;font-weight:600;color:var(--ink)}
+table.bgrid .st.m{min-width:190px;max-width:190px;white-space:normal;text-align:left;padding:4px 8px;font-size:12px;font-weight:600;color:var(--ink)}
 table.bgrid .st.m div{font-weight:400;color:var(--muted);font-size:11px}
-table.bgrid .st.o{left:190px;width:80px}table.bgrid .st.t{left:270px;width:64px}table.bgrid .st.rl{left:334px;width:40px;padding:0 6px;color:var(--muted);text-align:right;border-right:2px solid var(--line)}
+table.bgrid .st.o{min-width:86px}table.bgrid .st.t{min-width:64px}table.bgrid .st.rl{min-width:40px;padding:0 6px;color:var(--muted);text-align:right;border-right:2px solid var(--line)}
 table.bgrid input{width:52px;border:0;border-radius:0;background:transparent;padding:4px 5px;font:12px var(--f-mono);text-align:right;color:var(--ink)}
 table.bgrid .st input{width:100%;text-align:left;font-family:var(--f-body)}
 table.bgrid input:focus{outline:2px solid var(--accent);outline-offset:-2px;background:var(--panel)}
@@ -769,78 +771,104 @@ function mview(k,mode){
   return {labels,act:{v:av,est},plan:pv,real:rl}}
 
 function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#888'}
-const SERIES=['--s1','--s2','--s3'];
-function lineChart(el,k,defs,opts={}){
-  /* defs: [{key,name,color}] — plan drawn as a thin line in the same hue; actual points colored by above/below plan */
+/* mzoom: 0 = full year, 1-4 = that quarter only (applies to every chart). cmode: each chart's own view. */
+let mzoom=0;const cmode={};
+try{mzoom=+(sessionStorage.getItem('uvnn-mzoom')||0);Object.assign(cmode,JSON.parse(sessionStorage.getItem('uvnn-cmode')||'{}'))}catch{}
+const saveM=()=>{try{sessionStorage.setItem('uvnn-mzoom',mzoom);sessionStorage.setItem('uvnn-cmode',JSON.stringify(cmode))}catch{}};
+const isSum=k=>k==='mql_total'||k==='sqo_total';
+const fk=k=>isSum(k)?'mql_micro':k;
+/* Full-year view, then cut down to the zoomed quarter. */
+function zview(k,mode){const v=mview(k,mode);if(!mzoom)return v;
+  const [a,b]=mode==='quarter'?[mzoom-1,mzoom]:[(mzoom-1)*13,mzoom*13];
+  return {labels:v.labels.slice(a,b),act:{v:v.act.v.slice(a,b),est:v.act.est.slice(a,b)},plan:v.plan.slice(a,b),real:v.real.slice(a,b)}}
+function lineChart(el,defs,mode,opts={}){
   const datasets=[];let labels=[];const ink=tok('--muted'),grid=tok('--soft'),on=tok('--on'),off=tok('--off'),panel=tok('--panel');
-  const statusOK=opts.lowerIsBetter?(a,p)=>a<=p:(a,p)=>a>=p;
-  for(const d of defs){const v=mview(d.key,mmode);labels=v.labels;const col=tok(d.color);
-    const pc=(i)=>{const a=v.act.v[i],p=v.plan[i];if(a==null||!v.real[i])return col;return p==null?col:statusOK(a,p)?on:off};
+  for(const d of defs){const v=zview(d.key,mode);labels=v.labels;const col=tok(d.color);
+    const pc=i=>{const a=v.act.v[i],p=v.plan[i];if(a==null||!v.real[i]||p==null)return col;return a>=p?on:off};
     datasets.push({label:d.name,data:v.act.v,borderColor:col,backgroundColor:col,borderWidth:2,tension:0,spanGaps:false,
-      pointRadius:v.act.v.map((x,i)=>x!=null&&v.real[i]?(mmode==='quarter'?6:4):0),pointHoverRadius:6,
+      pointRadius:v.act.v.map((x,i)=>x!=null&&v.real[i]?(mode==='quarter'?6:4):0),pointHoverRadius:6,
       pointBackgroundColor:v.act.v.map((_,i)=>pc(i)),pointBorderColor:panel,pointBorderWidth:2,
-      segment:{borderDash:c=>(v.act.est[c.p0DataIndex]||v.act.est[c.p1DataIndex])?[4,4]:undefined},
-      _est:v.act.est,_real:v.real,_k:d.key,order:1});
-    if(!opts.noPlan&&v.plan.some(x=>x!=null))datasets.push({label:d.name+' plan',data:v.plan,borderColor:col+'80',borderWidth:1.5,borderDash:[2,3],pointRadius:0,tension:0,_k:d.key,_plan:true,order:2});
+      segment:{borderDash:c=>(v.act.est[c.p0DataIndex]||v.act.est[c.p1DataIndex])?[4,4]:undefined},_est:v.act.est,_k:d.key,order:1});
+    if(v.plan.some(x=>x!=null))datasets.push({label:d.name+' plan',data:v.plan,borderColor:col+'80',borderWidth:1.5,borderDash:[2,3],pointRadius:0,tension:0,_k:d.key,order:2});
   }
   const c=new Chart(el,{type:'line',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,animation:false,
     interaction:{mode:'index',intersect:false},
-    plugins:{legend:{display:defs.length>1||!opts.noPlan,labels:{color:ink,boxWidth:14,boxHeight:2,font:{size:11}}},
-      tooltip:{filter:t=>t.parsed.y!=null,callbacks:{label:t=>{const ds=t.dataset;const v=t.parsed.y;if(v==null)return null;const tag=ds._est?.[t.dataIndex]?' (estimated)':'';return `${ds.label}: ${fmtV(ds._k,v)}${tag}`}}}},
-    scales:{x:{ticks:{color:ink,maxRotation:0,autoSkip:true,maxTicksLimit:mmode==='quarter'?4:9,font:{size:10},callback:function(v){const l=this.getLabelForValue(v);return mmode==='quarter'?l:l.split(' · ')[1]}},grid:{display:false}},
-      y:{ticks:{color:ink,font:{size:10},callback:v=>fmtV(defs[0].key==='mql_total'||defs[0].key==='sqo_total'?'mql_micro':defs[0].key,v)},grid:{color:grid},beginAtZero:opts.zero!==false}}}});
+    plugins:{legend:{labels:{color:ink,boxWidth:14,boxHeight:2,font:{size:11}}},
+      tooltip:{filter:t=>t.parsed.y!=null,callbacks:{label:t=>{const ds=t.dataset;return `${ds.label}: ${fmtV(fk(ds._k),t.parsed.y)}${ds._est?.[t.dataIndex]?' (estimated)':''}`}}}},
+    scales:{x:{ticks:{color:ink,maxRotation:0,autoSkip:true,maxTicksLimit:mode==='quarter'?4:(mzoom?7:9),font:{size:10},callback:function(v){const l=this.getLabelForValue(v);return mode==='quarter'?l:l.split(' · ')[1]}},grid:{display:false}},
+      y:{ticks:{color:ink,font:{size:10},callback:v=>fmtV(fk(defs[0].key),v)},grid:{color:grid},beginAtZero:opts.zero!==false}}}});
   charts.push(c);return c}
-
-function statLine(k,label){const v=mview(k,mmode);let i=-1;for(let j=v.act.v.length-1;j>=0;j--)if(v.real[j]&&v.act.v[j]!=null){i=j;break}
+function statLine(k,label,mode){const v=zview(k,mode);let i=-1;for(let j=v.act.v.length-1;j>=0;j--)if(v.real[j]&&v.act.v[j]!=null){i=j;break}
   if(i<0)return `<span class="mstat none">${label||''} no actuals yet</span>`;
   const a=v.act.v[i],p=v.plan[i],ok=p==null?null:a>=p;
-  return `<span class="mstat ${ok==null?'':ok?'up':'down'}">${label?label+' ':''}<b>${fmtV(k==='mql_total'||k==='sqo_total'?'mql_micro':k,a)}</b>${p!=null?` vs plan ${fmtV(k==='mql_total'||k==='sqo_total'?'mql_micro':k,p)} ${ok?'▲':'▼'}`:''} <span class="mwhen">${v.labels[i].split(' · ').pop()}</span></span>`}
+  return `<span class="mstat ${ok==null?'':ok?'up':'down'}">${label?label+' ':''}<b>${fmtV(fk(k),a)}</b>${p!=null?` vs plan ${fmtV(fk(k),p)} ${ok?'▲':'▼'}`:''} <span class="mwhen">${v.labels[i].split(' · ').pop()}</span></span>`}
 
+const BKNOTE=m=>m==='ytd'?'Bookings are a % of each quarter’s forecast, so they don’t add across quarters. Shown quarter to date.':'';
 const MCARDS=[
-  {id:'c-book',title:'Bookings',sub:'% of quarter forecast',wide:true,defs:[{key:'bk_total',name:'Total',color:'--s1'},{key:'bk_micro',name:'Micro',color:'--s2'},{key:'bk_core',name:'Core',color:'--s3'}],note:()=>mmode==='ytd'?'Bookings are a % of each quarter’s forecast, so they don’t add up across quarters. Shown quarter to date.':''},
+  {id:'c-bkt',title:'Bookings · Total',sub:'% of quarter forecast',defs:[{key:'bk_total',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkm',title:'Bookings · Micro',sub:'% of quarter forecast',defs:[{key:'bk_micro',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkc',title:'Bookings · Core',sub:'% of quarter forecast',defs:[{key:'bk_core',name:'Actual',color:'--s1'}],note:BKNOTE},
   {id:'c-micro',title:'MQL / SQO · Micro',sub:'count, quarter to date',defs:[{key:'mql_micro',name:'MQL',color:'--s1'},{key:'sqo_micro',name:'SQO',color:'--s2'}]},
   {id:'c-core',title:'MQL / SQO · Core',sub:'count, quarter to date',defs:[{key:'mql_core',name:'MQL',color:'--s1'},{key:'sqo_core',name:'SQO',color:'--s2'}]},
   {id:'c-tot',title:'MQL / SQO · Total',sub:'Micro + Core',defs:[{key:'mql_total',name:'MQL',color:'--s1'},{key:'sqo_total',name:'SQO',color:'--s2'}]},
   {id:'c-svc',title:'Service bookings',sub:'$M, quarter to date',small:true,defs:[{key:'svc',name:'Actual',color:'--s1'}]},
   {id:'c-vit',title:'Product vitality',sub:'$M, quarter to date',small:true,defs:[{key:'vit',name:'Actual',color:'--s1'}]},
-  {id:'c-cas',title:'CAS',sub:'running average score',small:true,zero:false,defs:[{key:'cas',name:'Actual',color:'--s1'}],note:()=>mmode==='ytd'?'Year-to-date running average.':mmode==='quarter'?'Quarter-end running average.':'Quarter running average.'},
-  {id:'c-price',title:'Price improvement',sub:'% of revenue, rolling average',small:true,defs:[{key:'price',name:'Actual',color:'--s1'}],note:()=>mmode==='ytd'?'Running average of all weeks so far.':mmode==='quarter'?'Average of the weeks in each quarter.':'Weekly value as reported.'},
-  {id:'c-bb',title:'Book & burn and backlogs',sub:'$M',wide:true,zero:false,defs:[{key:'bb',name:'Book & burn',color:'--s1'},{key:'msn',name:'MSN backlog',color:'--s2'},{key:'cmc',name:'CMC backlog',color:'--s3'}],note:()=>mmode==='ytd'?'Backlog and book & burn are point-in-time values, shown as reported.':''}];
-
+  {id:'c-cas',title:'CAS',sub:'running average score',small:true,zero:false,defs:[{key:'cas',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Year-to-date running average.':m==='quarter'?'Quarter-end running average.':'Quarter running average.'},
+  {id:'c-price',title:'Price improvement',sub:'% of revenue, rolling average',small:true,defs:[{key:'price',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Running average of all weeks so far.':m==='quarter'?'Average of the weeks in each quarter.':'Weekly value as reported.'},
+  {id:'c-bb',title:'Book & burn and backlogs',sub:'$M',wide:true,zero:false,defs:[{key:'bb',name:'Book & burn',color:'--s1'},{key:'msn',name:'MSN backlog',color:'--s2'},{key:'cmc',name:'CMC backlog',color:'--s3'}],note:m=>m==='ytd'?'Backlog and book & burn are point-in-time values, shown as reported.':''}];
+const MODES=[['week','Weekly'],['ytd','Run rate'],['quarter','Quarters']];
 function yearNav(){return `<div class="yr mnav"><button type="button" data-myr="-1" aria-label="Previous year">‹</button><span>${myr}</span><button type="button" data-myr="1" aria-label="Next year">›</button></div>`}
+function cardHTML(c){const mode=cmode[c.id]||'week';
+  return `<header><h3>${c.title}</h3><span class="msub">${c.sub}</span><div class="seg sm" role="group" aria-label="${c.title} view">${MODES.map(([k,l])=>`<button type="button" data-cmode="${c.id}:${k}" aria-pressed="${mode===k}">${l}</button>`).join('')}</div></header>
+    <div class="mstats">${c.defs.map(d=>statLine(d.key,c.defs.length>1?d.name:'',mode)).join('')}</div>
+    <div class="cv"><canvas id="${c.id}" role="img" aria-label="${c.title} chart"></canvas></div>${c.note&&c.note(mode)?`<p class="mnote">${c.note(mode)}</p>`:''}`}
+function drawCard(c){const sec=$('#card-'+c.id);if(!sec)return;
+  const old=charts.find(x=>x.canvas?.id===c.id);if(old){old.destroy();charts=charts.filter(x=>x!==old)}
+  sec.innerHTML=cardHTML(c);lineChart($('#'+c.id),c.defs,cmode[c.id]||'week',{zero:c.zero})}
 function renderPerf(){
   charts.forEach(c=>c.destroy());charts=[];
   if(typeof Chart==='undefined'){$('#main').innerHTML='<div class="empty">The charting library didn’t load. Check your internet connection and reload.</div>';return}
   const has=Object.keys(mdoc()).length>0;
-  let h=`<div class="mhead"><div class="seg" role="group" aria-label="View">${[['week','Full year · weekly'],['ytd','Cumulative run rate'],['quarter','Quarters only']].map(([k,l])=>`<button type="button" data-mmode="${k}" aria-pressed="${mmode===k}">${l}</button>`).join('')}</div>${yearNav()}
+  let h=`<div class="mhead"><div class="seg" role="group" aria-label="Time range">${[[0,'Full year'],[1,'Q1'],[2,'Q2'],[3,'Q3'],[4,'Q4']].map(([z,l])=>`<button type="button" data-mzoom="${z}" aria-pressed="${mzoom===z}">${l}</button>`).join('')}</div>${yearNav()}
     <div class="mkey"><span><i class="dot up"></i>At or above plan</span><span><i class="dot down"></i>Below plan</span><span><i class="dash"></i>Estimated between reported weeks</span><span><i class="pl"></i>Plan</span></div></div>`;
   if(!has){$('#main').innerHTML=h+`<div class="empty">No bowler numbers for ${myr} yet. Add them on the Bowler input tab.</div>`;return}
-  h+='<div class="mgrid">'+MCARDS.map(c=>`<section class="mcard ${c.wide?'wide':''} ${c.small?'small':''}"><header><h3>${c.title}</h3><span class="msub">${c.sub}</span></header>
-    <div class="mstats">${c.defs.map(d=>statLine(d.key,c.defs.length>1?d.name:'')).join('')}</div>
-    <div class="cv"><canvas id="${c.id}" role="img" aria-label="${c.title} chart"></canvas></div>${c.note&&c.note()?`<p class="mnote">${c.note()}</p>`:''}</section>`).join('')+'</div>';
-  $('#main').innerHTML=h;
-  for(const c of MCARDS)lineChart($('#'+c.id),c.id,c.defs,{zero:c.zero})}
+  h+='<div class="mgrid">'+MCARDS.map(c=>`<section class="mcard ${c.wide?'wide':''} ${c.small?'small':''}" id="card-${c.id}"></section>`).join('')+'</div>';
+  $('#main').innerHTML=h;MCARDS.forEach(drawCard)}
 
 /* ---------- bowler input grid ---------- */
 const ROWS=k=>k==='cas'?[['plan','Plan'],['act','Qtr'],['ytd','YTD']]:[['plan','Plan'],['act','Act']];
 const fmtIn=(k,v)=>v==null?'':(MBY[k].fmt==='usd'||MBY[k].fmt==='score'||MBY[k].fmt==='pct'&&Math.abs(v)<10)?String(+v.toFixed(2)):String(Math.round(v*100)/100);
-function renderBowler(){
+function renderBowler(force){
   charts.forEach(c=>c.destroy());charts=[];
   const d=mdoc(),ro=!canWrite?'readonly':'';
+  const g=$('#main .bgrid');
+  if(g&&!force&&g.dataset.year===String(myr)){ /* refresh values only, never touch the cell being edited */
+    g.querySelectorAll('input[data-k]').forEach(i=>{if(i===document.activeElement)return;const v=fmtIn(i.dataset.k,d[i.dataset.k]?.[i.dataset.r]?.[+i.dataset.w]);if(i.value!==v)i.value=v});
+    g.querySelectorAll('input[data-meta]').forEach(i=>{if(i===document.activeElement)return;const v=String(d[i.dataset.meta]?.[i.dataset.f]??'');if(i.value!==v)i.value=v});
+    return}
+  const wrapOld=$('#main .bgridwrap'),sx=wrapOld?.scrollLeft||0,sy=wrapOld?.scrollTop||0;
   const qhead=[0,1,2,3,4].map(q=>`<th colspan="${q?13:1}" class="q">${q?'Q'+q:'Prior'}</th>`).join('');
   let h=`<div class="mhead">${yearNav()}<p class="mhelp">Type into any cell, or paste a row of weeks copied from Excel. Numbers save as you go. Enter percentages as plain numbers (20 for 20%) and dollars in millions.</p></div>
   <details class="bpaste"><summary>Paste the whole bowler from Excel</summary>
     <p class="mhelp">In Excel, copy the bowler from the Quarter row down to the last metric, including the Metric, Owner, Target and Plan/Act columns. Paste it below and click Import. Rows are matched by metric name, and blank cells stay blank.</p>
     <textarea id="b-paste" rows="5" placeholder="Paste here"></textarea>
     <div class="row"><button type="button" class="btn primary" id="b-import">Import into ${myr}</button><span id="b-msg" role="status"></span></div></details>
-  <div class="tblwrap bgridwrap"><table class="bgrid"><thead><tr><th class="st" colspan="4"></th>${qhead}</tr>
+  <div class="tblwrap bgridwrap"><table class="bgrid" data-year="${myr}"><thead><tr><th class="st" colspan="4"></th>${qhead}</tr>
     <tr><th class="st m">Metric</th><th class="st o">Owner</th><th class="st t">Target</th><th class="st rl"></th>${WEEKS.map(w=>`<th class="${w%13===1?'qs':''}">${w?'W'+w:'W52'}<div>${w?wDate(myr,w):'prior'}</div></th>`).join('')}</tr></thead><tbody>`;
   for(const [k] of MDEF){const m=MBY[k],md=d[k]||{},rs=ROWS(k);rs.forEach(([r,rl],ri)=>{
     h+=`<tr class="${ri===0?'mfirst':''}">`+(ri===0?`<th class="st m" rowspan="${rs.length}">${esc(m.label)}<div>${esc(m.unit)}</div></th><td class="st o" rowspan="${rs.length}"><input data-meta="${k}" data-f="owner" value="${esc(md.owner||'')}" ${ro} aria-label="${esc(m.label)} owner"></td><td class="st t" rowspan="${rs.length}"><input data-meta="${k}" data-f="target" value="${md.target??''}" ${ro} aria-label="${esc(m.label)} target"></td>`:'')+
       `<td class="st rl">${rl}</td>`+WEEKS.map(w=>`<td class="${w%13===1?'qs':''} ${r}"><input data-k="${k}" data-r="${r}" data-w="${w}" value="${fmtIn(k,md[r]?.[w])}" ${ro} aria-label="${esc(m.label)} ${rl} week ${w}"></td>`).join('')+'</tr>'})}
   h+='</tbody></table></div>';
   $('#main').innerHTML=h;
+  stickCols();
+  const w=$('#main .bgridwrap');if(w){w.scrollLeft=sx;w.scrollTop=sy}
 }
+/* Lock the first four columns at their real measured widths, so nothing scrolls underneath them. */
+function stickCols(){const head=document.querySelectorAll('.bgrid thead tr:nth-child(2) th.st');let left=0;const lefts={};
+  head.forEach(th=>{const c=['m','o','t','rl'].find(x=>th.classList.contains(x));lefts[c]=left;left+=th.getBoundingClientRect().width});
+  document.querySelectorAll('.bgrid .st').forEach(el=>{const c=['m','o','t','rl'].find(x=>el.classList.contains(x));if(c)el.style.left=lefts[c]+'px'});
+  const top=document.querySelector('.bgrid thead tr:first-child th');if(top){const h=top.getBoundingClientRect().height;document.querySelectorAll('.bgrid thead tr:nth-child(2) th').forEach(th=>th.style.top=h+'px')}
+  const first=document.querySelector('.bgrid thead tr:first-child th.st');if(first)first.style.left='0px'}
 const parseNum=s=>{s=String(s??'').trim().replace(/[$,\s]/g,'');if(!s||s==='-')return null;const neg=/^\(.*\)$/.test(s);s=s.replace(/[()%]/g,'');const x=parseFloat(s);return isNaN(x)?null:neg?-x:x};
 const pendingM={};let mTimer=null;
 function queueWrite(k,patch){pendingM[k]=Object.assign(pendingM[k]||{},patch);clearTimeout(mTimer);mTimer=setTimeout(flushM,700)}
@@ -857,7 +885,7 @@ document.addEventListener('paste',e=>{
   const c=e.target.closest('.bgrid [data-k]');if(!c)return;const t=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/\t/.test(t))return;
   e.preventDefault();const vals=t.replace(/\r/g,'').split('\n')[0].split('\t');const k=c.dataset.k,r=c.dataset.r,w0=+c.dataset.w;
   const md=(BW[myr]??={year:myr,metrics:{}}).metrics[k]??={};const arr=WEEKS.map(i=>md[r]?.[i]??null);
-  vals.forEach((v,j)=>{if(w0+j<NW)arr[w0+j]=parseNum(v)});md[r]=arr;queueWrite(k,{[r]:arr});renderBowler();toast(`Pasted ${Math.min(vals.length,NW-w0)} weeks`)});
+  vals.forEach((v,j)=>{if(w0+j<NW)arr[w0+j]=parseNum(v)});md[r]=arr;queueWrite(k,{[r]:arr});renderBowler(true);toast(`Pasted ${Math.min(vals.length,NW-w0)} weeks`)});
 
 /* Whole-bowler paste: tab-separated text with quoted multi-line labels, as Excel copies it. */
 function parseTSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
@@ -882,11 +910,12 @@ async function doImport(){
     $('#b-paste').value='';toast(`Imported ${keys.length} metrics`);$('#b-msg').textContent=`Imported ${keys.length} metrics (${rows} rows) into ${myr}.`}
   catch(e){$('#b-msg').textContent='Import failed. Check your access and try again.'}}
 document.addEventListener('click',e=>{
-  const mm=e.target.closest('[data-mmode]');if(mm){mmode=mm.dataset.mmode;try{sessionStorage.setItem('uvnn-mmode',mmode)}catch{}return renderPerf()}
-  const my=e.target.closest('[data-myr]');if(my){myr+=+my.dataset.myr;return render()}
+  const cm=e.target.closest('[data-cmode]');if(cm){const [id,m]=cm.dataset.cmode.split(':');cmode[id]=m;saveM();return drawCard(MCARDS.find(c=>c.id===id))}
+  const mz=e.target.closest('[data-mzoom]');if(mz){mzoom=+mz.dataset.mzoom;saveM();return renderPerf()}
+  const my=e.target.closest('[data-myr]');if(my){myr+=+my.dataset.myr;return tab==='bowler'?renderBowler(true):render()}
   if(e.target.closest('#b-import'))return doImport()});
-try{mmode=sessionStorage.getItem('uvnn-mmode')||'week'}catch{}
 function renderMetrics(){tab==='perf'?renderPerf():renderBowler()}
+window.addEventListener('resize',()=>{if(tab==='bowler')stickCols()});
 function subBowler(){db.collection('bowler').onSnapshot(snap=>{BW={};snap.docs.forEach(d=>BW[d.id]=d.data());
   if(tab==='perf')renderPerf();else if(tab==='bowler'&&!document.activeElement?.closest?.('.bgrid,.bpaste'))renderBowler()},()=>{})}
 
