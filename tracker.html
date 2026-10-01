@@ -68,7 +68,7 @@ button{font:inherit;cursor:pointer}
 .seg button{background:var(--panel);border:0;border-right:1px solid var(--line);padding:7px 12px;color:var(--ink);font:500 13px var(--f-body)}
 .seg button:last-child{border-right:0}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.seg.sm{margin-left:auto}.seg.sm button{padding:3px 8px;font-size:11px}
+.mcard .ctl{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}.seg.sm button{padding:3px 8px;font-size:11px}
 .mkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);align-items:center}
 .mkey i{display:inline-block;vertical-align:middle;margin-right:5px}
 .mkey .dot{width:9px;height:9px;border-radius:50%}.mkey .dot.up{background:var(--on)}.mkey .dot.down{background:var(--off)}
@@ -772,19 +772,19 @@ function mview(k,mode){
   return {labels,act:{v:av,est},plan:pv,real:rl}}
 
 function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#888'}
-/* mzoom: 0 = full year, 1-4 = that quarter only (applies to every chart). cmode: each chart's own view. */
-let mzoom=0;const cmode={};
-try{mzoom=+(sessionStorage.getItem('uvnn-mzoom')||0);Object.assign(cmode,JSON.parse(sessionStorage.getItem('uvnn-cmode')||'{}'))}catch{}
-const saveM=()=>{try{sessionStorage.setItem('uvnn-mzoom',mzoom);sessionStorage.setItem('uvnn-cmode',JSON.stringify(cmode))}catch{}};
+/* Each chart keeps its own view (cmode) and its own time range (czoom: 0 = full year, 1-4 = that quarter). */
+const cmode={},czoom={};
+try{Object.assign(cmode,JSON.parse(sessionStorage.getItem('uvnn-cmode')||'{}'));Object.assign(czoom,JSON.parse(sessionStorage.getItem('uvnn-czoom')||'{}'))}catch{}
+const saveM=()=>{try{sessionStorage.setItem('uvnn-cmode',JSON.stringify(cmode));sessionStorage.setItem('uvnn-czoom',JSON.stringify(czoom))}catch{}};
 const isSum=k=>k==='mql_total'||k==='sqo_total';
 const fk=k=>isSum(k)?'mql_micro':k;
 /* Full-year view, then cut down to the zoomed quarter. */
-function zview(k,mode){const v=mview(k,mode);if(!mzoom)return v;
-  const [a,b]=mode==='quarter'?[mzoom-1,mzoom]:[(mzoom-1)*13,mzoom*13];
+function zview(k,mode,z){const v=mview(k,mode);if(!z||mode==='quarter')return v;
+  const [a,b]=[(z-1)*13,z*13];
   return {labels:v.labels.slice(a,b),act:{v:v.act.v.slice(a,b),est:v.act.est.slice(a,b)},plan:v.plan.slice(a,b),real:v.real.slice(a,b)}}
 function lineChart(el,defs,mode,opts={}){
   const datasets=[];let labels=[];const ink=tok('--muted'),grid=tok('--soft'),on=tok('--on'),off=tok('--off'),panel=tok('--panel');
-  for(const d of defs){const v=zview(d.key,mode);labels=v.labels;const col=tok(d.color);
+  for(const d of defs){const v=zview(d.key,mode,opts.z);labels=v.labels;const col=tok(d.color);
     const pc=i=>{const a=v.act.v[i],p=v.plan[i];if(a==null||!v.real[i]||p==null)return col;return a>=p?on:off};
     datasets.push({label:d.name,data:v.act.v,borderColor:col,backgroundColor:col,borderWidth:2,tension:0,spanGaps:false,
       pointRadius:v.act.v.map((x,i)=>x!=null&&v.real[i]?(mode==='quarter'?6:4):0),pointHoverRadius:6,
@@ -796,19 +796,19 @@ function lineChart(el,defs,mode,opts={}){
     interaction:{mode:'index',intersect:false},
     plugins:{legend:{labels:{color:ink,boxWidth:14,boxHeight:2,font:{size:11}}},
       tooltip:{filter:t=>t.parsed.y!=null,callbacks:{label:t=>{const ds=t.dataset;return `${ds.label}: ${fmtV(fk(ds._k),t.parsed.y)}${ds._est?.[t.dataIndex]?' (estimated)':''}`}}}},
-    scales:{x:{ticks:{color:ink,maxRotation:0,autoSkip:true,maxTicksLimit:mode==='quarter'?4:(mzoom?7:9),font:{size:10},callback:function(v){const l=this.getLabelForValue(v);return mode==='quarter'?l:l.split(' · ')[1]}},grid:{display:false}},
+    scales:{x:{ticks:{color:ink,maxRotation:0,autoSkip:true,maxTicksLimit:mode==='quarter'?4:(opts.z?7:9),font:{size:10},callback:function(v){const l=this.getLabelForValue(v);return mode==='quarter'?l:l.split(' · ')[1]}},grid:{display:false}},
       y:{ticks:{color:ink,font:{size:10},callback:v=>fmtV(fk(defs[0].key),v)},grid:{color:grid},beginAtZero:opts.zero!==false}}}});
   charts.push(c);return c}
-function statLine(k,label,mode){const v=zview(k,mode);let i=-1;for(let j=v.act.v.length-1;j>=0;j--)if(v.real[j]&&v.act.v[j]!=null){i=j;break}
+function statLine(k,label,mode,z){const v=zview(k,mode,z);let i=-1;for(let j=v.act.v.length-1;j>=0;j--)if(v.real[j]&&v.act.v[j]!=null){i=j;break}
   if(i<0)return `<span class="mstat none">${label||''} no actuals yet</span>`;
   const a=v.act.v[i],p=v.plan[i],ok=p==null?null:a>=p;
   return `<span class="mstat ${ok==null?'':ok?'up':'down'}">${label?label+' ':''}<b>${fmtV(fk(k),a)}</b>${p!=null?` vs plan ${fmtV(fk(k),p)} ${ok?'▲':'▼'}`:''} <span class="mwhen">${v.labels[i].split(' · ').pop()}</span></span>`}
 
-const BKNOTE=m=>m==='ytd'?'Bookings are a % of each quarter’s forecast, so they don’t add across quarters. Shown quarter to date.':'';
+const BKNOTE=()=>'';const NORUN=['week','quarter'];
 const MCARDS=[
-  {id:'c-bkt',wide:true,title:'Bookings · Total',sub:'% of quarter forecast',defs:[{key:'bk_total',name:'Actual',color:'--s1'}],note:BKNOTE},
-  {id:'c-bkm',title:'Bookings · Micro',sub:'% of quarter forecast',defs:[{key:'bk_micro',name:'Actual',color:'--s1'}],note:BKNOTE},
-  {id:'c-bkc',title:'Bookings · Core',sub:'% of quarter forecast',defs:[{key:'bk_core',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkt',modes:NORUN,wide:true,title:'Bookings · Total',sub:'% of quarter forecast',defs:[{key:'bk_total',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkm',modes:NORUN,title:'Bookings · Micro',sub:'% of quarter forecast',defs:[{key:'bk_micro',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkc',modes:NORUN,title:'Bookings · Core',sub:'% of quarter forecast',defs:[{key:'bk_core',name:'Actual',color:'--s1'}],note:BKNOTE},
   {id:'c-micro',title:'MQL / SQO · Micro',sub:'count, quarter to date',defs:[{key:'mql_micro',name:'MQL',color:'--s1'},{key:'sqo_micro',name:'SQO',color:'--s2'}]},
   {id:'c-core',title:'MQL / SQO · Core',sub:'count, quarter to date',defs:[{key:'mql_core',name:'MQL',color:'--s1'},{key:'sqo_core',name:'SQO',color:'--s2'}]},
   {id:'c-tot',wide:true,title:'MQL / SQO · Total',sub:'Micro + Core',defs:[{key:'mql_total',name:'MQL',color:'--s1'},{key:'sqo_total',name:'SQO',color:'--s2'}]},
@@ -816,21 +816,25 @@ const MCARDS=[
   {id:'c-vit',title:'Product vitality',sub:'$M, quarter to date',small:true,defs:[{key:'vit',name:'Actual',color:'--s1'}]},
   {id:'c-cas',title:'CAS',sub:'running average score',small:true,zero:false,defs:[{key:'cas',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Year-to-date running average.':m==='quarter'?'Quarter-end running average.':'Quarter running average.'},
   {id:'c-price',title:'Price improvement',sub:'% of revenue, rolling average',small:true,defs:[{key:'price',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Running average of all weeks so far.':m==='quarter'?'Average of the weeks in each quarter.':'Weekly value as reported.'},
-  {id:'c-bb',title:'Book & burn and backlogs',sub:'$M',wide:true,zero:false,defs:[{key:'bb',name:'Book & burn',color:'--s1'},{key:'msn',name:'MSN backlog',color:'--s2'},{key:'cmc',name:'CMC backlog',color:'--s3'}],note:m=>m==='ytd'?'Backlog and book & burn are point-in-time values, shown as reported.':''}];
+  {id:'c-bb',modes:NORUN,title:'Book & burn and backlogs',sub:'$M',wide:true,zero:false,defs:[{key:'bb',name:'Book & burn',color:'--s1'},{key:'msn',name:'MSN backlog',color:'--s2'},{key:'cmc',name:'CMC backlog',color:'--s3'}],note:()=>''}];
 const MODES=[['week','Weekly'],['ytd','Run rate'],['quarter','Quarters']];
 function yearNav(){return `<div class="yr mnav"><button type="button" data-myr="-1" aria-label="Previous year">‹</button><span>${myr}</span><button type="button" data-myr="1" aria-label="Next year">›</button></div>`}
-function cardHTML(c){const mode=cmode[c.id]||'week';
-  return `<header><h3>${c.title}</h3><span class="msub">${c.sub}</span><div class="seg sm" role="group" aria-label="${c.title} view">${MODES.map(([k,l])=>`<button type="button" data-cmode="${c.id}:${k}" aria-pressed="${mode===k}">${l}</button>`).join('')}</div></header>
-    <div class="mstats">${c.defs.map(d=>statLine(d.key,c.defs.length>1?d.name:'',mode)).join('')}</div>
+const cmodes=c=>MODES.filter(([k])=>(c.modes||['week','ytd','quarter']).includes(k));
+const modeOf=c=>{const m=cmode[c.id];return cmodes(c).some(([k])=>k===m)?m:'week'};
+function cardHTML(c){const mode=modeOf(c),z=mode==='quarter'?0:(czoom[c.id]||0);
+  return `<header><h3>${c.title}</h3><span class="msub">${c.sub}</span><div class="ctl">
+      ${mode!=='quarter'?`<div class="seg sm" role="group" aria-label="${c.title} time range">${[[0,'Full year'],[1,'Q1'],[2,'Q2'],[3,'Q3'],[4,'Q4']].map(([q,l])=>`<button type="button" data-czoom="${c.id}:${q}" aria-pressed="${z===q}">${l}</button>`).join('')}</div>`:''}
+      <div class="seg sm" role="group" aria-label="${c.title} view">${cmodes(c).map(([k,l])=>`<button type="button" data-cmode="${c.id}:${k}" aria-pressed="${mode===k}">${l}</button>`).join('')}</div></div></header>
+    <div class="mstats">${c.defs.map(d=>statLine(d.key,c.defs.length>1?d.name:'',mode,z)).join('')}</div>
     <div class="cv"><canvas id="${c.id}" role="img" aria-label="${c.title} chart"></canvas></div>${c.note&&c.note(mode)?`<p class="mnote">${c.note(mode)}</p>`:''}`}
 function drawCard(c){const sec=$('#card-'+c.id);if(!sec)return;
   const old=charts.find(x=>x.canvas?.id===c.id);if(old){old.destroy();charts=charts.filter(x=>x!==old)}
-  sec.innerHTML=cardHTML(c);lineChart($('#'+c.id),c.defs,cmode[c.id]||'week',{zero:c.zero})}
+  sec.innerHTML=cardHTML(c);const mode=modeOf(c);lineChart($('#'+c.id),c.defs,mode,{zero:c.zero,z:mode==='quarter'?0:(czoom[c.id]||0)})}
 function renderPerf(){
   charts.forEach(c=>c.destroy());charts=[];
   if(typeof Chart==='undefined'){$('#main').innerHTML='<div class="empty">The charting library didn’t load. Check your internet connection and reload.</div>';return}
   const has=Object.keys(mdoc()).length>0;
-  let h=`<div class="mhead"><div class="seg" role="group" aria-label="Time range">${[[0,'Full year'],[1,'Q1'],[2,'Q2'],[3,'Q3'],[4,'Q4']].map(([z,l])=>`<button type="button" data-mzoom="${z}" aria-pressed="${mzoom===z}">${l}</button>`).join('')}</div>${yearNav()}
+  let h=`<div class="mhead">${yearNav()}
     <div class="mkey"><span><i class="dot up"></i>At or above plan</span><span><i class="dot down"></i>Below plan</span><span><i class="dash"></i>Estimated between reported weeks</span><span><i class="pl"></i>Plan</span></div></div>`;
   if(!has){$('#main').innerHTML=h+`<div class="empty">No bowler numbers for ${myr} yet. Add them on the Bowler input tab.</div>`;return}
   h+='<div class="mgrid">'+MCARDS.map(c=>`<section class="mcard ${c.wide?'wide':''} ${c.small?'small':''}" id="card-${c.id}"></section>`).join('')+'</div>';
@@ -912,7 +916,7 @@ async function doImport(){
   catch(e){$('#b-msg').textContent='Import failed. Check your access and try again.'}}
 document.addEventListener('click',e=>{
   const cm=e.target.closest('[data-cmode]');if(cm){const [id,m]=cm.dataset.cmode.split(':');cmode[id]=m;saveM();return drawCard(MCARDS.find(c=>c.id===id))}
-  const mz=e.target.closest('[data-mzoom]');if(mz){mzoom=+mz.dataset.mzoom;saveM();return renderPerf()}
+  const cz=e.target.closest('[data-czoom]');if(cz){const [id,q]=cz.dataset.czoom.split(':');czoom[id]=+q;saveM();return drawCard(MCARDS.find(c=>c.id===id))}
   const my=e.target.closest('[data-myr]');if(my){myr+=+my.dataset.myr;return tab==='bowler'?renderBowler(true):render()}
   if(e.target.closest('#b-import'))return doImport()});
 function renderMetrics(){tab==='perf'?renderPerf():renderBowler()}
