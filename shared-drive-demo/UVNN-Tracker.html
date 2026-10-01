@@ -262,7 +262,7 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
 </script>
 <script>
 /* Shared-folder storage for the tracker.
-   Each record is one small JSON file: <folder>/tracker-data/<collection>/<id>.json
+   Each record is one small JSON file in one flat folder: <folder>/tracker-data/<collection>__<id>.json
    Other people's edits are picked up by re-checking the folder every few seconds. */
 (function(){
   const COLS=['priorities','objectives','actions','notes'];
@@ -307,8 +307,8 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
     try{
       if(root&&(await root.requestPermission({mode:'readwrite'}))==='granted'){/* reuse */}
       else{root=await window.showDirectoryPicker({id:'uvnn-tracker',mode:'readwrite'});await saveHandle(root)}
-      dataDir=await root.getDirectoryHandle('tracker-data',{create:true});
-      for(const c of COLS)await dataDir.getDirectoryHandle(c,{create:true});
+      /* accept either the main folder or the tracker-data folder itself */
+      dataDir=root.name==='tracker-data'?root:await root.getDirectoryHandle('tracker-data',{create:true});
       await poll(true);
       const empty=COLS.every(c=>cache[c].size===0);
       $('fs-seed').hidden=!empty;$('fs-connect').hidden=true;
@@ -324,24 +324,27 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
     $('fs-seed').hidden=true;st(`Loaded ${done} records into “${root.name}”.`);emitAll();
   });
 
-  /* ---------- file I/O ---------- */
-  async function readDir(c){
-    const dir=await dataDir.getDirectoryHandle(c,{create:true});const seen=new Set();let changed=false;
-    for await (const [name,h] of dir.entries()){
-      if(h.kind!=='file'||!name.endsWith('.json'))continue;const id=name.slice(0,-5);seen.add(id);
+  /* ---------- file I/O: one flat folder, files named <collection>__<id>.json ---------- */
+  const fname=(c,id)=>`${c}__${id}.json`;
+  async function scan(){
+    const seen={};COLS.forEach(c=>seen[c]=new Set());const changed=new Set();
+    for await (const [name,h] of dataDir.entries()){
+      if(h.kind!=='file'||!name.endsWith('.json'))continue;
+      const k=name.indexOf('__');if(k<0)continue;
+      const c=name.slice(0,k),id=name.slice(k+2,-5);if(!cache[c]||!id)continue;seen[c].add(id);
       const f=await h.getFile();const prev=cache[c].get(id);
       if(prev&&prev.mod===f.lastModified&&prev.size===f.size)continue;
-      try{const data=JSON.parse(await f.text());cache[c].set(id,{mod:f.lastModified,size:f.size,data});changed=true}catch{/* half-written file: try next round */}
+      try{const data=JSON.parse(await f.text());cache[c].set(id,{mod:f.lastModified,size:f.size,data});changed.add(c)}catch{/* half-written file: try next round */}
     }
-    for(const id of [...cache[c].keys()])if(!seen.has(id)){cache[c].delete(id);changed=true}
+    for(const c of COLS)for(const id of [...cache[c].keys()])if(!seen[c].has(id)){cache[c].delete(id);changed.add(c)}
     return changed}
-  async function poll(force){let any=false;for(const c of COLS){if(await readDir(c)||force){any=true;emit(c)}}return any}
+  async function poll(force){const ch=await scan();for(const c of COLS)if(force||ch.has(c))emit(c);return ch.size>0}
   async function writeDoc(c,id,data,notify=true){
-    const dir=await dataDir.getDirectoryHandle(c,{create:true});const fh=await dir.getFileHandle(id+'.json',{create:true});
+    const fh=await dataDir.getFileHandle(fname(c,id),{create:true});
     const w=await fh.createWritable();await w.write(JSON.stringify(data,null,1));await w.close();
     const f=await fh.getFile();cache[c].set(id,{mod:f.lastModified,size:f.size,data});if(notify)emit(c)}
-  async function readFresh(c,id){try{const dir=await dataDir.getDirectoryHandle(c);const f=await (await dir.getFileHandle(id+'.json')).getFile();return JSON.parse(await f.text())}catch{return cache[c].get(id)?.data}}
-  async function removeDoc(c,id){try{const dir=await dataDir.getDirectoryHandle(c);await dir.removeEntry(id+'.json')}catch{}cache[c].delete(id);emit(c)}
+  async function readFresh(c,id){try{const f=await (await dataDir.getFileHandle(fname(c,id))).getFile();return JSON.parse(await f.text())}catch{return cache[c].get(id)?.data}}
+  async function removeDoc(c,id){try{await dataDir.removeEntry(fname(c,id))}catch{}cache[c].delete(id);emit(c)}
 
   /* ---------- the same small database API the tracker page already uses ---------- */
   const snapDoc=(id,data)=>({id,exists:data!==undefined,data:()=>data,metadata:{fromCache:false,hasPendingWrites:false}});
@@ -359,7 +362,7 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
   function colRef(c){return{path:c,doc:id=>docRef(c,id||newId()),
     add:async d=>{const r=docRef(c,newId());await r.set(d);return r},
     onSnapshot:(next)=>{listeners[c].add(next);if(dataDir)emit(c);return()=>listeners[c].delete(next)},
-    get:async()=>{await readDir(c);const docs=[...cache[c].entries()].map(([id,v])=>snapDoc(id,clone(v.data)));return{docs,size:docs.length,empty:!docs.length}}}}
+    get:async()=>{await scan();const docs=[...cache[c].entries()].map(([id,v])=>snapDoc(id,clone(v.data)));return{docs,size:docs.length,empty:!docs.length}}}}
   const db=Object.freeze({collection:c=>{if(!COLS.includes(c))throw new TypeError('Unknown collection '+c);return colRef(c)},doc:p=>{const [c,id]=p.split('/');return docRef(c,id)}});
   const nameNow=()=>($('fs-name').value||'').trim()||'Someone';
   const user=Object.freeze({id:async()=>nameNow(),me:async()=>({id:nameNow(),name:nameNow()}),can:async()=>true,canEdit:()=>true,isOwner:()=>true,
