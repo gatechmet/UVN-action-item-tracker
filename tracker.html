@@ -7,19 +7,19 @@
   --bg:#f3f5f7; --panel:#ffffff; --ink:#15202b; --muted:#5b6875; --line:#d9dfe5; --soft:#e9edf1;
   --accent:#1f5f8b; --accent-ink:#ffffff; --band:#223445; --band-ink:#eef3f7;
   --on:#1e8a4c; --on-bg:#dff2e7; --risk:#b7791f; --risk-bg:#fbf0d9; --off:#c0392b; --off-bg:#fbe3e0;
-  --done:#6b7785; --done-bg:#e6eaee; --pause:#2f63b0; --pause-bg:#e1eafa; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
+  --done:#6b7785; --done-bg:#e6eaee; --pause:#0f7c80; --pause-bg:#dcf1f1; --comp:#2563b8; --comp-bg:#e3ecfa; --comp-row:#f2f6fd; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
   --f-disp:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --pause:#7fa8ec; --pause-bg:#1d2b45; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --pause:#7fa8ec; --pause-bg:#1d2b45; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:20px 60px}
@@ -72,18 +72,32 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .date{font:12px var(--f-mono);white-space:nowrap;font-variant-numeric:tabular-nums}
 .date.late{color:var(--off);font-weight:500}
 .strip{display:grid;grid-template-columns:repeat(12,15px);gap:3px}
-.strip i,.strip .c{display:block;width:15px;height:15px;border-radius:3px;background:var(--soft);border:0;padding:0}
+.strip i,.strip .c{display:grid;place-items:center;width:15px;height:15px;border-radius:3px;background:var(--panel);border:1px solid var(--line);padding:0}
 .strip .c{cursor:pointer}
 .strip .c:hover{outline:2px solid var(--accent);outline-offset:1px}
 .strip .green{background:var(--on)}.strip .yellow{background:var(--risk)}.strip .red{background:var(--off)}
-.strip .complete{background:var(--done)}.strip .planned{background:none;border:1px dashed var(--plan)}.strip .na{background:var(--soft)}
+.strip .green,.strip .yellow,.strip .red,.strip .complete{border-color:transparent}.strip .complete{background:var(--comp)}.strip .planned{background:var(--panel);border:1px dashed var(--plan)}.strip .na{background:linear-gradient(var(--line),var(--line)) center/7px 1.5px no-repeat var(--panel)}
+.strip .due::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--ink)}.strip .due.green::after,.strip .due.yellow::after,.strip .due.red::after{background:var(--panel)}
+.strip .due.late::after{background:var(--off);width:6px;height:6px}
 .strip .now{box-shadow:0 0 0 1.5px var(--ink)}
 .mh{font:600 9px var(--f-mono);color:var(--muted)}.mh span{text-align:center}
 td.upd{width:300px;min-width:220px;font-size:12px;color:var(--muted)}
 td.upd .clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink)}
 td.upd .d{font:11px var(--f-mono)}
-.s-completed{background:var(--on-bg);color:var(--on)}.s-paused{background:var(--pause-bg);color:var(--pause)}
-tr.act.completed .ttl,tr.act.closed .ttl{color:var(--muted)}
+.s-completed{background:var(--comp);color:var(--panel)}.s-paused{background:var(--pause-bg);color:var(--pause)}
+tr.act.completed td{background:var(--comp-row)}tr.act.completed .ttl{color:var(--muted)}tr.act.closed .ttl{color:var(--muted)}
+tr.act.closed td{opacity:.75}
+.tick{color:var(--comp);font-weight:700}
+button.pill{border:0;cursor:pointer;font:inherit;font-size:11px;font-weight:600}button.pill:hover{outline:2px solid var(--accent);outline-offset:1px}
+.filters .fl{display:flex;flex-direction:column;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);gap:2px;min-width:0}
+.msb{font:inherit;font-size:14px;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:5px 24px 5px 8px;text-align:left;max-width:190px;min-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative}
+.msb::after{content:'';position:absolute;right:9px;top:50%;margin-top:-3px;border:4px solid transparent;border-top-color:var(--muted)}
+.msb.on{border-color:var(--accent);background:var(--soft);font-weight:500}
+.pop.ms{grid-template-columns:1fr;max-height:340px;overflow-y:auto;min-width:220px;max-width:min(420px,calc(100vw - 16px))}
+.pop.ms label{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:4px;font-size:13px;color:var(--ink);cursor:pointer}
+.pop.ms label:hover{background:var(--soft)}
+.pop.ms .hd{display:flex;justify-content:space-between;align-items:center}
+.pop .sep{grid-column:1/-1;border-top:1px solid var(--line);margin:2px 0}
 tr.act.closed .ttl{text-decoration:line-through;text-decoration-color:var(--line)}
 tr.act.paused .ttl{font-style:italic}
 .pop{position:absolute;z-index:25;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 20px rgb(0 0 0 / .18);padding:6px;display:grid;grid-template-columns:repeat(2,auto);gap:4px}
@@ -115,7 +129,7 @@ tr.act.paused .ttl{font-style:italic}
 .ro{font-size:12px;color:var(--risk);}
 .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--muted);align-items:center;margin-top:8px}
 .legend .strip{grid-template-columns:15px}
-@media (max-width:640px){.fgrid{grid-template-columns:1fr} input[type=search]{width:100%}.filters label{flex:1 1 40%}}
+@media (max-width:640px){.fgrid{grid-template-columns:1fr} input[type=search]{width:100%}.filters label,.filters .fl{flex:1 1 40%}.msb{max-width:none;width:100%}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -130,13 +144,13 @@ tr.act.paused .ttl{font-style:italic}
 
   <div class="filters" id="filters">
     <label>Search<input type="search" id="f-q" placeholder="Task, note, owner…"></label>
-    <label>Priority<select id="f-pri"></select></label>
-    <label>Objective<select id="f-obj"></select></label>
-    <label>Owner<select id="f-owner"></select></label>
-    <label>Region<select id="f-region"></select></label>
-    <label>Status<select id="f-status"><option value="">All</option><option value="open">Open</option><option value="paused">Paused (parking lot)</option><option value="completed">Completed</option><option value="closed">Closed (won't do)</option></select></label>
+    <div class="fl"><span>Priority</span><button type="button" class="msb" id="f-pri" data-ms="pri" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Objective</span><button type="button" class="msb" id="f-obj" data-ms="obj" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Owner</span><button type="button" class="msb" id="f-owner" data-ms="owner" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Region</span><button type="button" class="msb" id="f-region" data-ms="region" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Status</span><button type="button" class="msb" id="f-status" data-ms="status" aria-haspopup="true">All</button></div>
     <label>Completed in<select id="f-done"><option value="">Any time</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="60">Last 60 days</option><option value="90">Last 90 days</option></select></label>
-    <label>Schedule<select id="f-health"><option value="">All</option><option value="on">On track</option><option value="risk">At risk</option><option value="off">Off track</option><option value="none">Not rated</option><option value="late">Past due</option><option value="moved">Date moved</option></select></label>
+    <div class="fl"><span>Schedule</span><button type="button" class="msb" id="f-health" data-ms="health" aria-haspopup="true">All</button></div>
     <label>Group by<select id="f-group"><option value="tree">Priority &amp; objective</option><option value="owner">Owner</option><option value="region">Region</option><option value="flat">None</option></select></label>
     <label>Sort<select id="f-sort"><option value="order">Plan order</option><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option><option value="done">Recently completed</option></select></label>
     <button class="btn" id="f-clear" type="button">Clear</button>
@@ -146,9 +160,11 @@ tr.act.paused .ttl{font-style:italic}
     <span class="strip"><i class="green"></i></span>On track
     <span class="strip"><i class="yellow"></i></span>At risk
     <span class="strip"><i class="red"></i></span>Off track
-    <span class="strip"><i class="complete"></i></span>Complete
+    <span class="strip"><i class="complete"></i></span>Completed
     <span class="strip"><i class="planned"></i></span>Planned
     <span class="strip"><i class="na"></i></span>Not active
+    <span class="strip"><i class="due"></i></span>Due month (red if past due)
+    <span class="strip"><i class="now"></i></span>This month (open items)
   </div>
 
   <div class="viewbar" id="viewbar"></div>
@@ -178,36 +194,45 @@ const isLate=a=>a.status==='open'&&a.targetDate&&a.targetDate<today();
 const isMoved=a=>(a.dateHistory||[]).length>0&&a.originalDate&&a.targetDate!==a.originalDate;
 const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10)};
 
-const FILTERS=['q','pri','obj','owner','region','status','done','health'];
+const FILTERS=['q','done'];
+const MSK=['pri','obj','owner','region','status','health'];
+const MSL={pri:'Priority',obj:'Objective',owner:'Owner',region:'Region',status:'Status',health:'Schedule'};
+const SEL={};MSK.forEach(k=>SEL[k]=new Set());
+const OPTS={pri:[],obj:[],owner:[],region:[],
+  status:[['open','Open'],['paused','Paused (parking lot)'],['completed','Completed'],['closed',"Closed (won't do)"]],
+  health:[['on','On track'],['risk','At risk'],['off','Off track'],['none','Not rated'],['late','Past due'],['moved','Date moved']]};
+const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
+function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
+function paintMs(){MSK.forEach(k=>{const b=$('#f-'+k);b.textContent=msText(k);b.title=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||'All';b.classList.toggle('on',SEL[k].size>0)})}
 function prefs(){try{return JSON.parse(localStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
-function savePrefs(){try{const o={view};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+function savePrefs(){try{const o={view,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
 
 function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
 function objsOf(pid){return Object.values(S.obj).filter(o=>o.priorityId===pid).sort((a,b)=>a.order-b.order)}
 
-function fillSelect(id,opts,keepAll='All'){const el=$('#f-'+id),v=el.value;el.innerHTML=`<option value="">${keepAll}</option>`+opts.map(([k,l])=>`<option value="${esc(k)}">${esc(l)}</option>`).join('');if([...el.options].some(o=>o.value===v))el.value=v}
+function setOpts(k,opts){OPTS[k]=opts}
 function refreshFilters(){
-  fillSelect('pri',sortedPri().map(p=>[p.id,p.name]));
-  const pv=$('#f-pri').value;
-  fillSelect('obj',sortedPri().filter(p=>!pv||p.id===pv).flatMap(p=>objsOf(p.id).map(o=>[o.id,o.name.length>60?o.name.slice(0,58)+'…':o.name])));
+  setOpts('pri',sortedPri().map(p=>[p.id,p.name]));
+  setOpts('obj',sortedPri().filter(p=>!SEL.pri.size||SEL.pri.has(p.id)).flatMap(p=>objsOf(p.id).map(o=>[o.id,(SEL.pri.size===1?'':p.name.replace('Priority ','P')+' · ')+o.name])));
+  if(Object.keys(S.obj).length){const ok=new Set(OPTS.obj.map(x=>x[0]));SEL.obj.forEach(v=>{if(!ok.has(v))SEL.obj.delete(v)})}
   const own=new Set(),reg=new Set();
   Object.values(S.act).forEach(a=>{split(a.owner).forEach(x=>own.add(x));split(a.region).forEach(x=>reg.add(normR(x)))});
-  fillSelect('owner',[...own].sort().map(x=>[x,x]).concat([['__none','(Unassigned)']]));
-  fillSelect('region',[...reg].sort().map(x=>[x,x]).concat([['__none','(No region)']]));
+  setOpts('owner',[...own].sort().map(x=>[x,x]).concat([['__none','(Unassigned)']]));
+  setOpts('region',[...reg].sort().map(x=>[x,x]).concat([['__none','(No region)']]));
+  paintMs();
 }
 
 /* Dropdown filters define the record set AND the counts at the top. */
 function filtered(){
   const f=k=>$('#f-'+k).value, q=f('q').toLowerCase();
   return Object.values(S.act).filter(a=>{
-    if(f('pri')&&a.priorityId!==f('pri'))return false;
-    if(f('obj')&&a.objectiveId!==f('obj'))return false;
-    if(f('owner')){if(f('owner')==='__none'?split(a.owner).length:!split(a.owner).includes(f('owner')))return false}
-    if(f('region')){const r=split(a.region).map(normR);if(f('region')==='__none'?r.length:!r.includes(f('region')))return false}
-    if(f('status')&&a.status!==f('status'))return false;
+    if(SEL.pri.size&&!SEL.pri.has(a.priorityId))return false;
+    if(SEL.obj.size&&!SEL.obj.has(a.objectiveId))return false;
+    if(SEL.owner.size){const o=split(a.owner);if(![...SEL.owner].some(v=>v==='__none'?!o.length:o.includes(v)))return false}
+    if(SEL.region.size){const r=split(a.region).map(normR);if(![...SEL.region].some(v=>v==='__none'?!r.length:r.includes(v)))return false}
+    if(SEL.status.size&&!SEL.status.has(a.status))return false;
     if(f('done')&&!(a.status==='completed'&&(a.completedAt||'').slice(0,10)>=daysAgo(+f('done'))))return false;
-    const h=f('health');
-    if(h==='late'?!isLate(a):h==='moved'?!isMoved(a):h&&!(a.status==='open'&&a.health===h))return false;
+    if(SEL.health.size&&![...SEL.health].some(h=>h==='late'?isLate(a):h==='moved'?isMoved(a):a.status==='open'&&(a.health||'none')===h))return false;
     if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true});
 }
@@ -229,17 +254,21 @@ function lastNote(a){const n=notesFor(a.id).sort((x,y)=>y.at.localeCompare(x.at)
 
 function kpis(base){
   $('#kpis').innerHTML=Object.entries(VIEWS).map(([key,[l,fn]])=>`<button type="button" class="kpi ${key}" data-k="${key}" aria-pressed="${view===key&&key!==''}" title="${key?'Show only these records. Counts stay the same.':'Show all filtered records'}"><b>${base.filter(fn).length}</b><span>${l}</span></button>`).join('');
-  const act=FILTERS.filter(k=>$('#f-'+k).value).map(k=>{const el=$('#f-'+k);return el.tagName==='SELECT'?el.options[el.selectedIndex].text:`“${el.value}”`});
+  const act=[];if($('#f-q').value)act.push(`Search “${$('#f-q').value}”`);
+  MSK.forEach(k=>{if(SEL[k].size)act.push(`${MSL[k]}: ${OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||SEL[k].size+' selected'}`)});
+  if($('#f-done').value)act.push('Completed in '+$('#f-done').selectedOptions[0].text.toLowerCase());
   $('#viewbar').textContent=(act.length?'Filters: '+act.join(' · '):'No filters applied')+(view?`. Showing ${VIEWS[view][0]} only (click the tile again to show all).`:'');
 }
 
 const NOWM=new Date().getFullYear()===2026?new Date().getMonth():-1;
-function strip(a){return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${a.months?.[m]||''}${i===NOWM?' now':''}" data-cell="${a.id}" data-m="${m}" aria-label="${m}: ${CODES[a.months?.[m]||'']}" title="${m}: ${CODES[a.months?.[m]||'']}"></button>`).join('')}</span>`}
-function statusPill(a){return a.status==='open'?`<span class="pill h-${a.health||'none'}">${HL[a.health||'none']}</span>`:`<span class="pill s-${a.status}">${a.status==='closed'?'Closed':STAT[a.status]||a.status}</span>`}
+function strip(a){const open=a.status==='open',due=open&&/^2026-/.test(a.targetDate||'')?+a.targetDate.slice(5,7)-1:-1,late=isLate(a);
+  return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${a.months?.[m]||''}${open&&i===NOWM?' now':''}${i===due?' due'+(late?' late':''):''}" data-cell="${a.id}" data-m="${m}" aria-label="${m}: ${CODES[a.months?.[m]||'']}${i===due?' · due':''}" title="${m}: ${CODES[a.months?.[m]||'']}${i===due?(late?' · due (past due)':' · due this month'):''}"></button>`).join('')}</span>`}
+function statusPill(a){const lbl=a.status==='open'?HL[a.health||'none']:a.status==='completed'?'✓ Completed':a.status==='closed'?'Closed':STAT[a.status]||a.status;
+  return `<button type="button" class="pill ${a.status==='open'?'h-'+(a.health||'none'):'s-'+a.status}" data-stat="${a.id}" title="Change status" aria-haspopup="true">${lbl}</button>`}
 function row(a,ctx){
   const ln=lastNote(a);
   return `<tr class="act ${a.status}" data-id="${a.id}" tabindex="0">
-   <td class="ttl"><div>${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}</td>
+   <td class="ttl"><div>${a.status==='completed'?'<span class="tick" aria-label="Completed">✓</span> ':''}${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}</td>
    <td>${esc(a.owner)||'<span class="ctx">—</span>'}</td>
    <td>${esc(a.region)||'<span class="ctx">—</span>'}</td>
    <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}${a.status==='completed'&&a.completedAt?`<div class="ctx">Done ${fmt(a.completedAt.slice(0,10))}</div>`:''}</td>
@@ -248,7 +277,7 @@ function row(a,ctx){
    <td class="upd">${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
 const THEAD=`<thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
-  return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--done)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
+  return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--comp)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
 
 function render(){
   const base=filtered();
@@ -256,13 +285,13 @@ function render(){
   const list=base.filter(VIEWS[view][1]).sort(sorter()),g=$('#f-group').value,main=$('#main');
   kpis(base);
   if(!Object.keys(S.pri).length){main.innerHTML=`<div class="empty">No priorities yet.${canWrite?' <button class="btn primary" data-add="pri">Add a priority</button>':''}</div>`;return}
-  const filtersOn=FILTERS.some(k=>$('#f-'+k).value)||view;
+  const filtersOn=anyFilter()||view;
   const cnt=l=>`${l.filter(a=>a.status==='open').length} open · ${l.filter(a=>a.status==='paused').length} paused · ${l.length} total`;
   let h='';
   if(g==='tree'){
     for(const p of sortedPri()){
-      if($('#f-pri').value&&p.id!==$('#f-pri').value)continue;
-      const objs=objsOf(p.id).filter(o=>!$('#f-obj').value||o.id===$('#f-obj').value);
+      if(SEL.pri.size&&!SEL.pri.has(p.id))continue;
+      const objs=objsOf(p.id).filter(o=>!SEL.obj.size||SEL.obj.has(o.id));
       const pl=list.filter(a=>a.priorityId===p.id);
       if(filtersOn&&!pl.length)continue;
       h+=`<section><div class="band"><h2>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span><span class="counts">${cnt(pl)}</span><button class="btn ghost" data-open="${p.id}">Notes (${(p.history||[]).length+notesFor(p.id).length})</button></div><div class="pri">`;
@@ -291,17 +320,37 @@ function render(){
 
 /* ---------- month color picker ---------- */
 let popFor=null;
-function closePop(){document.querySelector('.pop')?.remove();popFor=null}
+function closePop(){document.querySelectorAll('.pop').forEach(e=>e.remove());popFor=null}
+function placePop(el,btn,above){
+  const r=btn.getBoundingClientRect(),w=el.offsetWidth,hgt=el.offsetHeight;
+  let left=above?r.left+window.scrollX+r.width/2-w/2:r.left+window.scrollX;left=Math.max(8,Math.min(left,document.documentElement.clientWidth-w-8));
+  let top=above?r.top+window.scrollY-hgt-6:r.bottom+window.scrollY+4;if(above&&r.top-hgt-6<0)top=r.bottom+window.scrollY+6;
+  el.style.left=left+'px';el.style.top=top+'px'}
+function openMs(btn){
+  const k=btn.dataset.ms;closePop();popFor={kind:'ms',k};
+  const el=document.createElement('div');el.className='pop ms';
+  el.innerHTML=`<div class="hd"><span>${MSL[k]}: pick any</span><button type="button" class="btn ghost" data-msclear="${k}">Clear</button></div>`+
+    (OPTS[k].map(([v,l])=>`<label><input type="checkbox" data-msk="${k}" value="${esc(v)}" ${SEL[k].has(v)?'checked':''}>${esc(l)}</label>`).join('')||'<div class="hd">Nothing to pick yet.</div>');
+  document.body.appendChild(el);placePop(el,btn,false);el.querySelector('input')?.focus()}
+function openStat(btn){
+  closePop();if(!canWrite){toast('View only: you can’t change status.');return}
+  const a=S.act[btn.dataset.stat];popFor={kind:'stat',id:a.id};
+  const el=document.createElement('div');el.className='pop';el.setAttribute('role','menu');
+  el.innerHTML=`<div class="hd">Status</div>`+Object.entries(STAT).map(([k,l])=>`<button type="button" role="menuitem" data-setstat="${k}" class="${a.status===k?'sel':''}"><span class="pill ${k==='open'?'s-open':'s-'+k}">${k==='completed'?'✓ ':''}${esc(l)}</span></button>`).join('')+
+    (a.status==='open'?`<div class="sep"></div><div class="hd">Schedule</div>`+Object.entries(HL).map(([k,l])=>`<button type="button" role="menuitem" data-sethealth="${k}" class="${(a.health||'none')===k?'sel':''}"><span class="pill h-${k}">${l}</span></button>`).join(''):'');
+  document.body.appendChild(el);placePop(el,btn,true);(el.querySelector('button.sel')||el.querySelector('button'))?.focus()}
+async function setStatus(a,v){
+  if(a.status===v)return;const patch={status:v,...stamp()};
+  if(v==='completed'){patch.completedAt=new Date().toISOString();if(NOWM>=0)patch.months={...(a.months||{}),[M[NOWM]]:'complete'}}
+  else patch.completedAt='';
+  await write('actions',a.id,patch,`Marked ${STAT[v]}`)}
 function openPop(btn){
   closePop();if(!canWrite){toast('View only: you can’t change month status.');return}
-  const a=S.act[btn.dataset.cell],m=btn.dataset.m,cur=a.months?.[m]||'';popFor={id:a.id,m};
+  const a=S.act[btn.dataset.cell],m=btn.dataset.m,cur=a.months?.[m]||'';popFor={kind:'cell',id:a.id,m};
   const el=document.createElement('div');el.className='pop';el.setAttribute('role','menu');
   el.innerHTML=`<div class="hd">${m} · ${esc(a.title.slice(0,40))}</div>`+Object.entries(CODES).map(([k,l])=>`<button type="button" role="menuitem" data-code="${k}" class="${k===cur?'sel':''}"><span class="strip"><i class="${k}"></i></span>${k?l:'Clear'}</button>`).join('');
   document.body.appendChild(el);
-  const r=btn.getBoundingClientRect(),w=el.offsetWidth,hgt=el.offsetHeight;
-  let left=r.left+window.scrollX+r.width/2-w/2;left=Math.max(8,Math.min(left,document.documentElement.clientWidth-w-8));
-  let top=r.top+window.scrollY-hgt-6;if(r.top-hgt-6<0)top=r.bottom+window.scrollY+6;
-  el.style.left=left+'px';el.style.top=top+'px';
+  placePop(el,btn,true);
   (el.querySelector('button.sel')||el.querySelector('button'))?.focus();
 }
 async function pickCode(code){
@@ -376,10 +425,7 @@ async function onField(e){
     const map={'d-title':'title','d-owner':'owner','d-region':'region','d-status':'status','d-health':'health','d-goal':'targetGoal','d-group':'group','d-orig':'originalDate'};
     if(map[t.id]){const v=t.value.trim();if(v===(a[map[t.id]]||''))return;
       const patch={[map[t.id]]:v,...stamp()};
-      if(t.id==='d-status'){
-        if(v==='completed'){patch.completedAt=new Date().toISOString();if(NOWM>=0)patch.months={...(a.months||{}),[M[NOWM]]:'complete'}}
-        else patch.completedAt='';
-        await write('actions',a.id,patch,`Marked ${STAT[v]}`);return}
+      if(t.id==='d-status'){await setStatus(a,v);return}
       await write('actions',a.id,patch,'Saved');return}
     if(t.id==='d-obj'&&t.value!==a.objectiveId){await write('actions',a.id,{objectiveId:t.value,priorityId:S.obj[t.value].priorityId,...stamp()},'Moved to objective');return}
     if(t.id==='d-date'&&t.value!==a.targetDate){
@@ -415,9 +461,15 @@ async function addItem(b){
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
-  const cell=e.target.closest('[data-cell]'),code=e.target.closest('.pop [data-code]');
+  const cell=e.target.closest('[data-cell]'),code=e.target.closest('.pop [data-code]'),st=e.target.closest('[data-stat]'),ms=e.target.closest('[data-ms]');
+  const ss=e.target.closest('.pop [data-setstat]'),sh=e.target.closest('.pop [data-sethealth]'),mc=e.target.closest('.pop [data-msclear]');
   if(code){e.stopPropagation();return pickCode(code.dataset.code)}
-  if(cell){e.stopPropagation();return popFor&&popFor.id===cell.dataset.cell&&popFor.m===cell.dataset.m?closePop():openPop(cell)}
+  if(ss){e.stopPropagation();const a=S.act[popFor?.id];closePop();return a&&setStatus(a,ss.dataset.setstat)}
+  if(sh){e.stopPropagation();const a=S.act[popFor?.id];closePop();return a&&a.health!==sh.dataset.sethealth&&write('actions',a.id,{health:sh.dataset.sethealth,...stamp()},'Schedule set to '+HL[sh.dataset.sethealth])}
+  if(mc){const k=mc.dataset.msclear;SEL[k].clear();document.querySelectorAll('.pop [data-msk]').forEach(i=>i.checked=false);if(k==='pri')refreshFilters();paintMs();savePrefs();return render()}
+  if(cell){e.stopPropagation();return popFor?.kind==='cell'&&popFor.id===cell.dataset.cell&&popFor.m===cell.dataset.m?closePop():openPop(cell)}
+  if(st){e.stopPropagation();return popFor?.kind==='stat'&&popFor.id===st.dataset.stat?closePop():openStat(st)}
+  if(ms){return popFor?.kind==='ms'&&popFor.k===ms.dataset.ms?closePop():openMs(ms)}
   if(!e.target.closest('.pop'))closePop();
   const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
   if(t.matches('[data-close]'))return closeDrawer();
@@ -427,20 +479,22 @@ document.addEventListener('click',e=>{
   if(t.id==='d-addnote')return addNote();
   if(t.id==='d-del')return delItem(t);
   if(t.matches('[data-delnote]'))return db.collection('notes').doc(t.dataset.delnote).delete().catch(()=>toast('Could not remove.'));
-  if(t.id==='f-clear'){FILTERS.forEach(k=>$('#f-'+k).value='');view='';refreshFilters();savePrefs();return render()}
+  if(t.id==='f-clear'){FILTERS.forEach(k=>$('#f-'+k).value='');MSK.forEach(k=>SEL[k].clear());view='';closePop();refreshFilters();savePrefs();return render()}
   if(t.matches('[data-k]')){const k=t.dataset.k;view=view===k?'':k;savePrefs();render()}
 });
 window.addEventListener('resize',closePop);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&popFor){closePop();return}if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id)});
 $('#drawer-root').addEventListener('change',onField);
-$('#filters').addEventListener('input',e=>{if(e.target.id==='f-pri')refreshFilters();savePrefs();render()});
+$('#filters').addEventListener('input',()=>{savePrefs();render()});
+document.addEventListener('change',e=>{const i=e.target.closest('[data-msk]');if(!i)return;const k=i.dataset.msk;
+  i.checked?SEL[k].add(i.value):SEL[k].delete(i.value);if(k==='pri')refreshFilters();paintMs();savePrefs();render()});
 
 /* ---------- boot ---------- */
-(function(){const p=prefs();refreshFilters();view=p.view||'';for(const k in p){const el=$('#f-'+k);if(el){el.value=p[k]}}})();
+(function(){const p=prefs();view=p.view||'';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
 let loaded={pri:false,obj:false,act:false};
 function sub(col,key){
   db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>S[key][d.id]={id:d.id,...d.data()});loaded[key]=true;
-    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Live · changes sync for everyone';const p=prefs();refreshFilters();['pri','obj','owner','region'].forEach(k=>{if(p[k]&&[...$('#f-'+k).options].some(o=>o.value===p[k]))$('#f-'+k).value=p[k]});render()}},
+    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Live · changes sync for everyone';refreshFilters();render()}},
     err=>{$('#conn').textContent='Connection lost. Reload the page to reconnect.'})}
 (async()=>{
   const [d,u]=await Promise.all([window.claude?.use('db'),window.claude?.use('user')].map(p=>Promise.resolve(p).catch(()=>null)));
