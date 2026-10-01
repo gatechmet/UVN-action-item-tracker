@@ -230,15 +230,15 @@ table.itab td.chk{font-size:12px;padding:4px 8px;line-height:1.3}
 
   <section class="intake" id="intake" aria-labelledby="i-title">
     <h2 id="i-title">Add actions in bulk</h2>
-    <p>Copy rows from Excel and paste them into the first cell. Columns go in this order: action, owner, region, target date, priority #, objective #. The objective # can be the full number, like 1.3, or just the objective number within the priority. Every row is checked before anything is added.</p>
+    <p>Copy rows from Excel and paste them into the first cell. Columns go in this order: action, owner, region, target date, objective #. The objective # includes its priority, so 1.3 means priority 1, objective 3. Every row is checked before anything is added.</p>
     <div class="itools">
       <button type="button" class="btn" id="i-newpri">+ New priority</button>
       <select id="i-objpri" aria-label="Priority for the new objective"></select>
       <button type="button" class="btn" id="i-newobj">+ New objective</button>
     </div>
     <div class="tblwrap"><table class="itab">
-      <colgroup><col style="width:38px"><col><col style="width:150px"><col style="width:120px"><col style="width:120px"><col style="width:90px"><col style="width:100px"><col style="width:230px"></colgroup>
-      <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Region</th><th>Target date</th><th>Priority #</th><th>Objective #</th><th>Check</th></tr></thead>
+      <colgroup><col style="width:38px"><col><col style="width:150px"><col style="width:120px"><col style="width:120px"><col style="width:100px"><col style="width:260px"></colgroup>
+      <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Region</th><th>Target date</th><th>Objective #</th><th>Check</th></tr></thead>
       <tbody id="i-body"></tbody>
     </table></div>
     <div class="iactions">
@@ -590,14 +590,14 @@ async function addItem(b){
   catch{toast('Could not add. Check your access.')}}
 
 /* ---------- bulk intake ---------- */
-const ICOLS=['t','o','r','d','p','ob'];
+const ICOLS=['t','o','r','d','ob'];
 let irows=[];
-const blankRow=()=>({t:'',o:'',r:'',d:'',p:'',ob:'',st:'',msg:''});
+const blankRow=()=>({t:'',o:'',r:'',d:'',ob:'',st:'',msg:''});
 function loadDraft(){try{irows=JSON.parse(sessionStorage.getItem('uvnn-intake')||'[]')}catch{irows=[]}if(!Array.isArray(irows))irows=[];while(irows.length<8)irows.push(blankRow())}
 function saveDraft(){try{sessionStorage.setItem('uvnn-intake',JSON.stringify(irows))}catch{}}
 const rowFilled=r=>ICOLS.some(k=>String(r[k]||'').trim());
 function renderIntake(){
-  $('#i-body').innerHTML=irows.map((r,i)=>`<tr class="${r.st}"><td class="rn">${i+1}</td>${ICOLS.map((k,c)=>`<td><input id="i-${i}-${k}" data-ir="${i}" data-ic="${c}" value="${esc(r[k])}" aria-label="Row ${i+1} ${['action','owner','region','target date','priority number','objective number'][c]}" ${k==='d'?'placeholder="m/d/yyyy"':''}${k==='p'?'placeholder="1"':''}${k==='ob'?'placeholder="1.3"':''}></td>`).join('')}<td class="chk">${esc(r.msg)}</td></tr>`).join('')}
+  $('#i-body').innerHTML=irows.map((r,i)=>`<tr class="${r.st}"><td class="rn">${i+1}</td>${ICOLS.map((k,c)=>`<td><input id="i-${i}-${k}" data-ir="${i}" data-ic="${c}" value="${esc(r[k])}" aria-label="Row ${i+1} ${['action','owner','region','target date','objective number'][c]}" ${k==='d'?'placeholder="m/d/yyyy"':''}${k==='ob'?'placeholder="1.3"':''}></td>`).join('')}<td class="chk">${esc(r.msg)}</td></tr>`).join('')}
 function renderIntakeKey(){
   $('#i-objpri').innerHTML=sortedPri().map(p=>`<option value="${p.id}">P${pNum(p)} ${esc(p.name)}</option>`).join('');
   $('#i-key').innerHTML=sortedPri().map(p=>`<li class="p">P${pNum(p)} · ${esc(p.name)}</li>`+objsOf(p.id).map(o=>`<li><b>${oNum(o)}</b> ${esc(o.name)}</li>`).join('')).join('');
@@ -610,19 +610,12 @@ function parseDate(v){v=String(v||'').trim();if(!v)return {ok:true,val:''};
   y=+y;mo=+mo;d=+d;const t=new Date(y,mo-1,d);if(t.getMonth()!==mo-1||t.getDate()!==d||y<2000||y>2100)return {ok:false};
   return {ok:true,val:`${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`}}
 function resolveRow(r){
-  const errs=[];const pris=sortedPri();
+  const errs=[];const on=String(r.ob).trim();let o=null;
   if(!String(r.t).trim())errs.push('Action name is missing');
-  const pn=String(r.p).trim().replace(/^p(riority)?\s*/i,''),on=String(r.ob).trim();
-  let pi=pn?parseInt(pn,10):NaN,oi=NaN;
-  if(/^\d+\.\d+$/.test(on)){const [a,b]=on.split('.').map(Number);if(pn&&a!==pi)errs.push(`Objective ${on} isn't under priority ${pn}`);pi=a;oi=b}
-  else if(/^\d+$/.test(on))oi=+on;
-  else if(on)errs.push(`Objective # "${on}" isn't a number like 1.3`);
+  const m=on.match(/^p?(\d+)\.(\d+)$/i);
   if(!on)errs.push('Objective # is missing');
-  if(!pn&&!/^\d+\.\d+$/.test(on))errs.push('Priority # is missing');
-  else if(pn&&!/^\d+$/.test(pn))errs.push(`Priority # "${r.p}" isn't a number`);
-  const p=pris[pi-1];let o=null;
-  if(!errs.length&&!p)errs.push(`No priority P${pi}`);
-  if(!errs.length){o=objsOf(p.id)[oi-1];if(!o)errs.push(`No objective ${pi}.${oi}`)}
+  else if(!m)errs.push(`Objective # "${on}" should look like 1.3`);
+  else{const p=sortedPri()[+m[1]-1];if(!p)errs.push(`No priority ${m[1]}`);else{o=objsOf(p.id)[+m[2]-1];if(!o)errs.push(`No objective ${m[1]}.${m[2]}`)}}
   const d=parseDate(r.d);if(!d.ok)errs.push(`Date "${r.d}" isn't a date`);
   return {errs,o,date:d.val}}
 async function submitIntake(){
