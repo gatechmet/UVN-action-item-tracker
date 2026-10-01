@@ -303,8 +303,70 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
   const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('fs-tracker',2);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('h'))r.result.createObjectStore('h')};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
   async function saveHandle(h){try{const d=await idb();d.transaction('h','readwrite').objectStore('h').put(h,'folder-v2')}catch{}}
   async function loadHandle(){try{const d=await idb();return await new Promise(res=>{const q=d.transaction('h').objectStore('h').get('folder-v2');q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}catch{return null}}
+
+  /* ---------- splash screen: shown until a folder is connected ---------- */
+  const SP_LINK='https://thermofisher.sharepoint.com/:f:/s/UVNN838/IgDmdYwOVqnOQJ-ogdw80wNAAUEdyOREptgQAojpNCo-aec?e=VFnGum';
+  const splash=document.createElement('div');splash.id='fs-splash';splash.setAttribute('role','dialog');splash.setAttribute('aria-modal','true');splash.setAttribute('aria-labelledby','sp-h');
+  splash.innerHTML=`<style>
+  #fs-splash{position:fixed;inset:0;z-index:60;background:var(--bg,#f3f5f7);overflow-y:auto;padding:32px 16px;font:14px/1.5 var(--f-body,system-ui,sans-serif);color:var(--ink,#15202b)}
+  #fs-splash .card{max-width:720px;margin:0 auto;background:var(--panel,#fff);border:1px solid var(--line,#d9dfe5);border-radius:8px;padding:28px;display:grid;gap:18px}
+  #fs-splash h1{font:700 26px var(--f-disp,system-ui,sans-serif);margin:0}
+  #fs-splash .lead{color:var(--muted,#5b6875);margin:0}
+  #fs-splash ol{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:s}
+  #fs-splash li{display:grid;grid-template-columns:32px 1fr;gap:12px;counter-increment:s}
+  #fs-splash li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);font:700 14px var(--f-mono,monospace)}
+  #fs-splash li b{display:block;margin-bottom:2px}
+  #fs-splash .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;align-items:center}
+  #fs-splash input{flex:1 1 320px;min-width:0;font:13px var(--f-mono,monospace);padding:7px 9px;border:1px solid var(--line,#d9dfe5);border-radius:4px;background:var(--panel,#fff);color:var(--ink,#15202b)}
+  #fs-splash button,#fs-splash a.btn{font:inherit;cursor:pointer;border-radius:4px;padding:7px 12px;border:1px solid var(--line,#d9dfe5);background:var(--panel,#fff);color:var(--ink,#15202b);text-decoration:none;display:inline-block}
+  #fs-splash .big{width:100%;padding:16px;font:700 18px var(--f-disp,system-ui,sans-serif);background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);border-color:transparent;border-radius:6px}
+  #fs-splash .note{font-size:12px;color:var(--muted,#5b6875)}
+  #fs-splash .msg{font-weight:600;color:var(--off,#c0392b)}
+  #fs-splash :focus-visible{outline:2px solid var(--accent,#1f5f8b);outline-offset:2px}
+  </style>
+  <div class="card">
+    <h1 id="sp-h">Connect to the UVNN tracker folder</h1>
+    <p class="lead">The tracker keeps its data in a shared team folder. Connect to it once and the tracker opens with everyone’s latest updates.</p>
+    <ol>
+      <li><div><b>Open the team folder in SharePoint</b>
+        <div class="row"><a class="btn" id="sp-open" href="${SP_LINK}" target="_blank" rel="noopener">Open SharePoint folder</a><button type="button" id="sp-copylink">Copy link</button></div></div></li>
+      <li><div><b>Sync it to your computer (first time only)</b>
+        In SharePoint, click <b style="display:inline">Sync</b> or <b style="display:inline">Add shortcut to My files</b> in the toolbar. The folder then shows up in File Explorer under Thermo Fisher Scientific or OneDrive.</div></li>
+      <li><div><b>Copy the folder’s path</b>
+        In File Explorer, open the synced tracker folder, click the address bar, and copy the path. Paste it here so it’s saved for next time.
+        <div class="row"><input id="sp-path" placeholder="C:\\Users\\you\\Thermo Fisher Scientific\\…\\UVNN-Tracker" aria-label="Folder path" spellcheck="false"><button type="button" id="sp-copypath">Copy path</button></div>
+        <div class="note">You’ll paste this into the address bar of the window that opens in the next step.</div></div></li>
+      <li><div><b>Connect</b>
+        Click the button, paste the path into the address bar at the top of the window, press Enter, then click <b style="display:inline">Select folder</b> and <b style="display:inline">Edit files</b>.</div></li>
+    </ol>
+    <button type="button" class="big" id="sp-connect">Click here to connect folder</button>
+    <button type="button" id="sp-reconnect" hidden></button>
+    <div class="msg" id="sp-msg" role="status"></div>
+    <p class="note">Tip: when the browser asks for permission, choose “Allow on every visit” if it’s offered. The tracker then connects by itself next time.</p>
+  </div>`;
+  document.body.appendChild(splash);
+  const spMsg=t=>{$('sp-msg').textContent=t||''};
+  const showSplash=()=>{splash.hidden=false};const hideSplash=()=>{splash.hidden=true};
+  if(!supported){splash.querySelector('.card').innerHTML='<h1>Open this file in Edge or Chrome</h1><p class="lead">This browser can’t connect to folders. Right-click the file and choose Open with &gt; Microsoft Edge.</p>'}
+  try{$('sp-path').value=localStorage.getItem('fs-path')||''}catch{}
+  $('sp-path').addEventListener('change',e=>{try{localStorage.setItem('fs-path',e.target.value.trim())}catch{}});
+  async function copyText(t,inputEl,btn){
+    try{await navigator.clipboard.writeText(t);const o=btn.textContent;btn.textContent='Copied';setTimeout(()=>btn.textContent=o,1500)}
+    catch{if(inputEl){inputEl.focus();inputEl.select()}spMsg('Press Ctrl+C to copy.')}}
+  $('sp-copylink').addEventListener('click',e=>copyText(SP_LINK,null,e.currentTarget));
+  $('sp-copypath').addEventListener('click',e=>{const v=$('sp-path').value.trim();if(!v){spMsg('Paste the folder path into the box first.');$('sp-path').focus();return}try{localStorage.setItem('fs-path',v)}catch{}copyText(v,$('sp-path'),e.currentTarget)});
+
   let saved=null;
-  (async()=>{saved=await loadHandle();if(saved&&supported){$('fs-reconnect').textContent=`Reconnect to “${saved.name}”`;$('fs-reconnect').hidden=false}})();
+  (async()=>{
+    saved=await loadHandle();
+    if(saved&&supported){
+      $('fs-reconnect').textContent=`Reconnect to “${saved.name}”`;$('fs-reconnect').hidden=false;
+      $('sp-reconnect').textContent=`Reconnect to “${saved.name}” (last used)`;$('sp-reconnect').hidden=false;
+      /* lasting access ("Allow on every visit") needs no click */
+      try{if((await saved.queryPermission({mode:'readwrite'}))==='granted'){await useFolder(saved);return}}catch{}
+    }
+    showSplash();
+  })();
 
   /* Work out which folder holds the record files. */
   async function hasRecords(dir){try{for await (const [n,h] of dir.entries()){if(h.kind==='file'&&/__.+\.json$/.test(n))return true}}catch{}return false}
@@ -324,7 +386,7 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
     const n=COLS.reduce((k,c)=>k+cache[c].size,0);
     $('fs-seed').hidden=n>0;$('fs-reconnect').hidden=true;$('fs-pick').textContent='Choose a different folder…';$('fs-pick').className='';
     st(n?`Connected to “${label}” · ${n} records. Changes save to this folder, and other people’s edits appear within a few seconds.`:`Connected to “${label}”, but it has no tracker records. Pick a different folder, or click “Load starting data”.`,n?'ok':'warn');
-    readyResolve(true);
+    hideSplash();readyResolve(true);
     clearInterval(timer);timer=setInterval(()=>poll(false).catch(()=>st('Lost contact with the folder. Check the network drive, then choose the folder again.','warn')),POLL_MS);
   }
   function explain(e){
@@ -332,12 +394,18 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
     if(n==='AbortError')return null;
     if(n==='NotAllowedError'||n==='SecurityError')return 'The browser didn’t allow access to that folder. Choose it again and click “Edit files” or “Allow”. If that keeps failing, your company may block web pages from using network drives.';
     return `Couldn’t open that folder (${n||'error'}: ${e?.message||e}). Try choosing it again, or copy the folder to your computer to check the page works.`}
-  $('fs-pick').addEventListener('click',async()=>{
-    try{const picked=await window.showDirectoryPicker({id:'uvnn-tracker-v2',mode:'readwrite'});await saveHandle(picked);await useFolder(picked)}
-    catch(e){const m=explain(e);if(m)st(m,'warn')}});
-  $('fs-reconnect').addEventListener('click',async()=>{
-    try{if(!saved)return;const p=await saved.requestPermission({mode:'readwrite'});if(p!=='granted'){st('Permission wasn’t granted. Use “Choose data folder…” instead.','warn');return}await useFolder(saved)}
-    catch(e){const m=explain(e);if(m)st(m+' You can also use “Choose data folder…”.','warn')}});
+  const fail=m=>{if(!m)return;st(m,'warn');if(!splash.hidden)spMsg(m)};
+  async function pick(){
+    spMsg('');const path=$('sp-path').value.trim();
+    if(path){try{localStorage.setItem('fs-path',path);await navigator.clipboard.writeText(path)}catch{}}
+    try{const picked=await window.showDirectoryPicker({id:'uvnn-tracker-v2',mode:'readwrite'});await saveHandle(picked);saved=picked;await useFolder(picked)}
+    catch(e){fail(explain(e))}}
+  async function reconnect(){
+    spMsg('');
+    try{if(!saved)return;const p=await saved.requestPermission({mode:'readwrite'});if(p!=='granted'){fail('Permission wasn’t granted. Use “Click here to connect folder” instead.');return}await useFolder(saved)}
+    catch(e){fail(explain(e))}}
+  $('fs-pick').addEventListener('click',pick);$('sp-connect').addEventListener('click',pick);
+  $('fs-reconnect').addEventListener('click',reconnect);$('sp-reconnect').addEventListener('click',reconnect);
   $('fs-seed').addEventListener('click',async()=>{
     const seed=window.SEED||{};const total=COLS.reduce((n,c)=>n+Object.keys(seed[c]||{}).length,0);let done=0;
     $('fs-seed').disabled=true;
@@ -347,12 +415,14 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
 
   /* ---------- file I/O: one flat folder, files named <collection>__<id>.json ---------- */
   const fname=(c,id)=>`${c}__${id}.json`;
+  /* real ids are letters and digits (old objective ids look like P1-O3); anything else is a sync conflict copy */
+  const validId=(c,id)=>/^[A-Za-z0-9]+$/.test(id)||(c==='objectives'&&/^P\d+-O\d+$/.test(id));
   async function scan(){
     const seen={};COLS.forEach(c=>seen[c]=new Set());const changed=new Set();
     for await (const [name,h] of dataDir.entries()){
       if(h.kind!=='file'||!name.endsWith('.json'))continue;
       const k=name.indexOf('__');if(k<0)continue;
-      const c=name.slice(0,k),id=name.slice(k+2,-5);if(!cache[c]||!id)continue;seen[c].add(id);
+      const c=name.slice(0,k),id=name.slice(k+2,-5);if(!cache[c]||!validId(c,id))continue;seen[c].add(id);
       const f=await h.getFile();const prev=cache[c].get(id);
       if(prev&&prev.mod===f.lastModified&&prev.size===f.size)continue;
       try{const data=JSON.parse(await f.text());cache[c].set(id,{mod:f.lastModified,size:f.size,data});changed.add(c)}catch{/* half-written file: try next round */}
