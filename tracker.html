@@ -54,6 +54,30 @@ button{font:inherit;cursor:pointer}
 .objhead h3{font-size:15px;font-weight:600;flex:1 1 260px;min-width:0}
 .bar{display:flex;height:6px;width:120px;border-radius:3px;overflow:hidden;background:var(--line)}
 .bar i{display:block}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 14px;font:600 14px var(--f-disp);color:var(--muted);letter-spacing:.02em}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:hover{color:var(--ink)}
+.dash{display:grid;gap:18px;margin-top:16px}
+.dcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.dcard .band{margin-top:0;border-radius:0}
+.dsum{padding:14px;display:grid;gap:12px;border-bottom:1px solid var(--line)}
+.bar.big{width:100%;height:14px;border-radius:4px}
+.mets{display:flex;flex-wrap:wrap;gap:8px 28px}
+.met b{display:block;font:600 22px var(--f-mono);font-variant-numeric:tabular-nums;line-height:1.1}
+.met span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.met.comp b{color:var(--comp)}.met.risk b{color:var(--risk)}.met.off b{color:var(--off)}.met.late b{color:var(--off)}.met.pause b{color:var(--pause)}
+table.otab{min-width:820px}
+table.otab td,table.otab th{padding:8px 10px}
+table.otab td.n{font:500 14px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+table.otab th.n{text-align:right}
+table.otab td.n.z{color:var(--line)}
+table.otab td.n.risk:not(.z){color:var(--risk)}table.otab td.n.off:not(.z),table.otab td.n.late:not(.z){color:var(--off)}table.otab td.n.comp:not(.z){color:var(--comp)}table.otab td.n.pause:not(.z){color:var(--pause)}
+table.otab tbody tr{cursor:pointer}table.otab tbody tr:hover td{background:var(--soft)}
+table.otab .bar{width:100%;height:10px}
+.pct{font:12px var(--f-mono);color:var(--muted)}
+.dkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);align-items:center;margin-top:10px}
+.dkey i{display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 .counts{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
 .tblwrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:1180px;table-layout:fixed}
@@ -149,6 +173,10 @@ tr.act.paused .ttl{font-style:italic}
     <div class="kpis" id="kpis"></div>
   </header>
 
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button type="button" role="tab" data-tab="tracker" id="tab-tracker">Tracker</button>
+    <button type="button" role="tab" data-tab="dash" id="tab-dash">Dashboard</button>
+  </nav>
   <div class="filters" id="filters">
     <label>Search<input type="search" id="f-q" placeholder="Task, note, owner…"></label>
     <div class="fl"><span>Priority</span><button type="button" class="msb" id="f-pri" data-ms="pri" aria-haspopup="true">All</button></div>
@@ -162,7 +190,7 @@ tr.act.paused .ttl{font-style:italic}
     <label>Sort<select id="f-sort"><option value="order">Plan order</option><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option><option value="done">Recently completed</option></select></label>
     <button class="btn" id="f-clear" type="button">Clear</button>
   </div>
-  <div class="legend">
+  <div class="legend" id="legend">
     <span>Month strip:</span>
     <span class="strip"><i class="green"></i></span>On track
     <span class="strip"><i class="yellow"></i></span>At risk
@@ -189,7 +217,7 @@ const CODES={'':'—',green:'On track',yellow:'At risk',red:'Off track',complete
 const STAT={open:'Open',paused:'Paused',completed:'Completed',closed:"Closed (won't do)"};
 const HCODE={green:'on',yellow:'risk',red:'off'};
 const S={pri:{},obj:{},act:{},notes:{}};
-let db=null,user=null,uid=null,canWrite=true,names={},openId=null,view='';
+let db=null,user=null,uid=null,canWrite=true,names={},openId=null,view='',tab='tracker';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today=()=>new Date().toISOString().slice(0,10);
@@ -214,7 +242,7 @@ const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
 function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
 function paintMs(){MSK.forEach(k=>{const b=$('#f-'+k);b.textContent=msText(k);b.title=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||'All';b.classList.toggle('on',SEL[k].size>0)})}
 function prefs(){try{return JSON.parse(localStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
-function savePrefs(){try{const o={view,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+function savePrefs(){try{const o={view,tab,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
 
 function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
 function objsOf(pid){return Object.values(S.obj).filter(o=>o.priorityId===pid).sort((a,b)=>a.order-b.order)}
@@ -294,11 +322,49 @@ const THEAD=()=>`<colgroup><col><col class="c-own"><col class="c-reg"><col class
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
   return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--comp)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
 
+const DSEG=[['comp','Completed',a=>a.status==='completed','var(--comp)'],['on','On track',a=>a.status==='open'&&a.health==='on','var(--on)'],
+  ['risk','At risk',a=>a.status==='open'&&a.health==='risk','var(--risk)'],['off','Off track',a=>a.status==='open'&&a.health==='off','var(--off)'],
+  ['nr','Open, not rated',a=>a.status==='open'&&(a.health||'none')==='none','var(--plan)'],['pause','Paused',a=>a.status==='paused','var(--pause)']];
+function bigBar(list,cls=''){const live=list.filter(a=>a.status!=='closed'),n=live.length||1;
+  return `<span class="bar ${cls}" role="img" aria-label="${DSEG.map(([,l,f])=>l+' '+live.filter(f).length).join(', ')}">${DSEG.map(([k,l,f,c])=>{const v=live.filter(f).length;return v?`<i style="width:${v/n*100}%;background:${c}" title="${l}: ${v}"></i>`:''}).join('')}</span>`}
+function stats(l){const live=l.filter(a=>a.status!=='closed'),comp=l.filter(a=>a.status==='completed').length;
+  return {open:l.filter(a=>a.status==='open').length,comp,risk:l.filter(a=>a.status==='open'&&a.health==='risk').length,
+    off:l.filter(a=>a.status==='open'&&a.health==='off').length,late:l.filter(isLate).length,pause:l.filter(a=>a.status==='paused').length,
+    pct:live.length?Math.round(comp/live.length*100):0}}
+function dashboard(list){
+  let h='<div class="dash">';
+  for(const p of sortedPri()){
+    if(SEL.pri.size&&!SEL.pri.has(p.id))continue;
+    const pl=list.filter(a=>a.priorityId===p.id),st=stats(pl);
+    const objs=objsOf(p.id).filter(o=>!SEL.obj.size||SEL.obj.has(o.id));
+    h+=`<section class="dcard"><div class="band"><h2>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span></div>
+      <div class="dsum">${bigBar(pl,'big')}
+      <div class="mets">
+        <div class="met"><b>${st.open}</b><span>Open</span></div>
+        <div class="met comp"><b>${st.comp}</b><span>Completed</span></div>
+        <div class="met risk"><b>${st.risk}</b><span>At risk</span></div>
+        <div class="met off"><b>${st.off}</b><span>Off track</span></div>
+        <div class="met late"><b>${st.late}</b><span>Past due</span></div>
+        <div class="met pause"><b>${st.pause}</b><span>Paused</span></div>
+        <div class="met"><b>${st.pct}%</b><span>Complete</span></div>
+      </div></div>
+      <div class="tblwrap"><table class="otab"><colgroup><col><col style="width:220px"><col style="width:70px"><col style="width:90px"><col style="width:76px"><col style="width:80px"><col style="width:76px"><col style="width:70px"></colgroup>
+      <thead><tr><th>Objective</th><th>Progress</th><th class="n">Open</th><th class="n">Completed</th><th class="n">At risk</th><th class="n">Off track</th><th class="n">Past due</th><th class="n">Paused</th></tr></thead><tbody>
+      ${objs.map(o=>{const ol=pl.filter(a=>a.objectiveId===o.id),x=stats(ol);const td=(v,c='')=>`<td class="n ${c}${v?'':' z'}">${v}</td>`;
+        return `<tr data-goobj="${o.id}" tabindex="0" title="Open these actions in the tracker"><td>${esc(o.name)}<div class="pct">${ol.length} actions · ${x.pct}% complete</div></td><td>${bigBar(ol)}</td>${td(x.open)}${td(x.comp,'comp')}${td(x.risk,'risk')}${td(x.off,'off')}${td(x.late,'late')}${td(x.pause,'pause')}</tr>`}).join('')}
+      </tbody></table></div></section>`;
+  }
+  h+=`<div class="dkey">${DSEG.map(([,l,,c])=>`<span><i style="background:${c}"></i>${l}</span>`).join('')}<span>Closed (won't do) items are left out of the bar and the % complete. Click an objective to open its actions.</span></div></div>`;
+  return h}
+
 function render(){
   const base=filtered();
+  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
+  $('#legend').hidden=tab==='dash';
   if(!VIEWS[view])view='';
   const list=base.filter(VIEWS[view][1]).sort(sorter()),g=$('#f-group').value,main=$('#main');
   kpis(base);
+  if(tab==='dash'&&Object.keys(S.pri).length){$('#main').innerHTML=dashboard(list);return}
   if(!Object.keys(S.pri).length){main.innerHTML=`<div class="empty">No priorities yet.${canWrite?' <button class="btn primary" data-add="pri">Add a priority</button>':''}</div>`;return}
   const filtersOn=anyFilter()||view;
   const cnt=l=>`${l.filter(a=>a.status==='open').length} open · ${l.filter(a=>a.status==='paused').length} paused · ${l.length} total`;
@@ -488,7 +554,7 @@ document.addEventListener('click',e=>{
   if(st){e.stopPropagation();return popFor?.kind==='stat'&&popFor.id===st.dataset.stat?closePop():openStat(st)}
   if(ms){return popFor?.kind==='ms'&&popFor.k===ms.dataset.ms?closePop():openMs(ms)}
   if(!e.target.closest('.pop'))closePop();
-  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
+  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-tab],[data-goobj],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
   if(t.matches('[data-close]'))return closeDrawer();
   if(t.matches('[data-open]'))return drawer(t.dataset.open);
   if(t.matches('tr.act'))return drawer(t.dataset.id);
@@ -498,16 +564,18 @@ document.addEventListener('click',e=>{
   if(t.matches('[data-delnote]'))return db.collection('notes').doc(t.dataset.delnote).delete().catch(()=>toast('Could not remove.'));
   if(t.id==='f-clear'){FILTERS.forEach(k=>$('#f-'+k).value='');MSK.forEach(k=>SEL[k].clear());view='';closePop();refreshFilters();savePrefs();return render()}
   if(t.matches('[data-k]')){const k=t.dataset.k;view=view===k?'':k;savePrefs();render()}
+  if(t.matches('[data-tab]')){tab=t.dataset.tab;closePop();savePrefs();render();window.scrollTo(0,0)}
+  if(t.matches('[data-goobj]')){const o=S.obj[t.dataset.goobj];SEL.obj=new Set([o.id]);SEL.pri=new Set([o.priorityId]);tab='tracker';refreshFilters();savePrefs();render();window.scrollTo(0,0)}
 });
 window.addEventListener('resize',closePop);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&popFor){closePop();return}if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&popFor){closePop();return}if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id);if(e.key==='Enter'&&e.target.matches('[data-goobj]'))e.target.click()});
 $('#drawer-root').addEventListener('change',onField);
 $('#filters').addEventListener('input',()=>{savePrefs();render()});
 document.addEventListener('change',e=>{const i=e.target.closest('[data-msk]');if(!i)return;const k=i.dataset.msk;
   i.checked?SEL[k].add(i.value):SEL[k].delete(i.value);if(k==='pri')refreshFilters();paintMs();savePrefs();render()});
 
 /* ---------- boot ---------- */
-(function(){const p=prefs();view=p.view||'';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
+(function(){const p=prefs();view=p.view||'';tab=p.tab==='dash'?'dash':'tracker';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
 let loaded={pri:false,obj:false,act:false};
 function sub(col,key){
   db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>S[key][d.id]={id:d.id,...d.data()});loaded[key]=true;
