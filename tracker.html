@@ -56,7 +56,9 @@ button{font:inherit;cursor:pointer}
 .bar i{display:block}
 .counts{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
 .tblwrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:860px}
+table{width:100%;border-collapse:collapse;min-width:1180px;table-layout:fixed}
+col.c-own{width:120px}col.c-reg{width:110px}col.c-tgt{width:118px}col.c-mon{width:236px}col.c-st{width:136px}col.c-upd{width:300px}
+td{overflow-wrap:anywhere}
 th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);text-align:left;font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line)}
 td{padding:6px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
 tr.act{cursor:pointer}
@@ -81,7 +83,7 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .strip .due.late::after{background:var(--off);width:6px;height:6px}
 .strip .now{box-shadow:0 0 0 1.5px var(--ink)}
 .mh{font:600 9px var(--f-mono);color:var(--muted)}.mh span{text-align:center}
-td.upd{width:300px;min-width:220px;font-size:12px;color:var(--muted)}
+td.upd{font-size:12px;color:var(--muted)}
 td.upd .clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink)}
 td.upd .d{font:11px var(--f-mono)}
 .s-completed{background:var(--comp);color:var(--panel)}.s-paused{background:var(--pause-bg);color:var(--pause)}
@@ -275,7 +277,7 @@ function row(a,ctx){
    <td>${strip(a)}</td>
    <td>${statusPill(a)}</td>
    <td class="upd">${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
-const THEAD=`<thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
+const THEAD=`<colgroup><col><col class="c-own"><col class="c-reg"><col class="c-tgt"><col class="c-mon"><col class="c-st"><col class="c-upd"></colgroup><thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
   return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--comp)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
 
