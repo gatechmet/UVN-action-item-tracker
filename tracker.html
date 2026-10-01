@@ -31,7 +31,7 @@ header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:end;justify-con
 .kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 12px;min-width:84px;cursor:pointer;text-align:left;color:var(--ink);font:inherit}
 .kpi b{display:block;font:600 20px var(--f-mono);font-variant-numeric:tabular-nums}
 .kpi span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.kpi.on b{color:var(--on)}.kpi.risk b{color:var(--risk)}.kpi.off b{color:var(--off)}.kpi.moved b{color:var(--moved)}
+.kpi.soon b{color:var(--off)}.kpi.on b{color:var(--on)}.kpi.risk b{color:var(--risk)}.kpi.off b{color:var(--off)}.kpi.moved b{color:var(--moved)}
 .kpi[aria-pressed="true"]{outline:2px solid var(--accent)}
 .filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .filters label{display:flex;flex-direction:column;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);gap:2px}
@@ -79,8 +79,13 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .strip .c:hover{outline:2px solid var(--accent);outline-offset:1px}
 .strip .green{background:var(--on)}.strip .yellow{background:var(--risk)}.strip .red{background:var(--off)}
 .strip .green,.strip .yellow,.strip .red,.strip .complete{border-color:transparent}.strip .complete{background:var(--comp)}.strip .planned{background:var(--panel);border:1px dashed var(--plan)}.strip .na{background:linear-gradient(var(--line),var(--line)) center/7px 1.5px no-repeat var(--panel)}
-.strip .due::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--ink)}.strip .due.green::after,.strip .due.yellow::after,.strip .due.red::after{background:var(--panel)}
-.strip .due.late::after{background:var(--off);width:6px;height:6px}
+.strip .due::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.strip .due.late::after{background:var(--off)}
+.strip .due.green::after,.strip .due.yellow::after,.strip .due.red::after,.strip .due.complete::after{background:#fff;box-shadow:0 0 0 1px rgb(0 0 0 / .25)}
+.yr{display:flex;align-items:center;justify-content:space-between;width:213px;margin-bottom:3px;font:600 11px var(--f-mono);color:var(--ink);text-transform:none;letter-spacing:0}
+.yr button{background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink);width:22px;height:18px;line-height:1;padding:0;cursor:pointer}
+.yr button:disabled{opacity:.35;cursor:default}
+.yr button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
 .strip .now{box-shadow:0 0 0 1.5px var(--ink)}
 .mh{font:600 9px var(--f-mono);color:var(--muted)}.mh span{text-align:center}
 td.upd{font-size:12px;color:var(--muted)}
@@ -166,7 +171,7 @@ tr.act.paused .ttl{font-style:italic}
     <span class="strip"><i class="planned"></i></span>Planned
     <span class="strip"><i class="na"></i></span>Not active
     <span class="strip"><i class="due"></i></span>Due month (red if past due)
-    <span class="strip"><i class="now"></i></span>This month (open items)
+    <span class="strip"><i class="now"></i></span>This month (open items). Use ‹ › above the months to change year
   </div>
 
   <div class="viewbar" id="viewbar"></div>
@@ -194,6 +199,8 @@ const normR=r=>{const u=r.toUpperCase();return u==='LATAM'?'LATAM':u==='GLOBAL'?
 function toast(t){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2400)}
 const isLate=a=>a.status==='open'&&a.targetDate&&a.targetDate<today();
 const isMoved=a=>(a.dateHistory||[]).length>0&&a.originalDate&&a.targetDate!==a.originalDate;
+const daysAhead=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const isSoon=a=>a.status==='open'&&!!a.targetDate&&a.targetDate<=daysAhead(28);
 const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10)};
 
 const FILTERS=['q','done'];
@@ -202,7 +209,7 @@ const MSL={pri:'Priority',obj:'Objective',owner:'Owner',region:'Region',status:'
 const SEL={};MSK.forEach(k=>SEL[k]=new Set());
 const OPTS={pri:[],obj:[],owner:[],region:[],
   status:[['open','Open'],['paused','Paused (parking lot)'],['completed','Completed'],['closed',"Closed (won't do)"]],
-  health:[['on','On track'],['risk','At risk'],['off','Off track'],['none','Not rated'],['late','Past due'],['moved','Date moved']]};
+  health:[['on','On track'],['risk','At risk'],['off','Off track'],['none','Not rated'],['late','Past due'],['soon','Past due or due in next 4 weeks'],['moved','Date moved']]};
 const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
 function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
 function paintMs(){MSK.forEach(k=>{const b=$('#f-'+k);b.textContent=msText(k);b.title=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||'All';b.classList.toggle('on',SEL[k].size>0)})}
@@ -234,7 +241,7 @@ function filtered(){
     if(SEL.region.size){const r=split(a.region).map(normR);if(![...SEL.region].some(v=>v==='__none'?!r.length:r.includes(v)))return false}
     if(SEL.status.size&&!SEL.status.has(a.status))return false;
     if(f('done')&&!(a.status==='completed'&&(a.completedAt||'').slice(0,10)>=daysAgo(+f('done'))))return false;
-    if(SEL.health.size&&![...SEL.health].some(h=>h==='late'?isLate(a):h==='moved'?isMoved(a):a.status==='open'&&(a.health||'none')===h))return false;
+    if(SEL.health.size&&![...SEL.health].some(h=>h==='late'?isLate(a):h==='soon'?isSoon(a):h==='moved'?isMoved(a):a.status==='open'&&(a.health||'none')===h))return false;
     if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true});
 }
@@ -242,7 +249,7 @@ function filtered(){
 const VIEWS={'':['Actions',()=>true],open:['Open',a=>a.status==='open'],paused:['Paused',a=>a.status==='paused'],
   completed:['Completed',a=>a.status==='completed'],closed:['Closed',a=>a.status==='closed'],
   on:['On track',a=>a.status==='open'&&a.health==='on'],risk:['At risk',a=>a.status==='open'&&a.health==='risk'],
-  off:['Off track',a=>a.status==='open'&&a.health==='off'],late:['Past due',isLate],moved:['Date moved',isMoved]};
+  off:['Off track',a=>a.status==='open'&&a.health==='off'],late:['Past due',isLate],soon:['Due ≤ 4 wks',isSoon],moved:['Date moved',isMoved]};
 function sorter(){const s=$('#f-sort').value;const rank={open:0,paused:1,completed:2,closed:3};return (a,b)=>{
   if(s==='date')return (a.targetDate||'9999').localeCompare(b.targetDate||'9999');
   if(s==='health')return (rank[a.status]??0)-(rank[b.status]??0)||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
@@ -262,9 +269,15 @@ function kpis(base){
   $('#viewbar').textContent=(act.length?'Filters: '+act.join(' · '):'No filters applied')+(view?`. Showing ${VIEWS[view][0]} only (click the tile again to show all).`:'');
 }
 
-const NOWM=new Date().getFullYear()===2026?new Date().getMonth():-1;
-function strip(a){const open=a.status==='open',due=open&&/^2026-/.test(a.targetDate||'')?+a.targetDate.slice(5,7)-1:-1,late=isLate(a);
-  return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${a.months?.[m]||''}${open&&i===NOWM?' now':''}${i===due?' due'+(late?' late':''):''}" data-cell="${a.id}" data-m="${m}" aria-label="${m}: ${CODES[a.months?.[m]||'']}${i===due?' · due':''}" title="${m}: ${CODES[a.months?.[m]||'']}${i===due?(late?' · due (past due)':' · due this month'):''}"></button>`).join('')}</span>`}
+const THISY=new Date().getFullYear(),YMIN=2025,YMAX=2030;
+let yr=THISY;
+const NOWM=new Date().getMonth();
+const nowIn=y=>y===THISY?NOWM:-1;
+/* 2026 months live in a.months (original import); other years in a.monthsY[year]. */
+const monthsOf=(a,y=yr)=>y===2026?(a.months||{}):(a.monthsY?.[y]||{});
+const monthsPatch=(a,y,obj)=>y===2026?{months:obj}:{monthsY:{[y]:obj}};
+function strip(a){const open=a.status==='open',due=open&&(a.targetDate||'').startsWith(yr+'-')?+a.targetDate.slice(5,7)-1:-1,late=isLate(a),mo=monthsOf(a),NW=nowIn(yr);
+  return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${mo[m]||''}${open&&i===NW?' now':''}${i===due?' due'+(late?' late':''):''}" data-cell="${a.id}" data-m="${m}" aria-label="${m} ${yr}: ${CODES[mo[m]||'']}${i===due?' · due':''}" title="${m} ${yr}: ${CODES[mo[m]||'']}${i===due?(late?' · due (past due)':' · due this month'):''}"></button>`).join('')}</span>`}
 function statusPill(a){const lbl=a.status==='open'?HL[a.health||'none']:a.status==='completed'?'✓ Completed':a.status==='closed'?'Closed':STAT[a.status]||a.status;
   return `<button type="button" class="pill ${a.status==='open'?'h-'+(a.health||'none'):'s-'+a.status}" data-stat="${a.id}" title="Change status" aria-haspopup="true">${lbl}</button>`}
 function row(a,ctx){
@@ -277,7 +290,7 @@ function row(a,ctx){
    <td>${strip(a)}</td>
    <td>${statusPill(a)}</td>
    <td class="upd">${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
-const THEAD=`<colgroup><col><col class="c-own"><col class="c-reg"><col class="c-tgt"><col class="c-mon"><col class="c-st"><col class="c-upd"></colgroup><thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
+const THEAD=()=>`<colgroup><col><col class="c-own"><col class="c-reg"><col class="c-tgt"><col class="c-mon"><col class="c-st"><col class="c-upd"></colgroup><thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><div class="yr"><button type="button" data-yr="-1" aria-label="Previous year" ${yr<=YMIN?'disabled':''}>‹</button><span>${yr}</span><button type="button" data-yr="1" aria-label="Next year" ${yr>=YMAX?'disabled':''}>›</button></div><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
   return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--comp)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
 
@@ -301,7 +314,7 @@ function render(){
         const ol=pl.filter(a=>a.objectiveId===o.id);
         if(filtersOn&&!ol.length)continue;
         h+=`<div class="obj"><div class="objhead"><h3>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${cnt(ol)}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
-        if(ol.length){h+=`<div class="tblwrap"><table>${THEAD}<tbody>`;let grp=null;
+        if(ol.length){h+=`<div class="tblwrap"><table>${THEAD()}<tbody>`;let grp=null;
           for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="7">${esc(grp)}</td></tr>`}h+=row(a)}
           h+='</tbody></table></div>'}
         if(canWrite)h+=`<div class="addrow"><button class="btn ghost" data-add="act" data-obj="${o.id}">+ Add action</button></div>`;
@@ -314,7 +327,7 @@ function render(){
     for(const a of list){const keys=g==='flat'?['All actions']:(g==='owner'?split(a.owner):[...new Set(split(a.region).map(normR))]);(keys.length?keys:['(Unassigned)']).forEach(k=>{if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(a)})}
     const ks=[...buckets.keys()].sort((a,b)=>a.startsWith('(')-b.startsWith('(')||a.localeCompare(b));
     for(const k of ks){const bl=buckets.get(k);
-      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span>${healthBar(bl)}<span class="counts">${cnt(bl)}</span></div><div class="pri"><div class="tblwrap"><table>${THEAD}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
+      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span>${healthBar(bl)}<span class="counts">${cnt(bl)}</span></div><div class="pri"><div class="tblwrap"><table>${THEAD()}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
   }
   main.innerHTML=h||'<div class="empty">No actions match these filters.</div>';
   if(openId)drawer(openId,true);
@@ -343,23 +356,23 @@ function openStat(btn){
   document.body.appendChild(el);placePop(el,btn,true);(el.querySelector('button.sel')||el.querySelector('button'))?.focus()}
 async function setStatus(a,v){
   if(a.status===v)return;const patch={status:v,...stamp()};
-  if(v==='completed'){patch.completedAt=new Date().toISOString();if(NOWM>=0)patch.months={...(a.months||{}),[M[NOWM]]:'complete'}}
+  if(v==='completed'){patch.completedAt=new Date().toISOString();Object.assign(patch,monthsPatch(a,THISY,{...monthsOf(a,THISY),[M[NOWM]]:'complete'}))}
   else patch.completedAt='';
   await write('actions',a.id,patch,`Marked ${STAT[v]}`)}
 function openPop(btn){
   closePop();if(!canWrite){toast('View only: you can’t change month status.');return}
-  const a=S.act[btn.dataset.cell],m=btn.dataset.m,cur=a.months?.[m]||'';popFor={kind:'cell',id:a.id,m};
+  const a=S.act[btn.dataset.cell],m=btn.dataset.m,cur=monthsOf(a)[m]||'';popFor={kind:'cell',id:a.id,m,y:yr};
   const el=document.createElement('div');el.className='pop';el.setAttribute('role','menu');
-  el.innerHTML=`<div class="hd">${m} · ${esc(a.title.slice(0,40))}</div>`+Object.entries(CODES).map(([k,l])=>`<button type="button" role="menuitem" data-code="${k}" class="${k===cur?'sel':''}"><span class="strip"><i class="${k}"></i></span>${k?l:'Clear'}</button>`).join('');
+  el.innerHTML=`<div class="hd">${m} ${yr} · ${esc(a.title.slice(0,40))}</div>`+Object.entries(CODES).map(([k,l])=>`<button type="button" role="menuitem" data-code="${k}" class="${k===cur?'sel':''}"><span class="strip"><i class="${k}"></i></span>${k?l:'Clear'}</button>`).join('');
   document.body.appendChild(el);
   placePop(el,btn,true);
   (el.querySelector('button.sel')||el.querySelector('button'))?.focus();
 }
 async function pickCode(code){
-  if(!popFor)return;const {id,m}=popFor;closePop();const a=S.act[id];
-  const patch={months:{...(a.months||{}),[m]:code},...stamp()};
-  if(M.indexOf(m)===NOWM&&HCODE[code])patch.health=HCODE[code];
-  await write('actions',id,patch,`${m} set to ${CODES[code]}`);
+  if(!popFor)return;const {id,m,y}=popFor;closePop();const a=S.act[id];
+  const patch={...monthsPatch(a,y,{...monthsOf(a,y),[m]:code}),...stamp()};
+  if(M.indexOf(m)===nowIn(y)&&HCODE[code])patch.health=HCODE[code];
+  await write('actions',id,patch,`${m} ${y} set to ${CODES[code]}`);
 }
 
 /* ---------- drawer ---------- */
@@ -395,13 +408,13 @@ function drawer(id,refresh){
       <label class="full">Sub-group<input id="d-group" value="${esc(a.group)}" placeholder="Optional heading inside the objective" ${dis}></label>
       <label class="full">Objective<select id="d-obj" ${dis}>${sortedPri().map(pp=>`<optgroup label="${esc(pp.name)}">${objsOf(pp.id).map(oo=>`<option value="${oo.id}">${esc(oo.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>
     </div>
-    <div class="sec"><h4>Monthly status</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
+    <div class="sec"><h4>Monthly status · ${yr}</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
     <div class="sec"><h4>Schedule changes</h4><ul class="log">${(a.dateHistory||[]).slice().reverse().map(d=>`<li><div class="meta">${d.at?fmt(d.at.slice(0,10)):'From spreadsheet'}${d.by?' · '+esc(who(d.by)):''}</div>${fmt(d.from)} → ${fmt(d.to)}${d.reason&&d.reason!=='From spreadsheet'?' · '+esc(d.reason):''}</li>`).join('')||'<li class="ctx">Target date has not changed.</li>'}</ul></div>
     <div class="sec"><h4>Updates</h4>${noteForm()}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(a)}</ul></div>
     ${canWrite?`<div class="sec" id="d-danger"><button class="btn" id="d-del" type="button">Delete action</button></div>`:''}`;
     root.innerHTML=shell(`${esc(pr?.name||'')} · ${esc(ob?.name||'')}`,a.title,body);
     $('#d-status').value=a.status;$('#d-health').value=a.health||'none';$('#d-obj').value=a.objectiveId;
-    root.querySelectorAll('[data-month]').forEach(s=>s.value=a.months?.[s.dataset.month]||'');
+    root.querySelectorAll('[data-month]').forEach(s=>s.value=monthsOf(a)[s.dataset.month]||'');
   }else{
     const isP=!!p;
     body=`<div class="fgrid"><label class="full">Name<textarea id="d-name" rows="2" ${dis}>${esc(item.name)}</textarea></label>
@@ -433,7 +446,7 @@ async function onField(e){
     if(t.id==='d-date'&&t.value!==a.targetDate){
       const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:uid||'',reason:$('#d-reason').value.trim()}];
       await write('actions',a.id,{targetDate:t.value,originalDate:a.originalDate||a.targetDate||t.value,dateHistory:hist,...stamp()},'Target date changed and logged');return}
-    if(t.dataset.month){await write('actions',a.id,{months:{...(a.months||{}),[t.dataset.month]:t.value},...stamp()},'Saved');return}
+    if(t.dataset.month){await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...stamp()},'Saved');return}
   }else{
     const col=S.pri[openId]?'priorities':'objectives',it=S.pri[openId]||S.obj[openId];
     if(t.id==='d-name'&&t.value.trim()!==it.name)await write(col,openId,{name:t.value.trim()},'Saved');
@@ -469,6 +482,8 @@ document.addEventListener('click',e=>{
   if(ss){e.stopPropagation();const a=S.act[popFor?.id];closePop();return a&&setStatus(a,ss.dataset.setstat)}
   if(sh){e.stopPropagation();const a=S.act[popFor?.id];closePop();return a&&a.health!==sh.dataset.sethealth&&write('actions',a.id,{health:sh.dataset.sethealth,...stamp()},'Schedule set to '+HL[sh.dataset.sethealth])}
   if(mc){const k=mc.dataset.msclear;SEL[k].clear();document.querySelectorAll('.pop [data-msk]').forEach(i=>i.checked=false);if(k==='pri')refreshFilters();paintMs();savePrefs();return render()}
+  const yb=e.target.closest('[data-yr]');
+  if(yb){e.stopPropagation();yr=Math.min(YMAX,Math.max(YMIN,yr+ +yb.dataset.yr));closePop();return render()}
   if(cell){e.stopPropagation();return popFor?.kind==='cell'&&popFor.id===cell.dataset.cell&&popFor.m===cell.dataset.m?closePop():openPop(cell)}
   if(st){e.stopPropagation();return popFor?.kind==='stat'&&popFor.id===st.dataset.stat?closePop():openStat(st)}
   if(ms){return popFor?.kind==='ms'&&popFor.k===ms.dataset.ms?closePop():openMs(ms)}
