@@ -241,8 +241,8 @@ const OPTS={pri:[],obj:[],owner:[],region:[],
 const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
 function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
 function paintMs(){MSK.forEach(k=>{const b=$('#f-'+k);b.textContent=msText(k);b.title=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||'All';b.classList.toggle('on',SEL[k].size>0)})}
-function prefs(){try{return JSON.parse(localStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
-function savePrefs(){try{const o={view,tab,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+function prefs(){try{return JSON.parse(sessionStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
+function savePrefs(){try{const o={view,tab,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);sessionStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
 
 function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
 function objsOf(pid){return Object.values(S.obj).filter(o=>o.priorityId===pid).sort((a,b)=>a.order-b.order)}
