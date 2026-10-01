@@ -321,6 +321,8 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
   #fs-splash img{display:block;max-width:100%;border:1px solid var(--line,#d9dfe5);border-radius:4px;margin:8px 0}
   #fs-splash .path{font:600 13px var(--f-mono,monospace);background:var(--soft,#e9edf1);padding:6px 9px;border-radius:4px;display:inline-block;overflow-wrap:anywhere}
   #fs-splash a.btn,#fs-splash button{font:inherit;cursor:pointer;border-radius:4px;padding:7px 14px;border:1px solid var(--line,#d9dfe5);background:var(--panel,#fff);color:var(--ink,#15202b);text-decoration:none;display:inline-block}
+  #fs-splash .blue{background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);border-color:transparent;font-weight:600}
+  #fs-splash .blue:hover{filter:brightness(1.1)}
   #fs-splash .big{width:100%;padding:16px;font:700 18px var(--f-disp,system-ui,sans-serif);background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);border-color:transparent;border-radius:6px}
   #fs-splash .note{font-size:12px;color:var(--muted,#5b6875);margin:0}
   #fs-splash .msg{font-weight:600;color:var(--off,#c0392b)}
@@ -332,15 +334,15 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
       <h2>Sync the UVNN team folder to OneDrive</h2>
       <p>Open the team’s General folder and click <b>Add shortcut to OneDrive</b>. You only do this once.</p>
       <img src="${SHOT}" alt="SharePoint toolbar with the Add shortcut to OneDrive button circled">
-      <a class="btn" href="${SP_LINK}" target="_blank" rel="noopener">Open the General folder</a>
+      <a class="btn blue" href="${SP_LINK}" target="_blank" rel="noopener">Open the General folder</a>
     </div></div>
     <div class="step"><span class="n">2</span><div>
       <h2>Connect to the data</h2>
       <p>Click the button below, then select this folder:</p>
       <span class="path">${DATA_PATH}</span>
     </div></div>
-    <button type="button" class="big" id="sp-connect">Click here to connect folder</button>
-    <button type="button" id="sp-reconnect" hidden></button>
+    <button type="button" class="big" id="sp-connect">FIRST TIME - Click here to connect folder</button>
+    <button type="button" class="big" id="sp-reconnect" hidden></button>
     <div class="msg" id="sp-msg" role="status"></div>
     <p class="note">If the browser offers “Allow on every visit”, choose it. The tracker then connects by itself next time.</p>
   </div>`;
