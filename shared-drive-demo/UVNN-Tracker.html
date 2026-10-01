@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>[hidden]{display:none!important}body{margin:0}</style>
 </head><body>
 <title>UVNN Strategy Tracker (shared folder)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -321,8 +322,9 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
   #fs-splash img{display:block;max-width:100%;border:1px solid var(--line,#d9dfe5);border-radius:4px;margin:8px 0}
   #fs-splash .path{font:600 13px var(--f-mono,monospace);background:var(--soft,#e9edf1);padding:6px 9px;border-radius:4px;display:inline-block;overflow-wrap:anywhere}
   #fs-splash a.btn,#fs-splash button{font:inherit;cursor:pointer;border-radius:4px;padding:7px 14px;border:1px solid var(--line,#d9dfe5);background:var(--panel,#fff);color:var(--ink,#15202b);text-decoration:none;display:inline-block}
-  #fs-splash .blue{background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);border-color:transparent;font-weight:600}
-  #fs-splash .blue:hover{filter:brightness(1.1)}
+  #fs-splash a.btn.blue,#fs-splash .blue{background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);border-color:transparent;font-weight:600}
+  #fs-splash a.btn.blue:hover,#fs-splash .blue:hover{filter:brightness(1.1)}
+  #fs-splash .warnbox{background:var(--risk-bg,#fbf0d9);color:var(--ink,#15202b);border-left:4px solid var(--risk,#b7791f);padding:10px 12px;border-radius:4px}
   #fs-splash .big{width:100%;padding:16px;font:700 18px var(--f-disp,system-ui,sans-serif);background:var(--accent,#1f5f8b);color:var(--accent-ink,#fff);border-color:transparent;border-radius:6px}
   #fs-splash .note{font-size:12px;color:var(--muted,#5b6875);margin:0}
   #fs-splash .msg{font-weight:600;color:var(--off,#c0392b)}
@@ -335,6 +337,7 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
       <p>Open the team’s General folder and click <b>Add shortcut to OneDrive</b>. You only do this once.</p>
       <img src="${SHOT}" alt="SharePoint toolbar with the Add shortcut to OneDrive button circled">
       <a class="btn blue" href="${SP_LINK}" target="_blank" rel="noopener">Open the General folder</a>
+      <p style="margin-top:10px">Then open the tracker from <b>File Explorer</b>, not from SharePoint: OneDrive › UVNN - General › KPI Leadership › Strategy Tracker, and double-click the HTML file.</p>
     </div></div>
     <div class="step"><span class="n">2</span><div>
       <h2>Connect to the data</h2>
@@ -347,6 +350,13 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
     <p class="note">If the browser offers “Allow on every visit”, choose it. The tracker then connects by itself next time.</p>
   </div>`;
   document.body.appendChild(splash);
+  const framed=(()=>{try{return window.top!==window}catch{return true}})();
+  const local=location.protocol==='file:';
+  if(supported&&(!local||framed)){
+    const w=document.createElement('div');w.className='warnbox';w.id='sp-where';
+    w.innerHTML='<b>Open this file from File Explorer, not from SharePoint or Teams.</b><br>It’s open in the browser through SharePoint, which blocks the folder picker. Go to your OneDrive shortcut in File Explorer, open <b>Strategy Tracker</b>, and double-click the HTML file.';
+    splash.querySelector('.card h1').after(w);
+  }
   const spMsg=t=>{$('sp-msg').textContent=t||''};
   const showSplash=()=>{splash.hidden=false};const hideSplash=()=>{splash.hidden=true};
   if(!supported){splash.querySelector('.card').innerHTML='<h1>Open this file in Edge or Chrome</h1><p>This browser can’t connect to folders. Right-click the file and choose Open with &gt; Microsoft Edge.</p>'}
@@ -387,7 +397,9 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
   function explain(e){
     const n=e?.name||'';
     if(n==='AbortError')return null;
-    if(n==='NotAllowedError'||n==='SecurityError')return 'The browser didn’t allow access to that folder. Choose it again and click “Edit files” or “Allow”. If that keeps failing, your company may block web pages from using network drives.';
+    if((n==='NotAllowedError'||n==='SecurityError')&&(!local||framed))return 'The folder window was blocked because this page is open through SharePoint in the browser. Open the HTML file from your OneDrive shortcut in File Explorer instead.';
+    if(n==='SecurityError')return `The browser blocked the folder window (${e?.message||n}). Open the HTML file by double-clicking it in File Explorer, in Edge or Chrome.`;
+    if(n==='NotAllowedError')return 'Access to that folder wasn’t allowed. Click the button again and choose “Edit files” or “Allow”. If no window appears at all, your browser settings may block file access. Check edge://settings/content/fileEditing.';
     return `Couldn’t open that folder (${n||'error'}: ${e?.message||e}). Try choosing it again, or copy the folder to your computer to check the page works.`}
   const fail=m=>{if(!m)return;st(m,'warn');if(!splash.hidden)spMsg(m)};
   async function pick(){
