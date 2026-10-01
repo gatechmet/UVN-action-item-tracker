@@ -13,16 +13,20 @@ Set up (once)
 
 Each time you use it
 1. Open UVNN-Tracker.html in Microsoft Edge or Google Chrome.
-   Firefox and Safari can't open shared folders.
-2. Type your name in the dark bar at the top.
-3. Click "Connect to data folder" (or "Reconnect") and pick the
-   UVNN-Tracker folder. Allow edit access when the browser asks.
-   Picking the tracker-data folder itself also works.
-4. Edits save straight to the shared drive. Other people's changes
-   appear within about 6 seconds.
+   Firefox and Safari can't open folders.
+2. Optional: type your name in the dark bar, so your updates show who
+   made them.
+3. Click "Choose data folder..." and pick the UVNN-Tracker folder, or the
+   tracker-data folder inside it. Click "Edit files" or "Allow" when the
+   browser asks.
+4. The bar turns green and shows how many records it found (183 to start).
+   Edits save straight to the shared drive. Other people's changes appear
+   within about 6 seconds.
+
+Next time, "Reconnect to ..." reopens the same folder in one click.
+"Choose a different folder..." switches folders at any time.
 
 Good to know
-- The browser asks for folder permission each time the page is opened.
 - Each record is its own small file in tracker-data, named like
   actions__A12.json. Don't edit or delete these by hand.
 - Two people only overwrite each other if they edit the same action
@@ -30,9 +34,11 @@ Good to know
 - Filters and views stay in your own browser tab.
 
 If it doesn't work
-- "Couldn't open that folder": your company may block web pages from
-  writing to network drives. Try a local copy to confirm the page
-  works, then ask IT.
+- The bar says the folder has no tracker records: you picked the wrong
+  folder. Click "Choose a different folder..." and pick UVNN-Tracker.
+- The bar says the browser didn't allow access: choose the folder again
+  and allow editing. If it keeps failing, your company may block web
+  pages from writing to network drives.
 - The page downloads instead of opening: right-click the HTML file and
   choose Open with > Microsoft Edge.
 

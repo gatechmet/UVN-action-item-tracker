@@ -278,51 +278,72 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
   /* ---------- connect bar ---------- */
   const bar=document.createElement('div');bar.id='fs-bar';
   bar.innerHTML=`<style>
-  #fs-bar{position:relative;z-index:40;background:var(--band,#223445);color:var(--band-ink,#eef3f7);font:13px var(--f-body,system-ui,sans-serif);padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
-  #fs-bar button{font:inherit;cursor:pointer;border-radius:4px;padding:5px 10px;border:1px solid currentColor;background:transparent;color:inherit}
+  #fs-bar{position:relative;z-index:40;background:var(--band,#223445);color:var(--band-ink,#eef3f7);font:13px var(--f-body,system-ui,sans-serif);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+  #fs-bar button{font:inherit;cursor:pointer;border-radius:4px;padding:6px 12px;border:1px solid currentColor;background:transparent;color:inherit}
   #fs-bar button.pri{background:var(--band-ink,#eef3f7);color:var(--band,#223445);border-color:transparent;font-weight:600}
-  #fs-bar input{font:inherit;padding:4px 6px;border-radius:4px;border:1px solid #9aa;width:160px;color:#15202b;background:#fff}
-  #fs-bar .st{opacity:.85}#fs-bar .warn{color:#ffd28a;font-weight:600}
+  #fs-bar button:disabled{opacity:.5;cursor:default}
+  #fs-bar input{font:inherit;padding:5px 7px;border-radius:4px;border:1px solid #9aa;width:150px;color:#15202b;background:#fff}
+  #fs-bar .st{opacity:.9;flex:1 1 280px;min-width:0}#fs-bar .warn{color:#ffd28a;font-weight:600;flex:1 1 280px;min-width:0}
+  #fs-bar .ok{color:#9be3b5;font-weight:600;flex:1 1 280px;min-width:0}
   </style>
-  <b>Shared-folder demo</b>
-  <span class="st" id="fs-st">Not connected.</span>
-  <button type="button" class="pri" id="fs-connect">Connect to data folder</button>
+  <b>Shared folder</b>
+  <button type="button" class="pri" id="fs-pick">Choose data folder…</button>
+  <button type="button" id="fs-reconnect" hidden></button>
   <button type="button" id="fs-seed" hidden>Load starting data into this folder</button>
-  <label>Your name <input id="fs-name" placeholder="e.g. Matt D" autocomplete="name"></label>`;
+  <label>Your name <input id="fs-name" placeholder="optional" autocomplete="name"></label>
+  <span class="st" id="fs-st" role="status">Click “Choose data folder…” and pick the UVNN-Tracker folder (or the tracker-data folder inside it).</span>`;
   document.body.prepend(bar);
   const $=s=>document.getElementById(s);
-  const st=(t,warn)=>{$('fs-st').textContent=t;$('fs-st').className=warn?'warn':'st'};
+  const st=(t,kind)=>{$('fs-st').textContent=t;$('fs-st').className=kind||'st'};
   try{$('fs-name').value=localStorage.getItem('fs-name')||''}catch{}
   $('fs-name').addEventListener('change',e=>{try{localStorage.setItem('fs-name',e.target.value.trim())}catch{}});
-  if(!supported){st('This browser can’t open shared folders. Open this file in Microsoft Edge or Google Chrome.',true);$('fs-connect').hidden=true}
+  if(!supported){st('This browser can’t open folders. Open this file in Microsoft Edge or Google Chrome.','warn');$('fs-pick').disabled=true}
 
-  /* remember the folder between sessions (permission is still re-asked) */
-  const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('fs-tracker',1);r.onupgradeneeded=()=>r.result.createObjectStore('h');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
-  async function saveHandle(h){try{const d=await idb();d.transaction('h','readwrite').objectStore('h').put(h,'root')}catch{}}
-  async function loadHandle(){try{const d=await idb();return await new Promise(res=>{const q=d.transaction('h').objectStore('h').get('root');q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}catch{return null}}
-  (async()=>{const h=await loadHandle();if(h){root=h;$('fs-connect').textContent=`Reconnect to “${h.name}”`;st('Click Reconnect to open the shared data folder again.')}})();
+  /* remember the last folder so "Reconnect" is one click (the browser still asks permission) */
+  const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('fs-tracker',2);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('h'))r.result.createObjectStore('h')};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+  async function saveHandle(h){try{const d=await idb();d.transaction('h','readwrite').objectStore('h').put(h,'folder-v2')}catch{}}
+  async function loadHandle(){try{const d=await idb();return await new Promise(res=>{const q=d.transaction('h').objectStore('h').get('folder-v2');q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}catch{return null}}
+  let saved=null;
+  (async()=>{saved=await loadHandle();if(saved&&supported){$('fs-reconnect').textContent=`Reconnect to “${saved.name}”`;$('fs-reconnect').hidden=false}})();
 
-  async function connect(){
-    if(!($('fs-name').value||'').trim()){st('Type your name first, so your updates show who made them.',true);$('fs-name').focus();return}
-    try{
-      if(root&&(await root.requestPermission({mode:'readwrite'}))==='granted'){/* reuse */}
-      else{root=await window.showDirectoryPicker({id:'uvnn-tracker',mode:'readwrite'});await saveHandle(root)}
-      /* accept either the main folder or the tracker-data folder itself */
-      dataDir=root.name==='tracker-data'?root:await root.getDirectoryHandle('tracker-data',{create:true});
-      await poll(true);
-      const empty=COLS.every(c=>cache[c].size===0);
-      $('fs-seed').hidden=!empty;$('fs-connect').hidden=true;
-      st(empty?`Connected to “${root.name}”. The folder is empty. Load the starting data to try it out.`:`Connected to “${root.name}”. Changes save to the shared folder. Other people’s edits appear within a few seconds.`);
-      readyResolve(true);setInterval(()=>poll(false).catch(()=>st('Lost contact with the shared folder. Check the network drive.',true)),POLL_MS);
-    }catch(e){if(e?.name!=='AbortError')st('Couldn’t open that folder: '+(e?.message||e)+'. Your company may block web pages from writing to network drives.',true)}
+  /* Work out which folder holds the record files. */
+  async function hasRecords(dir){try{for await (const [n,h] of dir.entries()){if(h.kind==='file'&&/__.+\.json$/.test(n))return true}}catch{}return false}
+  async function resolveDataDir(picked){
+    if(picked.name==='tracker-data'||await hasRecords(picked))return {dir:picked,label:picked.name};
+    try{const sub=await picked.getDirectoryHandle('tracker-data');return {dir:sub,label:`${picked.name} › tracker-data`}}
+    catch(e){if(e?.name!=='NotFoundError')throw e}
+    const sub=await picked.getDirectoryHandle('tracker-data',{create:true});return {dir:sub,label:`${picked.name} › tracker-data (new)`}}
+
+  let timer=null,label='';
+  async function useFolder(picked){
+    st('Opening folder…');
+    const r=await resolveDataDir(picked);
+    root=picked;dataDir=r.dir;label=r.label;
+    COLS.forEach(c=>cache[c].clear());
+    await poll(true);
+    const n=COLS.reduce((k,c)=>k+cache[c].size,0);
+    $('fs-seed').hidden=n>0;$('fs-reconnect').hidden=true;$('fs-pick').textContent='Choose a different folder…';$('fs-pick').className='';
+    st(n?`Connected to “${label}” · ${n} records. Changes save to this folder, and other people’s edits appear within a few seconds.`:`Connected to “${label}”, but it has no tracker records. Pick a different folder, or click “Load starting data”.`,n?'ok':'warn');
+    readyResolve(true);
+    clearInterval(timer);timer=setInterval(()=>poll(false).catch(()=>st('Lost contact with the folder. Check the network drive, then choose the folder again.','warn')),POLL_MS);
   }
-  $('fs-connect').addEventListener('click',connect);
+  function explain(e){
+    const n=e?.name||'';
+    if(n==='AbortError')return null;
+    if(n==='NotAllowedError'||n==='SecurityError')return 'The browser didn’t allow access to that folder. Choose it again and click “Edit files” or “Allow”. If that keeps failing, your company may block web pages from using network drives.';
+    return `Couldn’t open that folder (${n||'error'}: ${e?.message||e}). Try choosing it again, or copy the folder to your computer to check the page works.`}
+  $('fs-pick').addEventListener('click',async()=>{
+    try{const picked=await window.showDirectoryPicker({id:'uvnn-tracker-v2',mode:'readwrite'});await saveHandle(picked);await useFolder(picked)}
+    catch(e){const m=explain(e);if(m)st(m,'warn')}});
+  $('fs-reconnect').addEventListener('click',async()=>{
+    try{if(!saved)return;const p=await saved.requestPermission({mode:'readwrite'});if(p!=='granted'){st('Permission wasn’t granted. Use “Choose data folder…” instead.','warn');return}await useFolder(saved)}
+    catch(e){const m=explain(e);if(m)st(m+' You can also use “Choose data folder…”.','warn')}});
   $('fs-seed').addEventListener('click',async()=>{
     const seed=window.SEED||{};const total=COLS.reduce((n,c)=>n+Object.keys(seed[c]||{}).length,0);let done=0;
     $('fs-seed').disabled=true;
-    for(const c of COLS)for(const [id,d] of Object.entries(seed[c]||{})){await writeDoc(c,id,d,false);done++;if(done%20===0)st(`Writing starting data… ${done}/${total}`)}
-    $('fs-seed').hidden=true;st(`Loaded ${done} records into “${root.name}”.`);emitAll();
-  });
+    try{for(const c of COLS)for(const [id,d] of Object.entries(seed[c]||{})){await writeDoc(c,id,d,false);done++;if(done%20===0)st(`Writing starting data… ${done}/${total}`)}
+      $('fs-seed').hidden=true;st(`Loaded ${done} records into “${label}”.`,'ok');emitAll()}
+    catch(e){st(`Stopped after ${done} records: ${e?.message||e}`,'warn');$('fs-seed').disabled=false}});
 
   /* ---------- file I/O: one flat folder, files named <collection>__<id>.json ---------- */
   const fname=(c,id)=>`${c}__${id}.json`;
