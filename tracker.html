@@ -73,7 +73,8 @@ button{font:inherit;cursor:pointer}
 .mkey i{display:inline-block;vertical-align:middle;margin-right:5px}
 .mkey .dot{width:9px;height:9px;border-radius:50%}.mkey .dot.up{background:var(--on)}.mkey .dot.down{background:var(--off)}
 .mkey .dash{width:18px;border-top:2px dashed var(--muted)}.mkey .pl{width:18px;border-top:2px dotted var(--muted)}
-.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:14px}
+.mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.mgrid{grid-template-columns:1fr}}
 .mcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px;min-width:0}
 .mcard.wide{grid-column:1/-1}
 .mcard header{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
@@ -805,12 +806,12 @@ function statLine(k,label,mode){const v=zview(k,mode);let i=-1;for(let j=v.act.v
 
 const BKNOTE=m=>m==='ytd'?'Bookings are a % of each quarter’s forecast, so they don’t add across quarters. Shown quarter to date.':'';
 const MCARDS=[
-  {id:'c-bkt',title:'Bookings · Total',sub:'% of quarter forecast',defs:[{key:'bk_total',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkt',wide:true,title:'Bookings · Total',sub:'% of quarter forecast',defs:[{key:'bk_total',name:'Actual',color:'--s1'}],note:BKNOTE},
   {id:'c-bkm',title:'Bookings · Micro',sub:'% of quarter forecast',defs:[{key:'bk_micro',name:'Actual',color:'--s1'}],note:BKNOTE},
   {id:'c-bkc',title:'Bookings · Core',sub:'% of quarter forecast',defs:[{key:'bk_core',name:'Actual',color:'--s1'}],note:BKNOTE},
   {id:'c-micro',title:'MQL / SQO · Micro',sub:'count, quarter to date',defs:[{key:'mql_micro',name:'MQL',color:'--s1'},{key:'sqo_micro',name:'SQO',color:'--s2'}]},
   {id:'c-core',title:'MQL / SQO · Core',sub:'count, quarter to date',defs:[{key:'mql_core',name:'MQL',color:'--s1'},{key:'sqo_core',name:'SQO',color:'--s2'}]},
-  {id:'c-tot',title:'MQL / SQO · Total',sub:'Micro + Core',defs:[{key:'mql_total',name:'MQL',color:'--s1'},{key:'sqo_total',name:'SQO',color:'--s2'}]},
+  {id:'c-tot',wide:true,title:'MQL / SQO · Total',sub:'Micro + Core',defs:[{key:'mql_total',name:'MQL',color:'--s1'},{key:'sqo_total',name:'SQO',color:'--s2'}]},
   {id:'c-svc',title:'Service bookings',sub:'$M, quarter to date',small:true,defs:[{key:'svc',name:'Actual',color:'--s1'}]},
   {id:'c-vit',title:'Product vitality',sub:'$M, quarter to date',small:true,defs:[{key:'vit',name:'Actual',color:'--s1'}]},
   {id:'c-cas',title:'CAS',sub:'running average score',small:true,zero:false,defs:[{key:'cas',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Year-to-date running average.':m==='quarter'?'Quarter-end running average.':'Quarter running average.'},
