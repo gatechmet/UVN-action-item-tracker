@@ -1,8 +1,20 @@
 {
- "dateHistory": [],
+ "dateHistory": [
+  {
+   "from": "2026-10-31",
+   "to": "2026-12-31",
+   "at": "2026-10-01T17:51:24Z",
+   "by": "",
+   "reason": "Plan changed in the tracker spreadsheet"
+  }
+ ],
  "group": "Awareness and Marketing plan",
  "health": "none",
  "history": [
+  {
+   "date": "2026-09-30",
+   "text": "Creating email for webinar and working through joint email for December at the same time"
+  },
   {
    "date": "2026-08-27",
    "text": "WAI backed out, I think we create an email for us talking about how it fits into several workflows and calling out other products so we can send to the widest range of water customers as possible. but avoid aligning with teams who aren't as active as we had hoped."
@@ -14,7 +26,8 @@
  ],
  "months": {
   "Oct": "planned",
-  "Sep": "planned"
+  "Nov": "planned",
+  "Dec": "planned"
  },
  "objectiveId": "P1-O2",
  "order": 19,
@@ -23,8 +36,8 @@
  "priorityId": "P1",
  "region": "Global",
  "status": "open",
- "targetDate": "2026-10-31",
+ "targetDate": "2026-12-31",
  "targetGoal": "",
  "title": "Water-specific trade-up message (email? With WAI?)",
- "updatedAt": ""
+ "updatedAt": "2026-10-01T17:51:24Z"
 }

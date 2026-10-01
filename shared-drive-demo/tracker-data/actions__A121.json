@@ -4,6 +4,10 @@
  "health": "risk",
  "history": [
   {
+   "date": "2026-09-30",
+   "text": "been lower on my list, will round back and share some languages with regions next week"
+  },
+  {
    "date": "2026-09-16",
    "text": "Translation tracking a bit slower then expected but in progress"
   },
@@ -57,5 +61,5 @@
  "targetDate": "2026-10-31",
  "targetGoal": "Awareness",
  "title": "More translated materials (GENESYS and Email focus)",
- "updatedAt": ""
+ "updatedAt": "2026-10-01T17:51:24Z"
 }

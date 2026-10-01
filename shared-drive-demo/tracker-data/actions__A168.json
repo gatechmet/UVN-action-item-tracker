@@ -1,0 +1,27 @@
+{
+ "objectiveId": "P2-O8",
+ "priorityId": "P2",
+ "order": 34,
+ "title": "Build and share Conditioning days training content/materials",
+ "group": "Enable Boutique and Smaller Regional Dealers",
+ "owner": "Mike",
+ "region": "NA",
+ "targetGoal": "",
+ "targetDate": "2026-08-31",
+ "originalDate": "2026-08-31",
+ "health": "on",
+ "status": "completed",
+ "completedAt": "2026-08-31T12:00:00Z",
+ "months": {
+  "Jul": "green",
+  "Aug": "complete"
+ },
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "",
+   "text": "Added on 10/1 from the NA-LATAM tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

@@ -1,0 +1,32 @@
+{
+ "objectiveId": "P2-O8",
+ "priorityId": "P2",
+ "order": 31,
+ "title": "Acclaro Pro upgrade PN for EMEA",
+ "group": "Enable Boutique and Smaller Regional Dealers",
+ "owner": "Kelly",
+ "region": "EMEA",
+ "targetGoal": "",
+ "targetDate": "",
+ "originalDate": "",
+ "health": "none",
+ "status": "open",
+ "completedAt": "",
+ "months": {},
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "2026-07-22",
+   "text": "Justin followed up via email - any other action needed ?"
+  },
+  {
+   "date": "2026-06-11",
+   "text": "part number exists in NA - can it be used for EMEA? - Kelly to check in with Justin"
+  },
+  {
+   "date": "",
+   "text": "Added on 10/1 from the EMEA tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

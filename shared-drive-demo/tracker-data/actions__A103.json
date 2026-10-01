@@ -1,5 +1,13 @@
 {
- "dateHistory": [],
+ "dateHistory": [
+  {
+   "from": "2026-09-30",
+   "to": "2026-12-31",
+   "at": "2026-10-01T17:51:24Z",
+   "by": "",
+   "reason": "Plan changed in the tracker spreadsheet"
+  }
+ ],
  "group": "",
  "health": "risk",
  "history": [
@@ -67,7 +75,10 @@
  "months": {
   "Aug": "yellow",
   "Jul": "yellow",
-  "Sep": "planned"
+  "Sep": "planned",
+  "Oct": "planned",
+  "Nov": "planned",
+  "Dec": "planned"
  },
  "objectiveId": "P2-O7",
  "order": 1,
@@ -76,8 +87,8 @@
  "priorityId": "P2",
  "region": "NA",
  "status": "open",
- "targetDate": "2026-09-30",
+ "targetDate": "2026-12-31",
  "targetGoal": "",
  "title": "Develop 1 academic success story NA and EMEA.",
- "updatedAt": ""
+ "updatedAt": "2026-10-01T17:51:24Z"
 }
