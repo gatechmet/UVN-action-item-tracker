@@ -5,7 +5,7 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
    Each record is one small JSON file in one flat folder: <folder>/tracker-data/<collection>__<id>.json
    Other people's edits are picked up by re-checking the folder every few seconds. */
 (function(){
-  const COLS=['priorities','objectives','actions','notes','bowler'];
+  const COLS=['priorities','objectives','actions','notes','bowler','forecast'];
   const POLL_MS=6000;
   const supported='showDirectoryPicker' in window;
   let root=null,dataDir=null,ready,readyResolve;ready=new Promise(r=>readyResolve=r);
