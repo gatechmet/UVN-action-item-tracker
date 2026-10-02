@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>UVNN Strategy Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -7,19 +8,19 @@
   --bg:#f3f5f7; --panel:#ffffff; --ink:#15202b; --muted:#5b6875; --line:#d9dfe5; --soft:#e9edf1;
   --accent:#1f5f8b; --accent-ink:#ffffff; --band:#223445; --band-ink:#eef3f7;
   --on:#1e8a4c; --on-bg:#dff2e7; --risk:#b7791f; --risk-bg:#fbf0d9; --off:#c0392b; --off-bg:#fbe3e0;
-  --done:#6b7785; --done-bg:#e6eaee; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
+  --done:#6b7785; --done-bg:#e6eaee; --pause:#0f7c80; --pause-bg:#dcf1f1; --comp:#2563b8; --comp-bg:#e3ecfa; --comp-row:#f2f6fd; --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --plan:#8a9aab; --planln:#4b5661; --moved:#7a4fb5; --moved-bg:#efe7fa;
   --f-disp:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --planln:#c3ccd5; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --planln:#c3ccd5; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:20px 60px}
@@ -31,7 +32,7 @@ header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:end;justify-con
 .kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 12px;min-width:84px;cursor:pointer;text-align:left;color:var(--ink);font:inherit}
 .kpi b{display:block;font:600 20px var(--f-mono);font-variant-numeric:tabular-nums}
 .kpi span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.kpi.on b{color:var(--on)}.kpi.risk b{color:var(--risk)}.kpi.off b{color:var(--off)}.kpi.moved b{color:var(--moved)}
+.kpi.soon b{color:var(--off)}.kpi.on b{color:var(--on)}.kpi.risk b{color:var(--risk)}.kpi.off b{color:var(--off)}.kpi.moved b{color:var(--moved)}.kpi.nr b{color:var(--muted)}
 .kpi[aria-pressed="true"]{outline:2px solid var(--accent)}
 .filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .filters label{display:flex;flex-direction:column;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);gap:2px}
@@ -54,9 +55,83 @@ button{font:inherit;cursor:pointer}
 .objhead h3{font-size:15px;font-weight:600;flex:1 1 260px;min-width:0}
 .bar{display:flex;height:6px;width:120px;border-radius:3px;overflow:hidden;background:var(--line)}
 .bar i{display:block}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 14px;font:600 14px var(--f-disp);color:var(--muted);letter-spacing:.02em}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:hover{color:var(--ink)}
+.gsum{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+.gsum .bar{width:220px;height:10px}
+.gsum .gm{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}.gsum .gm b{color:var(--ink);font-weight:600}
+.mhead{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:14px 0}
+.mhead .yr{width:auto;gap:10px;margin:0}
+.mhelp{margin:0;color:var(--muted);font-size:13px;max-width:80ch}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{background:var(--panel);border:0;border-right:1px solid var(--line);padding:7px 12px;color:var(--ink);font:500 13px var(--f-body)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.mcard .ctl{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}.seg.sm button{padding:3px 8px;font-size:11px}
+.mkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);align-items:center}
+.mkey i{display:inline-block;vertical-align:middle;margin-right:5px}
+.mkey .dot{width:9px;height:9px;border-radius:50%}.mkey .dot.up{background:var(--on)}.mkey .dot.down{background:var(--off)}
+.mkey .dash{width:18px;border-top:2px dotted var(--muted)}.mkey .pl{width:22px;border-top:2px dashed var(--planln)}.mkey .ac{width:22px;border-top:3px solid var(--s1)}
+.mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.mgrid{grid-template-columns:1fr}}
+.mcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px;min-width:0}
+.mcard.wide{grid-column:1/-1}
+.mcard header{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.mcard h3{font-size:15px;font-weight:600}.msub{font-size:12px;color:var(--muted)}
+.mcard .cv{position:relative;height:250px}.mcard.small .cv{height:190px}.mcard.wide .cv{height:280px}
+.mstats{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--muted)}
+.mstat b{color:var(--ink);font:600 14px var(--f-mono)}.mstat.up b{color:var(--on)}.mstat.down b{color:var(--off)}.mwhen{font-size:11px}
+.mnote{margin:0;font-size:11px;color:var(--muted)}
+.bpaste{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin-bottom:12px}
+.bpaste summary{cursor:pointer;color:var(--accent);font-weight:500}
+.bpaste textarea{margin:8px 0;font:12px var(--f-mono)}.bpaste .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#b-msg{font-size:13px;color:var(--muted)}
+.bgridwrap{max-height:70vh;overflow:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table.bgrid{border-collapse:separate;border-spacing:0;table-layout:auto;min-width:0;width:auto}
+table.bgrid th,table.bgrid td{border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);padding:0;white-space:nowrap;font-size:11px}
+table.bgrid thead th{position:sticky;top:0;background:var(--soft);z-index:2;padding:4px 6px;text-align:center;color:var(--muted);text-transform:none;letter-spacing:0}
+
+table.bgrid thead th div{font-weight:400;font-size:10px}
+table.bgrid th.q{color:var(--ink);font-weight:600}
+table.bgrid .qs{border-left:2px solid var(--line)}
+table.bgrid .st{position:sticky;background:var(--panel);z-index:1;background-clip:padding-box}
+table.bgrid tbody th.st,table.bgrid tbody td.st{background:var(--panel)}
+table.bgrid thead .st{z-index:3;background:var(--soft)}
+table.bgrid .st.m{min-width:190px;max-width:190px;white-space:normal;text-align:left;padding:4px 8px;font-size:12px;font-weight:600;color:var(--ink)}
+table.bgrid .st.m div{font-weight:400;color:var(--muted);font-size:11px}
+table.bgrid .st.o{min-width:86px}table.bgrid .st.t{min-width:64px}table.bgrid .st.rl{min-width:40px;padding:0 6px;color:var(--muted);text-align:right;border-right:2px solid var(--line)}
+table.bgrid input{width:52px;border:0;border-radius:0;background:transparent;padding:4px 5px;font:12px var(--f-mono);text-align:right;color:var(--ink)}
+table.bgrid .st input{width:100%;text-align:left;font-family:var(--f-body)}
+table.bgrid input:focus{outline:2px solid var(--accent);outline-offset:-2px;background:var(--panel)}
+table.bgrid td.act input,table.bgrid td.ytd input{font-weight:600}
+table.bgrid tr.mfirst>*{border-top:2px solid var(--line)}
+.dash{display:grid;gap:18px;margin-top:16px}
+.dcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.dcard .band{margin-top:0;border-radius:0}
+.dsum{padding:14px;display:grid;gap:12px;border-bottom:1px solid var(--line)}
+.bar.big{width:100%;height:14px;border-radius:4px}
+.mets{display:flex;flex-wrap:wrap;gap:8px 28px}
+.met b{display:block;font:600 22px var(--f-mono);font-variant-numeric:tabular-nums;line-height:1.1}
+.met span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.met.comp b{color:var(--comp)}.met.risk b{color:var(--risk)}.met.off b{color:var(--off)}.met.late b{color:var(--off)}.met.pause b{color:var(--pause)}
+table.otab{min-width:820px}
+table.otab td,table.otab th{padding:8px 10px}
+table.otab td.n{font:500 14px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+table.otab th.n{text-align:right}
+table.otab td.n.z{color:var(--line)}
+table.otab td.n.risk:not(.z){color:var(--risk)}table.otab td.n.off:not(.z),table.otab td.n.late:not(.z){color:var(--off)}table.otab td.n.comp:not(.z){color:var(--comp)}table.otab td.n.pause:not(.z){color:var(--pause)}
+table.otab tbody tr{cursor:pointer}table.otab tbody tr:hover td{background:var(--soft)}
+table.otab .bar{width:100%;height:10px}
+.pct{font:12px var(--f-mono);color:var(--muted)}
+.dkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);align-items:center;margin-top:10px}
+.dkey i{display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 .counts{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
 .tblwrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:860px}
+table{width:100%;border-collapse:collapse;min-width:1180px;table-layout:fixed}
+col.c-own{width:120px}col.c-reg{width:110px}col.c-tgt{width:118px}col.c-mon{width:236px}col.c-st{width:136px}col.c-upd{width:300px}
+td{overflow-wrap:anywhere}
 th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);text-align:left;font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line)}
 td{padding:6px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
 tr.act{cursor:pointer}
@@ -71,13 +146,71 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .moved{background:var(--moved-bg);color:var(--moved)}
 .date{font:12px var(--f-mono);white-space:nowrap;font-variant-numeric:tabular-nums}
 .date.late{color:var(--off);font-weight:500}
-.strip{display:grid;grid-template-columns:repeat(12,9px);gap:2px}
-.strip i{height:12px;border-radius:2px;background:var(--soft)}
-.strip i.green{background:var(--on)}.strip i.yellow{background:var(--risk)}.strip i.red{background:var(--off)}
-.strip i.complete{background:var(--done)}.strip i.planned{background:none;border:1px dashed var(--plan)}.strip i.na{background:var(--soft)}
-.strip i.now{box-shadow:0 0 0 1px var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(12,15px);gap:3px}
+.strip i,.strip .c{display:grid;place-items:center;width:15px;height:15px;border-radius:3px;background:var(--panel);border:1px solid var(--line);padding:0}
+.strip .c{cursor:pointer}
+.strip .c:hover{outline:2px solid var(--accent);outline-offset:1px}
+.strip .green{background:var(--on)}.strip .yellow{background:var(--risk)}.strip .red{background:var(--off)}
+.strip .green,.strip .yellow,.strip .red,.strip .complete{border-color:transparent}.strip .complete{background:var(--comp)}.strip .planned{background:var(--panel);border:1px dashed var(--plan)}.strip .na{background:linear-gradient(var(--line),var(--line)) center/7px 1.5px no-repeat var(--panel)}
+.strip .due::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.strip .due.late::after{background:var(--off)}
+.strip .due.green::after,.strip .due.yellow::after,.strip .due.red::after,.strip .due.complete::after{background:#fff;box-shadow:0 0 0 1px rgb(0 0 0 / .25)}
+.yr{display:flex;align-items:center;justify-content:space-between;width:213px;margin-bottom:3px;font:600 11px var(--f-mono);color:var(--ink);text-transform:none;letter-spacing:0}
+.yr button{background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink);width:22px;height:18px;line-height:1;padding:0;cursor:pointer}
+.yr button:disabled{opacity:.35;cursor:default}
+.yr button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.strip .now{box-shadow:0 0 0 1.5px var(--ink)}
+.mh{font:600 9px var(--f-mono);color:var(--muted)}.mh span{text-align:center}
+td.upd{font-size:12px;color:var(--muted)}
+td.upd .clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink)}
+td.upd .d{font:11px var(--f-mono)}
+.s-completed{background:var(--comp);color:var(--panel)}.s-paused{background:var(--pause-bg);color:var(--pause)}
+tr.act.completed td{background:var(--comp-row)}tr.act.completed .ttl{color:var(--muted)}tr.act.closed .ttl{color:var(--muted)}
+tr.act.closed td{opacity:.75}
+.tick{color:var(--comp);font-weight:700}
+button.pill{border:0;cursor:pointer;font:inherit;font-size:11px;font-weight:600}button.pill:hover{outline:2px solid var(--accent);outline-offset:1px}
+.filters .fl{display:flex;flex-direction:column;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);gap:2px;min-width:0}
+.msb{font:inherit;font-size:14px;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:5px 24px 5px 8px;text-align:left;max-width:190px;min-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative}
+.msb::after{content:'';position:absolute;right:9px;top:50%;margin-top:-3px;border:4px solid transparent;border-top-color:var(--muted)}
+.msb.on{border-color:var(--accent);background:var(--soft);font-weight:500}
+.pop.ms{grid-template-columns:1fr;max-height:340px;overflow-y:auto;min-width:220px;max-width:min(420px,calc(100vw - 16px))}
+.pop.ms label{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:4px;font-size:13px;color:var(--ink);cursor:pointer}
+.pop.ms label:hover{background:var(--soft)}
+.pop.ms .hd{display:flex;justify-content:space-between;align-items:center}
+.pop .sep{grid-column:1/-1;border-top:1px solid var(--line);margin:2px 0}
+tr.act.closed .ttl{text-decoration:line-through;text-decoration-color:var(--line)}
+tr.act.paused .ttl{font-style:italic}
+.pop{position:absolute;z-index:25;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 20px rgb(0 0 0 / .18);padding:6px;display:grid;grid-template-columns:repeat(2,auto);gap:4px}
+.pop .hd{grid-column:1/-1;font-size:11px;color:var(--muted);padding:2px 4px}
+.pop button{display:flex;gap:6px;align-items:center;background:none;border:1px solid transparent;border-radius:4px;padding:4px 8px;color:var(--ink);font-size:12px;text-align:left}
+.pop button:hover,.pop button.sel{border-color:var(--line);background:var(--soft)}
+.pop .strip{display:inline-grid;grid-template-columns:15px}
+.viewbar{font-size:12px;color:var(--muted);margin-top:6px}
 .empty{padding:40px 16px;text-align:center;color:var(--muted)}
 .addrow{padding:8px 14px}
+.num{display:inline-block;font:600 12px var(--f-mono);padding:1px 6px;border-radius:3px;background:var(--accent);color:var(--accent-ink);margin-right:8px;vertical-align:2px;font-variant-numeric:tabular-nums}
+.band .num{background:var(--band-ink);color:var(--band)}
+.intake{margin-top:32px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:12px}
+.intake h2{font-size:18px}
+.intake p{margin:0;color:var(--muted);font-size:13px;max-width:75ch}
+.itools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.itools select{max-width:260px}
+table.itab{min-width:1000px;table-layout:fixed;border:1px solid var(--line)}
+table.itab th{background:var(--soft);border:1px solid var(--line);padding:6px}
+table.itab td{border:1px solid var(--line);padding:0;background:var(--panel)}
+table.itab td.rn{font:11px var(--f-mono);color:var(--muted);text-align:center;background:var(--soft)}
+table.itab input{width:100%;border:0;border-radius:0;background:transparent;padding:7px 8px;font-size:13px}
+table.itab input:focus{outline:2px solid var(--accent);outline-offset:-2px;background:var(--panel)}
+table.itab tr.bad td{background:var(--off-bg)}
+table.itab tr.bad td.chk{color:var(--off);font-weight:600}
+table.itab tr.ok td.chk{color:var(--on)}
+table.itab td.chk{font-size:12px;padding:4px 8px;line-height:1.3}
+.iactions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#i-msg{font-size:13px}#i-msg.bad{color:var(--off);font-weight:600}#i-msg.ok{color:var(--on)}
+.ikey summary{cursor:pointer;color:var(--accent);font-size:13px}
+.ikey ul{margin:6px 0 0;padding-left:18px;font-size:13px;columns:2 340px;column-gap:28px}
+.ikey li{break-inside:avoid;margin-bottom:2px}
+.ikey li.p{list-style:none;margin:8px 0 2px -18px;font-weight:600}
 /* drawer */
 .scrim{position:fixed;inset:0;background:rgb(0 0 0 / .35);z-index:20}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--panel);z-index:21;border-left:1px solid var(--line);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -98,8 +231,8 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:30;font-size:13px}
 .ro{font-size:12px;color:var(--risk);}
 .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--muted);align-items:center;margin-top:8px}
-.legend .strip{grid-template-columns:9px}
-@media (max-width:640px){.fgrid{grid-template-columns:1fr} input[type=search]{width:100%}.filters label{flex:1 1 40%}}
+.legend .strip{grid-template-columns:15px}
+@media (max-width:640px){.fgrid{grid-template-columns:1fr} input[type=search]{width:100%}.filters label,.filters .fl{flex:1 1 40%}.msb{max-width:none;width:100%}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -112,135 +245,254 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
     <div class="kpis" id="kpis"></div>
   </header>
 
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button type="button" role="tab" data-tab="tracker" id="tab-tracker">Tracker</button>
+    <button type="button" role="tab" data-tab="dash" id="tab-dash">Dashboard</button>
+    <button type="button" role="tab" data-tab="perf" id="tab-perf">Performance</button>
+    <button type="button" role="tab" data-tab="bowler" id="tab-bowler">Bowler input</button>
+  </nav>
   <div class="filters" id="filters">
     <label>Search<input type="search" id="f-q" placeholder="Task, note, owner…"></label>
-    <label>Priority<select id="f-pri"></select></label>
-    <label>Objective<select id="f-obj"></select></label>
-    <label>Owner<select id="f-owner"></select></label>
-    <label>Region<select id="f-region"></select></label>
-    <label>Status<select id="f-status"><option value="">All</option><option value="open">Open</option><option value="closed">Closed</option></select></label>
-    <label>Schedule<select id="f-health"><option value="">All</option><option value="on">On track</option><option value="risk">At risk</option><option value="off">Off track</option><option value="none">Not rated</option><option value="late">Past due</option><option value="moved">Date moved</option></select></label>
+    <div class="fl"><span>Priority</span><button type="button" class="msb" id="f-pri" data-ms="pri" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Objective</span><button type="button" class="msb" id="f-obj" data-ms="obj" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Owner</span><button type="button" class="msb" id="f-owner" data-ms="owner" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Region</span><button type="button" class="msb" id="f-region" data-ms="region" aria-haspopup="true">All</button></div>
+    <div class="fl"><span>Status</span><button type="button" class="msb" id="f-status" data-ms="status" aria-haspopup="true">All</button></div>
+    <label>Not updated in<select id="f-stale"><option value="">Any time</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="60">Last 60 days</option><option value="90">Last 90 days</option></select></label>
+    <label>Updated in<select id="f-upd"><option value="">Any time</option><option value="1">Last 24 hours</option><option value="3">Last 3 days</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option></select></label>
+    <label>Completed in<select id="f-done"><option value="">Any time</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="60">Last 60 days</option><option value="90">Last 90 days</option></select></label>
+    <div class="fl"><span>Schedule</span><button type="button" class="msb" id="f-health" data-ms="health" aria-haspopup="true">All</button></div>
     <label>Group by<select id="f-group"><option value="tree">Priority &amp; objective</option><option value="owner">Owner</option><option value="region">Region</option><option value="flat">None</option></select></label>
-    <label>Sort<select id="f-sort"><option value="order">Plan order</option><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option></select></label>
+    <label>Sort<select id="f-sort"><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option><option value="done">Recently completed</option></select></label>
     <button class="btn" id="f-clear" type="button">Clear</button>
   </div>
-  <div class="legend">
+  <div class="legend" id="legend">
     <span>Month strip:</span>
     <span class="strip"><i class="green"></i></span>On track
     <span class="strip"><i class="yellow"></i></span>At risk
     <span class="strip"><i class="red"></i></span>Off track
-    <span class="strip"><i class="complete"></i></span>Complete
+    <span class="strip"><i class="complete"></i></span>Completed
     <span class="strip"><i class="planned"></i></span>Planned
     <span class="strip"><i class="na"></i></span>Not active
+    <span class="strip"><i class="due"></i></span>Due month (red if past due)
+    <span class="strip"><i class="now"></i></span>This month (open items). Use ‹ › above the months to change year
   </div>
 
+  <div class="viewbar" id="viewbar"></div>
   <main id="main"><div class="empty">Loading the tracker…</div></main>
+
+  <section class="intake" id="intake" aria-labelledby="i-title">
+    <h2 id="i-title">Add actions in bulk</h2>
+    <p>Copy rows from Excel and paste them into the first cell. Columns go in this order: action, owner, region, target date, objective #. The objective # includes its priority, so 1.3 means priority 1, objective 3. Every row is checked before anything is added.</p>
+    <div class="itools">
+      <button type="button" class="btn" id="i-newpri">+ New priority</button>
+      <select id="i-objpri" aria-label="Priority for the new objective"></select>
+      <button type="button" class="btn" id="i-newobj">+ New objective</button>
+    </div>
+    <div class="tblwrap"><table class="itab">
+      <colgroup><col style="width:38px"><col><col style="width:150px"><col style="width:120px"><col style="width:120px"><col style="width:100px"><col style="width:260px"></colgroup>
+      <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Region</th><th>Target date</th><th>Objective #</th><th>Check</th></tr></thead>
+      <tbody id="i-body"></tbody>
+    </table></div>
+    <div class="iactions">
+      <button type="button" class="btn primary" id="i-submit">Add actions to tracker</button>
+      <button type="button" class="btn" id="i-addrow">Add 5 rows</button>
+      <button type="button" class="btn" id="i-clear">Clear table</button>
+      <span id="i-msg" role="status"></span>
+    </div>
+    <details class="ikey"><summary>Show priority and objective numbers</summary><ul id="i-key"></ul></details>
+  </section>
 </div>
 
 <div id="drawer-root"></div>
 <div id="toast" class="toast" hidden></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const HL={on:'On track',risk:'At risk',off:'Off track',none:'Not rated'};
 const HRANK={off:0,risk:1,none:2,on:3};
 const CODES={'':'—',green:'On track',yellow:'At risk',red:'Off track',complete:'Complete',planned:'Planned',na:'Not active'};
+const STAT={open:'Open',paused:'Paused',completed:'Completed',closed:"Closed (won't do)"};
+const HCODE={green:'on',yellow:'risk',red:'off'};
 const S={pri:{},obj:{},act:{},notes:{}};
-let db=null,user=null,uid=null,canWrite=true,names={},openId=null,kpiFilter='';
+let db=null,user=null,uid=null,canWrite=true,names={},openId=null,view='',tab='tracker';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today=()=>new Date().toISOString().slice(0,10);
 const fmt=d=>{if(!d)return '—';const [y,m,dd]=d.split('-');return `${dd} ${M[+m-1]} ${y.slice(2)}`};
 const split=s=>String(s||'').split(/[,\/&]| and /i).map(x=>x.trim().replace(/\?$/,'')).filter(Boolean);
-const normR=r=>{const u=r.toUpperCase();return u==='LATAM'?'LATAM':r};
+const normR=r=>{const u=r.toUpperCase();return u==='LATAM'?'LATAM':u==='GLOBAL'?'Global':r};
 function toast(t){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2400)}
-const isLate=a=>a.status!=='closed'&&a.targetDate&&a.targetDate<today();
+const isLate=a=>a.status==='open'&&a.targetDate&&a.targetDate<today();
 const isMoved=a=>(a.dateHistory||[]).length>0&&a.originalDate&&a.targetDate!==a.originalDate;
+const daysAhead=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const isSoon=a=>a.status==='open'&&!!a.targetDate&&a.targetDate<=daysAhead(28);
+const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10)};
 
-function prefs(){try{return JSON.parse(localStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
-function savePrefs(){try{const o={};['q','pri','obj','owner','region','status','health','group','sort'].forEach(k=>o[k]=$('#f-'+k).value);localStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+const FILTERS=['q','done','stale','upd'];
+const MSK=['pri','obj','owner','region','status','health'];
+const MSL={pri:'Priority',obj:'Objective',owner:'Owner',region:'Region',status:'Status',health:'Schedule'};
+const SEL={};MSK.forEach(k=>SEL[k]=new Set());
+const OPTS={pri:[],obj:[],owner:[],region:[],
+  status:[['open','Open'],['paused','Paused (parking lot)'],['completed','Completed'],['closed',"Closed (won't do)"]],
+  health:[['on','On track'],['risk','At risk'],['off','Off track'],['none','Not rated'],['late','Past due'],['soon','Past due or due in next 4 weeks'],['moved','Date moved']]};
+const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
+function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
+function paintMs(){MSK.forEach(k=>{const b=$('#f-'+k);b.textContent=msText(k);b.title=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||'All';b.classList.toggle('on',SEL[k].size>0)})}
+function prefs(){try{return JSON.parse(sessionStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
+function savePrefs(){try{const o={view,tab,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);sessionStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
 
 function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
+const pNum=p=>sortedPri().indexOf(p)+1;
+const oNum=o=>{const p=S.pri[o.priorityId];return p?`${pNum(p)}.${objsOf(p.id).indexOf(o)+1}`:'?'};
 function objsOf(pid){return Object.values(S.obj).filter(o=>o.priorityId===pid).sort((a,b)=>a.order-b.order)}
 
-function fillSelect(id,opts,keepAll='All'){const el=$('#f-'+id),v=el.value;el.innerHTML=`<option value="">${keepAll}</option>`+opts.map(([k,l])=>`<option value="${esc(k)}">${esc(l)}</option>`).join('');if([...el.options].some(o=>o.value===v))el.value=v}
+function setOpts(k,opts){OPTS[k]=opts}
 function refreshFilters(){
-  fillSelect('pri',sortedPri().map(p=>[p.id,p.name]));
-  const pv=$('#f-pri').value;
-  fillSelect('obj',sortedPri().filter(p=>!pv||p.id===pv).flatMap(p=>objsOf(p.id).map(o=>[o.id,o.name.length>60?o.name.slice(0,58)+'…':o.name])));
+  setOpts('pri',sortedPri().map(p=>[p.id,p.name]));
+  setOpts('obj',sortedPri().filter(p=>!SEL.pri.size||SEL.pri.has(p.id)).flatMap(p=>objsOf(p.id).map(o=>[o.id,oNum(o)+'  '+o.name])));
+  setOpts('pri',sortedPri().map(p=>[p.id,'P'+pNum(p)+'  '+p.name]));
+  if(Object.keys(S.obj).length){const ok=new Set(OPTS.obj.map(x=>x[0]));SEL.obj.forEach(v=>{if(!ok.has(v))SEL.obj.delete(v)})}
   const own=new Set(),reg=new Set();
   Object.values(S.act).forEach(a=>{split(a.owner).forEach(x=>own.add(x));split(a.region).forEach(x=>reg.add(normR(x)))});
-  fillSelect('owner',[...own].sort().map(x=>[x,x]).concat([['__none','(Unassigned)']]));
-  fillSelect('region',[...reg].sort().map(x=>[x,x]).concat([['__none','(No region)']]));
+  setOpts('owner',[...own].sort().map(x=>[x,x]).concat([['__none','(Unassigned)']]));
+  setOpts('region',[...reg].sort().map(x=>[x,x]).concat([['__none','(No region)']]));
+  paintMs();
 }
 
+/* Dropdown filters define the record set AND the counts at the top. */
 function filtered(){
   const f=k=>$('#f-'+k).value, q=f('q').toLowerCase();
   return Object.values(S.act).filter(a=>{
-    if(f('pri')&&a.priorityId!==f('pri'))return false;
-    if(f('obj')&&a.objectiveId!==f('obj'))return false;
-    if(f('owner')){if(f('owner')==='__none'?split(a.owner).length:!split(a.owner).includes(f('owner')))return false}
-    if(f('region')){const r=split(a.region).map(normR);if(f('region')==='__none'?r.length:!(r.includes(f('region'))||r.includes('Global')))return false}
-    if(f('status')&&a.status!==f('status'))return false;
-    const h=f('health');
-    if(h==='late'?!isLate(a):h==='moved'?!isMoved(a):h&&a.health!==h)return false;
-    if(kpiFilter==='late'&&!isLate(a))return false;
-    if(kpiFilter==='moved'&&!isMoved(a))return false;
+    if(SEL.pri.size&&!SEL.pri.has(a.priorityId))return false;
+    if(SEL.obj.size&&!SEL.obj.has(a.objectiveId))return false;
+    if(SEL.owner.size){const o=split(a.owner);if(![...SEL.owner].some(v=>v==='__none'?!o.length:o.includes(v)))return false}
+    if(SEL.region.size){const r=split(a.region).map(normR);if(![...SEL.region].some(v=>v==='__none'?!r.length:r.includes(v)))return false}
+    if(SEL.status.size&&!SEL.status.has(a.status))return false;
+    if(f('stale')&&!((a.status==='open'||a.status==='paused')&&lastUpd(a)<daysAgo(+f('stale'))))return false;
+    if(f('upd')&&!(lastUpd(a)>=daysAgo(+f('upd'))))return false;
+    if(f('done')&&!(a.status==='completed'&&(a.completedAt||'').slice(0,10)>=daysAgo(+f('done'))))return false;
+    if(SEL.health.size&&![...SEL.health].some(h=>h==='late'?isLate(a):h==='soon'?isSoon(a):h==='moved'?isMoved(a):a.status==='open'&&(a.health||'none')===h))return false;
     if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true});
 }
-function sorter(){const s=$('#f-sort').value;return (a,b)=>{
-  if(s==='date')return (a.targetDate||'9999').localeCompare(b.targetDate||'9999');
-  if(s==='health')return (a.status==='closed')-(b.status==='closed')||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
+/* Count tiles are a view on top of the filtered set. Clicking one never changes the counts. */
+const VIEWS={'':['Actions',()=>true],open:['Open',a=>a.status==='open'],paused:['Paused',a=>a.status==='paused'],
+  completed:['Completed',a=>a.status==='completed'],closed:['Closed',a=>a.status==='closed'],
+  on:['On track',a=>a.status==='open'&&a.health==='on'],risk:['At risk',a=>a.status==='open'&&a.health==='risk'],
+  off:['Off track',a=>a.status==='open'&&a.health==='off'],nr:['Not rated',a=>a.status==='open'&&(a.health||'none')==='none'],late:['Past due',isLate],soon:['Due ≤ 4 wks',isSoon],moved:['Date moved',isMoved]};
+function sorter(){const s=$('#f-sort').value;const rank={open:0,paused:1,completed:2,closed:3};return (a,b)=>{
+
+  if(s==='health')return (rank[a.status]??0)-(rank[b.status]??0)||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
   if(s==='updated')return (b.updatedAt||'').localeCompare(a.updatedAt||'');
-  const oa=S.obj[a.objectiveId],ob=S.obj[b.objectiveId];
-  return (a.priorityId||'').localeCompare(b.priorityId||'')||(oa?.order??0)-(ob?.order??0)||a.order-b.order}}
+  if(s==='done')return (b.completedAt||'').localeCompare(a.completedAt||'');
+  return (a.targetDate||'9999').localeCompare(b.targetDate||'9999')||(a.order||0)-(b.order||0)}}
 
 function notesFor(pid){return Object.values(S.notes).filter(n=>n.parentId===pid)}
+function lastUpd(a){const n=lastNote(a);return [n?.date||'',(a.updatedAt||'').slice(0,10)].sort().pop()||''}
 function lastNote(a){const n=notesFor(a.id).sort((x,y)=>y.at.localeCompare(x.at))[0];if(n)return {date:n.at.slice(0,10),text:n.text};return (a.history||[])[0]}
 
-function kpis(list){
-  const open=list.filter(a=>a.status==='open');
-  const k=[['',list.length,'Actions'],['open',open.length,'Open'],['closed',list.length-open.length,'Closed'],
-    ['on',open.filter(a=>a.health==='on').length,'On track'],['risk',open.filter(a=>a.health==='risk').length,'At risk'],
-    ['off',open.filter(a=>a.health==='off').length,'Off track'],['late',open.filter(isLate).length,'Past due'],['moved',list.filter(isMoved).length,'Date moved']];
-  $('#kpis').innerHTML=k.map(([key,n,l])=>`<button type="button" class="kpi ${key}" data-k="${key}" aria-pressed="${curKpi()===key&&key!==''}"><b>${n}</b><span>${l}</span></button>`).join('');
+function kpis(base){
+  $('#kpis').innerHTML=Object.entries(VIEWS).map(([key,[l,fn]])=>`<button type="button" class="kpi ${key}" data-k="${key}" aria-pressed="${view===key&&key!==''}" title="${key?'Show only these records. Counts stay the same.':'Show all filtered records'}"><b>${base.filter(fn).length}</b><span>${l}</span></button>`).join('');
+  const act=[];if($('#f-q').value)act.push(`Search “${$('#f-q').value}”`);
+  MSK.forEach(k=>{if(SEL[k].size)act.push(`${MSL[k]}: ${OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||SEL[k].size+' selected'}`)});
+  if($('#f-stale').value)act.push('Open or paused, not updated in '+$('#f-stale').selectedOptions[0].text.toLowerCase());
+  if($('#f-upd').value)act.push('Updated in '+$('#f-upd').selectedOptions[0].text.toLowerCase());
+  if($('#f-done').value)act.push('Completed in '+$('#f-done').selectedOptions[0].text.toLowerCase());
+  $('#viewbar').textContent=(act.length?'Filters: '+act.join(' · '):'No filters applied')+(view?`. Showing ${VIEWS[view][0]} only (click the tile again to show all).`:'');
 }
-function curKpi(){const s=$('#f-status').value,h=$('#f-health').value;return h||s||''}
 
-function strip(a){const now=new Date().getFullYear()===2026?new Date().getMonth():-1;return `<span class="strip" title="${M.map(m=>m+': '+(CODES[a.months?.[m]||'']||'—')).join('\n')}">${M.map((m,i)=>`<i class="${a.months?.[m]||''}${i===now?' now':''}"></i>`).join('')}</span>`}
+const THISY=new Date().getFullYear(),YMIN=2025,YMAX=2030;
+let yr=THISY;
+const NOWM=new Date().getMonth();
+const nowIn=y=>y===THISY?NOWM:-1;
+/* 2026 months live in a.months (original import); other years in a.monthsY[year]. */
+const monthsOf=(a,y=yr)=>y===2026?(a.months||{}):(a.monthsY?.[y]||{});
+const monthsPatch=(a,y,obj)=>y===2026?{months:obj}:{monthsY:{[y]:obj}};
+function strip(a){const open=a.status==='open',due=open&&(a.targetDate||'').startsWith(yr+'-')?+a.targetDate.slice(5,7)-1:-1,late=isLate(a),mo=monthsOf(a),NW=nowIn(yr);
+  return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${mo[m]||''}${open&&i===NW?' now':''}${i===due?' due'+(late?' late':''):''}" data-cell="${a.id}" data-m="${m}" aria-label="${m} ${yr}: ${CODES[mo[m]||'']}${i===due?' · due':''}" title="${m} ${yr}: ${CODES[mo[m]||'']}${i===due?(late?' · due (past due)':' · due this month'):''}"></button>`).join('')}</span>`}
+function statusPill(a){const lbl=a.status==='open'?HL[a.health||'none']:a.status==='completed'?'✓ Completed':a.status==='closed'?'Closed':STAT[a.status]||a.status;
+  return `<button type="button" class="pill ${a.status==='open'?'h-'+(a.health||'none'):'s-'+a.status}" data-stat="${a.id}" title="${a.autoOff?'Past its target date, so shown as off track. Click to change status':'Change status'}" aria-haspopup="true">${lbl}</button>`}
 function row(a,ctx){
   const ln=lastNote(a);
   return `<tr class="act ${a.status}" data-id="${a.id}" tabindex="0">
-   <td class="ttl"><div>${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}${ln?`<div class="ctx" title="${esc(ln.text)}">${ln.date?fmt(ln.date)+': ':''}${esc(ln.text.length>90?ln.text.slice(0,88)+'…':ln.text)}</div>`:''}</td>
+   <td class="ttl"><div>${a.status==='completed'?'<span class="tick" aria-label="Completed">✓</span> ':''}${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}</td>
    <td>${esc(a.owner)||'<span class="ctx">—</span>'}</td>
    <td>${esc(a.region)||'<span class="ctx">—</span>'}</td>
-   <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}</td>
+   <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}${a.status==='completed'&&a.completedAt?`<div class="ctx">Done ${fmt(a.completedAt.slice(0,10))}</div>`:''}</td>
    <td>${strip(a)}</td>
-   <td>${a.status==='closed'?'<span class="pill s-closed">Closed</span>':`<span class="pill h-${a.health}">${HL[a.health]}</span>`}</td></tr>`}
-const THEAD=`<thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th>Jan–Dec</th><th>Status</th></tr></thead>`;
+   <td>${statusPill(a)}</td>
+   <td class="upd">${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
+const THEAD=()=>`<colgroup><col><col class="c-own"><col class="c-reg"><col class="c-tgt"><col class="c-mon"><col class="c-st"><col class="c-upd"></colgroup><thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><div class="yr"><button type="button" data-yr="-1" aria-label="Previous year" ${yr<=YMIN?'disabled':''}>‹</button><span>${yr}</span><button type="button" data-yr="1" aria-label="Next year" ${yr>=YMAX?'disabled':''}>›</button></div><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
-  return `<span class="bar" title="Closed / on track / at risk / off track / not rated"><i style="width:${c(a=>a.status==='closed')}%;background:var(--done)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i></span>`}
+  return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--comp)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
+
+const DSEG=[['comp','Completed',a=>a.status==='completed','var(--comp)'],['on','On track',a=>a.status==='open'&&a.health==='on','var(--on)'],
+  ['risk','At risk',a=>a.status==='open'&&a.health==='risk','var(--risk)'],['off','Off track',a=>a.status==='open'&&a.health==='off','var(--off)'],
+  ['nr','Open, not rated',a=>a.status==='open'&&(a.health||'none')==='none','var(--plan)'],['pause','Paused',a=>a.status==='paused','var(--pause)']];
+function bigBar(list,cls=''){const live=list.filter(a=>a.status!=='closed'),n=live.length||1;
+  return `<span class="bar ${cls}" role="img" aria-label="${DSEG.map(([,l,f])=>l+' '+live.filter(f).length).join(', ')}">${DSEG.map(([k,l,f,c])=>{const v=live.filter(f).length;return v?`<i style="width:${v/n*100}%;background:${c}" title="${l}: ${v}"></i>`:''}).join('')}</span>`}
+function stats(l){const live=l.filter(a=>a.status!=='closed'),comp=l.filter(a=>a.status==='completed').length;
+  return {open:l.filter(a=>a.status==='open').length,comp,risk:l.filter(a=>a.status==='open'&&a.health==='risk').length,
+    off:l.filter(a=>a.status==='open'&&a.health==='off').length,late:l.filter(isLate).length,pause:l.filter(a=>a.status==='paused').length,
+    pct:live.length?Math.round(comp/live.length*100):0}}
+function dashboard(list){
+  let h='<div class="dash">';
+  for(const p of sortedPri()){
+    if(SEL.pri.size&&!SEL.pri.has(p.id))continue;
+    const pl=list.filter(a=>a.priorityId===p.id),st=stats(pl);
+    const objs=objsOf(p.id).filter(o=>!SEL.obj.size||SEL.obj.has(o.id));
+    h+=`<section class="dcard"><div class="band"><h2><span class="num">P${pNum(p)}</span>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span></div>
+      <div class="dsum">${bigBar(pl,'big')}
+      <div class="mets">
+        <div class="met"><b>${st.open}</b><span>Open</span></div>
+        <div class="met comp"><b>${st.comp}</b><span>Completed</span></div>
+        <div class="met risk"><b>${st.risk}</b><span>At risk</span></div>
+        <div class="met off"><b>${st.off}</b><span>Off track</span></div>
+        <div class="met late"><b>${st.late}</b><span>Past due</span></div>
+        <div class="met pause"><b>${st.pause}</b><span>Paused</span></div>
+        <div class="met"><b>${st.pct}%</b><span>Complete</span></div>
+      </div></div>
+      <div class="tblwrap"><table class="otab"><colgroup><col><col style="width:220px"><col style="width:70px"><col style="width:90px"><col style="width:76px"><col style="width:80px"><col style="width:76px"><col style="width:70px"></colgroup>
+      <thead><tr><th>Objective</th><th>Progress</th><th class="n">Open</th><th class="n">Completed</th><th class="n">At risk</th><th class="n">Off track</th><th class="n">Past due</th><th class="n">Paused</th></tr></thead><tbody>
+      ${objs.map(o=>{const ol=pl.filter(a=>a.objectiveId===o.id),x=stats(ol);const td=(v,c='')=>`<td class="n ${c}${v?'':' z'}">${v}</td>`;
+        return `<tr data-goobj="${o.id}" tabindex="0" title="Open these actions in the tracker"><td><span class="num">${oNum(o)}</span>${esc(o.name)}<div class="pct">${ol.length} actions · ${x.pct}% complete</div></td><td>${bigBar(ol)}</td>${td(x.open)}${td(x.comp,'comp')}${td(x.risk,'risk')}${td(x.off,'off')}${td(x.late,'late')}${td(x.pause,'pause')}</tr>`}).join('')}
+      </tbody></table></div></section>`;
+  }
+  h+=`<div class="dkey">${DSEG.map(([,l,,c])=>`<span><i style="background:${c}"></i>${l}</span>`).join('')}<span>Closed (won't do) items are left out of the bar and the % complete. Click an objective to open its actions.</span></div></div>`;
+  return h}
 
 function render(){
-  const list=filtered().sort(sorter()),g=$('#f-group').value,main=$('#main');
-  kpis(filtered.call?list:list);
+  renderIntakeKey();
+  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
+  const mt=tab==='perf'||tab==='bowler';
+  ['#filters','#kpis','#viewbar'].forEach(q=>$(q).hidden=mt);
+  if(mt){$('#legend').hidden=true;renderMetrics();return}
+  charts.forEach(c=>c.destroy());charts=[];
+  const base=filtered();
+  $('#legend').hidden=tab==='dash';
+  if(!VIEWS[view])view='';
+  const list=base.filter(VIEWS[view][1]).sort(sorter()),g=$('#f-group').value,main=$('#main');
+  kpis(base);
+  if(tab==='dash'&&Object.keys(S.pri).length){$('#main').innerHTML=dashboard(list);return}
   if(!Object.keys(S.pri).length){main.innerHTML=`<div class="empty">No priorities yet.${canWrite?' <button class="btn primary" data-add="pri">Add a priority</button>':''}</div>`;return}
-  const filtersOn=['q','pri','obj','owner','region','status','health'].some(k=>$('#f-'+k).value)||kpiFilter;
+  const filtersOn=anyFilter()||view;
+  const cnt=l=>`${l.filter(a=>a.status==='open').length} open · ${l.filter(a=>a.status==='paused').length} paused · ${l.length} total`;
   let h='';
   if(g==='tree'){
     for(const p of sortedPri()){
-      if($('#f-pri').value&&p.id!==$('#f-pri').value)continue;
-      const objs=objsOf(p.id).filter(o=>!$('#f-obj').value||o.id===$('#f-obj').value);
+      if(SEL.pri.size&&!SEL.pri.has(p.id))continue;
+      const objs=objsOf(p.id).filter(o=>!SEL.obj.size||SEL.obj.has(o.id));
       const pl=list.filter(a=>a.priorityId===p.id);
       if(filtersOn&&!pl.length)continue;
-      h+=`<section><div class="band"><h2>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span><span class="counts">${pl.filter(a=>a.status==='open').length} open · ${pl.length} total</span><button class="btn ghost" data-open="${p.id}">Notes (${(p.history||[]).length+notesFor(p.id).length})</button></div><div class="pri">`;
+      h+=`<section><div class="band"><h2><span class="num">P${pNum(p)}</span>${esc(p.name)}</h2><span class="stmt">${esc(p.statement)}</span><span class="counts">${cnt(pl)}</span><button class="btn ghost" data-open="${p.id}">Notes (${(p.history||[]).length+notesFor(p.id).length})</button></div><div class="pri">`;
       for(const o of objs){
         const ol=pl.filter(a=>a.objectiveId===o.id);
         if(filtersOn&&!ol.length)continue;
-        h+=`<div class="obj"><div class="objhead"><h3>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${ol.filter(a=>a.status==='open').length} open / ${ol.length}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
-        if(ol.length){h+=`<div class="tblwrap"><table>${THEAD}<tbody>`;let grp=null;
-          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="6">${esc(grp)}</td></tr>`}h+=row(a)}
+        h+=`<div class="obj"><div class="objhead"><h3><span class="num">${oNum(o)}</span>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${cnt(ol)}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
+        if(ol.length){h+=`<div class="tblwrap"><table>${THEAD()}<tbody>`;let grp=null;
+          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="7">${esc(grp)}</td></tr>`}h+=row(a)}
           h+='</tbody></table></div>'}
         if(canWrite)h+=`<div class="addrow"><button class="btn ghost" data-add="act" data-obj="${o.id}">+ Add action</button></div>`;
         h+='</div>'}
@@ -249,13 +501,56 @@ function render(){
     if(canWrite&&!filtersOn)h+=`<div class="addrow"><button class="btn" data-add="pri">+ Add priority</button></div>`;
   }else{
     const buckets=new Map();
-    for(const a of list){const keys=g==='flat'?['All actions']:(g==='owner'?split(a.owner):split(a.region).map(normR));(keys.length?keys:['(Unassigned)']).forEach(k=>{if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(a)})}
+    for(const a of list){const keys=g==='flat'?['All actions']:(g==='owner'?split(a.owner):[...new Set(split(a.region).map(normR))]);(keys.length?keys:['(Unassigned)']).forEach(k=>{if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(a)})}
     const ks=[...buckets.keys()].sort((a,b)=>a.startsWith('(')-b.startsWith('(')||a.localeCompare(b));
     for(const k of ks){const bl=buckets.get(k);
-      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span>${healthBar(bl)}<span class="counts">${bl.filter(a=>a.status==='open').length} open · ${bl.length} total</span></div><div class="pri"><div class="tblwrap"><table>${THEAD}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
+      const gs=stats(bl);
+      h+=`<section><div class="band"><h2>${esc(k)}</h2><span class="stmt"></span><span class="counts">${cnt(bl)}</span></div><div class="pri"><div class="gsum">${bigBar(bl)}<span class="gm"><b>${gs.open}</b> open / <b>${bl.length}</b> total</span><span class="gm"><b>${gs.comp}</b> completed</span><span class="gm"><b>${gs.risk}</b> at risk</span><span class="gm"><b>${gs.off}</b> off track</span><span class="gm"><b>${gs.late}</b> past due</span><span class="gm"><b>${gs.pct}%</b> complete</span></div><div class="tblwrap"><table>${THEAD()}<tbody>${bl.map(a=>row(a,`${S.pri[a.priorityId]?.name||''} · ${S.obj[a.objectiveId]?.name||''}`)).join('')}</tbody></table></div></div></section>`}
   }
   main.innerHTML=h||'<div class="empty">No actions match these filters.</div>';
   if(openId)drawer(openId,true);
+}
+
+/* ---------- month color picker ---------- */
+let popFor=null;
+function closePop(){document.querySelectorAll('.pop').forEach(e=>e.remove());popFor=null}
+function placePop(el,btn,above){
+  const r=btn.getBoundingClientRect(),w=el.offsetWidth,hgt=el.offsetHeight;
+  let left=above?r.left+window.scrollX+r.width/2-w/2:r.left+window.scrollX;left=Math.max(8,Math.min(left,document.documentElement.clientWidth-w-8));
+  let top=above?r.top+window.scrollY-hgt-6:r.bottom+window.scrollY+4;if(above&&r.top-hgt-6<0)top=r.bottom+window.scrollY+6;
+  el.style.left=left+'px';el.style.top=top+'px'}
+function openMs(btn){
+  const k=btn.dataset.ms;closePop();popFor={kind:'ms',k};
+  const el=document.createElement('div');el.className='pop ms';
+  el.innerHTML=`<div class="hd"><span>${MSL[k]}: pick any</span><button type="button" class="btn ghost" data-msclear="${k}">Clear</button></div>`+
+    (OPTS[k].map(([v,l])=>`<label><input type="checkbox" data-msk="${k}" value="${esc(v)}" ${SEL[k].has(v)?'checked':''}>${esc(l)}</label>`).join('')||'<div class="hd">Nothing to pick yet.</div>');
+  document.body.appendChild(el);placePop(el,btn,false);el.querySelector('input')?.focus()}
+function openStat(btn){
+  closePop();if(!canWrite){toast('View only: you can’t change status.');return}
+  const a=S.act[btn.dataset.stat];popFor={kind:'stat',id:a.id};
+  const el=document.createElement('div');el.className='pop';el.setAttribute('role','menu');
+  el.innerHTML=`<div class="hd">Status</div>`+Object.entries(STAT).map(([k,l])=>`<button type="button" role="menuitem" data-setstat="${k}" class="${a.status===k?'sel':''}"><span class="pill ${k==='open'?'s-open':'s-'+k}">${k==='completed'?'✓ ':''}${esc(l)}</span></button>`).join('')+
+    (a.status==='open'?`<div class="sep"></div><div class="hd">Schedule</div>`+Object.entries(HL).map(([k,l])=>`<button type="button" role="menuitem" data-sethealth="${k}" class="${(a.health||'none')===k?'sel':''}"><span class="pill h-${k}">${l}</span></button>`).join(''):'');
+  document.body.appendChild(el);placePop(el,btn,true);(el.querySelector('button.sel')||el.querySelector('button'))?.focus()}
+async function setStatus(a,v){
+  if(a.status===v)return;const patch={status:v,...stamp()};
+  if(v==='completed'){patch.completedAt=new Date().toISOString();Object.assign(patch,monthsPatch(a,THISY,{...monthsOf(a,THISY),[M[NOWM]]:'complete'}))}
+  else patch.completedAt='';
+  await write('actions',a.id,patch,`Marked ${STAT[v]}`)}
+function openPop(btn){
+  closePop();if(!canWrite){toast('View only: you can’t change month status.');return}
+  const a=S.act[btn.dataset.cell],m=btn.dataset.m,cur=monthsOf(a)[m]||'';popFor={kind:'cell',id:a.id,m,y:yr};
+  const el=document.createElement('div');el.className='pop';el.setAttribute('role','menu');
+  el.innerHTML=`<div class="hd">${m} ${yr} · ${esc(a.title.slice(0,40))}</div>`+Object.entries(CODES).map(([k,l])=>`<button type="button" role="menuitem" data-code="${k}" class="${k===cur?'sel':''}"><span class="strip"><i class="${k}"></i></span>${k?l:'Clear'}</button>`).join('');
+  document.body.appendChild(el);
+  placePop(el,btn,true);
+  (el.querySelector('button.sel')||el.querySelector('button'))?.focus();
+}
+async function pickCode(code){
+  if(!popFor)return;const {id,m,y}=popFor;closePop();const a=S.act[id];
+  const patch={...monthsPatch(a,y,{...monthsOf(a,y),[m]:code}),...stamp()};
+  if(M.indexOf(m)===nowIn(y)&&HCODE[code])patch.health=HCODE[code];
+  await write('actions',id,patch,`${m} ${y} set to ${CODES[code]}`);
 }
 
 /* ---------- drawer ---------- */
@@ -282,7 +577,7 @@ function drawer(id,refresh){
       <label class="full">Action<textarea id="d-title" rows="2" ${dis}>${esc(a.title)}</textarea></label>
       <label>Owner(s)<input id="d-owner" value="${esc(a.owner)}" placeholder="e.g. Justin, Kyle" ${dis}></label>
       <label>Region(s)<input id="d-region" value="${esc(a.region)}" placeholder="Global, NA, EMEA…" ${dis}></label>
-      <label>Status<select id="d-status" ${dis}><option value="open">Open</option><option value="closed">Closed</option></select></label>
+      <label>Status<select id="d-status" ${dis}>${Object.entries(STAT).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>
       <label>Schedule<select id="d-health" ${dis}>${Object.entries(HL).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>
       <label>Target date<input type="date" id="d-date" value="${esc(a.targetDate)}" ${dis}></label>
       <label>Original date<input type="date" id="d-orig" value="${esc(a.originalDate)}" ${dis}></label>
@@ -291,13 +586,13 @@ function drawer(id,refresh){
       <label class="full">Sub-group<input id="d-group" value="${esc(a.group)}" placeholder="Optional heading inside the objective" ${dis}></label>
       <label class="full">Objective<select id="d-obj" ${dis}>${sortedPri().map(pp=>`<optgroup label="${esc(pp.name)}">${objsOf(pp.id).map(oo=>`<option value="${oo.id}">${esc(oo.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>
     </div>
-    <div class="sec"><h4>Monthly status</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
+    <div class="sec"><h4>Monthly status · ${yr}</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
     <div class="sec"><h4>Schedule changes</h4><ul class="log">${(a.dateHistory||[]).slice().reverse().map(d=>`<li><div class="meta">${d.at?fmt(d.at.slice(0,10)):'From spreadsheet'}${d.by?' · '+esc(who(d.by)):''}</div>${fmt(d.from)} → ${fmt(d.to)}${d.reason&&d.reason!=='From spreadsheet'?' · '+esc(d.reason):''}</li>`).join('')||'<li class="ctx">Target date has not changed.</li>'}</ul></div>
     <div class="sec"><h4>Updates</h4>${noteForm()}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(a)}</ul></div>
     ${canWrite?`<div class="sec" id="d-danger"><button class="btn" id="d-del" type="button">Delete action</button></div>`:''}`;
     root.innerHTML=shell(`${esc(pr?.name||'')} · ${esc(ob?.name||'')}`,a.title,body);
     $('#d-status').value=a.status;$('#d-health').value=a.health||'none';$('#d-obj').value=a.objectiveId;
-    root.querySelectorAll('[data-month]').forEach(s=>s.value=a.months?.[s.dataset.month]||'');
+    root.querySelectorAll('[data-month]').forEach(s=>s.value=monthsOf(a)[s.dataset.month]||'');
   }else{
     const isP=!!p;
     body=`<div class="fgrid"><label class="full">Name<textarea id="d-name" rows="2" ${dis}>${esc(item.name)}</textarea></label>
@@ -323,13 +618,13 @@ async function onField(e){
     const map={'d-title':'title','d-owner':'owner','d-region':'region','d-status':'status','d-health':'health','d-goal':'targetGoal','d-group':'group','d-orig':'originalDate'};
     if(map[t.id]){const v=t.value.trim();if(v===(a[map[t.id]]||''))return;
       const patch={[map[t.id]]:v,...stamp()};
-      if(t.id==='d-status'&&v==='closed')patch.months={...(a.months||{}),[M[new Date().getMonth()]]:'complete'};
+      if(t.id==='d-status'){await setStatus(a,v);return}
       await write('actions',a.id,patch,'Saved');return}
     if(t.id==='d-obj'&&t.value!==a.objectiveId){await write('actions',a.id,{objectiveId:t.value,priorityId:S.obj[t.value].priorityId,...stamp()},'Moved to objective');return}
     if(t.id==='d-date'&&t.value!==a.targetDate){
       const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:uid||'',reason:$('#d-reason').value.trim()}];
       await write('actions',a.id,{targetDate:t.value,originalDate:a.originalDate||a.targetDate||t.value,dateHistory:hist,...stamp()},'Target date changed and logged');return}
-    if(t.dataset.month){await write('actions',a.id,{months:{...(a.months||{}),[t.dataset.month]:t.value},...stamp()},'Saved');return}
+    if(t.dataset.month){await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...stamp()},'Saved');return}
   }else{
     const col=S.pri[openId]?'priorities':'objectives',it=S.pri[openId]||S.obj[openId];
     if(t.id==='d-name'&&t.value.trim()!==it.name)await write(col,openId,{name:t.value.trim()},'Saved');
@@ -350,16 +645,310 @@ async function delItem(btn){
 async function addItem(b){
   if(!db)return;const kind=b.dataset.add,id=(kind==='act'?'A':kind==='obj'?'O':'P')+Date.now().toString(36);
   try{
-    if(kind==='pri'){await db.collection('priorities').doc(id).set({name:'New priority',statement:'',order:sortedPri().length+1,history:[]})}
-    else if(kind==='obj'){await db.collection('objectives').doc(id).set({priorityId:b.dataset.pri,name:'New objective',order:objsOf(b.dataset.pri).length+1,history:[]})}
+    if(kind==='pri'){await db.collection('priorities').doc(id).set({name:'Priority '+(sortedPri().length+1),statement:'',order:Math.max(0,...sortedPri().map(x=>x.order||0))+1,history:[]})}
+    else if(kind==='obj'){await db.collection('objectives').doc(id).set({priorityId:b.dataset.pri,name:'New objective',order:Math.max(0,...objsOf(b.dataset.pri).map(x=>x.order||0))+1,history:[]})}
     else{const o=S.obj[b.dataset.obj];const n=Object.values(S.act).filter(a=>a.objectiveId===o.id).length;
       await db.collection('actions').doc(id).set({objectiveId:o.id,priorityId:o.priorityId,order:n+1,title:'New action',group:'',owner:'',region:'',targetGoal:'',targetDate:'',originalDate:'',health:'none',status:'open',months:{},dateHistory:[],history:[],...stamp()})}
     openId=id;setTimeout(()=>{drawer(id);const f=$('#d-title')||$('#d-name');f?.focus();f?.select()},300)}
   catch{toast('Could not add. Check your access.')}}
 
+/* ---------- bulk intake ---------- */
+const ICOLS=['t','o','r','d','ob'];
+let irows=[];
+const blankRow=()=>({t:'',o:'',r:'',d:'',ob:'',st:'',msg:''});
+function loadDraft(){try{irows=JSON.parse(sessionStorage.getItem('uvnn-intake')||'[]')}catch{irows=[]}if(!Array.isArray(irows))irows=[];while(irows.length<8)irows.push(blankRow())}
+function saveDraft(){try{sessionStorage.setItem('uvnn-intake',JSON.stringify(irows))}catch{}}
+const rowFilled=r=>ICOLS.some(k=>String(r[k]||'').trim());
+function renderIntake(){
+  $('#i-body').innerHTML=irows.map((r,i)=>`<tr class="${r.st}"><td class="rn">${i+1}</td>${ICOLS.map((k,c)=>`<td><input id="i-${i}-${k}" data-ir="${i}" data-ic="${c}" value="${esc(r[k])}" aria-label="Row ${i+1} ${['action','owner','region','target date','objective number'][c]}" ${k==='d'?'placeholder="m/d/yyyy"':''}${k==='ob'?'placeholder="1.3"':''}></td>`).join('')}<td class="chk">${esc(r.msg||liveChk(r))}</td></tr>`).join('')}
+function liveChk(r){const on=String(r.ob||'').trim();if(!on)return '';const m=on.match(/^p?(\d+)\.(\d+)$/i);if(!m)return 'Use a number like 1.3';
+  const p=sortedPri()[+m[1]-1];if(!p)return `No priority ${m[1]}`;const o=objsOf(p.id)[+m[2]-1];return o?`→ ${o.name}`:`No objective ${m[1]}.${m[2]}`}
+function renderIntakeKey(){
+  $('#i-objpri').innerHTML=sortedPri().map(p=>`<option value="${p.id}">P${pNum(p)} ${esc(p.name)}</option>`).join('');
+  $('#i-key').innerHTML=sortedPri().map(p=>`<li class="p">P${pNum(p)} · ${esc(p.name)}</li>`+objsOf(p.id).map(o=>`<li><b>${oNum(o)}</b> ${esc(o.name)}</li>`).join('')).join('');
+  $('#intake').hidden=!canWrite||tab!=='tracker';
+}
+function parseDate(v){v=String(v||'').trim();if(!v)return {ok:true,val:''};
+  let m=v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);let y,mo,d;
+  if(m){[,y,mo,d]=m}else if((m=v.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/))){[,mo,d,y]=m;if(y.length===2)y='20'+y}
+  else{const t=new Date(v);if(isNaN(t))return {ok:false};y=t.getFullYear();mo=t.getMonth()+1;d=t.getDate()}
+  y=+y;mo=+mo;d=+d;const t=new Date(y,mo-1,d);if(t.getMonth()!==mo-1||t.getDate()!==d||y<2000||y>2100)return {ok:false};
+  return {ok:true,val:`${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`}}
+function resolveRow(r){
+  const errs=[];const on=String(r.ob).trim();let o=null;
+  if(!String(r.t).trim())errs.push('Action name is missing');
+  const m=on.match(/^p?(\d+)\.(\d+)$/i);
+  if(!on)errs.push('Objective # is missing');
+  else if(!m)errs.push(`Objective # "${on}" should look like 1.3`);
+  else{const p=sortedPri()[+m[1]-1];if(!p)errs.push(`No priority ${m[1]}`);else{o=objsOf(p.id)[+m[2]-1];if(!o)errs.push(`No objective ${m[1]}.${m[2]}`)}}
+  const d=parseDate(r.d);if(!d.ok)errs.push(`Date "${r.d}" isn't a date`);
+  return {errs,o,date:d.val}}
+async function submitIntake(){
+  const filled=irows.map((r,i)=>[r,i]).filter(([r])=>rowFilled(r));
+  if(!filled.length){$('#i-msg').className='bad';$('#i-msg').textContent='The table is empty. Paste or type at least one action.';return}
+  let bad=0;const ready=[];
+  irows.forEach(r=>{r.st='';r.msg=''});
+  for(const [r] of filled){const x=resolveRow(r);if(x.errs.length){bad++;r.st='bad';r.msg='⚑ '+x.errs.join('. ')}else{r.st='ok';r.msg='✓ '+oNum(x.o)+' '+x.o.name.slice(0,40);ready.push([r,x])}}
+  if(bad){renderIntake();saveDraft();$('#i-msg').className='bad';$('#i-msg').textContent=`${bad} row${bad>1?'s are':' is'} flagged in red. Nothing was added. Fix them and submit again.`;return}
+  if(!db||!canWrite){$('#i-msg').className='bad';$('#i-msg').textContent='You need edit access to add actions.';return}
+  const btn=$('#i-submit');btn.disabled=true;$('#i-msg').className='';$('#i-msg').textContent=`Adding ${ready.length} actions…`;
+  let added=0;
+  try{
+    for(const [r,x] of ready){const o=x.o;const n=Math.max(0,...Object.values(S.act).filter(a=>a.objectiveId===o.id).map(a=>a.order||0))+1+added;
+      const id='A'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+      await db.collection('actions').doc(id).set({objectiveId:o.id,priorityId:o.priorityId,order:n,title:String(r.t).trim(),group:'',owner:String(r.o).trim(),region:String(r.r).trim(),targetGoal:'',targetDate:x.date,originalDate:x.date,health:'none',status:'open',months:{},monthsY:{},dateHistory:[],history:[],...stamp()});
+      added++;r.done=true}
+    irows=irows.filter(r=>!r.done);while(irows.length<8)irows.push(blankRow());irows.forEach(r=>{r.st='';r.msg=''});
+    renderIntake();saveDraft();$('#i-msg').className='ok';$('#i-msg').textContent=`Added ${added} action${added>1?'s':''} to the tracker.`;toast(`Added ${added} actions`)}
+  catch(e){irows=irows.filter(r=>!r.done);while(irows.length<8)irows.push(blankRow());renderIntake();saveDraft();
+    $('#i-msg').className='bad';$('#i-msg').textContent=`Added ${added}, then saving failed${e?.code==='quota_exceeded'?' because storage is full':''}. The rows still in the table were not added.`}
+  finally{btn.disabled=false}}
+$('#i-body').addEventListener('input',e=>{const i=e.target.closest('[data-ir]');if(!i)return;const r=irows[+i.dataset.ir];r[ICOLS[+i.dataset.ic]]=i.value;if(r.st){r.st='';r.msg='';i.closest('tr').className=''}i.closest('tr').lastElementChild.textContent=liveChk(r);saveDraft()});
+$('#i-body').addEventListener('paste',e=>{const i=e.target.closest('[data-ir]');if(!i)return;
+  const txt=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/[\t\n]/.test(txt.replace(/\r?\n$/,'')))return;
+  e.preventDefault();const lines=txt.replace(/\r/g,'').replace(/\n$/,'').split('\n');const r0=+i.dataset.ir,c0=+i.dataset.ic;
+  lines.forEach((ln,k)=>{const cells=ln.split('\t');while(irows.length<=r0+k)irows.push(blankRow());const row=irows[r0+k];row.st='';row.msg='';
+    cells.forEach((v,j)=>{if(c0+j<ICOLS.length)row[ICOLS[c0+j]]=v.trim()})});
+  while(irows.length<r0+lines.length+3)irows.push(blankRow());
+  renderIntake();saveDraft();$('#i-msg').className='';$('#i-msg').textContent=`Pasted ${lines.length} row${lines.length>1?'s':''}. Click "Add actions to tracker" to check and add them.`});
+$('#i-body').addEventListener('keydown',e=>{const i=e.target.closest('[data-ir]');if(!i||e.key!=='Enter')return;e.preventDefault();const r=+i.dataset.ir+1;if(r>=irows.length){irows.push(blankRow());renderIntake()}$(`#i-${r}-${ICOLS[+i.dataset.ic]}`)?.focus()});
+$('#i-submit').addEventListener('click',submitIntake);
+$('#i-addrow').addEventListener('click',()=>{for(let k=0;k<5;k++)irows.push(blankRow());renderIntake();saveDraft()});
+let clearArmed=false;
+$('#i-clear').addEventListener('click',e=>{if(!clearArmed&&irows.some(rowFilled)){clearArmed=true;e.target.textContent='Click again to clear';setTimeout(()=>{clearArmed=false;e.target.textContent='Clear table'},3000);return}
+  clearArmed=false;e.target.textContent='Clear table';irows=[];while(irows.length<8)irows.push(blankRow());renderIntake();saveDraft();$('#i-msg').textContent=''});
+$('#i-newpri').addEventListener('click',()=>addItem({dataset:{add:'pri'}}));
+$('#i-newobj').addEventListener('click',()=>{const pid=$('#i-objpri').value;if(pid)addItem({dataset:{add:'obj',pri:pid}})});
+loadDraft();renderIntake();
+
+/* ---------- metrics bowler ---------- */
+/* Week index 0 is the prior year's closing week (W52); 1..52 are this year's weeks. Q1 = W1-W13, Q2 = W14-W26, ... */
+const MDEF=[
+  ['bk_total','Bookings - Total','% of forecast','pct','qtd'],['bk_micro','Bookings - Micro','% of forecast','pct','qtd'],['bk_core','Bookings - Core','% of forecast','pct','qtd'],
+  ['svc','Service Bookings','$M QTD','usd','qtd'],['vit','Product Vitality','$M QTD','usd','qtd'],
+  ['mql_micro','MQLs - Micro','# QTD','num','qtd'],['mql_core','MQLs - Core','# QTD','num','qtd'],['sqo_micro','SQOs - Micro','# QTD','num','qtd'],['sqo_core','SQOs - Core','# QTD','num','qtd'],
+  ['cas','CAS - Total UVNN','score, running average','score','avg'],
+  ['bb','Book & Burn (QTD bookings - revenue)','$M','usd','level'],['msn','MSN Backlog','$M','usd','level'],['cmc','CMC Backlog','$M','usd','level'],
+  ['ppi','Productivity - PPI Savings','$M','usd','qtd'],['price','Price Improvement','% of revenue','pct','avg']];
+const MBY=Object.fromEntries(MDEF.map(d=>[d[0],{key:d[0],label:d[1],unit:d[2],fmt:d[3],kind:d[4]}]));
+const NW=53,WEEKS=[...Array(NW).keys()];
+let BW={},myr=THISY,mmode='week',mprev=null,charts=[];
+const qOf=w=>w<1?0:Math.ceil(w/13);
+const wDate=(y,w)=>{const d=new Date(y,0,1+7*w);return `${d.getDate()}-${M[d.getMonth()]}`};
+const mdoc=()=>BW[myr]?.metrics||{};
+function series(k,row){const a=mdoc()[k]?.[row];return Array.isArray(a)?WEEKS.map(i=>a[i]??null):WEEKS.map(()=>null)}
+const fmtV=(k,v)=>{if(v==null||isNaN(v))return '—';const f=MBY[k]?.fmt;
+  return f==='pct'?(Math.abs(v)<10?v.toFixed(1):Math.round(v))+'%':f==='usd'?(v<0?'-':'')+'$'+Math.abs(v).toFixed(1)+'M':f==='score'?v.toFixed(1):Math.round(v).toLocaleString()};
+
+/* Straight-line fill between known points, inside each quarter only (QTD values reset each quarter). */
+function fill(arr,crossQ=false){
+  const out=arr.slice(),est=arr.map(()=>false);
+  const groups=crossQ?[[1,52]]:[1,2,3,4].map(q=>[(q-1)*13+1,q*13]);
+  for(const [a,b] of groups){const known=[];for(let w=a;w<=b;w++)if(arr[w]!=null)known.push(w);
+    for(let j=0;j+1<known.length;j++){const w0=known[j],w1=known[j+1];for(let w=w0+1;w<w1;w++){out[w]=arr[w0]+(arr[w1]-arr[w0])*(w-w0)/(w1-w0);est[w]=true}}}
+  return {v:out,est}}
+const lastIn=(v,q)=>{for(let w=q*13;w>(q-1)*13;w--)if(v[w]!=null)return v[w];return null};
+const meanOf=xs=>{const k=xs.filter(x=>x!=null);return k.length?k.reduce((s,x)=>s+x,0)/k.length:null};
+
+/* Returns {labels, act:{v,est}, plan:[]} for one metric in the chosen view. */
+function mview(k,mode){
+  const m=MBY[k];
+  if(k==='mql_total'||k==='sqo_total'){const p=k.slice(0,3);const a=mview(p+'_micro',mode),b=mview(p+'_core',mode);
+    const add=(x,y)=>x.map((v,i)=>v!=null&&y[i]!=null?v+y[i]:null);
+    return {labels:a.labels,act:{v:add(a.act.v,b.act.v),est:a.act.est.map((e,i)=>e||b.act.est[i])},plan:add(a.plan,b.plan),real:a.real.map((r,i)=>r&&b.real[i])}}
+  const rawA=series(k,'act'),rawP=series(k,'plan');
+  const A=fill(rawA,m.kind==='level'),P=fill(rawP,m.kind==='level').v;
+  const real=rawA.map(v=>v!=null);
+  if(mode==='quarter'){
+    const qs=[1,2,3,4];let av,pv;
+    if(k==='cas'){av=qs.map(q=>lastIn(rawA,q));pv=qs.map(q=>lastIn(rawP,q))}
+    else if(m.kind==='avg'){av=qs.map(q=>meanOf(rawA.slice((q-1)*13+1,q*13+1)));pv=qs.map(q=>meanOf(rawP.slice((q-1)*13+1,q*13+1)))}
+    else{av=qs.map(q=>lastIn(rawA,q));pv=qs.map(q=>lastIn(P,q))}
+    return {labels:qs.map(q=>'Q'+q),act:{v:av,est:qs.map(()=>false)},plan:pv,real:av.map(v=>v!=null)}}
+  const labels=WEEKS.slice(1).map(w=>`W${w} · ${wDate(myr,w)}`);
+  let av=A.v.slice(1),est=A.est.slice(1),pv=P.slice(1),rl=real.slice(1);
+  if(mode==='ytd'){
+    if(m.kind==='qtd'&&m.fmt!=='pct'){const cum=v=>{let off=0,out=[];for(let w=1;w<=52;w++){if(w>1&&(w-1)%13===0){const e=lastIn(v,qOf(w-1));off=e==null?NaN:off+e}out.push(v[w]==null||isNaN(off)?null:off+v[w])}return out};av=cum(A.v);pv=cum(P)}
+    else if(k==='cas'){const y=fill(series('cas','ytd'),true);av=y.v.slice(1);est=y.est.slice(1);rl=series('cas','ytd').slice(1).map(v=>v!=null)}
+    else if(m.kind==='avg'){const run=(v,keep)=>{let s=0,n=0;return v.slice(1).map((x,i)=>{if(x!=null&&keep[i+1]){s+=x;n++}return n?s/n:null})};
+      av=run(rawA,real);pv=run(rawP,rawP.map(v=>v!=null));est=av.map(()=>false)}
+  }
+  return {labels,act:{v:av,est},plan:pv,real:rl}}
+
+/* Backlogs: lower than plan is good. */
+const LOWER=new Set(['msn','cmc']);
+const beats=(k,a,p)=>LOWER.has(k)?a<=p:a>=p;
+function mix(hex,base,t){const h=x=>{x=x.replace('#','');if(x.length===3)x=[...x].map(c=>c+c).join('');return [0,2,4].map(i=>parseInt(x.slice(i,i+2),16))};try{const a=h(hex),b=h(base);if(a.some(isNaN)||b.some(isNaN))return hex;return '#'+a.map((v,i)=>Math.round(v+(b[i]-v)*t).toString(16).padStart(2,'0')).join('')}catch{return hex}}
+function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#888'}
+/* Each chart keeps its own view (cmode) and its own time range (czoom: 0 = full year, 1-4 = that quarter). */
+const cmode={},czoom={};
+try{Object.assign(cmode,JSON.parse(sessionStorage.getItem('uvnn-cmode')||'{}'));Object.assign(czoom,JSON.parse(sessionStorage.getItem('uvnn-czoom')||'{}'))}catch{}
+const saveM=()=>{try{sessionStorage.setItem('uvnn-cmode',JSON.stringify(cmode));sessionStorage.setItem('uvnn-czoom',JSON.stringify(czoom))}catch{}};
+const isSum=k=>k==='mql_total'||k==='sqo_total';
+const fk=k=>isSum(k)?'mql_micro':k;
+/* Full-year view, then cut down to the zoomed quarter. */
+function zview(k,mode,z){const v=mview(k,mode);if(!z||mode==='quarter')return v;
+  const [a,b]=[(z-1)*13,z*13];
+  return {labels:v.labels.slice(a,b),act:{v:v.act.v.slice(a,b),est:v.act.est.slice(a,b)},plan:v.plan.slice(a,b),real:v.real.slice(a,b)}}
+function lineChart(el,defs,mode,opts={}){
+  const datasets=[];let labels=[];const ink=tok('--muted'),grid=tok('--soft'),on=tok('--on'),off=tok('--off'),panel=tok('--panel');
+  for(const d of defs){const v=zview(d.key,mode,opts.z);labels=v.labels;const col=tok(d.color);
+    const pc=i=>{const a=v.act.v[i],p=v.plan[i];if(a==null||!v.real[i]||p==null)return col;return beats(d.key,a,p)?on:off};
+    datasets.push({label:(defs.length>1?d.name:'Actual'),data:v.act.v,borderColor:col,backgroundColor:col,borderWidth:3,tension:0,spanGaps:false,
+      pointRadius:v.act.v.map((x,i)=>x!=null&&v.real[i]?(mode==='quarter'?6:4):0),pointHoverRadius:6,
+      pointBackgroundColor:v.act.v.map((_,i)=>pc(i)),pointBorderColor:panel,pointBorderWidth:2,
+      segment:{borderDash:c=>(v.act.est[c.p0DataIndex]||v.act.est[c.p1DataIndex])?[1,4]:undefined},_est:v.act.est,_k:d.key,order:1});
+    /* Plan: neutral gray on single-series charts; a pale tint of the series color when several share a chart. Always long dashes, no points. */
+    const pcol=defs.length>1?mix(col,panel,.5):tok('--planln');
+    if(v.plan.some(x=>x!=null))datasets.push({label:(defs.length>1?d.name+' plan':'Plan'),data:v.plan,borderColor:pcol,backgroundColor:pcol,borderWidth:2,borderDash:[8,5],pointRadius:0,pointHoverRadius:3,tension:0,_k:d.key,order:2});
+  }
+  const c=new Chart(el,{type:'line',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,animation:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{legend:{labels:{color:ink,font:{size:11},usePointStyle:true,generateLabels:ch=>Chart.defaults.plugins.legend.labels.generateLabels(ch).map(l=>{const ds=ch.data.datasets[l.datasetIndex];return Object.assign(l,{pointStyle:'line',lineWidth:ds.borderDash?2:3,lineDash:ds.borderDash||[],strokeStyle:ds.borderColor,fillStyle:ds.borderColor})})}},
+      tooltip:{filter:t=>t.parsed.y!=null,callbacks:{label:t=>{const ds=t.dataset;return `${ds.label}: ${fmtV(fk(ds._k),t.parsed.y)}${ds._est?.[t.dataIndex]?' (estimated)':''}`}}}},
+    scales:{x:{ticks:{color:ink,maxRotation:0,autoSkip:true,maxTicksLimit:mode==='quarter'?4:(opts.z?7:9),font:{size:10},callback:function(v){const l=this.getLabelForValue(v);return mode==='quarter'?l:l.split(' · ')[1]}},grid:{display:false}},
+      y:{ticks:{color:ink,font:{size:10},callback:v=>fmtV(fk(defs[0].key),v)},grid:{color:grid},beginAtZero:opts.zero!==false}}}});
+  charts.push(c);return c}
+function statLine(k,label,mode,z){const v=zview(k,mode,z);let i=-1;for(let j=v.act.v.length-1;j>=0;j--)if(v.real[j]&&v.act.v[j]!=null){i=j;break}
+  if(i<0)return `<span class="mstat none">${label||''} no actuals yet</span>`;
+  const a=v.act.v[i],p=v.plan[i],ok=p==null?null:beats(k,a,p);
+  return `<span class="mstat ${ok==null?'':ok?'up':'down'}">${label?label+' ':''}<b>${fmtV(fk(k),a)}</b>${p!=null?` vs plan ${fmtV(fk(k),p)} ${a>=p?'▲':'▼'}`:''} <span class="mwhen">${v.labels[i].split(' · ').pop()}</span></span>`}
+
+const BKNOTE=()=>'';const NORUN=['week','quarter'];
+const MCARDS=[
+  {id:'c-bkt',modes:NORUN,wide:true,title:'Bookings · Total',sub:'% of quarter forecast',defs:[{key:'bk_total',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkm',modes:NORUN,title:'Bookings · Micro',sub:'% of quarter forecast',defs:[{key:'bk_micro',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-bkc',modes:NORUN,title:'Bookings · Core',sub:'% of quarter forecast',defs:[{key:'bk_core',name:'Actual',color:'--s1'}],note:BKNOTE},
+  {id:'c-micro',title:'MQL / SQO · Micro',sub:'count, quarter to date',defs:[{key:'mql_micro',name:'MQL',color:'--s1'},{key:'sqo_micro',name:'SQO',color:'--s2'}]},
+  {id:'c-core',title:'MQL / SQO · Core',sub:'count, quarter to date',defs:[{key:'mql_core',name:'MQL',color:'--s1'},{key:'sqo_core',name:'SQO',color:'--s2'}]},
+  {id:'c-tot',wide:true,title:'MQL / SQO · Total',sub:'Micro + Core',defs:[{key:'mql_total',name:'MQL',color:'--s1'},{key:'sqo_total',name:'SQO',color:'--s2'}]},
+  {id:'c-svc',title:'Service bookings',sub:'$M, quarter to date',small:true,defs:[{key:'svc',name:'Actual',color:'--s1'}]},
+  {id:'c-vit',title:'Product vitality',sub:'$M, quarter to date',small:true,defs:[{key:'vit',name:'Actual',color:'--s1'}]},
+  {id:'c-cas',title:'CAS',sub:'running average score',small:true,zero:false,defs:[{key:'cas',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Year-to-date running average.':m==='quarter'?'Quarter-end running average.':'Quarter running average.'},
+  {id:'c-price',title:'Price improvement',sub:'% of revenue, rolling average',small:true,defs:[{key:'price',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Running average of all weeks so far.':m==='quarter'?'Average of the weeks in each quarter.':'Weekly value as reported.'},
+  {id:'c-bb',modes:NORUN,title:'Book & burn and backlogs',sub:'$M',wide:true,zero:false,defs:[{key:'bb',name:'Book & burn',color:'--s1'},{key:'msn',name:'MSN backlog',color:'--s2'},{key:'cmc',name:'CMC backlog',color:'--s3'}],note:()=>'Backlogs: lower is better, so a backlog below plan shows green.'}];
+const MODES=[['week','Weekly'],['ytd','Run rate'],['quarter','Quarters']];
+function yearNav(){return `<div class="yr mnav"><button type="button" data-myr="-1" aria-label="Previous year">‹</button><span>${myr}</span><button type="button" data-myr="1" aria-label="Next year">›</button></div>`}
+const cmodes=c=>MODES.filter(([k])=>(c.modes||['week','ytd','quarter']).includes(k));
+const modeOf=c=>{const m=cmode[c.id];return cmodes(c).some(([k])=>k===m)?m:'week'};
+function cardHTML(c){const mode=modeOf(c),z=mode==='quarter'?0:(czoom[c.id]||0);
+  return `<header><h3>${c.title}</h3><span class="msub">${c.sub}</span><div class="ctl">
+      ${mode!=='quarter'?`<div class="seg sm" role="group" aria-label="${c.title} time range">${[[0,'Full year'],[1,'Q1'],[2,'Q2'],[3,'Q3'],[4,'Q4']].map(([q,l])=>`<button type="button" data-czoom="${c.id}:${q}" aria-pressed="${z===q}">${l}</button>`).join('')}</div>`:''}
+      <div class="seg sm" role="group" aria-label="${c.title} view">${cmodes(c).map(([k,l])=>`<button type="button" data-cmode="${c.id}:${k}" aria-pressed="${mode===k}">${l}</button>`).join('')}</div></div></header>
+    <div class="mstats">${c.defs.map(d=>statLine(d.key,c.defs.length>1?d.name:'',mode,z)).join('')}</div>
+    <div class="cv"><canvas id="${c.id}" role="img" aria-label="${c.title} chart"></canvas></div>${c.note&&c.note(mode)?`<p class="mnote">${c.note(mode)}</p>`:''}`}
+function drawCard(c){const sec=$('#card-'+c.id);if(!sec)return;
+  const old=charts.find(x=>x.canvas?.id===c.id);if(old){old.destroy();charts=charts.filter(x=>x!==old)}
+  sec.innerHTML=cardHTML(c);const mode=modeOf(c);lineChart($('#'+c.id),c.defs,mode,{zero:c.zero,z:mode==='quarter'?0:(czoom[c.id]||0)})}
+function renderPerf(){
+  charts.forEach(c=>c.destroy());charts=[];
+  if(typeof Chart==='undefined'){$('#main').innerHTML='<div class="empty">The charting library didn’t load. Check your internet connection and reload.</div>';return}
+  const has=Object.keys(mdoc()).length>0;
+  let h=`<div class="mhead">${yearNav()}
+    <div class="mkey"><span><i class="ac"></i>Actual (solid)</span><span><i class="pl"></i>Plan (dashed)</span><span><i class="dash"></i>Estimated between reported weeks</span><span><i class="dot up"></i>Better than plan</span><span><i class="dot down"></i>Worse than plan</span><span>Backlogs: below plan is better</span></div></div>`;
+  if(!has){$('#main').innerHTML=h+`<div class="empty">No bowler numbers for ${myr} yet. Add them on the Bowler input tab.</div>`;return}
+  h+='<div class="mgrid">'+MCARDS.map(c=>`<section class="mcard ${c.wide?'wide':''} ${c.small?'small':''}" id="card-${c.id}"></section>`).join('')+'</div>';
+  $('#main').innerHTML=h;MCARDS.forEach(drawCard)}
+
+/* ---------- bowler input grid ---------- */
+const ROWS=k=>k==='cas'?[['plan','Plan'],['act','Qtr'],['ytd','YTD']]:[['plan','Plan'],['act','Act']];
+const fmtIn=(k,v)=>v==null?'':(MBY[k].fmt==='usd'||MBY[k].fmt==='score'||MBY[k].fmt==='pct'&&Math.abs(v)<10)?String(+v.toFixed(2)):String(Math.round(v*100)/100);
+function renderBowler(force){
+  charts.forEach(c=>c.destroy());charts=[];
+  const d=mdoc(),ro=!canWrite?'readonly':'';
+  const g=$('#main .bgrid');
+  if(g&&!force&&g.dataset.year===String(myr)){ /* refresh values only, never touch the cell being edited */
+    g.querySelectorAll('input[data-k]').forEach(i=>{if(i===document.activeElement)return;const v=fmtIn(i.dataset.k,d[i.dataset.k]?.[i.dataset.r]?.[+i.dataset.w]);if(i.value!==v)i.value=v});
+    g.querySelectorAll('input[data-meta]').forEach(i=>{if(i===document.activeElement)return;const v=String(d[i.dataset.meta]?.[i.dataset.f]??'');if(i.value!==v)i.value=v});
+    return}
+  const wrapOld=$('#main .bgridwrap'),sx=wrapOld?.scrollLeft||0,sy=wrapOld?.scrollTop||0;
+  const qhead=[0,1,2,3,4].map(q=>`<th colspan="${q?13:1}" class="q">${q?'Q'+q:'Prior'}</th>`).join('');
+  let h=`<div class="mhead">${yearNav()}<p class="mhelp">Type into any cell, or paste a row of weeks copied from Excel. Numbers save as you go. Enter percentages as plain numbers (20 for 20%) and dollars in millions.</p></div>
+  <details class="bpaste"><summary>Paste the whole bowler from Excel</summary>
+    <p class="mhelp">In Excel, copy the bowler from the Quarter row down to the last metric, including the Metric, Owner, Target and Plan/Act columns. Paste it below and click Import. Rows are matched by metric name, and blank cells stay blank.</p>
+    <textarea id="b-paste" rows="5" placeholder="Paste here"></textarea>
+    <div class="row"><button type="button" class="btn primary" id="b-import">Import into ${myr}</button><span id="b-msg" role="status"></span></div></details>
+  <div class="tblwrap bgridwrap"><table class="bgrid" data-year="${myr}"><thead><tr><th class="st" colspan="4"></th>${qhead}</tr>
+    <tr><th class="st m">Metric</th><th class="st o">Owner</th><th class="st t">Target</th><th class="st rl"></th>${WEEKS.map(w=>`<th class="${w%13===1?'qs':''}">${w?'W'+w:'W52'}<div>${w?wDate(myr,w):'prior'}</div></th>`).join('')}</tr></thead><tbody>`;
+  for(const [k] of MDEF){const m=MBY[k],md=d[k]||{},rs=ROWS(k);rs.forEach(([r,rl],ri)=>{
+    h+=`<tr class="${ri===0?'mfirst':''}">`+(ri===0?`<th class="st m" rowspan="${rs.length}">${esc(m.label)}<div>${esc(m.unit)}</div></th><td class="st o" rowspan="${rs.length}"><input data-meta="${k}" data-f="owner" value="${esc(md.owner||'')}" ${ro} aria-label="${esc(m.label)} owner"></td><td class="st t" rowspan="${rs.length}"><input data-meta="${k}" data-f="target" value="${md.target??''}" ${ro} aria-label="${esc(m.label)} target"></td>`:'')+
+      `<td class="st rl">${rl}</td>`+WEEKS.map(w=>`<td class="${w%13===1?'qs':''} ${r}"><input data-k="${k}" data-r="${r}" data-w="${w}" value="${fmtIn(k,md[r]?.[w])}" ${ro} aria-label="${esc(m.label)} ${rl} week ${w}"></td>`).join('')+'</tr>'})}
+  h+='</tbody></table></div>';
+  $('#main').innerHTML=h;
+  stickCols();
+  const w=$('#main .bgridwrap');if(w){w.scrollLeft=sx;w.scrollTop=sy}
+}
+/* Lock the first four columns at their real measured widths, so nothing scrolls underneath them. */
+function stickCols(){const head=document.querySelectorAll('.bgrid thead tr:nth-child(2) th.st');let left=0;const lefts={};
+  head.forEach(th=>{const c=['m','o','t','rl'].find(x=>th.classList.contains(x));lefts[c]=left;left+=th.getBoundingClientRect().width});
+  document.querySelectorAll('.bgrid .st').forEach(el=>{const c=['m','o','t','rl'].find(x=>el.classList.contains(x));if(c)el.style.left=lefts[c]+'px'});
+  const top=document.querySelector('.bgrid thead tr:first-child th');if(top){const h=top.getBoundingClientRect().height;document.querySelectorAll('.bgrid thead tr:nth-child(2) th').forEach(th=>th.style.top=h+'px')}
+  const first=document.querySelector('.bgrid thead tr:first-child th.st');if(first)first.style.left='0px'}
+const parseNum=s=>{s=String(s??'').trim().replace(/[$,\s]/g,'');if(!s||s==='-')return null;const neg=/^\(.*\)$/.test(s);s=s.replace(/[()%]/g,'');const x=parseFloat(s);return isNaN(x)?null:neg?-x:x};
+const pendingM={};let mTimer=null;
+function queueWrite(k,patch){pendingM[k]=Object.assign(pendingM[k]||{},patch);clearTimeout(mTimer);mTimer=setTimeout(flushM,700)}
+async function flushM(){
+  if(!db||!Object.keys(pendingM).length)return;const y=String(myr),metrics={};for(const k in pendingM){metrics[k]=pendingM[k];delete pendingM[k]}
+  try{const ref=db.collection('bowler').doc(y);const cur=await ref.get();
+    if(cur.exists)await ref.update({metrics,updatedAt:new Date().toISOString()});else await ref.set({year:+y,metrics,updatedAt:new Date().toISOString()});toast('Saved')}
+  catch(e){toast('Couldn’t save the bowler. Check your access.')}}
+function setCell(k,r,w,v){const md=(BW[myr]??={year:myr,metrics:{}}).metrics[k]??={};const arr=WEEKS.map(i=>md[r]?.[i]??null);arr[w]=v;md[r]=arr;queueWrite(k,{[r]:arr})}
+document.addEventListener('change',e=>{
+  const c=e.target.closest('.bgrid [data-k]');if(c){setCell(c.dataset.k,c.dataset.r,+c.dataset.w,parseNum(c.value));return}
+  const m=e.target.closest('.bgrid [data-meta]');if(m){const k=m.dataset.meta,f=m.dataset.f,v=f==='target'?parseNum(m.value):m.value.trim();((BW[myr]??={year:myr,metrics:{}}).metrics[k]??={})[f]=v;queueWrite(k,{[f]:v})}});
+document.addEventListener('paste',e=>{
+  const c=e.target.closest('.bgrid [data-k]');if(!c)return;const t=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/\t/.test(t))return;
+  e.preventDefault();const vals=t.replace(/\r/g,'').split('\n')[0].split('\t');const k=c.dataset.k,r=c.dataset.r,w0=+c.dataset.w;
+  const md=(BW[myr]??={year:myr,metrics:{}}).metrics[k]??={};const arr=WEEKS.map(i=>md[r]?.[i]??null);
+  vals.forEach((v,j)=>{if(w0+j<NW)arr[w0+j]=parseNum(v)});md[r]=arr;queueWrite(k,{[r]:arr});renderBowler(true);toast(`Pasted ${Math.min(vals.length,NW-w0)} weeks`)});
+
+/* Whole-bowler paste: tab-separated text with quoted multi-line labels, as Excel copies it. */
+function parseTSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+  if(q){if(ch==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=ch}
+  else if(ch==='"'&&f==='')q=true;else if(ch==='\t'){row.push(f);f=''}else if(ch==='\n'){row.push(f);rows.push(row);row=[];f=''}else if(ch!=='\r')f+=ch}
+  if(f||row.length){row.push(f);rows.push(row)}return rows}
+const MATCH=[['bookings - total','bk_total'],['bookings - micro','bk_micro'],['bookings - core','bk_core'],['service bookings','svc'],['product vitality','vit'],['mqls - micro','mql_micro'],['mqls - core','mql_core'],['sqos - micro','sqo_micro'],['sqos - core','sqo_core'],['cas','cas'],['book & burn','bb'],['msn backlog','msn'],['cmc backlog','cmc'],['productivity','ppi'],['price improvement','price']];
+function importBowler(text){
+  const rows=parseTSV(text);const out={};let cur=null,n=0;
+  for(const r of rows){if(r.length<4)continue;
+    if(r[0].trim()){const l=r[0].split('\n')[0].trim().toLowerCase();cur=(MATCH.find(([p])=>l.startsWith(p))||[])[1]||null;if(cur){out[cur]={owner:r[1].trim(),target:parseNum(r[2])}}}
+    const kind=r[3].trim().toLowerCase();if(!cur||!['plan','act','qtr','ytd'].includes(kind))continue;
+    const vals=WEEKS.map(i=>parseNum(r[4+i]));out[cur][kind==='qtr'?'act':kind]=vals;n++}
+  return {metrics:out,rows:n}}
+async function doImport(){
+  const t=$('#b-paste').value;if(!t.trim()){$('#b-msg').textContent='Paste the bowler first.';return}
+  const {metrics,rows}=importBowler(t);const keys=Object.keys(metrics);
+  if(!rows){$('#b-msg').textContent='No Plan or Act rows were recognized. Copy from the Metric column through the last week.';return}
+  if(!db||!canWrite){$('#b-msg').textContent='You need edit access to import.';return}
+  try{const ref=db.collection('bowler').doc(String(myr));const cur=await ref.get();
+    if(cur.exists)await ref.update({metrics,updatedAt:new Date().toISOString()});else await ref.set({year:myr,metrics,updatedAt:new Date().toISOString()});
+    $('#b-paste').value='';toast(`Imported ${keys.length} metrics`);$('#b-msg').textContent=`Imported ${keys.length} metrics (${rows} rows) into ${myr}.`}
+  catch(e){$('#b-msg').textContent='Import failed. Check your access and try again.'}}
+document.addEventListener('click',e=>{
+  const cm=e.target.closest('[data-cmode]');if(cm){const [id,m]=cm.dataset.cmode.split(':');cmode[id]=m;saveM();return drawCard(MCARDS.find(c=>c.id===id))}
+  const cz=e.target.closest('[data-czoom]');if(cz){const [id,q]=cz.dataset.czoom.split(':');czoom[id]=+q;saveM();return drawCard(MCARDS.find(c=>c.id===id))}
+  const my=e.target.closest('[data-myr]');if(my){myr+=+my.dataset.myr;return tab==='bowler'?renderBowler(true):render()}
+  if(e.target.closest('#b-import'))return doImport()});
+function renderMetrics(){tab==='perf'?renderPerf():renderBowler()}
+window.addEventListener('resize',()=>{if(tab==='bowler')stickCols()});
+function subBowler(){db.collection('bowler').onSnapshot(snap=>{BW={};snap.docs.forEach(d=>BW[d.id]=d.data());
+  if(tab==='perf')renderPerf();else if(tab==='bowler'&&!document.activeElement?.closest?.('.bgrid,.bpaste'))renderBowler()},()=>{})}
+
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
+  const cell=e.target.closest('[data-cell]'),code=e.target.closest('.pop [data-code]'),st=e.target.closest('[data-stat]'),ms=e.target.closest('[data-ms]');
+  const ss=e.target.closest('.pop [data-setstat]'),sh=e.target.closest('.pop [data-sethealth]'),mc=e.target.closest('.pop [data-msclear]');
+  if(code){e.stopPropagation();return pickCode(code.dataset.code)}
+  if(ss){e.stopPropagation();const a=S.act[popFor?.id];closePop();return a&&setStatus(a,ss.dataset.setstat)}
+  if(sh){e.stopPropagation();const a=S.act[popFor?.id];closePop();return a&&a.health!==sh.dataset.sethealth&&write('actions',a.id,{health:sh.dataset.sethealth,...stamp()},'Schedule set to '+HL[sh.dataset.sethealth])}
+  if(mc){const k=mc.dataset.msclear;SEL[k].clear();document.querySelectorAll('.pop [data-msk]').forEach(i=>i.checked=false);if(k==='pri')refreshFilters();paintMs();savePrefs();return render()}
+  const yb=e.target.closest('[data-yr]');
+  if(yb){e.stopPropagation();yr=Math.min(YMAX,Math.max(YMIN,yr+ +yb.dataset.yr));closePop();return render()}
+  if(cell){e.stopPropagation();return popFor?.kind==='cell'&&popFor.id===cell.dataset.cell&&popFor.m===cell.dataset.m?closePop():openPop(cell)}
+  if(st){e.stopPropagation();return popFor?.kind==='stat'&&popFor.id===st.dataset.stat?closePop():openStat(st)}
+  if(ms){return popFor?.kind==='ms'&&popFor.k===ms.dataset.ms?closePop():openMs(ms)}
+  if(!e.target.closest('.pop'))closePop();
+  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-tab],[data-goobj],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
   if(t.matches('[data-close]'))return closeDrawer();
   if(t.matches('[data-open]'))return drawer(t.dataset.open);
   if(t.matches('tr.act'))return drawer(t.dataset.id);
@@ -367,21 +956,24 @@ document.addEventListener('click',e=>{
   if(t.id==='d-addnote')return addNote();
   if(t.id==='d-del')return delItem(t);
   if(t.matches('[data-delnote]'))return db.collection('notes').doc(t.dataset.delnote).delete().catch(()=>toast('Could not remove.'));
-  if(t.id==='f-clear'){['q','pri','obj','owner','region','status','health'].forEach(k=>$('#f-'+k).value='');kpiFilter='';refreshFilters();savePrefs();return render()}
-  if(t.matches('[data-k]')){const k=t.dataset.k;$('#f-status').value='';$('#f-health').value='';
-    if(curKpi()!==k||true){if(k==='open'||k==='closed')$('#f-status').value=k;else if(k){$('#f-status').value='open';$('#f-health').value=k==='moved'?'moved':k;if(k==='moved')$('#f-status').value=''}}
-    savePrefs();render()}
+  if(t.id==='f-clear'){FILTERS.forEach(k=>$('#f-'+k).value='');MSK.forEach(k=>SEL[k].clear());view='';closePop();refreshFilters();savePrefs();return render()}
+  if(t.matches('[data-k]')){const k=t.dataset.k;view=view===k?'':k;savePrefs();render()}
+  if(t.matches('[data-tab]')){tab=t.dataset.tab;closePop();savePrefs();render();window.scrollTo(0,0)}
+  if(t.matches('[data-goobj]')){const o=S.obj[t.dataset.goobj];SEL.obj=new Set([o.id]);SEL.pri=new Set([o.priorityId]);tab='tracker';refreshFilters();savePrefs();render();window.scrollTo(0,0)}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id)});
+window.addEventListener('resize',closePop);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&popFor){closePop();return}if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id);if(e.key==='Enter'&&e.target.matches('[data-goobj]'))e.target.click()});
 $('#drawer-root').addEventListener('change',onField);
-$('#filters').addEventListener('input',e=>{if(e.target.id==='f-pri')refreshFilters();savePrefs();render()});
+$('#filters').addEventListener('input',()=>{savePrefs();render()});
+document.addEventListener('change',e=>{const i=e.target.closest('[data-msk]');if(!i)return;const k=i.dataset.msk;
+  i.checked?SEL[k].add(i.value):SEL[k].delete(i.value);if(k==='pri')refreshFilters();paintMs();savePrefs();render()});
 
 /* ---------- boot ---------- */
-(function(){const p=prefs();refreshFilters();for(const k in p){const el=$('#f-'+k);if(el){el.value=p[k]}}})();
+(function(){const p=prefs();view=p.view||'';tab=['dash','perf','bowler'].includes(p.tab)?p.tab:'tracker';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
 let loaded={pri:false,obj:false,act:false};
 function sub(col,key){
-  db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>S[key][d.id]={id:d.id,...d.data()});loaded[key]=true;
-    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Live · changes sync for everyone';const p=prefs();refreshFilters();['pri','obj','owner','region'].forEach(k=>{if(p[k]&&[...$('#f-'+k).options].some(o=>o.value===p[k]))$('#f-'+k).value=p[k]});render()}},
+  db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>{const r={id:d.id,...d.data()};if(key==='act'&&isLate(r)&&r.health!=='off'){r.setHealth=r.health;r.health='off';r.autoOff=true}S[key][d.id]=r});loaded[key]=true;
+    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Live · changes sync for everyone';refreshFilters();render()}},
     err=>{$('#conn').textContent='Connection lost. Reload the page to reconnect.'})}
 (async()=>{
   const [d,u]=await Promise.all([window.claude?.use('db'),window.claude?.use('user')].map(p=>Promise.resolve(p).catch(()=>null)));
@@ -390,7 +982,9 @@ function sub(col,key){
   try{uid=await user?.id()}catch{}
   try{const c=await user?.can?.('data.write');if(c===false)canWrite=false}catch{}
   loaded.notes=true;
-  sub('priorities','pri');sub('objectives','obj');sub('actions','act');
+  sub('priorities','pri');sub('objectives','obj');sub('actions','act');subBowler();
   db.collection('notes').onSnapshot(snap=>{S.notes={};snap.docs.forEach(d=>S.notes[d.id]={id:d.id,...d.data()});if(loaded.act)render()},()=>{});
 })();
 </script>
+
+</body></html>
