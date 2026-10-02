@@ -7,19 +7,19 @@
   --bg:#f3f5f7; --panel:#ffffff; --ink:#15202b; --muted:#5b6875; --line:#d9dfe5; --soft:#e9edf1;
   --accent:#1f5f8b; --accent-ink:#ffffff; --band:#223445; --band-ink:#eef3f7;
   --on:#1e8a4c; --on-bg:#dff2e7; --risk:#b7791f; --risk-bg:#fbf0d9; --off:#c0392b; --off-bg:#fbe3e0;
-  --done:#6b7785; --done-bg:#e6eaee; --pause:#0f7c80; --pause-bg:#dcf1f1; --comp:#2563b8; --comp-bg:#e3ecfa; --comp-row:#f2f6fd; --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --plan:#8a9aab; --planln:#4b5661; --moved:#7a4fb5; --moved-bg:#efe7fa;
+  --done:#6b7785; --done-bg:#e6eaee; --pause:#0f7c80; --pause-bg:#dcf1f1; --comp:#2563b8; --comp-bg:#e3ecfa; --comp-row:#f2f6fd; --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
   --f-disp:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --planln:#c3ccd5; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --planln:#c3ccd5; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:20px 60px}
@@ -72,7 +72,7 @@ button{font:inherit;cursor:pointer}
 .mkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);align-items:center}
 .mkey i{display:inline-block;vertical-align:middle;margin-right:5px}
 .mkey .dot{width:9px;height:9px;border-radius:50%}.mkey .dot.up{background:var(--on)}.mkey .dot.down{background:var(--off)}
-.mkey .dash{width:22px;border-top:3px solid color-mix(in srgb,var(--s1) 45%,var(--panel))}.mkey .pl{width:22px;border-top:2px dashed var(--planln)}.mkey .ac{width:22px;border-top:3px solid var(--s1)}
+.mkey .pl{width:22px;border-top:2px dashed color-mix(in srgb,var(--s1) 40%,var(--panel))}.mkey .ac{width:22px;border-top:3px solid color-mix(in srgb,var(--s1) 75%,var(--ink))}
 .mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @media (max-width:760px){.mgrid{grid-template-columns:1fr}}
 .mcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px;min-width:0}
@@ -790,15 +790,15 @@ function zview(k,mode,z){const v=mview(k,mode);if(!z||mode==='quarter')return v;
   const [a,b]=[(z-1)*13,z*13];
   return {labels:v.labels.slice(a,b),act:{v:v.act.v.slice(a,b),est:v.act.est.slice(a,b)},plan:v.plan.slice(a,b),real:v.real.slice(a,b)}}
 function lineChart(el,defs,mode,opts={}){
-  const datasets=[];let labels=[];const ink=tok('--muted'),grid=tok('--soft'),on=tok('--on'),off=tok('--off'),panel=tok('--panel');
-  for(const d of defs){const v=zview(d.key,mode,opts.z);labels=v.labels;const col=tok(d.color);
+  const datasets=[];let labels=[];const ink=tok('--muted'),grid=tok('--soft'),on=tok('--on'),off=tok('--off'),panel=tok('--panel'),deep=tok('--ink');
+  for(const d of defs){const v=zview(d.key,mode,opts.z);labels=v.labels;const base=tok(d.color),col=mix(base,deep,.25);
     const pc=i=>{const a=v.act.v[i],p=v.plan[i];if(a==null||!v.real[i]||p==null)return col;return beats(d.key,a,p)?on:off};
     datasets.push({label:(defs.length>1?d.name:'Actual'),data:v.act.v,borderColor:col,backgroundColor:col,borderWidth:3,tension:0,spanGaps:false,
       pointRadius:v.act.v.map((x,i)=>x!=null&&v.real[i]?(mode==='quarter'?6:4):0),pointHoverRadius:6,
       pointBackgroundColor:v.act.v.map((_,i)=>pc(i)),pointBorderColor:panel,pointBorderWidth:2,
-      segment:{borderColor:c=>(v.act.est[c.p0DataIndex]||v.act.est[c.p1DataIndex])?mix(col,panel,.55):undefined},_est:v.act.est,_k:d.key,order:1});
-    /* Plan: neutral gray on single-series charts; a pale tint of the series color when several share a chart. Always long dashes, no points. */
-    const pcol=defs.length>1?mix(col,panel,.5):tok('--planln');
+      _est:v.act.est,_k:d.key,order:1});
+    /* Actual: a deeper shade of the series color. Plan: a soft pale tint of the same color, long dashes, no points. */
+    const pcol=mix(base,panel,.6);
     if(v.plan.some(x=>x!=null))datasets.push({label:(defs.length>1?d.name+' plan':'Plan'),data:v.plan,borderColor:pcol,backgroundColor:pcol,borderWidth:2,borderDash:[8,5],pointRadius:0,pointHoverRadius:3,tension:0,_k:d.key,order:2});
   }
   const c=new Chart(el,{type:'line',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,animation:false,
@@ -844,7 +844,7 @@ function renderPerf(){
   if(typeof Chart==='undefined'){$('#main').innerHTML='<div class="empty">The charting library didn’t load. Check your internet connection and reload.</div>';return}
   const has=Object.keys(mdoc()).length>0;
   let h=`<div class="mhead">${yearNav()}
-    <div class="mkey"><span><i class="ac"></i>Actual (solid)</span><span><i class="pl"></i>Plan (dashed)</span><span><i class="dash"></i>Actual, estimated between reported weeks (pale)</span><span><i class="dot up"></i>Better than plan</span><span><i class="dot down"></i>Worse than plan</span><span>Backlogs: below plan is better</span></div></div>`;
+    <div class="mkey"><span><i class="ac"></i>Actual (solid)</span><span><i class="pl"></i>Plan (dashed)</span><span>Dots mark reported weeks; the line between them is estimated (hover to see)</span><span><i class="dot up"></i>Better than plan</span><span><i class="dot down"></i>Worse than plan</span><span>Backlogs: below plan is better</span></div></div>`;
   if(!has){$('#main').innerHTML=h+`<div class="empty">No bowler numbers for ${myr} yet. Add them on the Bowler input tab.</div>`;return}
   h+='<div class="mgrid">'+MCARDS.map(c=>`<section class="mcard ${c.wide?'wide':''} ${c.small?'small':''}" id="card-${c.id}"></section>`).join('')+'</div>';
   $('#main').innerHTML=h;MCARDS.forEach(drawCard)}
