@@ -1,0 +1,11 @@
+name: Release check
+# The team uses shared-drive-demo/UVNN-Tracker.html. It must be a fresh build of
+# tracker.html plus the shared-folder layer, and the zip must hold the same file.
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Release is the shared-folder version and in step with tracker.html
+        run: python3 shared-drive-demo/build/build.py --check
