@@ -1,0 +1,34 @@
+{
+ "dateHistory": [],
+ "group": "External Tools",
+ "health": "none",
+ "history": [
+  {
+   "date": "",
+   "text": "9.24 - Workign through food/bev updated ebook with some of this info. Will create additional water focused ebook once next app note is compelted, and when we can create executive summary of both water webinars"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "Aligned in pirority call, will look to create in Q4 with Food and Bev brochure starting first"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Haven't seen any materials ready yet, look to start in July?"
+  }
+ ],
+ "months": {
+  "Dec": "planned",
+  "Nov": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 10,
+ "originalDate": "2026-12-31",
+ "owner": "Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Water Methods general brochure",
+ "updatedAt": ""
+}

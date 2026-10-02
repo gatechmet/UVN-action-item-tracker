@@ -1,0 +1,22 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [],
+ "months": {
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Jun": "green"
+ },
+ "objectiveId": "P2-O7",
+ "order": 8,
+ "originalDate": "2026-08-31",
+ "owner": "Dimi",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Evaluate and build action plan for EMEA dealer underperformance",
+ "updatedAt": ""
+}

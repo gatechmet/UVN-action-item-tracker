@@ -1,0 +1,28 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-03-18",
+   "text": "Kelly to follow up with Joel Seddon on this -  FH: We are awaiting instructions from the BU on how our partners should carry out the process."
+  }
+ ],
+ "months": {
+  "Apr": "complete",
+  "Feb": "planned",
+  "Mar": "yellow"
+ },
+ "objectiveId": "P3-O2",
+ "order": 3,
+ "originalDate": "2026-04-30",
+ "owner": "Valdo?",
+ "priorityId": "P3",
+ "region": "LATAM",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "",
+ "title": "Direct LATAM shipment from CMC",
+ "updatedAt": ""
+}

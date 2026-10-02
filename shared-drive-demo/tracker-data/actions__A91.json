@@ -1,0 +1,37 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "1.75M with fisher so Adnan asking for data from fisher to understand what kind of market share we have. The market share over the past 3 yaers (exc Implen) but like for like is declining from 47% to 43% to 32% for instruments only."
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "complete",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O4",
+ "order": 3,
+ "originalDate": "2026-03-31",
+ "owner": "Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "Fisher Market Share data",
+ "updatedAt": ""
+}

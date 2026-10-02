@@ -1,0 +1,23 @@
+{
+ "completedAt": "2026-09-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O1",
+ "order": 5,
+ "originalDate": "2026-09-01",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-09-01",
+ "targetGoal": "",
+ "title": "Phase II launch",
+ "updatedAt": ""
+}

@@ -1,0 +1,51 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "7.9: I have template creating, last I saw we were waiting for SKU"
+  },
+  {
+   "date": "2026-06-30",
+   "text": "Got loyalty numbers for GENESYS trade up flyer, need to create that today"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Thermo Fisher completed, Fisher Sci/VWR being reviewed and should be ready in roughly two weeks. Promo page in US updating on 7/1"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "H2 promo flyers finishing, will work on GENSYS G5 version in June"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Promo flyers being worked on, just realized I may need a GENESYS 20 - 180 Promo flyer for the month of June now..."
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Launching with Phase 1"
+  },
+  {
+   "date": "2026-04-14",
+   "text": "Share with Adnan for approval on Fisher side"
+  }
+ ],
+ "months": {
+  "Jul": "complete",
+  "Jun": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 17,
+ "originalDate": "2026-07-31",
+ "owner": "Kyle/Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "100 leads, 10 SQO, $75K bookings",
+ "title": "Promo flyer upgrade GENESYS",
+ "updatedAt": ""
+}

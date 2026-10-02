@@ -1,0 +1,56 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "Continuing to send emails similar to GENESYS Series we are sending through Eloqua"
+  },
+  {
+   "date": "2026-07-09",
+   "text": "First email been out for several weeks, email two next week, last email end of July"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Third email in series ready, focusing on Acclaro pro and updating messaging"
+  },
+  {
+   "date": "2026-05-06",
+   "text": "Provided notes on last email, series in the works now"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Justin reviewing the third email here now"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "Newsletter sponsorship live, got series of emails and will share with Justin for light review"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "First two series of emails being worked on, aligning on PAT copy and will start third email soon"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Email series featuring NanoDrop Ultra. Will talk about feature, benifets, and use cases in email one linking back to markeitng page. Email two will focus on workflow with BID instruments and drive to contact form, Email three will focus on PAT workflow and drive to contact form. GENESYS Series being identified but more then likely introduction, software flexability focus, and then water or academia focus"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Jun": "complete",
+  "May": "green"
+ },
+ "objectiveId": "P1-O4",
+ "order": 12,
+ "originalDate": "2026-06-30",
+ "owner": "Kyle",
+ "priorityId": "P1",
+ "region": "NA/EMEA",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "Timeline: In bowler",
+ "title": "Azo emails",
+ "updatedAt": ""
+}

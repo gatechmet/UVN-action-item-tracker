@@ -1,0 +1,27 @@
+{
+ "completedAt": "2026-09-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-03",
+   "text": "Alignment meeting scheduled for 9/15 align with RnD on prioritiy and implementation timing for product roadmapping"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Sep": "complete"
+ },
+ "objectiveId": "P1-O6",
+ "order": 3,
+ "originalDate": "2026-09-30",
+ "owner": "Brian/Lauren",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Refreshed Roadmap alignment with R&D",
+ "updatedAt": ""
+}

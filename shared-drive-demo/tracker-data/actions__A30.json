@@ -1,0 +1,37 @@
+{
+ "completedAt": "2026-09-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-17",
+   "text": "Preapproval meeting scheduled next week"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "After strategy call the general idea is to look at reskinnig NDLP 2.0 for APJ and EMEA with EMEA having an increase in price to offset cannabilization"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Gathering some more VoS and pricing information"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O3",
+ "order": 3,
+ "originalDate": "2026-09-30",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "NanoDrop Mid initial business case",
+ "updatedAt": ""
+}

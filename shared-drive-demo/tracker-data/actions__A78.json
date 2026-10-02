@@ -1,0 +1,45 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-07-22",
+   "text": "I think its live be there's a change in product management right in this moment so haven't been able to get clear communication around it - trying to follow up with other team members to get a better status update"
+  },
+  {
+   "date": "2026-06-18",
+   "text": "still on track for july go live"
+  },
+  {
+   "date": "2026-04-15",
+   "text": "BID targeting a July Go live of onside installation"
+  },
+  {
+   "date": "2026-03-27",
+   "text": "BID in agreement to do onsite IQOQ and working on proposal"
+  },
+  {
+   "date": "2026-03-03",
+   "text": "BID is conducting VOC and waiting for GSS to create proposal"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Jul": "yellow",
+  "Jun": "green",
+  "Mar": "yellow",
+  "May": "green"
+ },
+ "objectiveId": "P2-O2",
+ "order": 1,
+ "originalDate": "2026-07-31",
+ "owner": "Kelly",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-07-31",
+ "targetGoal": "",
+ "title": "Engage BID/GSS to enable the NDU service model for pharma customers",
+ "updatedAt": ""
+}

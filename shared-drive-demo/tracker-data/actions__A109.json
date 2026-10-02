@@ -1,0 +1,30 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-05-06",
+   "text": "FH: This action can be moved to blower. 03/18 FH: Everything has been approved, and we should start in April.- 2/11 have marketing approved for newsletter before March"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Feb": "green",
+  "Jul": "planned",
+  "Jun": "planned",
+  "Mar": "green",
+  "May": "yellow"
+ },
+ "objectiveId": "P2-O7",
+ "order": 7,
+ "originalDate": "2026-07-31",
+ "owner": "Valdo",
+ "priorityId": "P2",
+ "region": "LATAM",
+ "status": "open",
+ "targetDate": "2026-07-31",
+ "targetGoal": "$150K",
+ "title": "Newsletter with promotions (quarterly)",
+ "updatedAt": ""
+}

@@ -1,0 +1,57 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-16",
+   "text": "：Q3 forecast 330K, QTD331K revenue, pacing 100%."
+  },
+  {
+   "date": "2026-08-26",
+   "text": "Q3 forecast 300K, QTD283K revenue, pacing 94%."
+  },
+  {
+   "date": "2026-08-05",
+   "text": "Q3 forecast 300K, QTD180K revenue, pacing 60%."
+  },
+  {
+   "date": "2026-07-22",
+   "text": "Q3 forecast 285K, QTD100K revenue, pacing 35%."
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Q2 forecast 184K, pacing100%."
+  },
+  {
+   "date": "2026-06-10",
+   "text": "Q2 forecast 184K, pacing100%."
+  }
+ ],
+ "months": {
+  "Apr": "complete",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "green",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O5",
+ "order": 4,
+ "originalDate": "2026-04-30",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "Target:$1.1M,\nYTD923K",
+ "title": "Existing dealers expand to Ultra full portfolio and sellout target",
+ "updatedAt": ""
+}

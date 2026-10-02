@@ -1,0 +1,24 @@
+{
+ "dateHistory": [],
+ "group": "Awareness and Marketing plan",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 20,
+ "originalDate": "2026-10-31",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Water Market Strategy",
+ "updatedAt": ""
+}

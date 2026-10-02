@@ -1,0 +1,55 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-28",
+   "text": "QTD $134K sellout, complete 31% of Q2 revenue target $450K."
+  },
+  {
+   "date": "2026-05-26",
+   "text": "QTD $283K sellout, complete 63% of Q2 revenue target $450K."
+  },
+  {
+   "date": "2026-06-22",
+   "text": "QTD $455K sellout, complete Q2 revenue target."
+  },
+  {
+   "date": "2026-07-22",
+   "text": "QTD $100K sellout, pacing 16%."
+  },
+  {
+   "date": "2026-08-03",
+   "text": "QTD$234K sellout,pacing  38%"
+  },
+  {
+   "date": "2026-09-15",
+   "text": "QTD$565k sellout,pacing 89%"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "na",
+  "Dec": "na",
+  "Jul": "green",
+  "Jun": "green",
+  "Mar": "complete",
+  "May": "green",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O8",
+ "order": 23,
+ "originalDate": "2026-07-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "> Q revenue target\nQ2-$455K\nQ3-$610K · Timeline: 565K",
+ "title": "Drive distributor sellout > revenue target",
+ "updatedAt": ""
+}

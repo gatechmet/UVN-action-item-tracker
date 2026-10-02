@@ -1,0 +1,36 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "",
+   "text": "Moved to bowler"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "planned",
+  "Feb": "na",
+  "Jan": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "na",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O8",
+ "order": 12,
+ "originalDate": "2026-12-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "180k USD",
+ "title": "Procatively approach Pharma/Biopharma customer with Acclaro Pro",
+ "updatedAt": ""
+}

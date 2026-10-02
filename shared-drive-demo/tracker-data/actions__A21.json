@@ -1,0 +1,21 @@
+{
+ "dateHistory": [],
+ "group": "Selling Strategy",
+ "health": "none",
+ "history": [],
+ "months": {
+  "Dec": "planned",
+  "Nov": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 14,
+ "originalDate": "2026-12-31",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Post Y1 - how can we work with WAI to take over applicable customer base as they upgrade?",
+ "updatedAt": ""
+}

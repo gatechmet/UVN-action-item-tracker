@@ -1,0 +1,35 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-04-09",
+   "text": "Waiting for Fisher OFT email to be approved"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Jamie and Mike have training scheduled and working on the materials"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "have a call with inside sales director this week"
+  }
+ ],
+ "months": {
+  "Apr": "complete",
+  "Feb": "complete"
+ },
+ "objectiveId": "P2-O4",
+ "order": 2,
+ "originalDate": "2026-04-30",
+ "owner": "Mike, Jamie",
+ "priorityId": "P2",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "",
+ "title": "Partner with fisher inside sales team that covers academia to drive promotion",
+ "updatedAt": ""
+}

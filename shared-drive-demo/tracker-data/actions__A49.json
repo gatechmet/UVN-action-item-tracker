@@ -1,0 +1,25 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [],
+ "months": {
+  "Aug": "red",
+  "Dec": "planned",
+  "Jul": "red",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O4",
+ "order": 17,
+ "originalDate": "2026-12-31",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Enable global sales bundles to be sold through SAP",
+ "updatedAt": ""
+}

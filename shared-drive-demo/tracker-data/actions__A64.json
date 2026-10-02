@@ -1,0 +1,32 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-05-14",
+   "text": "Working through playbook and sales level tools first, willl look to update webpage and social posts first, with Acclaro Pro flyer last since it was recently updated"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "meeting today, making progress. Will setup a call with Kyle to review actions needed"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Jun": "complete",
+  "May": "green"
+ },
+ "objectiveId": "P1-O5",
+ "order": 11,
+ "originalDate": "2026-06-30",
+ "owner": "Kyle, Justin",
+ "priorityId": "P1",
+ "region": "",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "Message/collateral review vs existing technologies, enhance attack approach",
+ "updatedAt": ""
+}

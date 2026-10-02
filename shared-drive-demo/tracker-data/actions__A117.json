@@ -1,0 +1,39 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-06-16",
+   "text": "we will organize it in US in August /September  6/11Marta working on scheduling this training with Jeff"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Mark to reach out to Teri and follow up"
+  },
+  {
+   "date": "2026-04-02",
+   "text": "Teri to reach out to Jeff to see if we can coordinate training /mentorship"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "Mar": "yellow",
+  "May": "yellow",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O8",
+ "order": 7,
+ "originalDate": "2026-09-30",
+ "owner": "Marta",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Hands-on service training for new dealers in UK and refresh for others (Micro)",
+ "updatedAt": ""
+}

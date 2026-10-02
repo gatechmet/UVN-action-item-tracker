@@ -1,0 +1,48 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "I believe there's no way for me to post in other regions, I did support by sharing out content and materials to teams for GENESYS Launch"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Need to round back with the teams"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "I'm the guinea pig for Youtube, I have provided some info and team should be providing ETA or asking for more info by end of week"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Working through createing Youtube ad's, digital CAD team should have more requirements for Tik Tok portion to begin"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "meeting with digital team about tik tok next week"
+  },
+  {
+   "date": "2026-04-14",
+   "text": "Check in to Tik Tok"
+  }
+ ],
+ "months": {
+  "Jul": "complete",
+  "Jun": "yellow",
+  "May": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 14,
+ "originalDate": "2026-07-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "25 leads, 2 SQO, $15K bookings",
+ "title": "Social Testing",
+ "updatedAt": ""
+}

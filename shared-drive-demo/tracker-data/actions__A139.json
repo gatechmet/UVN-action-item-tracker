@@ -1,0 +1,46 @@
+{
+ "completedAt": "2026-09-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "Nishi had requested update to signed documents, those have all been provided back to her. Reached out for a status update on the compliance process which has already started"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "India team working with the GEM officials, asked Arun for an update"
+  },
+  {
+   "date": "2026-07-01",
+   "text": "We have provided all necessary documents for GeM compliance"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Followed up to get clear timeline on excemption/filing"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Regulatory filing for exemption of video of MSN manufacturing site. Ultra PNs are already setup to ship from both MSN/CMC order management will need to flip when orders come in"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "May": "yellow",
+  "Sep": "green"
+ },
+ "objectiveId": "P2-O9",
+ "order": 1,
+ "originalDate": "2026-09-30",
+ "owner": "Justin",
+ "priorityId": "P2",
+ "region": "India",
+ "status": "completed",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "NanoDrop Ultra GeM compliance",
+ "updatedAt": ""
+}

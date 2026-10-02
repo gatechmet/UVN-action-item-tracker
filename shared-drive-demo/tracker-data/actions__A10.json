@@ -1,0 +1,27 @@
+{
+ "dateHistory": [],
+ "group": "Internal Tools",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-06-22",
+   "text": "Move to H2"
+  }
+ ],
+ "months": {
+  "Aug": "yellow",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 3,
+ "originalDate": "2026-10-31",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "TBD",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Reagent partnerships",
+ "updatedAt": ""
+}

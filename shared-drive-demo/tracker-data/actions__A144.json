@@ -1,0 +1,29 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Working on first verions of marketing tool kits starting with water, and will look to have a rough draft to align on here in the first week of October"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Dec": "planned",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P2-O11",
+ "order": 3,
+ "originalDate": "2026-12-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Build turnkey dealer playbook/templates and improve content findability; align outputs to the GCM refresh window.",
+ "updatedAt": ""
+}

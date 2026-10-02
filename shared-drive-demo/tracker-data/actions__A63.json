@@ -1,0 +1,49 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-01",
+   "text": "A3 setup"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Internal testing done, will look to add to website/brochure"
+  },
+  {
+   "date": "2026-05-18",
+   "text": "ROI calculator done and flyer in works, will present on it in EMEA training, will also go over it with the NA team in their meeting when I am back. Additionally will send out to the rest of the commercial teams. Jenn P working on internal testing so we can present a similar R2 instrument to instrument spec that Repligen is pushing"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "Feedback from meeting being incorporated into value prop messaging, working on ROI calculator, spec comparisons"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "Workshop meeting setup tomorrow"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Initial draft for complete"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Jun": "complete",
+  "Mar": "green",
+  "May": "green"
+ },
+ "objectiveId": "P1-O5",
+ "order": 10,
+ "originalDate": "2026-06-30",
+ "owner": "Brian, Justin, Jenn P",
+ "priorityId": "P1",
+ "region": "",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "Develop 2026 strategic plan to drive Acclaro Pro Adoption",
+ "updatedAt": ""
+}

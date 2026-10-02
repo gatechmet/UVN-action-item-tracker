@@ -1,0 +1,22 @@
+{
+ "dateHistory": [],
+ "group": "Internal Tools",
+ "health": "risk",
+ "history": [],
+ "months": {
+  "Aug": "yellow",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 6,
+ "originalDate": "2026-10-31",
+ "owner": "",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "Cross-training with the WAI team",
+ "updatedAt": ""
+}

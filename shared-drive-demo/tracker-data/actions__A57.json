@@ -1,0 +1,58 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-04",
+   "text": "Done"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Shared PAT for final review with MMAIO"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "We have materials with BID, need to get review of BPG/VIB alignment workflow"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "This and Demo flyer got combined a bit, align with Justin tomorrow but should be able to finish both in the next couple of business days"
+  },
+  {
+   "date": "2026-03-30",
+   "text": "we have a draft created but been diprioitizing compared to GENESYS and a few other items"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Looking to start design this week, should be able to track for first week of April - brainstorming how to best include BPG"
+  },
+  {
+   "date": "2026-03-10",
+   "text": "Had been depriotized a bit, will focus on this here and look to wrap by first week of April"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Rough draft created, working on flyer for PAT instruments with in CAD"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O5",
+ "order": 4,
+ "originalDate": "2026-05-31",
+ "owner": "Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "NA",
+ "title": "Acclaro Pro Workflow with CAD",
+ "updatedAt": ""
+}

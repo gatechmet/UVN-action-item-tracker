@@ -1,0 +1,38 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-05-14",
+   "text": "On hold until we can roll out IQ/OQ to support these pharma customers"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "discussed with all in one - BPG strong in upstream - trying to get a downstream contact"
+  },
+  {
+   "date": "2026-03-31",
+   "text": "working with PBG for inline solution with acclaro pro and investigating opportunity to partner further"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Aug": "planned",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "Mar": "green",
+  "May": "yellow"
+ },
+ "objectiveId": "P1-O4",
+ "order": 14,
+ "originalDate": "2026-08-31",
+ "owner": "Adnan",
+ "priorityId": "P1",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "BPG Acclaro Pro Collaboration",
+ "updatedAt": ""
+}

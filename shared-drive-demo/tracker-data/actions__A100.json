@@ -1,0 +1,23 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "",
+   "text": "Next Inventory report from GeneCo by end of Sep."
+  }
+ ],
+ "months": {},
+ "objectiveId": "P2-O5",
+ "order": 6,
+ "originalDate": "",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "open",
+ "targetDate": "",
+ "targetGoal": "",
+ "title": "GeneCo after-discontinue inventory tracking",
+ "updatedAt": ""
+}

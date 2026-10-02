@@ -1,0 +1,36 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "Internal Tools",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-17",
+   "text": "Looping Kelly in to discussion; will be joint effort to build out throguh H2"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Completed and presented first draft at EMEA training. Will work to build out with Brian"
+  },
+  {
+   "date": "2026-05-05",
+   "text": "plan to first draft of personas with in-person trainings. Will work with WAI to build out through remainder of year"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "green",
+  "Jun": "green"
+ },
+ "objectiveId": "P1-O2",
+ "order": 4,
+ "originalDate": "2026-08-31",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Use cases - water treatment plants, pharma manufacturer, food/bev manufacturer",
+ "updatedAt": ""
+}

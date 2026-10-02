@@ -1,0 +1,64 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-05-27",
+   "text": "Info provided to Katie"
+  },
+  {
+   "date": "2026-05-06",
+   "text": "Info shared with Katie and aligned on a few small fixes Monday"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Fixes made on Monday to promo in WF request"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "Need Promo approvals to share with team"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "Messaging with Fisher Sci team, need to align on promos in by 4/22"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Align on promo ideas tomorrow"
+  },
+  {
+   "date": "2026-04-02",
+   "text": "need to enter promo info by the 15th for fisher sci"
+  },
+  {
+   "date": "2026-03-30",
+   "text": "need to enter info by mid april, looking to align on promos with Jaime and Lauren"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Talked with Lauren and she is hoping Jaime can help drive promo that could be run"
+  },
+  {
+   "date": "2026-03-10",
+   "text": "need to enter by 4/10, aligning with Product/Commercial team on promo pricing now"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Mar": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P2-O4",
+ "order": 1,
+ "originalDate": "2026-05-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "Fisher Sci US New Lab start up promo",
+ "updatedAt": ""
+}

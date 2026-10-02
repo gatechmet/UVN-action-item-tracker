@@ -1,0 +1,49 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Moving to red due to current quality RCA. Investigation underway but concerns around how this may affect Q4 ramp"
+  },
+  {
+   "date": "2026-09-03",
+   "text": "Risk seems to be mitigated for Q3 but open question surrounding risk for longer term. Leaving yellow while investigating"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "Moving up to red based on current Q3 supply risk based on circuit board. Second source investigation underway through Zollner"
+  },
+  {
+   "date": "2026-08-06",
+   "text": "Moving to yellow based on recent risk buy feedback from CMC"
+  },
+  {
+   "date": "2026-07-30",
+   "text": "No go on 32GB chips. Next updated expected late Aug after follow-up meeting."
+  },
+  {
+   "date": "2026-07-21",
+   "text": "LE approved investigation for 32GB GEN chips"
+  }
+ ],
+ "months": {
+  "Aug": "red",
+  "Jul": "green",
+  "Jun": "green",
+  "Sep": "yellow",
+  "Oct": "yellow"
+ },
+ "objectiveId": "P1-O1",
+ "order": 6,
+ "originalDate": "2026-09-30",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "PCBA Risk for forward buys",
+ "updatedAt": "2026-10-01T13:52:10.354Z"
+}

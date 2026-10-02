@@ -1,0 +1,27 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Build the FL business case: improved-performance option vs. fallback, including volume, pricing, cannibalization, margin transfer and AOP impact."
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O4",
+ "order": 20,
+ "originalDate": "2026-10-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "FL enhancement business case",
+ "updatedAt": ""
+}

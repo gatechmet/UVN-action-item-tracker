@@ -1,0 +1,36 @@
+{
+ "objectiveId": "P1-O4",
+ "priorityId": "P1",
+ "order": 23,
+ "title": "NA pharma marketing/opportunity penetration",
+ "group": "Accelerate Pharma/Biopharma share gain via NanoDrop Ultra and Fl",
+ "owner": "Kyle",
+ "region": "NA",
+ "targetGoal": "",
+ "targetDate": "2026-10-31",
+ "originalDate": "2026-10-31",
+ "health": "on",
+ "status": "open",
+ "completedAt": "",
+ "months": {
+  "Aug": "green",
+  "Sep": "green",
+  "Oct": "planned"
+ },
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "2026-09-29",
+   "text": "Going to start additional Pmax campaign based on NGS from Brians comment, will align with Justin and Brian in early Oct."
+  },
+  {
+   "date": "2026-09-03",
+   "text": "CAD eBook created and started to share, light on UV for first focus on manfacturing drugs. Also working on updating the Pharma marketing page to drive additional traffic Vertical for CAD was able to secure another 30K or so, UVNN will be part of workflow campaigns. Is this for Fisher extra campaigns? Reached out to them here"
+  },
+  {
+   "date": "",
+   "text": "Added on 10/1 from the NA-LATAM tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

@@ -1,0 +1,29 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Validate Qubit/DeNovix market size, business at risk, installed base and combo-promotion quote/win evidence. Build clear positioning and customer value for the product."
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Dec": "planned",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O4",
+ "order": 21,
+ "originalDate": "2026-12-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Clear Qubit positiong and transition plan",
+ "updatedAt": ""
+}

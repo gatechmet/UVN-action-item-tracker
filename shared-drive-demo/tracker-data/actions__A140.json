@@ -1,0 +1,35 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-01",
+   "text": "SMB submitted and should be in place for H2"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Pricing approved for a NDU promotion for GeM orders, working on SMB"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Sent requst to India to provide price point they feel could save most of these orders"
+  }
+ ],
+ "months": {
+  "Jun": "complete",
+  "May": "green"
+ },
+ "objectiveId": "P2-O9",
+ "order": 2,
+ "originalDate": "2026-06-30",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "India",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "Evaluate NDU government promotions to convert NDL Sales",
+ "updatedAt": ""
+}

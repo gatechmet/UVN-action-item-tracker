@@ -1,0 +1,57 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-28",
+   "text": "M1 in Q2- 21%"
+  },
+  {
+   "date": "2026-05-26",
+   "text": "M2 in Q2 - 65%"
+  },
+  {
+   "date": "2026-06-22",
+   "text": "M3 in Q2 ＞100%"
+  },
+  {
+   "date": "2026-07-22",
+   "text": "M1 in Q3 > 20%"
+  },
+  {
+   "date": "2026-08-03",
+   "text": "：M1 in Q3 -21%"
+  },
+  {
+   "date": "2026-09-15",
+   "text": "：M3 in Q3>100%"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "Mar": "complete",
+  "May": "green",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O8",
+ "order": 26,
+ "originalDate": "2026-07-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "Q3 M3＞100%",
+ "title": "Booking pacing enhancement quarterly",
+ "updatedAt": ""
+}

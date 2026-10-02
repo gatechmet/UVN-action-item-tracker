@@ -1,0 +1,39 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-06-04",
+   "text": "seeing how we can partner to drive acclaro pro and standardization across US"
+  },
+  {
+   "date": "2026-05-19",
+   "text": "call scheduled for next week"
+  },
+  {
+   "date": "2026-04-28",
+   "text": "Mike working to schedule"
+  },
+  {
+   "date": "2026-02-16",
+   "text": "we will set up a call with Mike and IDIR to get this rolling"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Jun": "planned",
+  "May": "yellow"
+ },
+ "objectiveId": "P1-O5",
+ "order": 8,
+ "originalDate": "2026-06-30",
+ "owner": "Mike",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "open",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "Start discussion with Fisher Sci team i.e. IDIRs (segment directors)",
+ "updatedAt": ""
+}

@@ -1,0 +1,49 @@
+{
+ "completedAt": "",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "Awaiting PD testing"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Adding assay to instrument purchase for BID, awaiting PD testing, may need to assess price if we cannot improve spec limits"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "Assay flyer being added to the BOM of FL units"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "Commercial survey was sent out. One of the key findings for the FL models is that are pricing is too high considering Denovix beats us in the key spec that most customers care about which is low-end dynamic range. Additionally the commercial team had the lowest confidence in selling the FL Assays"
+  }
+ ],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "na",
+  "Jan": "na",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "na",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P1-O4",
+ "order": 10,
+ "originalDate": "",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "closed",
+ "targetDate": "",
+ "targetGoal": "",
+ "title": "Post launch marketing assessment and Revised strategy",
+ "updatedAt": ""
+}

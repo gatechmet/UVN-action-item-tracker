@@ -1,0 +1,49 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-16",
+   "text": "：Booking forecast 1.05M in Q3, QTD 1.03K; progressed 172K vs LW. Revenue forecast 1.1M(Including Backlog70K), QTD 1.03M ,progressed 259K vs LW."
+  },
+  {
+   "date": "2026-08-26",
+   "text": "：Booking forecast 900K in Q3, QTD 858K; progressed 237K vs LW. Revenue forecast 970K(Including Backlog70K), QTD 771K ,progressed 219K vs LW."
+  },
+  {
+   "date": "2026-08-05",
+   "text": "：Booking forecast 705K in Q3, QTD 617K; progressed 90K vs LW. Revenue forecast 779K , QTD 552K ,progressed 270K vs LW."
+  },
+  {
+   "date": "2026-07-22",
+   "text": "：Booking forecast 639K in Q3, QTD 527K; progressed 220K vs LW. Revenue forecast 639K , QTD 288K ,progressed 140K vs LW."
+  },
+  {
+   "date": "2026-06-24",
+   "text": "：Booking forecast 600K, QTD 600K; progressed 46K vs LW. Revenue forecast 694K (includ. Gene 79K), QTD 694K ,progressed186K vs LW."
+  },
+  {
+   "date": "2026-06-10",
+   "text": "Booking forecast 600K, QTD 554K; progressed 333K vs LW. Revenue forecast 694K (includ. Gene 79K), QTD 508K ,progressed 232K vs LW."
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green"
+ },
+ "objectiveId": "P2-O5",
+ "order": 1,
+ "originalDate": "2026-04-30",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "Q3 6+6 Fcst:\nBkgs: 598K\nRev: 470K",
+ "title": "Execute new partnership to support a strong NanoDrop GTM",
+ "updatedAt": ""
+}

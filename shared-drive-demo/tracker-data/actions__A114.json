@@ -1,0 +1,25 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [],
+ "months": {
+  "Aug": "planned",
+  "Jul": "planned",
+  "Jun": "planned",
+  "May": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O8",
+ "order": 4,
+ "originalDate": "2026-09-30",
+ "owner": "Kelly",
+ "priorityId": "P2",
+ "region": "APJ & EMEA",
+ "status": "closed",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Optimize channel landscape, grow mindshare with key partners",
+ "updatedAt": "2026-10-01T16:45:11.888Z",
+ "completedAt": ""
+}

@@ -1,0 +1,48 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-08-13",
+   "text": "Some weird blocking issue came through, but resolved now. Should be done"
+  },
+  {
+   "date": "2026-08-06",
+   "text": "SMBs released, but ND part numbers had block added for unknown reason. Investigating this"
+  },
+  {
+   "date": "2026-07-30",
+   "text": "SMBs should be released today/tomorrow"
+  },
+  {
+   "date": "2026-07-21",
+   "text": "On track to release next week; working with Mike for any issues"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "Delayed due to GTC hold up. Should be released by end of month. Working with SMB team to extend H1 PN effective date to allow for continuity"
+  },
+  {
+   "date": "2026-06-03",
+   "text": "On track for July release"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "green",
+  "Jun": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 20,
+ "originalDate": "2026-08-31",
+ "owner": "Lauren",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Roll out 2H Promos",
+ "updatedAt": ""
+}

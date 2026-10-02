@@ -1,0 +1,26 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Apr": "yellow",
+  "Aug": "green",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "Mar": "yellow",
+  "May": "red"
+ },
+ "objectiveId": "P3-O3",
+ "order": 1,
+ "originalDate": "2026-08-31",
+ "owner": "",
+ "priorityId": "P3",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Complete robust analysis dual-sourcing scoping for Genesys and and extended ND portfolio",
+ "updatedAt": ""
+}

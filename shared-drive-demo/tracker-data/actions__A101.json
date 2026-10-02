@@ -1,0 +1,34 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-08-26",
+   "text": "：2 APs have placed order(Wuxi Biologitics).1unit delay to Q4."
+  },
+  {
+   "date": "2026-07-22",
+   "text": "1unit delay to later Q3. 2 APs have placed order(Wuxi Biologitics). Q1: 1AP sold to Xinma Bio;"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green",
+  "May": "green"
+ },
+ "objectiveId": "P2-O5",
+ "order": 7,
+ "originalDate": "2026-05-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "Sellout target 10 units,\nYTD 3 Units",
+ "title": "Accolaro Pro Sales Acceleration/ promo",
+ "updatedAt": ""
+}

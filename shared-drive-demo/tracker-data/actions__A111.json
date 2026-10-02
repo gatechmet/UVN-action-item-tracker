@@ -1,0 +1,39 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-04",
+   "text": "aquamate discontinued is good for the dealers"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Switched dealers in Brazil, focus on driving uptake in Q2"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "FH: All Tier 1 and Tier 2 partners with regular MBRs, including forecast alignment and other actions."
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "planned",
+  "Jun": "green",
+  "Mar": "green",
+  "May": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 1,
+ "originalDate": "2026-07-31",
+ "owner": "Valdo",
+ "priorityId": "P2",
+ "region": "LATAM",
+ "status": "open",
+ "targetDate": "2026-07-31",
+ "targetGoal": "",
+ "title": "Strengthen accountability with channel partners in LATAM",
+ "updatedAt": ""
+}

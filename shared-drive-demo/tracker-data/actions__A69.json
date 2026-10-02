@@ -1,0 +1,40 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "No update on feedback from AT. Revised market assumptions, aiming for Gate 0/1 in November"
+  },
+  {
+   "date": "2026-09-03",
+   "text": "Met with AT; will make breadboard by end of September. LE to work on next steps outline for both products and communicate through project call"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "looking to engage with AT based on workshop discussion, waiting on feedback from Ted"
+  },
+  {
+   "date": "2026-07-30",
+   "text": "Slides prepped for workshop discussion"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "green",
+  "Oct": "planned",
+  "Sep": "green"
+ },
+ "objectiveId": "P1-O6",
+ "order": 2,
+ "originalDate": "2026-10-31",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "",
+ "title": "UV/VIS low End strategy and business case",
+ "updatedAt": ""
+}

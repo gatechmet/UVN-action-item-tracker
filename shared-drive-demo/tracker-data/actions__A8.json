@@ -1,0 +1,41 @@
+{
+ "completedAt": "2026-06-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "Internal Tools",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-06-17",
+   "text": "first draft complete with Hach reagents, currently discussing with Adnan"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Should be okay to release first draft by EOM"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Falling a bit behind with training prep. Will aim to complete by mid-June"
+  },
+  {
+   "date": "2026-05-05",
+   "text": "will be worked on and available at launch"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "Jul": "planned",
+  "Jun": "complete",
+  "May": "yellow"
+ },
+ "objectiveId": "P1-O2",
+ "order": 1,
+ "originalDate": "2026-07-31",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "",
+ "title": "Method & reagent cross reference cheatsheet",
+ "updatedAt": ""
+}

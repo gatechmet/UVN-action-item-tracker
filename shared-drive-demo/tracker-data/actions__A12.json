@@ -1,0 +1,23 @@
+{
+ "dateHistory": [],
+ "group": "Internal Tools",
+ "health": "risk",
+ "history": [],
+ "months": {
+  "Aug": "yellow",
+  "Jul": "green",
+  "Jun": "green",
+  "Sep": "planned"
+ },
+ "objectiveId": "P1-O2",
+ "order": 5,
+ "originalDate": "2026-09-30",
+ "owner": "Kelly",
+ "priorityId": "P1",
+ "region": "",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "In-depth how to win playbook",
+ "updatedAt": ""
+}

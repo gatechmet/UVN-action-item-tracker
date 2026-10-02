@@ -1,0 +1,37 @@
+{
+ "objectiveId": "P2-O8",
+ "priorityId": "P2",
+ "order": 29,
+ "title": "Promotional Pricing for Iraq/Pakistan for ND 8",
+ "group": "Enable Boutique and Smaller Regional Dealers",
+ "owner": "Justin",
+ "region": "EMEA",
+ "targetGoal": "100k USD",
+ "targetDate": "2026-08-31",
+ "originalDate": "2026-08-31",
+ "health": "on",
+ "status": "completed",
+ "completedAt": "2026-08-31T12:00:00Z",
+ "months": {
+  "May": "green",
+  "Jun": "green",
+  "Jul": "green",
+  "Aug": "complete"
+ },
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "GTC confirmed no issue with sending NDLP and NDE to Iraq and Pakistan, they need end user information so stocking orders may still be a challenge but I think this can be completed"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "Pricing has been approved. Last step is to make sure there are no export limitations on the China site to export into Iraq/Pakistan. Just had meeting with MSN director of compliance who is working on this issue. She is expecting to have an answer by next week on does US export still apply, does China export have any similar restrictions, can we stock"
+  },
+  {
+   "date": "",
+   "text": "Added on 10/1 from the EMEA tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

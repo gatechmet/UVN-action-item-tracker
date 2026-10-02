@@ -1,0 +1,21 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [],
+ "months": {
+  "May": "complete"
+ },
+ "objectiveId": "P2-O2",
+ "order": 2,
+ "originalDate": "2026-05-31",
+ "owner": "Dan, Matt",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "Develop new method for sales forecasting and pacing data",
+ "updatedAt": ""
+}

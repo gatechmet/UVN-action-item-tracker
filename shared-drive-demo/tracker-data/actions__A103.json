@@ -1,0 +1,94 @@
+{
+ "dateHistory": [
+  {
+   "from": "2026-09-30",
+   "to": "2026-12-31",
+   "at": "2026-10-01T17:51:24Z",
+   "by": "",
+   "reason": "Plan changed in the tracker spreadsheet"
+  }
+ ],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-05-27",
+   "text": "U of Toronto still having some set up issues?"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "seeing if there's a software issue"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "haven't heard anything else, should I ping again or Mike are you in contact recently?"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "Janice was out for PTO for a bit, looking to connect now that she's back"
+  },
+  {
+   "date": "2026-04-02",
+   "text": "Kyle sitll communicating with U toronto to try and move this forward and connecting with Janice"
+  },
+  {
+   "date": "2026-03-10",
+   "text": "Depends on U Toronto timing, would like to get out by early May, if not possible will look to launch in September to align with academia"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Janice is doing final training with dealer and should be able to approach after"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "round back closer to the end of Q1 with Janice and see if she can ask the dealer"
+  },
+  {
+   "date": "2026-11-12",
+   "text": "Still targeting U of Toronto, Hoping to start end of this year for something next year"
+  },
+  {
+   "date": "2026-10-08",
+   "text": "university of toronto teaching lab late Q4 (possibly into Q1 of next year)"
+  },
+  {
+   "date": "2026-09-08",
+   "text": "Hoping to align with the University of Toronto"
+  },
+  {
+   "date": "2026-08-13",
+   "text": "Need to round back with US possibly"
+  },
+  {
+   "date": "2026-07-08",
+   "text": "hoping to hear from LATAM by mid July"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "LATAM said they may have a contact at Pepsco"
+  },
+  {
+   "date": "2026-02-25",
+   "text": "Will reach out to regions and align by end of March"
+  }
+ ],
+ "months": {
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Sep": "planned",
+  "Oct": "planned",
+  "Nov": "planned",
+  "Dec": "planned"
+ },
+ "objectiveId": "P2-O7",
+ "order": 1,
+ "originalDate": "2026-09-30",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "NA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Develop 1 academic success story NA and EMEA.",
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

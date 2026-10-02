@@ -1,0 +1,65 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-09-30",
+   "text": "been lower on my list, will round back and share some languages with regions next week"
+  },
+  {
+   "date": "2026-09-16",
+   "text": "Translation tracking a bit slower then expected but in progress"
+  },
+  {
+   "date": "2026-09-02",
+   "text": "finalizing some of the page translations for GENESYS G5 in the coming week or two"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Has been lower on my list but will look to send some GENESYS emails out in German and French as testing very soon"
+  },
+  {
+   "date": "2026-06-30",
+   "text": "Aligning with regions on GENSYS materials, looking to make drip emails in two additional languages for August or September emails going forward"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "User guide in review now, will provide first four emails and social in rough draft for other languages, regions can edit and send for launch of G5"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "I will get some review copy shared by end of week"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Will focus on support for GENESYS G5 social posts first"
+  },
+  {
+   "date": "2026-04-14",
+   "text": "French, German, Spanish"
+  },
+  {
+   "date": "2026-03-30",
+   "text": "brainstorm idea, haven't met with team in month"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Jul": "yellow",
+  "Jun": "green",
+  "Oct": "planned",
+  "Sep": "yellow"
+ },
+ "objectiveId": "P2-O8",
+ "order": 11,
+ "originalDate": "2026-10-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-10-31",
+ "targetGoal": "Awareness",
+ "title": "More translated materials (GENESYS and Email focus)",
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

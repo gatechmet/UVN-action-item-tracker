@@ -1,0 +1,32 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Apr": "na",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "na",
+  "Jun": "na",
+  "Mar": "complete",
+  "May": "na",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O5",
+ "order": 8,
+ "originalDate": "2026-03-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "Top bio/pharma accounts penetration",
+ "updatedAt": ""
+}

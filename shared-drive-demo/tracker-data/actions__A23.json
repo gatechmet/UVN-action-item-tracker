@@ -1,0 +1,52 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "Awareness and Marketing plan",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "Trade up OFT being created now, should have end of July"
+  },
+  {
+   "date": "2026-07-09",
+   "text": "TF done, Fisher Sci in review, VWR entering review this week"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Loyalty flyers for Core and Micro H2 completed, will need to create a GENESYS G5 flyer for July"
+  },
+  {
+   "date": "2026-05-07",
+   "text": "Loyalty flyers starting, web page updating in next few weeks. Will follow up with loyalty emails and social through out campaign"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "Looking to support through new lab start up as well, Lauren aligning on promo"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "will do targeted linkedin campaign to support"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "connect with mike to get target goal"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "green",
+  "Jun": "green"
+ },
+ "objectiveId": "P1-O2",
+ "order": 16,
+ "originalDate": "2026-08-31",
+ "owner": "Kyle, Lauren",
+ "priorityId": "P1",
+ "region": "NA",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Trade up when new genesys model is released  - Core UV Food and Bev Focus + QA/QC + water",
+ "updatedAt": ""
+}

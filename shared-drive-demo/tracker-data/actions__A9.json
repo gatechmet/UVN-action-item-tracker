@@ -1,0 +1,31 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "Internal Tools",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-05-28",
+   "text": "Will continue to build out playbook through phase II (line 16), but first draft and trianing materials complete"
+  },
+  {
+   "date": "2026-05-05",
+   "text": "first draft of training completed. Will share out early next week for review"
+  }
+ ],
+ "months": {
+  "Apr": "yellow",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O2",
+ "order": 2,
+ "originalDate": "2026-05-31",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "Cheat sheet for how to win - service, custom methods, security, battlecard",
+ "updatedAt": ""
+}

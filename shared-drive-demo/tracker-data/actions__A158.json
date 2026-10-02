@@ -1,0 +1,32 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "GTC confirmed licencing not an issue for NDLP and NDE"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Aliceanne was investigating this and was suppose to provide an update but I have not yet seen one come in. Followed up with her and Marta"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "yellow",
+  "Jun": "yellow"
+ },
+ "objectiveId": "P3-O5",
+ "order": 2,
+ "originalDate": "2026-08-31",
+ "owner": "Justin",
+ "priorityId": "P3",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Export licenses limiting ability to sell into Iraq/ ME",
+ "updatedAt": ""
+}

@@ -1,0 +1,31 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "Selling Strategy",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-04-22",
+   "text": "Including standard, loyalty, and new lab start up promos for H2"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "will work on with promo cycle, not yet started"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O2",
+ "order": 13,
+ "originalDate": "2026-05-31",
+ "owner": "",
+ "priorityId": "P1",
+ "region": "ROW",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "",
+ "title": "ROW - preapproved price supports - access to different reagent manufacturers",
+ "updatedAt": ""
+}

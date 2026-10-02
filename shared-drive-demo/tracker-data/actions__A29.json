@@ -1,0 +1,58 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-08-27",
+   "text": "After strategy call the general idea is to look at reskinnig NDLP 2.0 for APJ and EMEA with EMEA having an increase in price"
+  },
+  {
+   "date": "2026-07-23",
+   "text": "Surveying some EMEA dealers, will ask Japan again in call tonight"
+  },
+  {
+   "date": "2026-07-01",
+   "text": "Awaiting more info from Japan."
+  },
+  {
+   "date": "2026-05-26",
+   "text": "Japan sent request to see if they are interested"
+  },
+  {
+   "date": "2026-05-18",
+   "text": "SEA believes no incremental revenue would be seen this year. I followed up with what incremental units could be seen next year or what could be lost without implementation"
+  },
+  {
+   "date": "2026-05-06",
+   "text": "India not interested, believes too much canabilization will occur with Ultra. Still waiting to hear back from SEA on their review."
+  },
+  {
+   "date": "2026-04-20",
+   "text": "India and SEA sent request to see if they are interested in NanoDrop Lite Plus 2.0"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Will request incremental volumes and cannabilization risk from India and SEAT"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "complete",
+  "Jul": "yellow",
+  "Jun": "red",
+  "May": "red"
+ },
+ "objectiveId": "P1-O3",
+ "order": 2,
+ "originalDate": "2026-08-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "India, SEA, Japan",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Evaluate expanding NDL+2 to additional geographise based on competitive threat",
+ "updatedAt": ""
+}

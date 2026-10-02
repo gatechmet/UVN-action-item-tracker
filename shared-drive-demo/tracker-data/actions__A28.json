@@ -1,0 +1,34 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "2026-03-10",
+   "text": "18K for Q1"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "Part numbers created, SMB submitted. Should hopefully go live with next SMB cycle at the end of the month"
+  },
+  {
+   "date": "2026-01-14",
+   "text": "Baboucarr has approved so part numbers need to be created (will take a month or so)"
+  }
+ ],
+ "months": {
+  "Mar": "complete"
+ },
+ "objectiveId": "P1-O3",
+ "order": 1,
+ "originalDate": "2026-03-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Korea",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "36 Total Units Sold (LY6 (4) + Promo 15 (7) + 25)\n$208K · Timeline: Q4",
+ "title": "ND Lite Plus v2.0 to Korea (25-40 incremental units annually)",
+ "updatedAt": ""
+}

@@ -1,0 +1,49 @@
+{
+ "completedAt": "2026-04-30T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-05-14",
+   "text": "Monitoring updates, cotinuing to see the same trend of slighty lower views month over month. Continue to strengthen GEO with the assumption that is stealing large portions of traffic"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Acclaro Pro performing well. We are transitiong to PMAX SEO which utilizes AI to better bid amount of dollars per day for each SEO campaign. Need to watch training from earlier and will set up in next week or two"
+  },
+  {
+   "date": "2026-03-30",
+   "text": "Refined keywords several times. Partnering with Product managers to update several low performing SEO pages with new messages/page locations"
+  },
+  {
+   "date": "2026-03-18",
+   "text": "Looking to allocate more dollars in Q2 - Q4"
+  },
+  {
+   "date": "2026-03-10",
+   "text": "Starting progromattic display test today as well 2/11: Refining keywords with SEO team, working through page improvements"
+  },
+  {
+   "date": "2026-01-27",
+   "text": "meet with BID to align, SEO generally good but can align between RNA/DNA pages and ours. Will test progromattic displays and GEO optimization in Q1"
+  }
+ ],
+ "months": {
+  "Apr": "complete",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green"
+ },
+ "objectiveId": "P1-O5",
+ "order": 1,
+ "originalDate": "2026-04-30",
+ "owner": "Kyle",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-04-30",
+ "targetGoal": "Line 39",
+ "title": "SEO (acclaro pro, ND Marketing page)",
+ "updatedAt": ""
+}

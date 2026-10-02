@@ -1,0 +1,53 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "This is on hold until the PD testing is complete"
+  },
+  {
+   "date": "2026-07-16",
+   "text": "AT planning on sending prototypes over for testing early August 6/25: PD software update was just released. Need to wait for AT to send over a few units with the collimated light adjustment for testing to start."
+  },
+  {
+   "date": "2026-05-28",
+   "text": "Software team pushed PD software release to end of June"
+  },
+  {
+   "date": "2026-04-21",
+   "text": "PD software expected to be released in May"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Poor results, PD testing required 3/18: Next step is to re-assess Qubit RNA HS assay. If poor results, will look to enable photodiode for testing"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "RiboGreen data not looking good enough. Will need to move to a new kit."
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "red",
+  "Dec": "planned",
+  "Jul": "yellow",
+  "Jun": "yellow",
+  "May": "yellow",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "red"
+ },
+ "objectiveId": "P1-O4",
+ "order": 8,
+ "originalDate": "2026-12-31",
+ "owner": "Justin, Jenn P, Brian",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Identify a low end RNA fl kit for an app note",
+ "updatedAt": ""
+}

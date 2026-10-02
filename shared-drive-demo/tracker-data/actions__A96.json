@@ -1,0 +1,23 @@
+{
+ "completedAt": "2026-03-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [],
+ "months": {
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "complete"
+ },
+ "objectiveId": "P2-O5",
+ "order": 2,
+ "originalDate": "2026-03-31",
+ "owner": "Lisa Li",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-03-31",
+ "targetGoal": "",
+ "title": "Re-build Micro-UV Sales channels",
+ "updatedAt": ""
+}

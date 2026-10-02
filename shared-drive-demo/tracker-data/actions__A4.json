@@ -1,0 +1,40 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-06-17",
+   "text": "Americas training complete"
+  },
+  {
+   "date": "2026-06-04",
+   "text": "NA training next week"
+  },
+  {
+   "date": "2026-05-28",
+   "text": "EMEA training (successfully) completed"
+  },
+  {
+   "date": "2026-04-16",
+   "text": "Planning ongoing"
+  }
+ ],
+ "months": {
+  "Jul": "complete",
+  "Jun": "green",
+  "May": "green"
+ },
+ "objectiveId": "P1-O1",
+ "order": 4,
+ "originalDate": "2026-06-30",
+ "owner": "Lauren",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-06-30",
+ "targetGoal": "",
+ "title": "Regional Trainings Completed",
+ "updatedAt": ""
+}

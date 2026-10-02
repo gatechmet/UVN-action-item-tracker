@@ -1,0 +1,49 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "off",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "BID now wants to postpone to 2027 as they do not have funding to send people to Wilmington. Asked if they want virtual training in the meantime."
+  },
+  {
+   "date": "2026-07-01",
+   "text": "Followed up with Valdo to get timing set"
+  },
+  {
+   "date": "2026-06-25",
+   "text": "Waiting on Valdo to confirm timing"
+  },
+  {
+   "date": "2026-05-06",
+   "text": "Training to be scheduled for July/August timeframe (after World Cup)"
+  },
+  {
+   "date": "2026-04-22",
+   "text": "FH: Waiting for BID confirmation. 4/21: Targeting on-site training in WIlmington,DE in early July. Focus around market overview for FL/Acclaro Pro, review of messaging, and hands-on trainign with all assays/Acclaro Pro"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "red",
+  "Dec": "planned",
+  "Jul": "red",
+  "Jun": "green",
+  "May": "green",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "red"
+ },
+ "objectiveId": "P1-O4",
+ "order": 13,
+ "originalDate": "2026-12-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "LATAM",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "LATAM BID Training (Hands On)",
+ "updatedAt": ""
+}

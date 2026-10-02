@@ -1,0 +1,57 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Two new distributors in Guangdong are expected to generate 50K sellout in Q2."
+  },
+  {
+   "date": "2026-04-28",
+   "text": "QTD new dealer sellout $13K."
+  },
+  {
+   "date": "2026-05-26",
+   "text": "QTD new dealer sellout $52K."
+  },
+  {
+   "date": "2026-06-22",
+   "text": "QTD new dealer sellout $80K."
+  },
+  {
+   "date": "2026-07-22",
+   "text": "QTD new dealer sellout $109K."
+  },
+  {
+   "date": "2026-09-15",
+   "text": "：QTD new dealer sellout $130K."
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Aug": "na",
+  "Dec": "na",
+  "Feb": "green",
+  "Jan": "green",
+  "Jul": "green",
+  "Jun": "green",
+  "Mar": "green",
+  "May": "green",
+  "Nov": "na",
+  "Oct": "na",
+  "Sep": "na"
+ },
+ "objectiveId": "P2-O8",
+ "order": 25,
+ "originalDate": "2026-07-31",
+ "owner": "",
+ "priorityId": "P2",
+ "region": "China",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": ">$200K FY · Timeline: Q1:$30K\nQ2: $59K\nQ3:$20K",
+ "title": "New dealers sellout target",
+ "updatedAt": ""
+}

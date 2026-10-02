@@ -1,0 +1,25 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "none",
+ "history": [
+  {
+   "date": "",
+   "text": "Data will be provided in H1 QBR on the success of the promotion as its only been running for a quarter"
+  }
+ ],
+ "months": {
+  "Dec": "planned"
+ },
+ "objectiveId": "P2-O4",
+ "order": 6,
+ "originalDate": "2026-12-31",
+ "owner": "Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "150k USD",
+ "title": "Continue the Q4 25 Core UV promo and work with RSD to get this set up on their system",
+ "updatedAt": ""
+}

@@ -1,0 +1,39 @@
+{
+ "completedAt": "2026-07-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "I think we got this one cleaned up, but let me know if you need any other versions Adnan"
+  },
+  {
+   "date": "2026-07-09",
+   "text": "additional materials needed?"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Started something before I left on PTO, will round back by 7/1"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Was planning on working for it now for G5, is it okay for us to wait until July now? 4/14: Update internal training document (create one larger one with GENESYS G5)"
+  }
+ ],
+ "months": {
+  "Jul": "complete",
+  "Jun": "green"
+ },
+ "objectiveId": "P2-O8",
+ "order": 18,
+ "originalDate": "2026-07-31",
+ "owner": "Kyle/Adnan",
+ "priorityId": "P2",
+ "region": "EMEA",
+ "status": "completed",
+ "targetDate": "2026-07-31",
+ "targetGoal": "Awareness",
+ "title": "Internal Spec document into customer facing",
+ "updatedAt": ""
+}

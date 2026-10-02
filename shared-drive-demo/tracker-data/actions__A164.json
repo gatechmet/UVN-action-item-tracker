@@ -1,0 +1,24 @@
+{
+ "objectiveId": "P1-O4",
+ "priorityId": "P1",
+ "order": 22,
+ "title": "FL Kit Promotion",
+ "group": "Accelerate Pharma/Biopharma share gain via NanoDrop Ultra and Fl",
+ "owner": "BID/Matt",
+ "region": "NA/EMEA?",
+ "targetGoal": "100K",
+ "targetDate": "",
+ "originalDate": "",
+ "health": "none",
+ "status": "open",
+ "completedAt": "",
+ "months": {},
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "",
+   "text": "Added on 10/1 from the NA-LATAM tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

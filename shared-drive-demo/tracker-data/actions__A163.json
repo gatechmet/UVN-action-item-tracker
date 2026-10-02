@@ -1,0 +1,55 @@
+{
+ "objectiveId": "P2-O8",
+ "priorityId": "P2",
+ "order": 33,
+ "title": "NanoDrop 25th Anniversary",
+ "group": "EMEA Demand Gen",
+ "owner": "Kyle",
+ "region": "EMEA",
+ "targetGoal": "Awareness",
+ "targetDate": "2026-07-31",
+ "originalDate": "2026-07-31",
+ "health": "risk",
+ "status": "completed",
+ "completedAt": "2026-07-31T12:00:00Z",
+ "months": {
+  "Jun": "yellow",
+  "Jul": "complete"
+ },
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "2026-07-23",
+   "text": "Got aligned on some imagery and two options for copy, should be able to share here with teams end of week or early next week"
+  },
+  {
+   "date": "2026-07-09",
+   "text": "finally got some copy updates, still no movement on imagery or nanodrop in imagery. Should have a shareable round here around 7/15"
+  },
+  {
+   "date": "2026-06-30",
+   "text": "Design team running roughly a week behind but gave me heads up today they should have something 7.2 or 7.6"
+  },
+  {
+   "date": "2026-06-24",
+   "text": "Discussions had while out but design team hadn't created updated design. Pushed for that on Tuesday and should see something Thursday or Friday. Would like to complete and share this with teams by end of next week"
+  },
+  {
+   "date": "2026-05-27",
+   "text": "Brand marketing team has sided with creative stuido in first message, trying one more time and then I will escalate to Jim/Petra and more then likely include Matt"
+  },
+  {
+   "date": "2026-05-14",
+   "text": "Started some materials but now being told Corporate doesn't want product anniversarys any more, just technology based. I.E. 25 years of microvolume instead of 25 years of NanoDrop"
+  },
+  {
+   "date": "2026-04-30",
+   "text": "Esig, email banner and social media just entered into workfront"
+  },
+  {
+   "date": "",
+   "text": "Added on 10/1 from the EMEA tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

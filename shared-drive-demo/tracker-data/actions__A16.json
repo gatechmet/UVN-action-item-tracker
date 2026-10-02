@@ -1,0 +1,42 @@
+{
+ "completedAt": "2026-05-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "External Tools",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-05-06",
+   "text": "Done"
+  },
+  {
+   "date": "2026-04-20",
+   "text": "Working on last chapter"
+  },
+  {
+   "date": "2026-04-09",
+   "text": "Translation in system now, due in 22 business days"
+  },
+  {
+   "date": "2026-02-11",
+   "text": "in process - translations are a bit behind but the user guide is on track"
+  }
+ ],
+ "months": {
+  "Apr": "green",
+  "Feb": "green",
+  "Jan": "green",
+  "Mar": "green",
+  "May": "complete"
+ },
+ "objectiveId": "P1-O2",
+ "order": 9,
+ "originalDate": "2026-05-31",
+ "owner": "Justin",
+ "priorityId": "P1",
+ "region": "Global",
+ "status": "completed",
+ "targetDate": "2026-05-31",
+ "targetGoal": "NA",
+ "title": "detailed user guide",
+ "updatedAt": ""
+}

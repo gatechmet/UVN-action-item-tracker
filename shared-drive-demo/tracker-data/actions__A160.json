@@ -1,0 +1,35 @@
+{
+ "objectiveId": "P2-O8",
+ "priorityId": "P2",
+ "order": 30,
+ "title": "ND Light Pricing Promo for Q3 ($4750 dealer price)",
+ "group": "Enable Boutique and Smaller Regional Dealers",
+ "owner": "Kelly",
+ "region": "EMEA",
+ "targetGoal": "75k",
+ "targetDate": "2026-08-31",
+ "originalDate": "2026-08-31",
+ "health": "on",
+ "status": "completed",
+ "completedAt": "2026-08-31T12:00:00Z",
+ "months": {
+  "Jul": "green",
+  "Aug": "complete"
+ },
+ "dateHistory": [],
+ "history": [
+  {
+   "date": "2026-07-22",
+   "text": "set up is complete - need to confirm with EMEA team how to track this promotion to see if we are on target"
+  },
+  {
+   "date": "2026-06-18",
+   "text": "SMB created and being approved by SMB team"
+  },
+  {
+   "date": "",
+   "text": "Added on 10/1 from the EMEA tab of the tracker spreadsheet. This row is not on a Priority sheet."
+  }
+ ],
+ "updatedAt": "2026-10-01T17:51:24Z"
+}

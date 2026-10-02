@@ -1,0 +1,32 @@
+{
+ "completedAt": "2026-08-31T12:00:00Z",
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Created imagery and eSig for teams. Shared with PR and secured and Q/A coming up in Oct. Have created SEO campaigns to drive awareness and additional traffic to the marketing pages through 2026 and into 2027 for a bit"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "Anniversary awareness campaign active, several third party partners helped post. PMAX Google ad active as well, building in several social posts for the rest of the year"
+  }
+ ],
+ "months": {
+  "Aug": "complete",
+  "Jul": "green",
+  "Jun": "green"
+ },
+ "objectiveId": "P2-O11",
+ "order": 1,
+ "originalDate": "2026-08-31",
+ "owner": "Kyle",
+ "priorityId": "P2",
+ "region": "",
+ "status": "completed",
+ "targetDate": "2026-08-31",
+ "targetGoal": "",
+ "title": "Nanodrop Advertising Campaign (only one ND)",
+ "updatedAt": ""
+}

@@ -1,0 +1,32 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "on",
+ "history": [
+  {
+   "date": "",
+   "text": "Ideas to shift to: focus on personas and build around these in trainings?"
+  }
+ ],
+ "months": {
+  "Aug": "green",
+  "Dec": "planned",
+  "Jul": "green",
+  "Jun": "planned",
+  "May": "planned",
+  "Nov": "planned",
+  "Oct": "planned",
+  "Sep": "planned"
+ },
+ "objectiveId": "P2-O8",
+ "order": 2,
+ "originalDate": "2026-12-31",
+ "owner": "Kelly",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-12-31",
+ "targetGoal": "",
+ "title": "Emphasize value-based selling and application-led engagement to strengthen competitive positioning",
+ "updatedAt": "2026-10-01T16:46:24.993Z"
+}

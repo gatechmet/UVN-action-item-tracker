@@ -1,0 +1,48 @@
+{
+ "dateHistory": [],
+ "group": "",
+ "health": "risk",
+ "history": [
+  {
+   "date": "2026-09-24",
+   "text": "Informed that we have enough parts to make 100 additional units; need to review cost/service need to see if worthwhile"
+  },
+  {
+   "date": "2026-09-03",
+   "text": "Will be starting weekly communications to team given low levels of stock"
+  },
+  {
+   "date": "2026-08-27",
+   "text": "Still working through; orders seem to be handled as normal but need to keep managing legacy stock level"
+  },
+  {
+   "date": "2026-08-06",
+   "text": "Keeping this yellow based on ongoing confusing feedback from MSN team. Customer orders appear to be blocked from OM for unknown reason, LE investigating more"
+  },
+  {
+   "date": "2026-07-30",
+   "text": "Tracking ongoing. Main concern is now confusing over MSN placing STOs."
+  },
+  {
+   "date": "2026-07-21",
+   "text": "Risk with MSN providing information. Building spreadsheet to track as best as possible"
+  }
+ ],
+ "months": {
+  "Aug": "yellow",
+  "Jul": "yellow",
+  "Jun": "green",
+  "Sep": "yellow"
+ },
+ "objectiveId": "P2-O8",
+ "order": 21,
+ "originalDate": "2026-09-30",
+ "owner": "Lauren",
+ "priorityId": "P2",
+ "region": "Global",
+ "status": "open",
+ "targetDate": "2026-09-30",
+ "targetGoal": "",
+ "title": "Manage final order allocations and drive appropriate stocking and dealer transition for Hornbill",
+ "updatedAt": ""
+}
