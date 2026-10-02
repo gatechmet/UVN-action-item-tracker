@@ -335,7 +335,7 @@ const MSK=['pri','obj','owner','region','status','health'];
 const MSL={pri:'Priority',obj:'Objective',owner:'Owner',region:'Region',status:'Status',health:'Schedule'};
 const SEL={};MSK.forEach(k=>SEL[k]=new Set());
 const OPTS={pri:[],obj:[],owner:[],region:[],
-  status:[['open','Open'],['paused','Paused (parking lot)'],['completed','Completed'],['closed',"Closed (won't do)"]],
+  status:[['open','Open'],['nr','Open, not rated'],['paused','Paused (parking lot)'],['completed','Completed'],['closed',"Closed (won't do)"]],
   health:[['on','On track'],['risk','At risk'],['off','Off track'],['none','Not rated'],['late','Past due'],['soon','Past due or due in next 4 weeks'],['moved','Date moved']]};
 const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
 function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
@@ -369,7 +369,7 @@ function filtered(){
     if(SEL.obj.size&&!SEL.obj.has(a.objectiveId))return false;
     if(SEL.owner.size){const o=split(a.owner);if(![...SEL.owner].some(v=>v==='__none'?!o.length:o.includes(v)))return false}
     if(SEL.region.size){const r=split(a.region).map(normR);if(![...SEL.region].some(v=>v==='__none'?!r.length:r.includes(v)))return false}
-    if(SEL.status.size&&!SEL.status.has(a.status))return false;
+    if(SEL.status.size&&![...SEL.status].some(v=>v==='nr'?a.status==='open'&&(a.health||'none')==='none':a.status===v))return false;
     if(f('stale')&&!((a.status==='open'||a.status==='paused')&&lastUpd(a)<daysAgo(+f('stale'))))return false;
     if(f('upd')&&!(lastUpd(a)>=daysAgo(+f('upd'))))return false;
     if(f('done')&&!(a.status==='completed'&&(a.completedAt||'').slice(0,10)>=daysAgo(+f('done'))))return false;
