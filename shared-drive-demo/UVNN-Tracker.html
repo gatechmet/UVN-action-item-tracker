@@ -12,18 +12,19 @@
   --accent:#1f5f8b; --accent-ink:#ffffff; --band:#223445; --band-ink:#eef3f7;
   --on:#1e8a4c; --on-bg:#dff2e7; --risk:#b7791f; --risk-bg:#fbf0d9; --off:#c0392b; --off-bg:#fbe3e0;
   --done:#6b7785; --done-bg:#e6eaee; --pause:#0f7c80; --pause-bg:#dcf1f1; --comp:#2563b8; --comp-bg:#e3ecfa; --comp-row:#f2f6fd; --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --plan:#8a9aab; --moved:#7a4fb5; --moved-bg:#efe7fa;
+  --aop:#4f5b67; --actual:#d0541f; --fc:#3987e5; --fcbar:#86b6ef; --fclast:#256abf; --r1:#86b6ef; --r2:#6da7ec; --r3:#5598e7; --r4:#3987e5; --r5:#2a78d6; --r6:#256abf; --r7:#1c5cab; --r8:#184f95; --r9:#0d366b; --up:#256abf; --down:#d03b3b; --mid:#f0efec; --gapfill:rgba(208,59,59,.12);
   --f-disp:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; --aop:#c3ccd5; --actual:#ee7a45; --fc:#5598e7; --fcbar:#1c5cab; --fclast:#6da7ec; --r1:#184f95; --r2:#1c5cab; --r3:#256abf; --r4:#2a78d6; --r5:#3987e5; --r6:#5598e7; --r7:#6da7ec; --r8:#9ec5f4; --r9:#cde2fb; --up:#5598e7; --down:#e66767; --mid:#383835; --gapfill:rgba(230,103,103,.16); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f161d; --panel:#16202a; --ink:#e3e9ef; --muted:#93a1ae; --line:#2a3743; --soft:#1d2934;
   --accent:#5fa8d8; --accent-ink:#0b1218; --band:#1c2c3b; --band-ink:#e3edf5;
   --on:#4cc583; --on-bg:#173526; --risk:#e2ad4f; --risk-bg:#3a2e14; --off:#ef6f61; --off-bg:#3d1c19;
-  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; color-scheme:dark}
+  --done:#9aa6b2; --done-bg:#253240; --pause:#4fc2c6; --pause-bg:#133536; --comp:#6ea5f0; --comp-bg:#1b2a44; --comp-row:#17233a; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --plan:#6d7d8d; --moved:#b590ea; --moved-bg:#2e2342; --aop:#c3ccd5; --actual:#ee7a45; --fc:#5598e7; --fcbar:#1c5cab; --fclast:#6da7ec; --r1:#184f95; --r2:#1c5cab; --r3:#256abf; --r4:#2a78d6; --r5:#3987e5; --r6:#5598e7; --r7:#6da7ec; --r8:#9ec5f4; --r9:#cde2fb; --up:#5598e7; --down:#e66767; --mid:#383835; --gapfill:rgba(230,103,103,.16); color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:20px 60px}
@@ -62,6 +63,61 @@ button{font:inherit;cursor:pointer}
 .tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 14px;font:600 14px var(--f-disp);color:var(--muted);letter-spacing:.02em}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
 .tabs button:hover{color:var(--ink)}
+.subtabs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
+.subtabs button{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 14px;font:500 13px var(--f-body);color:var(--ink)}
+.subtabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+/* forecasting */
+#fx{display:grid;gap:16px;margin-top:8px}
+#fx .fx-controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:end}
+#fx .fx-controls .yr{width:auto;gap:10px;margin:0}
+#fx .ctl{display:flex;flex-direction:column;gap:3px;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+#fx .how{margin:0;font-size:12px;color:var(--muted)}
+#fx .fx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+#fx .fx-tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px;min-width:0}
+#fx .fx-tile span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+#fx .fx-tile b{display:block;font:600 22px var(--f-mono);font-variant-numeric:tabular-nums}
+#fx .fx-tile small{font:12px var(--f-mono);color:var(--muted)}
+#fx .dn{color:var(--down)}#fx .upc{color:var(--up)}
+#fx .fx-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+#fx .fx-card header{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+#fx .fx-card h2{font-size:17px}
+#fx .ask{font-size:13px;color:var(--muted);flex:1 1 320px;min-width:0}
+#fx .ctlr{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px}
+#fx .cv{position:relative;height:320px}#fx .cv.tall{height:440px}
+@media (max-width:640px){#fx .cv.tall{height:360px}}
+#fx .fx-grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:900px){#fx .fx-grid2{grid-template-columns:1fr}}
+#fx .key{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);align-items:center}
+#fx .key i{display:inline-block;width:22px;vertical-align:middle;margin-right:6px}
+#fx .key .a{border-top:3px solid var(--actual)}#fx .key .p{border-top:2px dashed var(--aop)}#fx .key .f{border-top:3px solid var(--fc)}
+#fx .key .t{border-top:3px solid var(--aop);width:18px}#fx .key .v{height:3px;background:linear-gradient(90deg,var(--r1),var(--r9))}
+#fx .key .bx{height:10px;width:12px;border-radius:2px}#fx .key .gf{height:10px;background:var(--gapfill);border:1px solid var(--down)}
+#fx table{min-width:0;table-layout:auto;width:100%}
+#fx table.fx-hm{border-collapse:separate;border-spacing:2px;font-size:12px;min-width:420px}
+#fx table.fx-hm th{font:500 11px var(--f-body);color:var(--muted);text-align:left;padding:4px 6px;letter-spacing:.04em;white-space:nowrap;text-transform:none;border:0}
+#fx table.fx-hm th.c{text-align:center}#fx table.fx-hm th.sum{border-left:2px solid var(--line)}
+#fx table.fx-hm td{text-align:center;padding:7px 2px;border-radius:4px;border:0;font:500 11px var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+#fx table.fx-hm td.sum{background:var(--soft)}#fx table.fx-hm td.na{color:var(--muted)}
+#fx table.fx-hm tr.sel th{color:var(--ink);font-weight:600}#fx table.fx-hm tr:not(.sel) td{opacity:.5}
+#fx table.fx-hm tr.sub th{padding-left:22px;font-weight:400}
+#fx button.exp{background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink);font:11px var(--f-mono);padding:0 5px;margin-left:6px;cursor:pointer}
+#fx .scale{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:11px var(--f-mono);color:var(--muted)}
+#fx .scale i{display:block;width:140px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--down),var(--mid),var(--up))}
+#fx table.fx-in{border-collapse:separate;border-spacing:0;font-size:12px}
+#fx table.fx-in th{font:500 11px var(--f-body);color:var(--muted);text-transform:none;letter-spacing:0;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+#fx table.fx-in th.n{text-align:right}#fx table.fx-in th.st{color:var(--ink);font-weight:500;border-bottom:1px solid var(--soft)}
+#fx table.fx-in td{padding:0;border-bottom:1px solid var(--soft);border-left:1px solid var(--soft)}
+#fx table.fx-in td.tot{padding:4px 8px;text-align:right;font:600 12px var(--f-mono);color:var(--ink);background:var(--soft);white-space:nowrap}
+#fx table.fx-in td.dim{background:var(--soft)}
+#fx table.fx-in tr.mfirst>*{border-top:2px solid var(--line)}
+#fx table.fx-in input{width:100%;min-width:62px;border:0;border-radius:0;background:transparent;padding:5px 6px;font:12px var(--f-mono);text-align:right;color:var(--ink)}
+#fx table.fx-in input:focus{outline:2px solid var(--accent);outline-offset:-2px;background:var(--panel)}
+#fx .fx-row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:end}
+#fx .fx-curve{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end}
+#fx .fx-curve label{display:flex;align-items:center;gap:6px;font-size:13px}
+#fx .fx-curve input{width:70px;text-align:right;font-family:var(--f-mono)}
+#fx .ok{color:var(--on);font-weight:500}#fx .bad{color:var(--off);font-weight:600}
+#fx textarea{font:12px var(--f-mono)}
 .gsum{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
 .gsum .bar{width:220px;height:10px}
 .gsum .gm{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}.gsum .gm b{color:var(--ink);font-weight:600}
@@ -248,12 +304,12 @@ table.itab td.chk{font-size:12px;padding:4px 8px;line-height:1.3}
     <div class="kpis" id="kpis"></div>
   </header>
 
-  <nav class="tabs" role="tablist" aria-label="Views">
-    <button type="button" role="tab" data-tab="tracker" id="tab-tracker">Tracker</button>
-    <button type="button" role="tab" data-tab="dash" id="tab-dash">Dashboard</button>
-    <button type="button" role="tab" data-tab="perf" id="tab-perf">Performance</button>
-    <button type="button" role="tab" data-tab="bowler" id="tab-bowler">Bowler input</button>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" data-top="act">Activity Tracker</button>
+    <button type="button" role="tab" data-top="kpi">Weekly KPI</button>
+    <button type="button" role="tab" data-top="fx">Forecasting</button>
   </nav>
+  <nav class="subtabs" id="subtabs" aria-label="Views"></nav>
   <div class="filters" id="filters">
     <label>Search<input type="search" id="f-q" placeholder="Task, note, owner…"></label>
     <div class="fl"><span>Priority</span><button type="button" class="msb" id="f-pri" data-ms="pri" aria-haspopup="true">All</button></div>
@@ -319,7 +375,7 @@ window.SEED={"priorities":{"P1":{"history":[],"name":"Priority 1","order":1,"sta
    Each record is one small JSON file in one flat folder: <folder>/tracker-data/<collection>__<id>.json
    Other people's edits are picked up by re-checking the folder every few seconds. */
 (function(){
-  const COLS=['priorities','objectives','actions','notes','bowler'];
+  const COLS=['priorities','objectives','actions','notes','bowler','forecast'];
   const POLL_MS=6000;
   const supported='showDirectoryPicker' in window;
   let root=null,dataDir=null,ready,readyResolve;ready=new Promise(r=>readyResolve=r);
@@ -676,8 +732,16 @@ function dashboard(list){
   h+=`<div class="dkey">${DSEG.map(([,l,,c])=>`<span><i style="background:${c}"></i>${l}</span>`).join('')}<span>Closed (won't do) items are left out of the bar and the % complete. Click an objective to open its actions.</span></div></div>`;
   return h}
 
+/* Two-tier tabs: section -> its views. The first view of each section opens when the section is picked. */
+const SECTIONS={act:[['tracker','Action Items'],['dash','Dashboard']],kpi:[['perf','Dashboard'],['bowler','Inputs']],fx:[['fdash','Dashboard'],['finput','Inputs']]};
+const sectionOf=t=>Object.keys(SECTIONS).find(k=>SECTIONS[k].some(([v])=>v===t))||'act';
+function paintNav(){const sec=sectionOf(tab);
+  document.querySelectorAll('[data-top]').forEach(b=>b.setAttribute('aria-selected',b.dataset.top===sec));
+  $('#subtabs').innerHTML=SECTIONS[sec].map(([v,l])=>`<button type="button" data-tab="${v}" aria-selected="${v===tab}">${l}</button>`).join('')}
 function render(){
-  renderIntakeKey();
+  renderIntakeKey();paintNav();
+  if(tab==='fdash'||tab==='finput'){['#filters','#kpis','#viewbar','#legend'].forEach(q=>$(q).hidden=true);charts.forEach(c=>c.destroy());charts=[];return FX.render()}
+  FX.destroy();
   document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
   const mt=tab==='perf'||tab==='bowler';
   ['#filters','#kpis','#viewbar'].forEach(q=>$(q).hidden=mt);
@@ -1161,7 +1225,7 @@ document.addEventListener('click',e=>{
   if(st){e.stopPropagation();return popFor?.kind==='stat'&&popFor.id===st.dataset.stat?closePop():openStat(st)}
   if(ms){return popFor?.kind==='ms'&&popFor.k===ms.dataset.ms?closePop():openMs(ms)}
   if(!e.target.closest('.pop'))closePop();
-  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-tab],[data-goobj],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
+  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-tab],[data-top],[data-goobj],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
   if(t.matches('[data-close]'))return closeDrawer();
   if(t.matches('[data-open]'))return drawer(t.dataset.open);
   if(t.matches('tr.act'))return drawer(t.dataset.id);
@@ -1171,6 +1235,7 @@ document.addEventListener('click',e=>{
   if(t.matches('[data-delnote]'))return db.collection('notes').doc(t.dataset.delnote).delete().catch(()=>toast('Could not remove.'));
   if(t.id==='f-clear'){FILTERS.forEach(k=>$('#f-'+k).value='');MSK.forEach(k=>SEL[k].clear());view='';closePop();refreshFilters();savePrefs();return render()}
   if(t.matches('[data-k]')){const k=t.dataset.k;view=view===k?'':k;savePrefs();render()}
+  if(t.matches('[data-top]')){tab=SECTIONS[t.dataset.top][0][0];closePop();savePrefs();render();window.scrollTo(0,0)}
   if(t.matches('[data-tab]')){tab=t.dataset.tab;closePop();savePrefs();render();window.scrollTo(0,0)}
   if(t.matches('[data-goobj]')){const o=S.obj[t.dataset.goobj];SEL.obj=new Set([o.id]);SEL.pri=new Set([o.priorityId]);tab='tracker';refreshFilters();savePrefs();render();window.scrollTo(0,0)}
 });
@@ -1182,7 +1247,7 @@ document.addEventListener('change',e=>{const i=e.target.closest('[data-msk]');if
   i.checked?SEL[k].add(i.value):SEL[k].delete(i.value);if(k==='pri')refreshFilters();paintMs();savePrefs();render()});
 
 /* ---------- boot ---------- */
-(function(){const p=prefs();view=p.view||'';tab=['dash','perf','bowler'].includes(p.tab)?p.tab:'tracker';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
+(function(){const p=prefs();view=p.view||'';tab=['dash','perf','bowler','fdash','finput'].includes(p.tab)?p.tab:'tracker';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
 let loaded={pri:false,obj:false,act:false};
 function sub(col,key){
   db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>{const r={id:d.id,...d.data()};if(key==='act'&&isLate(r)&&r.health!=='off'){r.setHealth=r.health;r.health='off';r.autoOff=true}S[key][d.id]=r});loaded[key]=true;
@@ -1191,13 +1256,368 @@ function sub(col,key){
 (async()=>{
   const [d,u]=await Promise.all([window.claude?.use('db'),window.claude?.use('user')].map(p=>Promise.resolve(p).catch(()=>null)));
   db=d;user=u;
-  if(!db){$('#conn').textContent='';$('#main').innerHTML='<div class="empty">The shared tracker data is available when you are signed in to claude.ai with access to this page.</div>';return}
+  if(!db){$('#conn').textContent='';paintNav();$('#main').innerHTML='<div class="empty">The shared tracker data is available when you are signed in to claude.ai with access to this page.</div>';return}
   try{uid=await user?.id()}catch{}
   try{const c=await user?.can?.('data.write');if(c===false)canWrite=false}catch{}
   loaded.notes=true;
   sub('priorities','pri');sub('objectives','obj');sub('actions','act');subBowler();
+  db.collection('forecast').onSnapshot(snap=>FX.onData(snap.docs),()=>{});
   db.collection('notes').onSnapshot(snap=>{S.notes={};snap.docs.forEach(d=>S.notes[d.id]={id:d.id,...d.data()});if(loaded.act)render()},()=>{});
 })();
+</script>
+<script>
+/* ================= Forecasting: AOP vs monthly forecasts =================
+   One document per year in the 'forecast' collection:
+   { year, curve:[m1,m2,m3], aop:{bookings:{NA:[Q1..Q4]}}, act:{bookings:{NA:[Jan..Dec]}}, fc:{'2026-10':{bookings:{NA:[Q1..Q4]}}} }
+   Forecasts hold quarter totals; the curve splits each quarter into months. Blank closed quarters use actuals. */
+const FX=(()=>{
+const MONS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const TOPR=['NA','EMEA','China','APJ','LATAM','ROW'],APJC=['Japan','SEA','ANZ','India','Korea'];
+const LEAF=['NA','EMEA','China','Japan','SEA','ANZ','India','Korea','LATAM','ROW'];
+const REG={NA:'NA',EMEA:'EMEA',China:'China',LATAM:'LATAM',ROW:'ROW',Japan:'APJ',SEA:'APJ',ANZ:'APJ',India:'APJ',Korea:'APJ'};
+const METS=['bookings','revenue'],MLAB={bookings:'Bookings',revenue:'Revenue'};
+const ROWS=METS.flatMap(m=>LEAF.map(c=>({m,c,r:REG[c]})));
+const DEF_CURVE=[.25,.30,.45];
+const kidsOf=r=>r==='APJ'?APJC:[r];
+let docs={},fyr=new Date().getFullYear(),charts=[];
+let metric='bookings',selTop=new Set(TOPR),selSub=new Set(APJC),hmUnit='pct',expAPJ=false,lead=0,b2bMode='m',fcPick='';
+const per={walk:'fy',gap:'fy'};
+try{const p=JSON.parse(sessionStorage.getItem('uvnn-fx')||'{}');if(p.metric)metric=p.metric;if(p.per)Object.assign(per,p.per);if(p.hmUnit)hmUnit=p.hmUnit;if(p.b2bMode)b2bMode=p.b2bMode;if(p.lead!=null)lead=p.lead;if(p.fyr)fyr=p.fyr}catch{}
+const saveP=()=>{try{sessionStorage.setItem('uvnn-fx',JSON.stringify({metric,per,hmUnit,b2bMode,lead,fyr}))}catch{}};
+const r3=x=>Math.round(x*1000)/1000;
+const sum=xs=>xs.reduce((s,x)=>s+(x||0),0);
+const money=v=>{const x=Math.abs(v);return (v<0&&x>=.005?'−':'')+'$'+x.toFixed(x>0&&x<1?2:1)+'M'};
+const smoney=v=>(v>0?'+':'')+money(v);
+const pct=v=>(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)+'%';
+const T=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const MONO='"IBM Plex Mono",ui-monospace,monospace';
+const q$=s=>document.querySelector(s);
+
+/* ---------- model for the selected year ---------- */
+const D=()=>docs[String(fyr)]||{};
+const curve=()=>{const c=D().curve;return Array.isArray(c)&&c.length===3?c:DEF_CURVE};
+const fcKeys=()=>Object.keys(D().fc||{}).filter(k=>k.startsWith(fyr+'-')).sort();
+const vOf=k=>+k.slice(5,7)-1; // forecast built in month k has v = months closed before it
+const keyOf=v=>`${fyr}-${String(v+1).padStart(2,'0')}`;
+function model(){
+  const d=D(),cv=curve(),VERS=[0,...fcKeys().map(vOf)];
+  let CLOSED=0;for(const m of METS)for(const c of LEAF)(d.act?.[m]?.[c]||[]).forEach((x,i)=>{if(x!=null&&x!=='')CLOSED=Math.max(CLOSED,i+1)});
+  const LATEST=VERS[VERS.length-1];
+  const hasAop=METS.some(m=>LEAF.some(c=>(d.aop?.[m]?.[c]||[]).some(x=>x!=null)));
+  const aop=(m,r)=>(d.aop?.[m]?.[r]||[null,null,null,null]).flatMap(q=>cv.map(w=>q==null?0:r3(q*w)));
+  const actual=(m,r)=>MONS.map((_,i)=>i<CLOSED?(d.act?.[m]?.[r]?.[i]??0):null);
+  function version(m,r,v){if(v===0)return aop(m,r);const Q=d.fc?.[keyOf(v)]?.[m]?.[r]||[],act=actual(m,r),out=[],cl=Math.min(v,CLOSED);
+    for(let q=0;q<4;q++){const ms=[0,1,2].map(k=>q*3+k),closed=ms.filter(i=>i<cl),open=ms.filter(i=>i>=cl);
+      const done=closed.reduce((s,i)=>s+(act[i]||0),0),left=(Q[q]??(open.length?0:done))-done,w=open.reduce((s,i)=>s+cv[i%3],0);
+      ms.forEach(i=>out.push(i<cl?act[i]:r3(left*cv[i%3]/w)))}
+    return out}
+  return {VERS,CLOSED,LATEST,hasAop,aop,actual,version}}
+let M=null;
+const leaves=()=>[...selTop].flatMap(r=>r==='APJ'?[...selSub]:[r]);
+const agg=(f,L=leaves())=>MONS.map((_,i)=>{const vals=L.map(r=>f(r)[i]);return vals.some(x=>x==null)?null:sum(vals)});
+const vName=v=>v===0?'AOP':`${MONS[v]} forecast`,vShort=v=>v===0?'AOP':MONS[v];
+const ramp=['--r1','--r2','--r3','--r4','--r5','--r6','--r7','--r8','--r9'];
+const vColor=v=>{const fs=M.VERS.slice(1),i=fs.indexOf(v),n=fs.length;return T(ramp[n<2?8:Math.round(i*8/(n-1))])};
+
+/* ---------- shared bits ---------- */
+const PERIODS=[['fy','Full year'],['q1','Q1'],['q2','Q2'],['q3','Q3'],['q4','Q4']];
+const span=p=>p==='fy'?[0,12]:[(+p[1]-1)*3,(+p[1])*3];
+const axis=(x={})=>Object.assign({ticks:{color:T('--muted'),font:{size:11}},grid:{color:T('--soft')}},x);
+const yMoney=(x={})=>axis(Object.assign({ticks:{color:T('--muted'),font:{size:11},callback:v=>'$'+(+v).toFixed(Number.isInteger(+v)?0:1)+'M'}},x));
+const opts=o=>Object.assign({responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false}}},o);
+const seg=(id,items,cur,attr='data-v')=>`<div class="seg sm" id="${id}">${items.map(([v,l])=>`<button type="button" ${attr}="${v}" aria-pressed="${String(cur)===String(v)}">${l}</button>`).join('')}</div>`;
+const yearNav=()=>`<div class="yr fx-yr"><button type="button" data-fyr="-1" aria-label="Previous year">‹</button><span>${fyr}</span><button type="button" data-fyr="1" aria-label="Next year">›</button></div>`;
+function destroy(){charts.forEach(c=>c.destroy());charts=[]}
+
+/* ================= DASHBOARD ================= */
+function filtersHTML(){const allTop=selTop.size===TOPR.length,allSub=selSub.size===APJC.length,apjOnly=selTop.size===1&&selTop.has('APJ');
+  return `<div class="fx-controls">${yearNav()}
+    <div class="ctl">Metric${seg('fx-metric',METS.map(m=>[m,MLAB[m]]),metric)}</div>
+    <div class="ctl">Region<div class="seg sm" id="fx-region"><button type="button" data-v="all" aria-pressed="${allTop}">All</button>${TOPR.map(r=>`<button type="button" data-v="${r}" aria-pressed="${!allTop&&selTop.has(r)}">${r}</button>`).join('')}</div></div>
+    ${apjOnly?`<div class="ctl">APJ country<div class="seg sm" id="fx-sub"><button type="button" data-v="all" aria-pressed="${allSub}">All APJ</button>${APJC.map(r=>`<button type="button" data-v="${r}" aria-pressed="${!allSub&&selSub.has(r)}">${r}</button>`).join('')}</div></div>`:''}</div>`}
+const card=(id,title,ask,ctl,body,how='')=>`<section class="fx-card"><header><h2>${title}</h2><span class="ask" id="${id}-ask">${ask}</span>${ctl?`<div class="ctlr">${ctl}</div>`:''}</header>${body}${how?`<p class="how">${how}</p>`:''}</section>`;
+function dashboard(){
+  const main=q$('#main');
+  if(!M.hasAop){main.innerHTML=`<div id="fx">${filtersHTML()}<div class="empty">No AOP for ${fyr} yet. Enter it under <button type="button" class="btn primary" data-tab="finput">Forecasting › Inputs</button></div></div>`;return}
+  const L=vShort(M.LATEST);
+  main.innerHTML=`<div id="fx">${filtersHTML()}
+  <p class="how">${M.CLOSED?`Actuals through ${MONS[M.CLOSED-1]}.`:'No actuals yet.'} ${M.VERS.length>1?`Latest forecast: ${vName(M.LATEST)}.`:'No monthly forecasts yet: views show AOP only.'} Forecasts set quarter totals; a ${curve().map(x=>Math.round(x*100)).join('/')} curve splits each quarter into months.</p>
+  <div class="fx-tiles" id="fx-tiles"></div>
+  ${card('fx-walk','1 · Forecast vs AOP','',seg('fx-pwalk',PERIODS,per.walk,'data-p'),'<div class="key" id="fx-walk-key"></div><div class="cv"><canvas id="fx-ch-walk" role="img" aria-label="Forecast against AOP"></canvas></div>')}
+  ${card('fx-gap','2 · Gap to AOP, forecast by forecast','Running gap to AOP since January. Zero is on plan. Each forecast starts on the actual line at the month it was built.',seg('fx-pgap',PERIODS,per.gap,'data-p'),'<div class="key"><span><i class="a"></i>Actual</span><span><i class="p"></i>AOP (zero line)</span><span><i class="v"></i>Monthly forecasts, oldest (light) to newest (dark)</span></div><div class="cv tall"><canvas id="fx-ch-gap" role="img" aria-label="Running gap to AOP"></canvas></div>','Read it: if each new forecast starts lower than the last one expected, the team has been too optimistic. A quarter shows only the forecasts built in it.')}
+  ${card('fx-rr','3 · What it takes to hit AOP','At each forecast: the monthly run-rate still needed to reach full-year AOP, against the run-rate that forecast expects.','','<div class="key"><span><i class="p"></i>Needed per month to hit AOP</span><span><i class="f"></i>Forecast per month</span><span><i class="gf"></i>Shortfall per month</span></div><div class="cv tall"><canvas id="fx-ch-rr" role="img" aria-label="Run-rate needed against forecast"></canvas></div>')}
+  <div class="fx-grid2">
+  ${card('fx-hm','4 · Where the gap sits','Full-year forecast vs AOP, by region and monthly forecast.',seg('fx-hmunit',[['pct','%'],['usd','$']],hmUnit),'<div class="tblwrap"><table class="fx-hm" id="fx-hm"></table></div><div class="scale"><span>Below AOP</span><i></i><span>Above AOP</span><span>· Click ▸ beside APJ to show its countries.</span></div>')}
+  ${card('fx-br',`5 · AOP to ${vShort(M.LATEST)==='AOP'?'AOP':'latest forecast'}`,'Which regions moved the full-year number. Pick APJ alone to see its countries.','','<div class="cv"><canvas id="fx-ch-bridge" role="img" aria-label="Bridge from AOP to latest forecast"></canvas></div>')}
+  </div>
+  ${card('fx-acc','6 · Forecast accuracy','For each closed quarter: how far the quarter forecast was from the actual. Red means the forecast was too high.',seg('fx-lead',[[0,'At quarter start'],[1,'1 month before'],[3,'3 months before']],lead),'<div class="tblwrap"><table class="fx-hm" id="fx-acc"></table></div><div class="scale"><span>Forecast too high</span><i></i><span>Forecast too low</span><span>· Avg miss ignores direction. Bias keeps it: negative means the forecast runs high.</span></div>')}
+  ${card('fx-b2b','7 · Book-to-bill','Bookings divided by revenue. Above 1.0, backlog is building; below 1.0, it is draining. Uses both metrics.',seg('fx-b2bm',[['m','Monthly'],['q','Quarterly']],b2bMode),`<div class="key"><span><i class="a"></i>Actual</span><span><i class="f"></i>Forecast (${L})</span><span><i class="p"></i>AOP</span></div><div class="cv"><canvas id="fx-ch-b2b" role="img" aria-label="Book-to-bill ratio"></canvas></div>`)}
+  </div>`;
+  tiles();heat();accuracy();
+  if(typeof Chart==='undefined'){document.querySelectorAll('#fx .cv').forEach(e=>e.textContent='The charting library didn’t load. Check your connection and reload.');return}
+  walk();gapChart();runRate();bridge();b2b()}
+
+function tiles(){
+  const prev=M.VERS.length>1?M.VERS[M.VERS.length-2]:0;
+  const A=sum(agg(r=>M.aop(metric,r))),Lv=sum(agg(r=>M.version(metric,r,M.LATEST))),P=sum(agg(r=>M.version(metric,r,prev)));
+  const ytdA=sum(agg(r=>M.aop(metric,r)).slice(0,M.CLOSED)),ytd=sum(agg(r=>M.actual(metric,r)).slice(0,M.CLOSED));
+  const d=(x,y)=>y?(x/y-1)*100:0;
+  const t=[['Full-year AOP',money(A),`${fyr} plan`],
+    [`Latest forecast (${vShort(M.LATEST)})`,money(Lv),`<span class="${Lv<A?'dn':'upc'}">${pct(d(Lv,A))} vs AOP</span>`],
+    [`Change since ${vShort(prev)}`,smoney(Lv-P),'full-year outlook'],
+    [M.CLOSED?`Actual Jan to ${MONS[M.CLOSED-1]}`:'Actual to date',money(ytd),M.CLOSED?`<span class="${ytd<ytdA?'dn':'upc'}">${pct(d(ytd,ytdA))} vs AOP to date</span>`:'no actuals yet']];
+  q$('#fx-tiles').innerHTML=t.map(([l,v,s])=>`<div class="fx-tile"><span>${l}</span><b>${v}</b><small>${s}</small></div>`).join('')}
+
+const fyLabels={id:'fxFyLabels',afterDatasetsDraw(c){const ds=c.data.datasets[0],meta=c.getDatasetMeta(0),A=c.data.datasets[1].data[0];
+  const ctx=c.ctx,small=c.width/meta.data.length<64;ctx.save();ctx.textAlign='center';
+  meta.data.forEach((bar,i)=>{const v=ds.data[i],p=A?(v-A)/Math.abs(A)*100:0,fs=small?9:11,last=i===meta.data.length-1;
+    ctx.fillStyle=last?T('--panel'):T('--ink');ctx.font=`600 ${fs}px ${MONO}`;ctx.fillText(small?'$'+v.toFixed(0):money(v),bar.x,bar.y+fs+6);
+    ctx.font=`500 ${fs}px ${MONO}`;ctx.fillText(i===0?'AOP':pct(p),bar.x,bar.y+fs*2+9)});ctx.restore()}};
+const barLabels={id:'fxBarLabels',afterDatasetsDraw(c){const ds=c.data.datasets[0],meta=c.getDatasetMeta(0),A=c.data.datasets[1].data;
+  const ctx=c.ctx,n=meta.data.length,small=c.width/n<70;ctx.save();ctx.textAlign='center';
+  meta.data.forEach((bar,i)=>{const v=ds.data[i],p=A[i]?(v-A[i])/Math.abs(A[i])*100:0,fs=small?9:11;
+    const y=Math.min(bar.y,c.scales.y.getPixelForValue(A[i]))-6;
+    ctx.fillStyle=T('--ink');ctx.font=`600 ${fs}px ${MONO}`;ctx.fillText(small?'$'+v.toFixed(1):money(v),bar.x,y-fs-2);
+    ctx.fillStyle=p<0?T('--down'):T('--up');ctx.font=`500 ${fs}px ${MONO}`;ctx.fillText(pct(p),bar.x,y)});ctx.restore()}};
+function walk(){
+  if(per.walk==='fy'){
+    q$('#fx-walk-ask').textContent='Each bar is the full-year total that month’s forecast expected. The dashed line is full-year AOP.';
+    q$('#fx-walk-key').innerHTML='<span><i class="bx" style="background:var(--fcbar)"></i>Forecast total</span><span><i class="bx" style="background:var(--fclast)"></i>Latest forecast</span><span><i class="p"></i>AOP</span><span>The axis starts above zero so the gap is visible.</span>';
+    const vals=M.VERS.map(v=>sum(agg(r=>M.version(metric,r,v)))),A=vals[0];
+    const lo=Math.min(...vals),hi=Math.max(...vals),pad=Math.max((hi-lo)*.9,Math.abs(A)*.025,.1);
+    charts.push(new Chart(q$('#fx-ch-walk'),{type:'bar',data:{labels:M.VERS.map(vShort),datasets:[
+      {label:'Forecast total',data:vals,backgroundColor:M.VERS.map(v=>v===M.LATEST&&v?T('--fclast'):T('--fcbar')),borderRadius:4,borderSkipped:'bottom',maxBarThickness:56,order:2},
+      {type:'line',label:'AOP',data:vals.map(()=>A),borderColor:T('--aop'),borderDash:[7,5],borderWidth:2,pointRadius:0,pointHoverRadius:0,order:1}]},
+      options:opts({layout:{padding:{top:8}},plugins:{legend:{display:false},tooltip:{callbacks:{title:it=>vName(M.VERS[it[0].dataIndex]),label:t=>t.datasetIndex===1?`AOP: ${money(A)}`:`Full year: ${money(t.parsed.y)} (${smoney(t.parsed.y-A)})`}}},
+        scales:{x:axis({grid:{display:false}}),y:yMoney({min:lo<0?lo-pad:Math.max(0,lo-pad),max:hi<0?0:hi+pad*.4})}}),plugins:[fyLabels]}));return}
+  q$('#fx-walk-ask').textContent=`Each bar is the actual for a closed month, or the ${vName(M.LATEST)} for a month still to come. The dark tick on each bar is that month’s AOP.`;
+  q$('#fx-walk-key').innerHTML=`<span><i class="bx" style="background:var(--actual)"></i>Actual</span><span><i class="bx" style="background:var(--fcbar)"></i>Forecast (${vShort(M.LATEST)})</span><span><i class="t"></i>AOP for the month</span><span>The axis starts above zero so the gap is visible.</span>`;
+  const [a,b]=span(per.walk),A=agg(r=>M.aop(metric,r)).slice(a,b),act=agg(r=>M.actual(metric,r)),fc=agg(r=>M.version(metric,r,M.LATEST));
+  const isAct=MONS.slice(a,b).map((_,k)=>a+k<M.CLOSED),vals=isAct.map((x,k)=>x?act[a+k]:fc[a+k]);
+  const lo=Math.min(...vals,...A),hi=Math.max(...vals,...A),tickR=Math.max(10,Math.min(30,880/(b-a)/3));
+  charts.push(new Chart(q$('#fx-ch-walk'),{type:'bar',data:{labels:MONS.slice(a,b),datasets:[
+    {label:'Value',data:vals,backgroundColor:isAct.map(x=>x?T('--actual'):T('--fcbar')),borderRadius:4,borderSkipped:'bottom',maxBarThickness:80,order:2},
+    {type:'line',label:'AOP',data:A,showLine:false,pointStyle:'line',pointRadius:tickR,pointHoverRadius:tickR,pointBorderWidth:3,borderColor:T('--aop'),order:1}]},
+    options:opts({layout:{padding:{top:36}},plugins:{legend:{display:false},tooltip:{callbacks:{label:t=>t.datasetIndex===1?`AOP: ${money(t.parsed.y)}`:`${isAct[t.dataIndex]?'Actual':'Forecast'}: ${money(t.parsed.y)} (${smoney(t.parsed.y-A[t.dataIndex])})`}}},
+      scales:{x:axis({grid:{display:false}}),y:yMoney({min:lo<0?Math.floor(lo*1.2):Math.max(0,Math.floor(lo*.8)),max:hi<0?0:Math.ceil(hi*1.04)})}}),plugins:[barLabels]}))}
+
+const endLabels={id:'fxEnd',afterDatasetsDraw(c){const ctx=c.ctx;ctx.save();ctx.font=`600 11px ${MONO}`;ctx.textAlign='left';const used=[];
+  c.data.datasets.forEach((d,i)=>{if(!d._v)return;const meta=c.getDatasetMeta(i),pt=meta.data[meta.data.length-1];if(!pt||d.data[d.data.length-1]==null)return;
+    const y=pt.y+4;if(used.some(u=>Math.abs(u-y)<12))return;used.push(y);ctx.fillStyle=T('--ink');ctx.fillText(vShort(d._v),pt.x+6,y)});ctx.restore()}};
+function gapChart(){
+  const [a,b]=span(per.gap),A=agg(r=>M.aop(metric,r)),act=agg(r=>M.actual(metric,r));
+  const cum=arr=>{let s=0;const o=[0];arr.forEach(x=>{s+=x||0;o.push(s)});return o};
+  const cA=cum(A),gapOf=arr=>cum(arr).map((x,k)=>r3(x-cA[k]));
+  const idx=[...Array(b-a+1).keys()].map(k=>a+k),labels=idx.map(k=>k===0?'Start':`End ${MONS[k-1]}`);
+  const actG=gapOf(act),actLine=idx.map(k=>k<=M.CLOSED?actG[k]:null);
+  const vs=M.VERS.slice(1).filter(v=>per.gap==='fy'||(v>=a&&v<=b));
+  const ds=vs.map(v=>{const g=gapOf(agg(r=>M.version(metric,r,v))),last=v===M.LATEST,col=vColor(v),k0=Math.min(v,M.CLOSED);
+    return {label:vName(v),data:idx.map(k=>k>=k0?g[k]:null),borderColor:col,backgroundColor:col,borderWidth:last?3:1.75,pointRadius:idx.map(k=>k>k0?(last?3.5:2.5):k===k0?3.5:0),pointBackgroundColor:idx.map(k=>k===k0?T('--panel'):col),tension:0,order:2,_v:v}});
+  ds.push({label:'Actual',data:actLine,borderColor:T('--actual'),backgroundColor:T('--actual'),borderWidth:3,pointRadius:actLine.map(x=>x==null?0:4),pointBorderColor:T('--panel'),pointBorderWidth:2,order:1});
+  charts.push(new Chart(q$('#fx-ch-gap'),{type:'line',data:{labels,datasets:ds},
+    options:opts({layout:{padding:{right:40}},plugins:{legend:{display:false},tooltip:{itemSort:(x,y)=>y.parsed.y-x.parsed.y,callbacks:{label:t=>t.parsed.y==null?null:`${t.dataset.label}: ${smoney(t.parsed.y)} vs AOP`}}},
+      scales:{x:axis({grid:{display:false}}),y:axis({ticks:{color:T('--muted'),font:{size:11},callback:v=>smoney(+v)},grid:{color:c=>c.tick.value===0?T('--aop'):T('--soft'),lineWidth:c=>c.tick.value===0?1.5:1}})}}),plugins:[endLabels]}))}
+
+function runRate(){
+  const fyA=sum(agg(r=>M.aop(metric,r))),act=agg(r=>M.actual(metric,r)),need=[],fc=[];
+  for(const v of M.VERS){const ytd=sum(act.slice(0,Math.min(v,M.CLOSED))),left=12-Math.min(v,M.CLOSED);
+    need.push(r3((fyA-ytd)/left));fc.push(r3((sum(agg(r=>M.version(metric,r,v)))-ytd)/left))}
+  const lo=Math.min(...need,...fc),hi=Math.max(...need,...fc),pad=(hi-lo)*.25+.5;
+  charts.push(new Chart(q$('#fx-ch-rr'),{type:'line',data:{labels:M.VERS.map(v=>v===0?'AOP':`${MONS[v]} fcst`),datasets:[
+    {label:'Needed per month to hit AOP',data:need,borderColor:T('--aop'),borderDash:[7,5],borderWidth:2.5,pointRadius:3,pointBackgroundColor:T('--aop'),tension:0,fill:false,order:2},
+    {label:'Forecast per month',data:fc,borderColor:T('--fc'),backgroundColor:T('--gapfill'),borderWidth:3,pointRadius:4,pointBackgroundColor:T('--fc'),pointBorderColor:T('--panel'),pointBorderWidth:2,tension:0,fill:{target:0,above:'transparent',below:T('--gapfill')},order:1}]},
+    options:opts({plugins:{legend:{display:false},tooltip:{callbacks:{label:t=>`${t.dataset.label}: ${money(t.parsed.y)}`,footer:it=>{const i=it[0].dataIndex,g=fc[i]-need[i];return `${g<0?'Shortfall':'Ahead'}: ${money(Math.abs(g))} per month`}}}},
+      scales:{x:axis({grid:{display:false}}),y:yMoney({min:Math.floor(lo-pad),max:Math.ceil(hi+pad)})}})}))}
+
+const cellBg=(p,full=10)=>{const k=Math.min(1,Math.abs(p)/full),c=p<0?T('--down'):T('--up');return `background:color-mix(in srgb,${c} ${Math.round(k*85)}%,var(--mid))`+(k>.6?';color:#fff':'')};
+const rowsFor=()=>TOPR.flatMap(r=>r==='APJ'&&expAPJ?[{r,L:APJC},...APJC.map(c=>({r:c,L:[c],sub:true}))]:[{r,L:kidsOf(r)}]);
+const isSel=row=>row.L.some(x=>leaves().includes(x));
+const rowHead=row=>`<th>${row.r}${row.r==='APJ'?`<button type="button" class="exp" data-fxexp aria-expanded="${expAPJ}" aria-label="${expAPJ?'Hide':'Show'} APJ countries">${expAPJ?'▾':'▸'}</button>`:''}</th>`;
+function heat(){
+  const vs=M.VERS.slice(1);
+  if(!vs.length){q$('#fx-hm').innerHTML='<tbody><tr><td class="na">No monthly forecasts yet.</td></tr></tbody>';return}
+  let h=`<thead><tr><th>Region</th>${vs.map(v=>`<th class="c">${vShort(v)}</th>`).join('')}</tr></thead><tbody>`;
+  for(const row of rowsFor()){const fa=sum(agg(r=>M.aop(metric,r),row.L));
+    h+=`<tr class="${isSel(row)?'sel':''} ${row.sub?'sub':''}">${rowHead(row)}${vs.map(v=>{const t=sum(agg(r=>M.version(metric,r,v),row.L)),d=t-fa,p=fa?d/Math.abs(fa)*100:0;
+      return `<td style="${cellBg(p)}" title="${row.r}, ${vName(v)}: ${money(t)} vs AOP ${money(fa)} (${smoney(d)}, ${pct(p)})">${hmUnit==='pct'?pct(p):smoney(d)}</td>`}).join('')}</tr>`}
+  q$('#fx-hm').innerHTML=h+'</tbody>'}
+
+const bridgeLabels={id:'fxBridge',afterDatasetsDraw(c){const ctx=c.ctx,meta=c.getDatasetMeta(0),d=c.data.datasets[0].data,n=d.length;ctx.save();ctx.textAlign='center';ctx.font=`600 11px ${MONO}`;ctx.fillStyle=T('--ink');
+  meta.data.forEach((bar,i)=>{const [a,b]=d[i];ctx.fillText(i===0||i===n-1?money(b):smoney(b-a),bar.x,Math.min(bar.y,bar.base)-6)});ctx.restore()}};
+function bridge(){
+  const fyA=sum(agg(r=>M.aop(metric,r)));
+  const groups=selTop.size===1&&selTop.has('APJ')?[...selSub].map(c=>[c,[c]]):[...selTop].map(r=>[r,r==='APJ'?[...selSub]:[r]]);
+  const steps=groups.map(([n,G])=>[n,sum(agg(r=>M.version(metric,r,M.LATEST),G))-sum(agg(r=>M.aop(metric,r),G))]).sort((a,b)=>a[1]-b[1]);
+  let run=fyA;const labels=['AOP'],data=[[0,fyA]],col=[T('--aop')];
+  for(const [r,d] of steps){labels.push(r);data.push([run,run+d]);run+=d;col.push(d<0?T('--down'):T('--up'))}
+  labels.push(`${vShort(M.LATEST)} fcst`);data.push([0,run]);col.push(T('--fc'));
+  const tops=data.map(x=>Math.max(...x)),bots=data.slice(1,-1).map(x=>Math.min(...x));
+  const lo=Math.min(...bots,run),hi=Math.max(...tops),pad=(hi-lo)*.35+.2;
+  charts.push(new Chart(q$('#fx-ch-bridge'),{type:'bar',data:{labels,datasets:[{label:'Full year',data,backgroundColor:col,borderRadius:4,borderSkipped:false,maxBarThickness:46}]},
+    options:opts({layout:{padding:{top:22}},interaction:{mode:'nearest',intersect:true},plugins:{legend:{display:false},tooltip:{callbacks:{label:t=>{const [a,b]=t.raw,i=t.dataIndex;return i===0||i===labels.length-1?`${labels[i]}: ${money(b)}`:`${labels[i]}: ${smoney(b-a)}`}}}},
+      scales:{x:axis({grid:{display:false}}),y:yMoney({min:lo<0?lo-pad:Math.max(0,lo-pad),max:hi+pad*.3})}}),plugins:[bridgeLabels]}))}
+
+function accuracy(){
+  const qs=[0,1,2,3].filter(q=>(q+1)*3<=M.CLOSED),qsum=(a,q)=>(a[q*3]||0)+(a[q*3+1]||0)+(a[q*3+2]||0);
+  if(!qs.length){q$('#fx-acc').innerHTML='<tbody><tr><td class="na">No closed quarters yet.</td></tr></tbody>';return}
+  let h=`<thead><tr><th>Region</th>${qs.map(q=>`<th class="c">Q${q+1}</th>`).join('')}<th class="c sum">Avg miss</th><th class="c">Bias</th></tr></thead><tbody>`;
+  for(const row of rowsFor()){const act=agg(r=>M.actual(metric,r),row.L),errs=[];
+    const cells=qs.map(q=>{const vb=q*3-lead;
+      if(vb<1||!M.VERS.includes(vb))return `<td class="na" title="No forecast was built then.">–</td>`;
+      const f=qsum(agg(r=>M.version(metric,r,vb),row.L),q),a=qsum(act,q);
+      if(Math.abs(a)<1e-9)return `<td class="na" title="No actuals to score against.">–</td>`;
+      const e=(f/a-1)*100;errs.push(e);return `<td style="${cellBg(-e,8)}" title="${row.r} Q${q+1}: ${vName(vb)} said ${money(f)}, actual ${money(a)}">${pct(e)}</td>`});
+    const mae=errs.length?sum(errs.map(Math.abs))/errs.length:null,bias=errs.length?sum(errs)/errs.length:null;
+    h+=`<tr class="${isSel(row)?'sel':''} ${row.sub?'sub':''}">${rowHead(row)}${cells.join('')}<td class="sum">${mae==null?'–':mae.toFixed(1)+'%'}</td><td class="sum">${bias==null?'–':pct(-bias)}</td></tr>`}
+  q$('#fx-acc').innerHTML=h+'</tbody>'}
+
+function b2b(){
+  const B={a:agg(r=>M.actual('bookings',r)),f:agg(r=>M.version('bookings',r,M.LATEST)),p:agg(r=>M.aop('bookings',r))};
+  const R={a:agg(r=>M.actual('revenue',r)),f:agg(r=>M.version('revenue',r,M.LATEST)),p:agg(r=>M.aop('revenue',r))};
+  const q=b2bMode==='q',groups=q?[0,1,2,3].map(k=>[k*3,k*3+3]):MONS.map((_,i)=>[i,i+1]),labels=q?['Q1','Q2','Q3','Q4']:MONS;
+  const ratio=(b,r,[x,y])=>{const d=sum(r.slice(x,y));return Math.abs(d)<1e-9?null:r3(sum(b.slice(x,y))/d)};
+  const closedG=groups.map(([x,y])=>y<=M.CLOSED),lastClosed=closedG.lastIndexOf(true);
+  const act=groups.map((g,i)=>closedG[i]?ratio(B.a,R.a,g):null),fc=groups.map((g,i)=>i>=Math.max(lastClosed,0)&&!closedG[i]||i===lastClosed?ratio(B.f,R.f,g):null),pl=groups.map(g=>ratio(B.p,R.p,g));
+  const all=[...act,...fc,...pl].filter(x=>x!=null),lo=Math.min(...all,1),hi=Math.max(...all,1);
+  charts.push(new Chart(q$('#fx-ch-b2b'),{type:'line',data:{labels,datasets:[
+    {label:'AOP',data:pl,borderColor:T('--aop'),borderDash:[7,5],borderWidth:2,pointRadius:0,tension:0,order:3},
+    {label:'Forecast',data:fc,borderColor:T('--fc'),backgroundColor:T('--fc'),borderWidth:3,pointRadius:fc.map((x,i)=>x!=null&&i>lastClosed?4:0),tension:0,order:2},
+    {label:'Actual',data:act,borderColor:T('--actual'),backgroundColor:T('--actual'),borderWidth:3,pointRadius:4,pointBorderColor:T('--panel'),pointBorderWidth:2,tension:0,order:1}]},
+    options:opts({plugins:{legend:{display:false},tooltip:{filter:t=>t.parsed.y!=null&&!(t.datasetIndex===1&&t.dataIndex===lastClosed),callbacks:{label:t=>`${t.dataset.label}: ${t.parsed.y.toFixed(2)}`}}},
+      scales:{x:axis({grid:{display:false}}),y:axis({min:Math.floor((lo-.05)*20)/20,max:Math.ceil((hi+.05)*20)/20,ticks:{color:T('--muted'),font:{size:11},callback:v=>(+v).toFixed(2)},grid:{color:c=>Math.abs(c.tick.value-1)<1e-9?T('--aop'):T('--soft'),lineWidth:c=>Math.abs(c.tick.value-1)<1e-9?1.5:1}})}})}))}
+
+/* ================= INPUTS ================= */
+const fmtIn=v=>v==null||v===''?'':String(Math.round(v*1000)/1000);
+const ro=()=>canWrite?'':'readonly';
+const rowLabel=x=>`<th class="st">${x.r}</th><th class="st">${x.c}</th><th class="st">${MLAB[x.m]}</th>`;
+function grid(id,cols,get,opts2={}){
+  return `<div class="tblwrap"><table class="fx-in" id="${id}"><thead><tr><th>Region</th><th>Country</th><th>Metric</th>${cols.map(c=>`<th class="n">${c}</th>`).join('')}<th class="n">${opts2.total||'Full year'}</th></tr></thead><tbody>
+  ${ROWS.map((x,ri)=>`<tr class="${ri===LEAF.length?'mfirst':''}">${rowLabel(x)}${cols.map((c,ci)=>{const v=get(x,ci),dim=opts2.dim?.(ci);
+    return `<td class="${dim?'dim':''}"><input data-g="${id}" data-r="${ri}" data-c="${ci}" value="${fmtIn(v)}" ${ro()} inputmode="decimal" aria-label="${x.c} ${MLAB[x.m]} ${c}" ${dim?'placeholder="actual"':''}></td>`}).join('')}<td class="tot" id="${id}-t${ri}">${money(sum(cols.map((c,ci)=>opts2.totVal?opts2.totVal(x,ci):get(x,ci))))}</td></tr>`).join('')}
+  </tbody></table></div>`}
+function inputs(){
+  const d=D(),cv=curve(),keys=fcKeys(),mdl=model();
+  const isEmpty=!mdl.hasAop&&!keys.length&&!mdl.CLOSED;
+  if(!fcPick||!fcPick.startsWith(fyr+'-'))fcPick=keys[keys.length-1]||keyOf(Math.max(1,mdl.CLOSED));
+  const fv=vOf(fcPick),closedQ=ci=>(ci+1)*3<=Math.min(fv,mdl.CLOSED);
+  const fcOpts=MONS.slice(1).map((m,i)=>{const k=keyOf(i+1);return `<option value="${k}" ${k===fcPick?'selected':''}>${m} ${fyr} forecast${keys.includes(k)?' ✓':''}</option>`}).join('');
+  q$('#main').innerHTML=`<div id="fx">
+  <div class="fx-controls">${yearNav()}<p class="how">One person enters these numbers. Everything saves as you type. Amounts are $M. Paste a block copied from Excel into any cell to fill from there.</p></div>
+  ${canWrite?'':'<p class="ro">View only: you can read but not edit.</p>'}
+  <section class="fx-card"><header><h2>Curve</h2><span class="ask">Share of a quarter that lands in its 1st, 2nd and 3rd month. One curve for everything.</span></header>
+    <div class="fx-curve">${cv.map((x,i)=>`<label>${['1st month','2nd month','3rd month'][i]}<input data-curve="${i}" value="${Math.round(x*1000)/10}" ${ro()} inputmode="decimal" aria-label="${['1st','2nd','3rd'][i]} month share, percent"><span>%</span></label>`).join('')}
+    <span id="fx-curve-tot" class="${Math.abs(sum(cv)-1)<1e-6?'ok':'bad'}">Total ${Math.round(sum(cv)*1000)/10}%${Math.abs(sum(cv)-1)<1e-6?'':' · must be 100%'}</span></div></section>
+  <section class="fx-card"><header><h2>AOP</h2><span class="ask">Quarter totals for the year's plan, per country and metric. Enter once a year.</span></header>
+    ${grid('g-aop',['Q1','Q2','Q3','Q4'],(x,ci)=>d.aop?.[x.m]?.[x.c]?.[ci])}</section>
+  <section class="fx-card"><header><h2>Forecasts</h2><span class="ask">Quarter totals for each monthly forecast. Type only quarters still open: closed quarters use actuals. For the quarter you are in, type the whole quarter.</span></header>
+    <div class="fx-row"><label class="ctl">Forecast<select id="fx-fcpick">${fcOpts}</select></label>
+      ${canWrite?`<button type="button" class="btn" id="fx-fccopy">Copy from previous forecast</button><button type="button" class="btn" id="fx-fcdel">Delete this forecast</button>`:''}
+      <span class="how">${keys.length?`${keys.length} forecast${keys.length>1?'s':''} saved for ${fyr}: ${keys.map(k=>MONS[vOf(k)]).join(', ')}.`:'No forecasts saved yet.'}</span></div>
+    ${grid('g-fc',['Q1','Q2','Q3','Q4'],(x,ci)=>d.fc?.[fcPick]?.[x.m]?.[x.c]?.[ci],{dim:closedQ,totVal:(x,ci)=>{const v=d.fc?.[fcPick]?.[x.m]?.[x.c]?.[ci];if(v!=null)return v;if(!closedQ(ci))return 0;const a=d.act?.[x.m]?.[x.c]||[];return (a[ci*3]||0)+(a[ci*3+1]||0)+(a[ci*3+2]||0)}})}</section>
+  <section class="fx-card"><header><h2>Actuals</h2><span class="ask">One number per month when it closes, including finance adjustments. The latest month with any actual counts as closed.</span></header>
+    ${grid('g-act',MONS,(x,ci)=>d.act?.[x.m]?.[x.c]?.[ci],{total:'YTD'})}</section>
+  <section class="fx-card"><header><h2>Paste a whole table</h2><span class="ask">Copy a tab from the Excel template, header row included or not, and paste it here. Rows are matched by country and metric.</span></header>
+    <div class="fx-row"><label class="ctl">Table${seg('fx-imp',[['aop','AOP'],['fc','Forecasts'],['act','Actuals']],impKind)}</label></div>
+    <textarea id="fx-paste" rows="5" placeholder="Paste here" ${canWrite?'':'disabled'}></textarea>
+    <div class="fx-row"><button type="button" class="btn primary" id="fx-import" ${canWrite?'':'disabled'}>Import into ${fyr}</button><span id="fx-impmsg" role="status" class="how"></span></div></section>
+  ${canWrite&&(isEmpty||d.sample)?`<section class="fx-card"><header><h2>Testing</h2><span class="ask">${d.sample?`${fyr} holds made-up sample data. Clear it before entering real numbers.`:`For trying the dashboards before real numbers arrive. Only offered while ${fyr} is empty.`}</span></header>
+    <div class="fx-row">${d.sample?`<button type="button" class="btn" id="fx-clear">Clear the sample data</button>`:`<button type="button" class="btn" id="fx-sample">Load sample data into ${fyr}</button>`}</div></section>`:''}
+  </div>`}
+let impKind='fc';
+
+/* ---------- saving ---------- */
+const pend={};let tmr=null;
+function cur(){const k=String(fyr);return docs[k]??={year:fyr}}
+function queue(field){pend[field]=true;clearTimeout(tmr);tmr=setTimeout(flush,600)}
+async function flush(){
+  if(!db||!canWrite)return;const fields=Object.keys(pend);if(!fields.length)return;fields.forEach(f=>delete pend[f]);
+  const d=cur(),patch={updatedAt:new Date().toISOString()};fields.forEach(f=>patch[f]=d[f]??null);
+  try{const ref=db.collection('forecast').doc(String(fyr)),ex=await ref.get();if(ex.exists)await ref.update(patch);else await ref.set({year:fyr,...patch});toast('Saved')}
+  catch(e){toast(e?.code==='quota_exceeded'?'Storage is full.':'Couldn’t save the forecast inputs. Check your access.')}}
+const num=s=>{const v=parseNum(s);return v==null?null:r3(v)};
+function setCell(g,ri,ci,v){const x=ROWS[ri],d=cur();
+  if(g==='g-aop'){((d.aop??={})[x.m]??={})[x.c]??=[null,null,null,null];d.aop[x.m][x.c][ci]=v;queue('aop')}
+  if(g==='g-fc'){(((d.fc??={})[fcPick]??={})[x.m]??={})[x.c]??=[null,null,null,null];d.fc[fcPick][x.m][x.c][ci]=v;queue('fc')}
+  if(g==='g-act'){((d.act??={})[x.m]??={})[x.c]??=Array(12).fill(null);d.act[x.m][x.c][ci]=v;queue('act')}}
+function retotal(g,ri){const el=q$(`#${g}-t${ri}`);if(!el)return;const n=g==='g-act'?12:4;let t=0;
+  for(let ci=0;ci<n;ci++){const i=q$(`[data-g="${g}"][data-r="${ri}"][data-c="${ci}"]`);t+=num(i?.value)||0}el.textContent=money(t)}
+
+/* ---------- paste & import ---------- */
+function parseRows(text){return text.replace(/\r/g,'').split('\n').filter(l=>l.trim()).map(l=>l.split('\t').map(s=>s.trim()))}
+const findRow=(c,m)=>ROWS.findIndex(x=>x.c.toLowerCase()===String(c).toLowerCase()&&MLAB[x.m].toLowerCase()===String(m).toLowerCase());
+function doImport(){
+  const rows=parseRows(q$('#fx-paste').value),msg=q$('#fx-impmsg');if(!rows.length){msg.textContent='Paste a table first.';return}
+  let n=0,skipped=[],made=new Set();const d=cur();
+  for(const r of rows){let fc=null,o=r;
+    if(impKind==='fc'){if(!/^\d{4}-\d{2}$/.test(r[0]))continue;fc=r[0];o=r.slice(1);if(!fc.startsWith(fyr+'-')){skipped.push(fc);continue}}
+    const ri=findRow(o[1],o[2]);if(ri<0){if(!/^(region|forecast)$/i.test(r[0]))skipped.push(`${o[1]||'?'} ${o[2]||''}`.trim());continue}
+    const x=ROWS[ri],vals=o.slice(3,impKind==='act'?15:7).map(num);
+    if(impKind==='aop'){((d.aop??={})[x.m]??={})[x.c]=[0,1,2,3].map(i=>vals[i]??null)}
+    if(impKind==='act'){((d.act??={})[x.m]??={})[x.c]=MONS.map((_,i)=>vals[i]??null)}
+    if(impKind==='fc'){(((d.fc??={})[fc]??={})[x.m]??={})[x.c]=[0,1,2,3].map(i=>vals[i]??null);made.add(fc)}
+    n++}
+  if(!n){msg.textContent='No rows matched. Check the table choice and that Country and Metric columns are included.';return}
+  queue(impKind);flush();q$('#fx-paste').value='';
+  msg.textContent=`Imported ${n} rows${made.size?` across ${made.size} forecast${made.size>1?'s':''}`:''}.${skipped.length?` Skipped: ${[...new Set(skipped)].slice(0,6).join(', ')}.`:''}`;
+  if(made.size)fcPick=[...made].sort().pop();setTimeout(()=>{render();q$('#fx-impmsg')&&(q$('#fx-impmsg').textContent=msg.textContent)},0)}
+
+/* ---------- sample data (testing only, made up) ---------- */
+function sample(){
+  const FYS={bookings:{NA:160,EMEA:120,China:35,LATAM:40,Japan:15,SEA:9,ANZ:8,India:7,Korea:6,ROW:10},revenue:{NA:150,EMEA:112,China:33,LATAM:36,Japan:14,SEA:8,ANZ:7.5,India:6,Korea:5.5,ROW:9}};
+  const QPH={bookings:[.22,.24,.25,.29],revenue:[.23,.25,.25,.27]},DR={NA:-.05,EMEA:-.06,China:-.11,LATAM:-.13,Japan:.06,SEA:.09,ANZ:.03,India:.12,Korea:-.03,ROW:-.02};
+  const SD={NA:1,EMEA:2.4,China:3.1,LATAM:4.7,Japan:5.2,SEA:6.6,ANZ:7.3,India:8.9,Korea:9.5,ROW:10.3},DM={bookings:1,revenue:.6},CL=9,cv=DEF_CURVE;
+  const damp=(m,f)=>1+(f-1)*DM[m],aF=(r,i)=>1+DR[r]*(.35+.65*i/8)+.035*Math.sin(i*1.9+SD[r]),qs=a=>[0,1,2,3].map(q=>r3(a[q*3]+a[q*3+1]+a[q*3+2]));
+  const out={year:fyr,sample:true,curve:cv,aop:{},act:{},fc:{}};
+  for(const m of METS){out.aop[m]={};out.act[m]={};
+    for(const r of LEAF){const aq=QPH[m].map(p=>r3(FYS[m][r]*p));out.aop[m][r]=aq;const am=MONS.map((_,i)=>aq[Math.floor(i/3)]*cv[i%3]);
+      const act=am.map((x,i)=>i<CL?r3(x*damp(m,aF(r,i))):null);out.act[m][r]=act;
+      for(let v=1;v<=CL;v++){const lo=Math.max(0,v-3),f=[...Array(v-lo).keys()].reduce((s,k)=>s+aF(r,lo+k),0)/(v-lo)+.015;
+        const Q=qs(am.map((x,i)=>i<v?act[i]:x*damp(m,f))).map((x,q)=>(q+1)*3<=v?null:x);((out.fc[keyOf(v)]??={})[m]??={})[r]=Q}}}
+  return out}
+
+/* ---------- events ---------- */
+let armed=null;
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#fx'))return;
+  const yb=e.target.closest('[data-fyr]');if(yb){fyr+=+yb.dataset.fyr;fcPick='';saveP();return render()}
+  if(e.target.closest('[data-fxexp]')){expAPJ=!expAPJ;return render()}
+  const b=e.target.closest('.seg button');
+  if(b){const g=b.parentElement.id,v=b.dataset.v??b.dataset.p;
+    const tog=(set,all,v)=>{if(v==='all')return new Set(all);if(set.size===all.length)return new Set([v]);const s=new Set(set);s.has(v)?s.delete(v):s.add(v);return s.size?s:new Set(all)};
+    if(g==='fx-metric')metric=v;if(g==='fx-hmunit')hmUnit=v;if(g==='fx-lead')lead=+v;if(g==='fx-b2bm')b2bMode=v;if(g==='fx-pwalk')per.walk=v;if(g==='fx-pgap')per.gap=v;
+    if(g==='fx-region'){selTop=tog(selTop,TOPR,v);if(!(selTop.size===1&&selTop.has('APJ')))selSub=new Set(APJC)}
+    if(g==='fx-sub')selSub=tog(selSub,APJC,v);
+    if(g==='fx-imp'){impKind=v;document.querySelectorAll('#fx-imp button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===v));return}
+    saveP();return render()}
+  if(e.target.closest('#fx-import'))return doImport();
+  if(e.target.closest('#fx-fccopy')){const keys=fcKeys().filter(k=>k<fcPick);const src=keys[keys.length-1];if(!src){toast('No earlier forecast to copy.');return}
+    const d=cur();d.fc[fcPick]=JSON.parse(JSON.stringify(d.fc[src]));queue('fc');flush();return render()}
+  const del=e.target.closest('#fx-fcdel,#fx-clear,#fx-sample');
+  if(del){if(armed!==del.id){armed=del.id;const t=del.textContent;del.textContent='Click again to confirm';setTimeout(()=>{if(armed===del.id){armed=null;del.textContent=t}},3000);return}armed=null;
+    const d=cur();
+    if(del.id==='fx-fcdel'){if(d.fc)delete d.fc[fcPick];queue('fc')}
+    if(del.id==='fx-clear'){['curve','aop','act','fc','sample'].forEach(f=>{d[f]=null;queue(f)})}
+    if(del.id==='fx-sample'){Object.assign(d,sample());['curve','aop','act','fc','sample'].forEach(queue)}
+    flush();fcPick='';return render()}
+});
+document.addEventListener('change',e=>{
+  const s=e.target.closest('#fx-fcpick');if(s){fcPick=s.value;return render()}
+  const c=e.target.closest('[data-curve]');if(c){let v=num(c.value);if(v!=null&&v>1)v=r3(v/100);const d=cur();d.curve=[...curve()];d.curve[+c.dataset.curve]=v??0;queue('curve');
+    const t=sum(d.curve),el=q$('#fx-curve-tot');el.className=Math.abs(t-1)<1e-6?'ok':'bad';el.textContent=`Total ${Math.round(t*1000)/10}%${Math.abs(t-1)<1e-6?'':' · must be 100%'}`;return}
+  const i=e.target.closest('[data-g]');if(i&&canWrite){setCell(i.dataset.g,+i.dataset.r,+i.dataset.c,num(i.value));retotal(i.dataset.g,+i.dataset.r)}});
+document.addEventListener('paste',e=>{const i=e.target.closest('#fx [data-g]');if(!i||!canWrite)return;
+  const t=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/[\t\n]/.test(t.replace(/\r?\n$/,'')))return;e.preventDefault();
+  const g=i.dataset.g,r0=+i.dataset.r,c0=+i.dataset.c,n=g==='g-act'?12:4;let cells=0;
+  parseRows(t).forEach((cols,k)=>{const ri=r0+k;if(ri>=ROWS.length)return;cols.forEach((v,j)=>{const ci=c0+j;if(ci>=n)return;const el=q$(`[data-g="${g}"][data-r="${ri}"][data-c="${ci}"]`);if(el){el.value=v;setCell(g,ri,ci,num(v));cells++}});retotal(g,ri)});
+  toast(`Pasted ${cells} cells`)});
+document.addEventListener('keydown',e=>{const i=e.target.closest('#fx [data-g]');if(!i||e.key!=='Enter')return;e.preventDefault();
+  q$(`[data-g="${i.dataset.g}"][data-r="${+i.dataset.r+1}"][data-c="${i.dataset.c}"]`)?.focus()});
+
+function render(){destroy();M=model();if(tab==='finput')inputs();else dashboard()}
+function onData(snapDocs){const keep=Object.keys(pend),old=docs[String(fyr)];docs={};snapDocs.forEach(d=>docs[d.id]=d.data());
+  if(keep.length&&old){const n=docs[String(fyr)]??={year:fyr};keep.forEach(f=>n[f]=old[f])} // edits typed but not saved yet win
+  if(tab==='fdash')render();else if(tab==='finput'&&!document.activeElement?.closest?.('#fx input,#fx textarea,#fx select'))render()}
+return {render,destroy,onData}})();
 </script>
 
 </body></html>
