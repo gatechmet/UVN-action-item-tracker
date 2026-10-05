@@ -1497,6 +1497,7 @@ function grid(id,cols,get,opts2={}){
   </tbody></table></div>`}
 function inputs(){
   const d=D(),cv=curve(),keys=fcKeys(),mdl=model();
+  const isEmpty=!mdl.hasAop&&!keys.length&&!mdl.CLOSED;
   if(!fcPick||!fcPick.startsWith(fyr+'-'))fcPick=keys[keys.length-1]||keyOf(Math.max(1,mdl.CLOSED));
   const fv=vOf(fcPick),closedQ=ci=>(ci+1)*3<=Math.min(fv,mdl.CLOSED);
   const fcOpts=MONS.slice(1).map((m,i)=>{const k=keyOf(i+1);return `<option value="${k}" ${k===fcPick?'selected':''}>${m} ${fyr} forecast${keys.includes(k)?' ✓':''}</option>`}).join('');
@@ -1519,8 +1520,8 @@ function inputs(){
     <div class="fx-row"><label class="ctl">Table${seg('fx-imp',[['aop','AOP'],['fc','Forecasts'],['act','Actuals']],impKind)}</label></div>
     <textarea id="fx-paste" rows="5" placeholder="Paste here" ${canWrite?'':'disabled'}></textarea>
     <div class="fx-row"><button type="button" class="btn primary" id="fx-import" ${canWrite?'':'disabled'}>Import into ${fyr}</button><span id="fx-impmsg" role="status" class="how"></span></div></section>
-  <section class="fx-card"><header><h2>Testing</h2><span class="ask">For trying the dashboards before real numbers arrive. Clearly made-up figures.</span></header>
-    <div class="fx-row">${canWrite?`<button type="button" class="btn" id="fx-sample">Load sample data into ${fyr}</button><button type="button" class="btn" id="fx-clear">Clear ${fyr}</button>`:''}<span id="fx-testmsg" class="how"></span></div></section>
+  ${canWrite&&(isEmpty||d.sample)?`<section class="fx-card"><header><h2>Testing</h2><span class="ask">${d.sample?`${fyr} holds made-up sample data. Clear it before entering real numbers.`:`For trying the dashboards before real numbers arrive. Only offered while ${fyr} is empty.`}</span></header>
+    <div class="fx-row">${d.sample?`<button type="button" class="btn" id="fx-clear">Clear the sample data</button>`:`<button type="button" class="btn" id="fx-sample">Load sample data into ${fyr}</button>`}</div></section>`:''}
   </div>`}
 let impKind='fc';
 
@@ -1566,7 +1567,7 @@ function sample(){
   const QPH={bookings:[.22,.24,.25,.29],revenue:[.23,.25,.25,.27]},DR={NA:-.05,EMEA:-.06,China:-.11,LATAM:-.13,Japan:.06,SEA:.09,ANZ:.03,India:.12,Korea:-.03,ROW:-.02};
   const SD={NA:1,EMEA:2.4,China:3.1,LATAM:4.7,Japan:5.2,SEA:6.6,ANZ:7.3,India:8.9,Korea:9.5,ROW:10.3},DM={bookings:1,revenue:.6},CL=9,cv=DEF_CURVE;
   const damp=(m,f)=>1+(f-1)*DM[m],aF=(r,i)=>1+DR[r]*(.35+.65*i/8)+.035*Math.sin(i*1.9+SD[r]),qs=a=>[0,1,2,3].map(q=>r3(a[q*3]+a[q*3+1]+a[q*3+2]));
-  const out={year:fyr,curve:cv,aop:{},act:{},fc:{}};
+  const out={year:fyr,sample:true,curve:cv,aop:{},act:{},fc:{}};
   for(const m of METS){out.aop[m]={};out.act[m]={};
     for(const r of LEAF){const aq=QPH[m].map(p=>r3(FYS[m][r]*p));out.aop[m][r]=aq;const am=MONS.map((_,i)=>aq[Math.floor(i/3)]*cv[i%3]);
       const act=am.map((x,i)=>i<CL?r3(x*damp(m,aF(r,i))):null);out.act[m][r]=act;
@@ -1595,8 +1596,8 @@ document.addEventListener('click',e=>{
   if(del){if(armed!==del.id){armed=del.id;const t=del.textContent;del.textContent='Click again to confirm';setTimeout(()=>{if(armed===del.id){armed=null;del.textContent=t}},3000);return}armed=null;
     const d=cur();
     if(del.id==='fx-fcdel'){if(d.fc)delete d.fc[fcPick];queue('fc')}
-    if(del.id==='fx-clear'){['curve','aop','act','fc'].forEach(f=>{d[f]=null;queue(f)})}
-    if(del.id==='fx-sample'){Object.assign(d,sample());['curve','aop','act','fc'].forEach(queue)}
+    if(del.id==='fx-clear'){['curve','aop','act','fc','sample'].forEach(f=>{d[f]=null;queue(f)})}
+    if(del.id==='fx-sample'){Object.assign(d,sample());['curve','aop','act','fc','sample'].forEach(queue)}
     flush();fcPick='';return render()}
 });
 document.addEventListener('change',e=>{
