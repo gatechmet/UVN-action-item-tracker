@@ -118,6 +118,18 @@ button{font:inherit;cursor:pointer}
 #fx .fx-curve input{width:70px;text-align:right;font-family:var(--f-mono)}
 #fx .ok{color:var(--on);font-weight:500}#fx .bad{color:var(--off);font-weight:600}
 #fx textarea{font:12px var(--f-mono)}
+#fx .fx-sub{font:600 13px var(--f-disp);margin:8px 0 0;color:var(--ink)}
+#fx .fx-hatch{background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 5px);border:1px solid var(--muted)}
+#fx .fx-flags{border:1px solid var(--off);background:var(--off-bg);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--ink)}
+#fx .fx-flags b{color:var(--off)}#fx .fx-flags ul{margin:4px 0 0;padding-left:18px}
+#fx table.fx-segtab{border-collapse:collapse;min-width:560px;font-size:12px}
+#fx table.fx-segtab td{text-align:right;padding:6px 10px;border-bottom:1px solid var(--soft);font:500 12px var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+#fx table.fx-segtab th{font:500 11px var(--f-body);color:var(--muted);text-transform:none;letter-spacing:.03em;text-align:left;border-bottom:1px solid var(--line)}
+#fx table.fx-segtab td.dn{color:var(--down)}#fx table.fx-segtab td.upc{color:var(--up)}
+#fx table.fx-segtab th{padding:6px 10px}#fx table.fx-segtab th.c{text-align:right}
+#fx table.fx-segtab tr.tot td,#fx table.fx-segtab tr.tot th{font-weight:600;border-top:2px solid var(--line);color:var(--ink)}
+#fx table.fx-segtab tbody th{color:var(--ink);font:500 12px var(--f-body)}
+#fx .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:8px}
 .gsum{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
 .gsum .bar{width:220px;height:10px}
 .gsum .gm{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}.gsum .gm b{color:var(--ink);font-weight:600}
@@ -1277,11 +1289,17 @@ const LEAF=['NA','EMEA','China','Japan','SEA','ANZ','India','Korea','LATAM','ROW
 const REG={NA:'NA',EMEA:'EMEA',China:'China',LATAM:'LATAM',ROW:'ROW',Japan:'APJ',SEA:'APJ',ANZ:'APJ',India:'APJ',Korea:'APJ'};
 const METS=['bookings','revenue'],MLAB={bookings:'Bookings',revenue:'Revenue'};
 const ROWS=METS.flatMap(m=>LEAF.map(c=>({m,c,r:REG[c]})));
+/* Global segment split (no regions). Stored in the same year file under 'seg':
+   seg.aop[metric][segment]=[Q1..Q4], seg.fc[metric][segment]=[Q1..Q4] (latest outlook only), seg.act[metric][segment]=[Jan..Dec] */
+const SEGS=[['core','Core','--s1'],['micro','Micro','--s2'],['svc','Service','--s3']];
+const SROWS=METS.flatMap(m=>SEGS.map(([s,l])=>({m,s,l})));
+const gridRows=g=>g.startsWith('g-s')?SROWS:ROWS;
+const isMonthly=g=>g==='g-act'||g==='g-sact';
 const DEF_CURVE=[.25,.30,.45];
 const kidsOf=r=>r==='APJ'?APJC:[r];
 let docs={},fyr=new Date().getFullYear(),charts=[];
 let metric='bookings',selTop=new Set(TOPR),selSub=new Set(APJC),hmUnit='pct',expAPJ=false,lead=0,b2bMode='m',fcPick='';
-const per={walk:'fy',gap:'fy'};
+const per={walk:'fy',gap:'fy',seg:'m'};
 try{const p=JSON.parse(sessionStorage.getItem('uvnn-fx')||'{}');if(p.metric)metric=p.metric;if(p.per)Object.assign(per,p.per);if(p.hmUnit)hmUnit=p.hmUnit;if(p.b2bMode)b2bMode=p.b2bMode;if(p.lead!=null)lead=p.lead;if(p.fyr)fyr=p.fyr}catch{}
 const saveP=()=>{try{sessionStorage.setItem('uvnn-fx',JSON.stringify({metric,per,hmUnit,b2bMode,lead,fyr}))}catch{}};
 const r3=x=>Math.round(x*1000)/1000;
@@ -1313,6 +1331,35 @@ function model(){
     return out}
   return {VERS,CLOSED,LATEST,hasAop,aop,actual,version}}
 let M=null;
+function segModel(){
+  const d=D(),S=d.seg||{},cv=curve();let SCL=0;
+  for(const m of METS)for(const [s] of SEGS)(S.act?.[m]?.[s]||[]).forEach((x,i)=>{if(x!=null&&x!=='')SCL=Math.max(SCL,i+1)});
+  const has=['aop','act','fc'].some(k=>METS.some(m=>SEGS.some(([s])=>(S[k]?.[m]?.[s]||[]).some(x=>x!=null))));
+  const aop=(m,s)=>(S.aop?.[m]?.[s]||[null,null,null,null]).flatMap(q=>cv.map(w=>q==null?null:r3(q*w)));
+  const act=(m,s)=>MONS.map((_,i)=>i<SCL?(S.act?.[m]?.[s]?.[i]??0):null);
+  /* forecast for open months only: the quarter outlook minus actuals so far, spread over the open months by the curve */
+  function fc(m,s){const Q=S.fc?.[m]?.[s]||[],a=act(m,s),out=Array(12).fill(null);
+    for(let q=0;q<4;q++){const ms=[0,1,2].map(k=>q*3+k),open=ms.filter(i=>i>=SCL);if(!open.length||Q[q]==null)continue;
+      const done=ms.filter(i=>i<SCL).reduce((t,i)=>t+(a[i]||0),0),w=open.reduce((t,i)=>t+cv[i%3],0);
+      open.forEach(i=>out[i]=r3((Q[q]-done)*cv[i%3]/w))}
+    return out}
+  const hasAop=METS.some(m=>SEGS.some(([s])=>(S.aop?.[m]?.[s]||[]).some(x=>x!=null)));
+  return {S,SCL,has,hasAop,aop,act,fc}}
+/* Segments should add up to the regional data: compare actual months, open-quarter outlook and AOP quarters. */
+function segFlags(){
+  const G=segModel(),d=D(),out=[];if(!G.has)return out;
+  const regA=(m,i)=>LEAF.reduce((t,c)=>t+(d.act?.[m]?.[c]?.[i]??0),0),regHasA=(m,i)=>LEAF.some(c=>d.act?.[m]?.[c]?.[i]!=null);
+  const key=fcKeys().pop(),tol=x=>Math.max(.005,Math.abs(x)*.005);
+  const cmp=(label,a,b)=>{if(Math.abs(a-b)>tol(b))out.push(`${label}: segments ${money(a)} vs regions ${money(b)} (${smoney(a-b)})`)};
+  for(const m of METS){
+    for(let i=0;i<G.SCL;i++){if(!regHasA(m,i))continue;cmp(`${MLAB[m]} · ${MONS[i]} actual`,SEGS.reduce((t,[s])=>t+(G.S.act?.[m]?.[s]?.[i]??0),0),regA(m,i))}
+    for(let q=0;q<4;q++){
+      const sq=SEGS.map(([s])=>G.S.fc?.[m]?.[s]?.[q]),rq=key?LEAF.map(c=>d.fc?.[key]?.[m]?.[c]?.[q]):[];
+      if(sq.some(x=>x!=null)&&rq.some(x=>x!=null))cmp(`${MLAB[m]} · Q${q+1} outlook vs ${MONS[vOf(key)]} forecast`,sum(sq),sum(rq));
+      const sa=SEGS.map(([s])=>G.S.aop?.[m]?.[s]?.[q]),ra=LEAF.map(c=>d.aop?.[m]?.[c]?.[q]);
+      if(sa.some(x=>x!=null)&&ra.some(x=>x!=null))cmp(`${MLAB[m]} · Q${q+1} AOP`,sum(sa),sum(ra))}}
+  return out}
+const flagList=f=>f.length?`<div class="fx-flags" role="status"><b>⚑ ${f.length} mismatch${f.length>1?'es':''} with the regional data</b><ul>${f.slice(0,8).map(x=>`<li>${x}</li>`).join('')}${f.length>8?`<li>…and ${f.length-8} more</li>`:''}</ul></div>`:'';
 const leaves=()=>[...selTop].flatMap(r=>r==='APJ'?[...selSub]:[r]);
 const agg=(f,L=leaves())=>MONS.map((_,i)=>{const vals=L.map(r=>f(r)[i]);return vals.some(x=>x==null)?null:sum(vals)});
 const vName=v=>v===0?'AOP':`${MONS[v]} forecast`,vShort=v=>v===0?'AOP':MONS[v];
@@ -1352,10 +1399,11 @@ function dashboard(){
   </div>
   ${card('fx-acc','6 · Forecast accuracy','For each closed quarter: how far the quarter forecast was from the actual. Red means the forecast was too high.',seg('fx-lead',[[0,'At quarter start'],[1,'1 month before'],[3,'3 months before']],lead),'<div class="tblwrap"><table class="fx-hm" id="fx-acc"></table></div><div class="scale"><span>Forecast too high</span><i></i><span>Forecast too low</span><span>· Avg miss ignores direction. Bias keeps it: negative means the forecast runs high.</span></div>')}
   ${card('fx-b2b','7 · Book-to-bill','Bookings divided by revenue. Above 1.0, backlog is building; below 1.0, it is draining. Uses both metrics.',seg('fx-b2bm',[['m','Monthly'],['q','Quarterly']],b2bMode),`<div class="key"><span><i class="a"></i>Actual</span><span><i class="f"></i>Forecast (${L})</span><span><i class="p"></i>AOP</span></div><div class="cv"><canvas id="fx-ch-b2b" role="img" aria-label="Book-to-bill ratio"></canvas></div>`)}
+  ${card('fx-seg','8 · Core / Micro / Service','',seg('fx-segv',[['m','Monthly'],['q','Quarterly'],['y','Full year']],per.seg),`<div id="fx-seg-body"></div>`)}
   </div>`;
   tiles();heat();accuracy();
   if(typeof Chart==='undefined'){document.querySelectorAll('#fx .cv').forEach(e=>e.textContent='The charting library didn’t load. Check your connection and reload.');return}
-  walk();gapChart();runRate();bridge();b2b()}
+  walk();gapChart();runRate();bridge();b2b();segCard()}
 
 function tiles(){
   const prev=M.VERS.length>1?M.VERS[M.VERS.length-2]:0;
@@ -1486,18 +1534,66 @@ function b2b(){
     options:opts({plugins:{legend:{display:false},tooltip:{filter:t=>t.parsed.y!=null&&!(t.datasetIndex===1&&t.dataIndex===lastClosed),callbacks:{label:t=>`${t.dataset.label}: ${t.parsed.y.toFixed(2)}`}}},
       scales:{x:axis({grid:{display:false}}),y:axis({min:Math.floor((lo-.05)*20)/20,max:Math.ceil((hi+.05)*20)/20,ticks:{color:T('--muted'),font:{size:11},callback:v=>(+v).toFixed(2)},grid:{color:c=>Math.abs(c.tick.value-1)<1e-9?T('--aop'):T('--soft'),lineWidth:c=>Math.abs(c.tick.value-1)<1e-9?1.5:1}})}})}))}
 
+/* ---------- 8: segment split (global) ---------- */
+function hatch(color){const c=document.createElement('canvas');c.width=c.height=8;const x=c.getContext('2d');
+  x.fillStyle=color+'40';x.fillRect(0,0,8,8);x.strokeStyle=color;x.lineWidth=1.6;x.beginPath();x.moveTo(-2,10);x.lineTo(10,-2);x.moveTo(6,10);x.lineTo(10,6);x.moveTo(-2,2);x.lineTo(2,-2);x.stroke();
+  return x.createPattern(c,'repeat')}
+const short=v=>Math.abs(v)<1?v.toFixed(2):v.toFixed(1);
+/* value inside each stacked piece when it fits, total above the stack (and above the AOP tick) */
+const segLabels={id:'fxSegLabels',afterDatasetsDraw(c){const ctx=c.ctx,n=c.data.labels.length;ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
+  const fs=c.width/n<60?9:11;ctx.font=`600 ${fs}px ${MONO}`;
+  c.data.datasets.forEach((d,i)=>{if(!d._seg)return;const meta=c.getDatasetMeta(i);meta.data.forEach((el,k)=>{const v=d.data[k];if(!v)return;
+    const h=Math.abs(el.base-el.y),w=el.width,txt=short(v);if(h<fs+4||ctx.measureText(txt).width+6>w)return;const y=(el.y+el.base)/2;
+    if(d._fc){const tw=ctx.measureText(txt).width+8;ctx.fillStyle=T('--panel');ctx.globalAlpha=.85;ctx.fillRect(el.x-tw/2,y-fs/2-2,tw,fs+4);ctx.globalAlpha=1;ctx.fillStyle=T('--ink')}else ctx.fillStyle='#fff';
+    ctx.fillText(txt,el.x,y)})});
+  ctx.textBaseline='alphabetic';ctx.font=`600 ${fs+1}px ${MONO}`;ctx.fillStyle=T('--ink');const aopD=c.data.datasets.find(d=>d._aop);
+  for(let k=0;k<n;k++){let top=Infinity,x=null,tot=0;c.data.datasets.forEach((d,i)=>{if(!d._seg||!d.data[k])return;tot+=d.data[k];const el=c.getDatasetMeta(i).data[k];top=Math.min(top,el.y,el.base);x=el.x});
+    if(aopD&&aopD.data[k]!=null)top=Math.min(top,c.scales.y.getPixelForValue(aopD.data[k]));if(x!=null)ctx.fillText(money(tot),x,top-8)}
+  ctx.restore()}};
+function segCard(){
+  const G=segModel(),body=q$('#fx-seg-body');if(!body)return;
+  if(!G.has){q$('#fx-seg-ask').textContent='Global bookings and revenue by segment. Ignores the region filter.';body.innerHTML=`<div class="empty">No segment numbers for ${fyr} yet. Add them under <button type="button" class="btn" data-tab="finput">Forecasting › Inputs</button> in the Segments section.</div>`;return}
+  const m=metric,v=per.seg,last=G.SCL?MONS[G.SCL-1]:null;
+  q$('#fx-seg-ask').textContent=(v==='m'?`Monthly, global. ${last?`Jan to ${last} are actuals; later months are the current outlook.`:'No actuals yet: all months are the current outlook.'}`:v==='q'?'By quarter. A quarter still open stacks its closed months (solid) under its open months (hatched).':'Full year by segment: actuals to date (solid) plus the outlook for months still open (hatched), each against its AOP.')+' Ignores the region filter.';
+  const all=[...Array(12).keys()],B=v==='m'?MONS.map((x,i)=>[x,[i]]):v==='q'?[0,1,2,3].map(q=>['Q'+(q+1),[q*3,q*3+1,q*3+2]]):null;
+  const ps=(arr,ms)=>ms.reduce((t,i)=>t+(arr[i]||0),0),ds=[];let labels,aopV;
+  if(B){labels=B.map(b=>b[0]);
+    for(const [s,name,tk] of SEGS){const col=T(tk),A=G.act(m,s),F=G.fc(m,s);
+      ds.push({label:`${name} · actual`,data:B.map(([,ms])=>ps(A,ms)||null),backgroundColor:col,stack:'s',_seg:1,borderWidth:{top:2},borderColor:T('--panel'),borderSkipped:false,maxBarThickness:v==='q'?90:46});
+      ds.push({label:`${name} · outlook`,data:B.map(([,ms])=>ps(F,ms)||null),backgroundColor:hatch(col),stack:'s',_seg:1,_fc:1,borderWidth:{top:2},borderColor:T('--panel'),borderSkipped:false,maxBarThickness:v==='q'?90:46})}
+    aopV=G.hasAop?B.map(([,ms])=>SEGS.reduce((t,[s])=>t+ps(G.aop(m,s),ms),0)):null}
+  else{labels=SEGS.map(x=>x[1]);const cols=SEGS.map(x=>T(x[2]));
+    ds.push({label:'Actual to date',data:SEGS.map(([s])=>ps(G.act(m,s),all)||null),backgroundColor:cols,stack:'s',_seg:1,borderWidth:{top:2},borderColor:T('--panel'),borderSkipped:false,maxBarThickness:90});
+    ds.push({label:'Outlook, rest of year',data:SEGS.map(([s])=>ps(G.fc(m,s),all)||null),backgroundColor:cols.map(hatch),stack:'s',_seg:1,_fc:1,borderWidth:{top:2},borderColor:T('--panel'),borderSkipped:false,maxBarThickness:90});
+    aopV=G.hasAop?SEGS.map(([s])=>ps(G.aop(m,s),all)):null}
+  if(aopV){const rad=v==='m'?14:v==='q'?36:44;ds.push({type:'line',label:'AOP',data:aopV,showLine:false,pointStyle:'line',pointRadius:rad,pointHoverRadius:rad,pointBorderWidth:3,borderColor:T('--aop'),order:-1,_aop:1})}
+  const f=segFlags();
+  body.innerHTML=`<div class="key"><span><i class="bx" style="background:var(--s1)"></i>Core</span><span><i class="bx" style="background:var(--s2)"></i>Micro</span><span><i class="bx" style="background:var(--s3)"></i>Service</span><span><i class="bx" style="background:var(--muted)"></i>Actual</span><span><i class="bx fx-hatch"></i>Current outlook</span>${G.hasAop?'<span><i class="t"></i>AOP</span>':''}</div>
+    <div class="cv tall"><canvas id="fx-ch-seg" role="img" aria-label="${MLAB[m]} by segment, actual and outlook"></canvas></div><div class="tblwrap"><table class="fx-segtab" id="fx-segtab"></table></div>${flagList(f)}`;
+  charts.push(new Chart(q$('#fx-ch-seg'),{type:'bar',data:{labels,datasets:ds},options:opts({layout:{padding:{top:24}},
+    plugins:{legend:{display:false},tooltip:{filter:t=>t.parsed.y!=null&&t.parsed.y!==0,callbacks:{label:t=>`${t.dataset.label}: ${money(t.parsed.y)}`,
+      footer:it=>{const k=it[0].dataIndex,tot=ds.filter(d=>d._seg).reduce((s,d)=>s+(d.data[k]||0),0);return `Total ${money(tot)}${aopV?` · AOP ${money(aopV[k])} (${smoney(tot-aopV[k])})`:''}`}}}},
+    scales:{x:axis({stacked:true,grid:{display:false}}),y:yMoney({stacked:true,beginAtZero:true})}}),plugins:[segLabels,{id:'fxSegDiv',afterDraw(c){if(v!=='m'||!G.SCL||G.SCL>=12)return;
+      const x=(c.scales.x.getPixelForValue(G.SCL-1)+c.scales.x.getPixelForValue(G.SCL))/2,{top,bottom}=c.chartArea,ctx=c.ctx;ctx.save();ctx.strokeStyle=T('--muted');ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();ctx.setLineDash([]);
+      ctx.font=`500 11px ${MONO}`;ctx.fillStyle=T('--muted');ctx.textAlign='right';ctx.fillText('Actuals',x-6,top+10);ctx.textAlign='left';ctx.fillText('Outlook',x+6,top+10);ctx.restore()}}]}));
+  const rows=SEGS.map(([s,name,tk])=>{const a=ps(G.act(m,s),all),o=ps(G.fc(m,s),all),p=ps(G.aop(m,s),all);return {name,tk,a,o,y:a+o,p}});
+  const T0={name:'Total',a:sum(rows.map(x=>x.a)),o:sum(rows.map(x=>x.o)),y:sum(rows.map(x=>x.y)),p:sum(rows.map(x=>x.p))};
+  const tr=x=>`<tr class="${x.tk?'':'tot'}"><th>${x.tk?`<i class="sw" style="background:var(${x.tk})"></i>`:''}${x.name}</th><td>${money(x.a)}</td><td>${money(x.o)}</td><td>${money(x.y)}</td><td>${T0.y?Math.round(x.y/T0.y*100)+'%':'–'}</td><td>${G.hasAop?money(x.p):'–'}</td><td class="${x.y<x.p?'dn':'upc'}">${G.hasAop&&x.p?pct((x.y-x.p)/Math.abs(x.p)*100):'–'}</td></tr>`;
+  q$('#fx-segtab').innerHTML=`<thead><tr><th>Segment</th><th class="c">Actual${last?' Jan–'+last:''}</th><th class="c">Outlook${G.SCL<12?' '+MONS[G.SCL]+'–Dec':''}</th><th class="c">Full year</th><th class="c">Mix</th><th class="c">AOP</th><th class="c">vs AOP</th></tr></thead><tbody>${rows.map(tr).join('')}${tr(T0)}</tbody>`}
+
 /* ================= INPUTS ================= */
 const fmtIn=v=>v==null||v===''?'':String(Math.round(v*1000)/1000);
 const ro=()=>canWrite?'':'readonly';
 const rowLabel=x=>`<th class="st">${x.r}</th><th class="st">${x.c}</th><th class="st">${MLAB[x.m]}</th>`;
 function grid(id,cols,get,opts2={}){
-  return `<div class="tblwrap"><table class="fx-in" id="${id}"><thead><tr><th>Region</th><th>Country</th><th>Metric</th>${cols.map(c=>`<th class="n">${c}</th>`).join('')}<th class="n">${opts2.total||'Full year'}</th></tr></thead><tbody>
-  ${ROWS.map((x,ri)=>`<tr class="${ri===LEAF.length?'mfirst':''}">${rowLabel(x)}${cols.map((c,ci)=>{const v=get(x,ci),dim=opts2.dim?.(ci);
-    return `<td class="${dim?'dim':''}"><input data-g="${id}" data-r="${ri}" data-c="${ci}" value="${fmtIn(v)}" ${ro()} inputmode="decimal" aria-label="${x.c} ${MLAB[x.m]} ${c}" ${dim?'placeholder="actual"':''}></td>`}).join('')}<td class="tot" id="${id}-t${ri}">${money(sum(cols.map((c,ci)=>opts2.totVal?opts2.totVal(x,ci):get(x,ci))))}</td></tr>`).join('')}
+  const rows=gridRows(id),segG=rows===SROWS,lab=x=>segG?`<th class="st">${x.l}</th><th class="st">${MLAB[x.m]}</th>`:rowLabel(x);
+  return `<div class="tblwrap"><table class="fx-in" id="${id}"><thead><tr>${segG?'<th>Segment</th>':'<th>Region</th><th>Country</th>'}<th>Metric</th>${cols.map(c=>`<th class="n">${c}</th>`).join('')}<th class="n">${opts2.total||'Full year'}</th></tr></thead><tbody>
+  ${rows.map((x,ri)=>`<tr class="${ri===rows.length/2?'mfirst':''}">${lab(x)}${cols.map((c,ci)=>{const v=get(x,ci),dim=opts2.dim?.(ci);
+    return `<td class="${dim?'dim':''}"><input data-g="${id}" data-r="${ri}" data-c="${ci}" value="${fmtIn(v)}" ${ro()} inputmode="decimal" aria-label="${segG?x.l:x.c} ${MLAB[x.m]} ${c}" ${dim?'placeholder="actual"':''}></td>`}).join('')}<td class="tot" id="${id}-t${ri}">${money(sum(cols.map((c,ci)=>opts2.totVal?opts2.totVal(x,ci):get(x,ci))))}</td></tr>`).join('')}
   </tbody></table></div>`}
 function inputs(){
   const d=D(),cv=curve(),keys=fcKeys(),mdl=model();
-  const isEmpty=!mdl.hasAop&&!keys.length&&!mdl.CLOSED;
+  const isEmpty=!mdl.hasAop&&!keys.length&&!mdl.CLOSED&&!segModel().has;
   if(!fcPick||!fcPick.startsWith(fyr+'-'))fcPick=keys[keys.length-1]||keyOf(Math.max(1,mdl.CLOSED));
   const fv=vOf(fcPick),closedQ=ci=>(ci+1)*3<=Math.min(fv,mdl.CLOSED);
   const fcOpts=MONS.slice(1).map((m,i)=>{const k=keyOf(i+1);return `<option value="${k}" ${k===fcPick?'selected':''}>${m} ${fyr} forecast${keys.includes(k)?' ✓':''}</option>`}).join('');
@@ -1516,14 +1612,22 @@ function inputs(){
     ${grid('g-fc',['Q1','Q2','Q3','Q4'],(x,ci)=>d.fc?.[fcPick]?.[x.m]?.[x.c]?.[ci],{dim:closedQ,totVal:(x,ci)=>{const v=d.fc?.[fcPick]?.[x.m]?.[x.c]?.[ci];if(v!=null)return v;if(!closedQ(ci))return 0;const a=d.act?.[x.m]?.[x.c]||[];return (a[ci*3]||0)+(a[ci*3+1]||0)+(a[ci*3+2]||0)}})}</section>
   <section class="fx-card"><header><h2>Actuals</h2><span class="ask">One number per month when it closes, including finance adjustments. The latest month with any actual counts as closed.</span></header>
     ${grid('g-act',MONS,(x,ci)=>d.act?.[x.m]?.[x.c]?.[ci],{total:'YTD'})}</section>
-  <section class="fx-card"><header><h2>Paste a whole table</h2><span class="ask">Copy a tab from the Excel template, header row included or not, and paste it here. Rows are matched by country and metric.</span></header>
-    <div class="fx-row"><label class="ctl">Table${seg('fx-imp',[['aop','AOP'],['fc','Forecasts'],['act','Actuals']],impKind)}</label></div>
+  <section class="fx-card"><header><h2>Segments (global)</h2><span class="ask">Core, Micro and Service for the whole company, no regions. They should add up to the regional numbers above; mismatches are flagged here and on the dashboard.</span></header>
+    ${flagList(segFlags())}
+    <h3 class="fx-sub">AOP · quarter totals</h3>
+    ${grid('g-saop',['Q1','Q2','Q3','Q4'],(x,ci)=>d.seg?.aop?.[x.m]?.[x.s]?.[ci])}
+    <h3 class="fx-sub">Current outlook · quarter totals</h3><p class="how">Only the latest outlook is kept: update it in place each month. Leave closed quarters blank; for the quarter you are in, type the whole quarter.</p>
+    ${grid('g-sfc',['Q1','Q2','Q3','Q4'],(x,ci)=>d.seg?.fc?.[x.m]?.[x.s]?.[ci],{dim:ci=>(ci+1)*3<=segModel().SCL,totVal:(x,ci)=>{const q=d.seg?.fc?.[x.m]?.[x.s]?.[ci];if(q!=null)return q;const a=d.seg?.act?.[x.m]?.[x.s]||[];return (ci+1)*3<=segModel().SCL?(a[ci*3]||0)+(a[ci*3+1]||0)+(a[ci*3+2]||0):0}})}
+    <h3 class="fx-sub">Actuals · monthly</h3><p class="how">When a month's actual is entered it replaces that month's outlook on the dashboard.</p>
+    ${grid('g-sact',MONS,(x,ci)=>d.seg?.act?.[x.m]?.[x.s]?.[ci],{total:'YTD'})}</section>
+  <section class="fx-card"><header><h2>Paste a whole table</h2><span class="ask">Copy a tab from the Excel template, header row included or not, and paste it here. Rows are matched by country and metric. Segment tables are Segment, Metric, then the quarters or months.</span></header>
+    <div class="fx-row"><label class="ctl">Table${seg('fx-imp',[['aop','AOP'],['fc','Forecasts'],['act','Actuals'],['saop','Segments: AOP'],['sfc','Segments: outlook'],['sact','Segments: actuals']],impKind)}</label></div>
     <textarea id="fx-paste" rows="5" placeholder="Paste here" ${canWrite?'':'disabled'}></textarea>
-    <div class="fx-row"><button type="button" class="btn primary" id="fx-import" ${canWrite?'':'disabled'}>Import into ${fyr}</button><span id="fx-impmsg" role="status" class="how"></span></div></section>
+    <div class="fx-row"><button type="button" class="btn primary" id="fx-import" ${canWrite?'':'disabled'}>Import into ${fyr}</button><span id="fx-impmsg" role="status" class="how">${impMsg}</span></div></section>
   ${canWrite&&(isEmpty||d.sample)?`<section class="fx-card"><header><h2>Testing</h2><span class="ask">${d.sample?`${fyr} holds made-up sample data. Clear it before entering real numbers.`:`For trying the dashboards before real numbers arrive. Only offered while ${fyr} is empty.`}</span></header>
     <div class="fx-row">${d.sample?`<button type="button" class="btn" id="fx-clear">Clear the sample data</button>`:`<button type="button" class="btn" id="fx-sample">Load sample data into ${fyr}</button>`}</div></section>`:''}
   </div>`}
-let impKind='fc';
+let impKind='fc',impMsg='';
 
 /* ---------- saving ---------- */
 const pend={};let tmr=null;
@@ -1535,19 +1639,28 @@ async function flush(){
   try{const ref=db.collection('forecast').doc(String(fyr)),ex=await ref.get();if(ex.exists)await ref.update(patch);else await ref.set({year:fyr,...patch});toast('Saved')}
   catch(e){toast(e?.code==='quota_exceeded'?'Storage is full.':'Couldn’t save the forecast inputs. Check your access.')}}
 const num=s=>{const v=parseNum(s);return v==null?null:r3(v)};
-function setCell(g,ri,ci,v){const x=ROWS[ri],d=cur();
+function setCell(g,ri,ci,v){const x=gridRows(g)[ri],d=cur();
   if(g==='g-aop'){((d.aop??={})[x.m]??={})[x.c]??=[null,null,null,null];d.aop[x.m][x.c][ci]=v;queue('aop')}
   if(g==='g-fc'){(((d.fc??={})[fcPick]??={})[x.m]??={})[x.c]??=[null,null,null,null];d.fc[fcPick][x.m][x.c][ci]=v;queue('fc')}
-  if(g==='g-act'){((d.act??={})[x.m]??={})[x.c]??=Array(12).fill(null);d.act[x.m][x.c][ci]=v;queue('act')}}
-function retotal(g,ri){const el=q$(`#${g}-t${ri}`);if(!el)return;const n=g==='g-act'?12:4;let t=0;
+  if(g==='g-act'){((d.act??={})[x.m]??={})[x.c]??=Array(12).fill(null);d.act[x.m][x.c][ci]=v;queue('act')}
+  if(g.startsWith('g-s')){const y=SROWS[ri],k={'g-saop':'aop','g-sfc':'fc','g-sact':'act'}[g];
+    const arr=(((d.seg??={})[k]??={})[y.m]??={})[y.s]??=Array(k==='act'?12:4).fill(null);arr[ci]=v;queue('seg')}}
+function retotal(g,ri){const el=q$(`#${g}-t${ri}`);if(!el)return;const n=isMonthly(g)?12:4;let t=0;
   for(let ci=0;ci<n;ci++){const i=q$(`[data-g="${g}"][data-r="${ri}"][data-c="${ci}"]`);t+=num(i?.value)||0}el.textContent=money(t)}
 
 /* ---------- paste & import ---------- */
 function parseRows(text){return text.replace(/\r/g,'').split('\n').filter(l=>l.trim()).map(l=>l.split('\t').map(s=>s.trim()))}
 const findRow=(c,m)=>ROWS.findIndex(x=>x.c.toLowerCase()===String(c).toLowerCase()&&MLAB[x.m].toLowerCase()===String(m).toLowerCase());
 function doImport(){
-  const rows=parseRows(q$('#fx-paste').value),msg=q$('#fx-impmsg');if(!rows.length){msg.textContent='Paste a table first.';return}
+  const rows=parseRows(q$('#fx-paste').value),el=q$('#fx-impmsg'),msg={set textContent(t){impMsg=t;el.textContent=t},get textContent(){return impMsg}};if(!rows.length){msg.textContent='Paste a table first.';return}
   let n=0,skipped=[],made=new Set();const d=cur();
+  if(impKind.startsWith('s')){const k={saop:'aop',sfc:'fc',sact:'act'}[impKind],len=k==='act'?12:4;
+    for(const r of rows){const y=SROWS.find(x=>x.l.toLowerCase()===String(r[0]).toLowerCase()&&MLAB[x.m].toLowerCase()===String(r[1]).toLowerCase());
+      if(!y){if(!/^segment$/i.test(r[0]))skipped.push(`${r[0]||'?'} ${r[1]||''}`.trim());continue}
+      const vals=r.slice(2,2+len).map(num);(((d.seg??={})[k]??={})[y.m]??={})[y.s]=[...Array(len).keys()].map(i=>vals[i]??null);n++}
+    if(!n){msg.textContent='No rows matched. Segment tables need Segment and Metric columns first (Core, Micro or Service; Bookings or Revenue).';return}
+    queue('seg');flush();q$('#fx-paste').value='';msg.textContent=`Imported ${n} segment rows.${skipped.length?` Skipped: ${[...new Set(skipped)].slice(0,6).join(', ')}.`:''}`;
+    setTimeout(render,0);return}
   for(const r of rows){let fc=null,o=r;
     if(impKind==='fc'){if(!/^\d{4}-\d{2}$/.test(r[0]))continue;fc=r[0];o=r.slice(1);if(!fc.startsWith(fyr+'-')){skipped.push(fc);continue}}
     const ri=findRow(o[1],o[2]);if(ri<0){if(!/^(region|forecast)$/i.test(r[0]))skipped.push(`${o[1]||'?'} ${o[2]||''}`.trim());continue}
@@ -1559,7 +1672,7 @@ function doImport(){
   if(!n){msg.textContent='No rows matched. Check the table choice and that Country and Metric columns are included.';return}
   queue(impKind);flush();q$('#fx-paste').value='';
   msg.textContent=`Imported ${n} rows${made.size?` across ${made.size} forecast${made.size>1?'s':''}`:''}.${skipped.length?` Skipped: ${[...new Set(skipped)].slice(0,6).join(', ')}.`:''}`;
-  if(made.size)fcPick=[...made].sort().pop();setTimeout(()=>{render();q$('#fx-impmsg')&&(q$('#fx-impmsg').textContent=msg.textContent)},0)}
+  if(made.size)fcPick=[...made].sort().pop();setTimeout(render,0)}
 
 /* ---------- sample data (testing only, made up) ---------- */
 function sample(){
@@ -1573,6 +1686,13 @@ function sample(){
       const act=am.map((x,i)=>i<CL?r3(x*damp(m,aF(r,i))):null);out.act[m][r]=act;
       for(let v=1;v<=CL;v++){const lo=Math.max(0,v-3),f=[...Array(v-lo).keys()].reduce((s,k)=>s+aF(r,lo+k),0)/(v-lo)+.015;
         const Q=qs(am.map((x,i)=>i<v?act[i]:x*damp(m,f))).map((x,q)=>(q+1)*3<=v?null:x);((out.fc[keyOf(v)]??={})[m]??={})[r]=Q}}}
+  /* segments: shares of the regional totals, so they reconcile exactly */
+  const share=i=>{const c=.58+.03*Math.sin(i*1.3),mi=.26-.02*Math.sin(i*1.3+1);return {core:c,micro:mi,svc:1-c-mi}};
+  const qshare={core:.58,micro:.26,svc:.16};out.seg={aop:{},act:{},fc:{}};
+  for(const m of METS){const tA=[0,1,2,3].map(q=>sum(LEAF.map(r=>out.aop[m][r][q]))),tM=MONS.map((_,i)=>i<CL?sum(LEAF.map(r=>out.act[m][r][i])):null);
+    const last=out.fc[keyOf(CL)][m],tF=[0,1,2,3].map(q=>LEAF.some(r=>last[r][q]!=null)?sum(LEAF.map(r=>last[r][q])):null);
+    out.seg.aop[m]={};out.seg.act[m]={};out.seg.fc[m]={};
+    for(const [s] of SEGS){out.seg.aop[m][s]=tA.map(x=>r3(x*qshare[s]));out.seg.act[m][s]=tM.map((x,i)=>x==null?null:x*share(i)[s]);out.seg.fc[m][s]=tF.map(x=>x==null?null:x*qshare[s])}}
   return out}
 
 /* ---------- events ---------- */
@@ -1584,10 +1704,10 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('.seg button');
   if(b){const g=b.parentElement.id,v=b.dataset.v??b.dataset.p;
     const tog=(set,all,v)=>{if(v==='all')return new Set(all);if(set.size===all.length)return new Set([v]);const s=new Set(set);s.has(v)?s.delete(v):s.add(v);return s.size?s:new Set(all)};
-    if(g==='fx-metric')metric=v;if(g==='fx-hmunit')hmUnit=v;if(g==='fx-lead')lead=+v;if(g==='fx-b2bm')b2bMode=v;if(g==='fx-pwalk')per.walk=v;if(g==='fx-pgap')per.gap=v;
+    if(g==='fx-metric')metric=v;if(g==='fx-hmunit')hmUnit=v;if(g==='fx-lead')lead=+v;if(g==='fx-b2bm')b2bMode=v;if(g==='fx-pwalk')per.walk=v;if(g==='fx-pgap')per.gap=v;if(g==='fx-segv')per.seg=v;
     if(g==='fx-region'){selTop=tog(selTop,TOPR,v);if(!(selTop.size===1&&selTop.has('APJ')))selSub=new Set(APJC)}
     if(g==='fx-sub')selSub=tog(selSub,APJC,v);
-    if(g==='fx-imp'){impKind=v;document.querySelectorAll('#fx-imp button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===v));return}
+    if(g==='fx-imp'){impKind=v;impMsg='';q$('#fx-impmsg')&&(q$('#fx-impmsg').textContent='');document.querySelectorAll('#fx-imp button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===v));return}
     saveP();return render()}
   if(e.target.closest('#fx-import'))return doImport();
   if(e.target.closest('#fx-fccopy')){const keys=fcKeys().filter(k=>k<fcPick);const src=keys[keys.length-1];if(!src){toast('No earlier forecast to copy.');return}
@@ -1596,8 +1716,8 @@ document.addEventListener('click',e=>{
   if(del){if(armed!==del.id){armed=del.id;const t=del.textContent;del.textContent='Click again to confirm';setTimeout(()=>{if(armed===del.id){armed=null;del.textContent=t}},3000);return}armed=null;
     const d=cur();
     if(del.id==='fx-fcdel'){if(d.fc)delete d.fc[fcPick];queue('fc')}
-    if(del.id==='fx-clear'){['curve','aop','act','fc','sample'].forEach(f=>{d[f]=null;queue(f)})}
-    if(del.id==='fx-sample'){Object.assign(d,sample());['curve','aop','act','fc','sample'].forEach(queue)}
+    if(del.id==='fx-clear'){['curve','aop','act','fc','seg','sample'].forEach(f=>{d[f]=null;queue(f)})}
+    if(del.id==='fx-sample'){Object.assign(d,sample());['curve','aop','act','fc','seg','sample'].forEach(queue)}
     flush();fcPick='';return render()}
 });
 document.addEventListener('change',e=>{
@@ -1607,8 +1727,8 @@ document.addEventListener('change',e=>{
   const i=e.target.closest('[data-g]');if(i&&canWrite){setCell(i.dataset.g,+i.dataset.r,+i.dataset.c,num(i.value));retotal(i.dataset.g,+i.dataset.r)}});
 document.addEventListener('paste',e=>{const i=e.target.closest('#fx [data-g]');if(!i||!canWrite)return;
   const t=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/[\t\n]/.test(t.replace(/\r?\n$/,'')))return;e.preventDefault();
-  const g=i.dataset.g,r0=+i.dataset.r,c0=+i.dataset.c,n=g==='g-act'?12:4;let cells=0;
-  parseRows(t).forEach((cols,k)=>{const ri=r0+k;if(ri>=ROWS.length)return;cols.forEach((v,j)=>{const ci=c0+j;if(ci>=n)return;const el=q$(`[data-g="${g}"][data-r="${ri}"][data-c="${ci}"]`);if(el){el.value=v;setCell(g,ri,ci,num(v));cells++}});retotal(g,ri)});
+  const g=i.dataset.g,r0=+i.dataset.r,c0=+i.dataset.c,n=isMonthly(g)?12:4;let cells=0;
+  parseRows(t).forEach((cols,k)=>{const ri=r0+k;if(ri>=gridRows(g).length)return;cols.forEach((v,j)=>{const ci=c0+j;if(ci>=n)return;const el=q$(`[data-g="${g}"][data-r="${ri}"][data-c="${ci}"]`);if(el){el.value=v;setCell(g,ri,ci,num(v));cells++}});retotal(g,ri)});
   toast(`Pasted ${cells} cells`)});
 document.addEventListener('keydown',e=>{const i=e.target.closest('#fx [data-g]');if(!i||e.key!=='Enter')return;e.preventDefault();
   q$(`[data-g="${i.dataset.g}"][data-r="${+i.dataset.r+1}"][data-c="${i.dataset.c}"]`)?.focus()});
