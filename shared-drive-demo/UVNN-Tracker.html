@@ -176,6 +176,7 @@ table.bgrid .st.o{min-width:86px}table.bgrid .st.t{min-width:64px}table.bgrid .s
 table.bgrid input{width:52px;border:0;border-radius:0;background:transparent;padding:4px 5px;font:12px var(--f-mono);text-align:right;color:var(--ink)}
 table.bgrid .st input{width:100%;text-align:left;font-family:var(--f-body)}
 table.bgrid input:focus{outline:2px solid var(--accent);outline-offset:-2px;background:var(--panel)}
+td.xl-sel,table.bgrid td.xl-sel{background:color-mix(in srgb,var(--accent) 18%,var(--panel))!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}
 table.bgrid td.act input,table.bgrid td.ytd input{font-weight:600}
 table.bgrid tr.mfirst>*{border-top:2px solid var(--line)}
 .dash{display:grid;gap:18px;margin-top:16px}
@@ -1139,6 +1140,58 @@ function renderPerf(){
   h+='<div class="mgrid">'+MCARDS.map(c=>`<section class="mcard ${c.wide?'wide':''} ${c.small?'small':''}" id="card-${c.id}"></section>`).join('')+'</div>';
   $('#main').innerHTML=h;MCARDS.forEach(drawCard)}
 
+/* ---------- spreadsheet-style editing for input grids ----------
+   Click-drag, Shift+click or Shift+arrows select a block; Ctrl/Cmd+C, X, V copy, cut and paste it as Excel does
+   (tab-separated); Delete clears the block; arrows and Enter move between cells. Each grid registers how to save a cell. */
+const XL=(()=>{
+  const cfgs=[];let sel=null,drag=false,moved=false;
+  const cfgOf=el=>el&&cfgs.find(c=>el.matches?.(c.cell)&&el.closest(c.table));
+  const matrix=t=>[...t.querySelectorAll('tbody tr')].map(tr=>[...tr.querySelectorAll(cfgs.find(c=>t.matches(c.table)).cell)]).filter(r=>r.length);
+  function pos(el){const t=el.closest('table'),m=matrix(t);for(let r=0;r<m.length;r++){const c=m[r].indexOf(el);if(c>=0)return [r,c]}return null}
+  const rect=()=>{const [r1,c1]=sel.a,[r2,c2]=sel.b;return [Math.min(r1,r2),Math.min(c1,c2),Math.max(r1,r2),Math.max(c1,c2)]};
+  const multi=()=>sel&&(sel.a[0]!==sel.b[0]||sel.a[1]!==sel.b[1]);
+  const inSel=()=>{const m=matrix(sel.t),[r1,c1,r2,c2]=rect(),out=[];for(let r=r1;r<=r2;r++){const row=[];for(let c=c1;c<=c2;c++)row.push(m[r]?.[c]);out.push(row)}return out};
+  function paint(){document.querySelectorAll('.xl-sel').forEach(x=>x.classList.remove('xl-sel'));if(!multi())return;inSel().flat().forEach(i=>i?.closest('td')?.classList.add('xl-sel'))}
+  const start=(el,cfg)=>{const p=pos(el);sel={t:el.closest('table'),cfg,a:p,b:p};paint()};
+  const writable=()=>typeof canWrite==='undefined'||canWrite;
+  function write(cells,vals){/* cells: [[input]], vals: [[string]] */let n=0;
+    cells.forEach((row,r)=>row.forEach((el,c)=>{if(!el||el.readOnly)return;const v=vals[r]?.[c];if(v===undefined)return;el.value=v;sel.cfg.write(el,v);n++}));
+    sel.cfg.done?.();return n}
+  document.addEventListener('mousedown',e=>{const el=e.target.closest('input'),cfg=cfgOf(el);if(!cfg){if(!e.target.closest('.xl-keep')){sel=null;paint()}return}
+    if(e.shiftKey&&sel&&sel.t===el.closest('table')){e.preventDefault();sel.b=pos(el);paint();return}
+    start(el,cfg);drag=true;moved=false});
+  document.addEventListener('mouseover',e=>{if(!drag||!sel)return;const el=e.target.closest('input');if(!el||el.closest('table')!==sel.t||!cfgOf(el))return;
+    const p=pos(el);if(p&&(p[0]!==sel.b[0]||p[1]!==sel.b[1])){sel.b=p;moved=true;paint();window.getSelection?.().removeAllRanges()}});
+  document.addEventListener('mouseup',()=>{if(drag&&moved&&sel){const m=matrix(sel.t);m[sel.a[0]]?.[sel.a[1]]?.focus()}drag=false});
+  document.addEventListener('focusin',e=>{const cfg=cfgOf(e.target);if(cfg&&!drag&&!(sel&&multi()&&sel.t===e.target.closest('table')))start(e.target,cfg)});
+  document.addEventListener('keydown',e=>{const el=e.target,cfg=cfgOf(el);if(!cfg||!sel)return;const m=matrix(sel.t),p=pos(el);if(!p)return;
+    const go=(dr,dc)=>{const n=m[p[0]+dr]?.[p[1]+dc];if(n){e.preventDefault();n.focus();n.select?.()}};
+    if(e.shiftKey&&e.key.startsWith('Arrow')){e.preventDefault();const d={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1]}[e.key];
+      const nb=[sel.b[0]+d[0],sel.b[1]+d[1]];if(m[nb[0]]?.[nb[1]]){sel.b=nb;paint()}return}
+    if((e.key==='Delete'||e.key==='Backspace')&&multi()){e.preventDefault();if(!writable())return;const cells=inSel();write(cells,cells.map(r=>r.map(()=>'')));return}
+    if(e.key==='Escape'&&multi()){sel.b=sel.a;paint();return}
+    if(e.key==='Enter'){go(e.shiftKey?-1:1,0);return}
+    if(e.key==='ArrowDown')return go(1,0);if(e.key==='ArrowUp')return go(-1,0);
+    const atStart=el.selectionStart===0&&el.selectionEnd===0,atEnd=el.selectionStart===el.value.length&&el.selectionEnd===el.value.length;
+    if(e.key==='ArrowLeft'&&atStart)return go(0,-1);if(e.key==='ArrowRight'&&atEnd)return go(0,1)});
+  function copyOut(e){const el=e.target,cfg=cfgOf(el);if(!cfg||!sel)return false;
+    if(!multi()&&el.selectionStart!==el.selectionEnd)return false; /* part of one cell's text: let the browser copy it */
+    const tsv=inSel().map(r=>r.map(i=>i?.value??'').join('\t')).join('\r\n');e.clipboardData.setData('text/plain',tsv);e.preventDefault();return true}
+  document.addEventListener('copy',e=>{if(copyOut(e)&&multi())toast('Copied '+inSel().flat().length+' cells')});
+  document.addEventListener('cut',e=>{if(!copyOut(e))return;if(!writable())return;const cells=inSel();write(cells,cells.map(r=>r.map(()=>'')))});
+  document.addEventListener('paste',e=>{const el=e.target,cfg=cfgOf(el);if(!cfg)return;if(!writable()){e.preventDefault();return}
+    const t=(e.clipboardData||window.clipboardData)?.getData('text')||'',rows=parseTSV(t.replace(/\r\n?/g,'\n')).filter(r=>r.some(x=>x.trim()!==''));
+    if(!rows.length)return;
+    const single=rows.length===1&&rows[0].length===1;
+    if(single&&!multi())return; /* one value into one cell: normal typing paste */
+    e.preventDefault();if(!sel||sel.t!==el.closest('table'))start(el,cfg);
+    const m=matrix(sel.t);let r0,c0,cells,vals;
+    if(single){cells=inSel();vals=cells.map(r=>r.map(()=>rows[0][0].trim()))}
+    else{[r0,c0]=multi()?rect():pos(el);cells=rows.map((row,i)=>row.map((_,j)=>m[r0+i]?.[c0+j]));vals=rows.map(r=>r.map(x=>x.trim()));
+      const h=Math.min(rows.length,m.length-r0)-1,w=Math.max(...rows.map(r=>r.length))-1;sel.a=[r0,c0];sel.b=[r0+Math.max(h,0),Math.min(c0+w,(m[r0]?.length||1)-1)];paint()}
+    const n=write(cells,vals);toast(`Pasted ${n} cell${n===1?'':'s'}`)});
+  return {add:c=>cfgs.push(c)}})();
+
 /* ---------- bowler input grid ---------- */
 const ROWS=k=>k==='cas'?[['plan','Plan'],['act','Qtr'],['ytd','YTD']]:[['plan','Plan'],['act','Act']];
 const fmtIn=(k,v)=>v==null?'':(MBY[k].fmt==='usd'||MBY[k].fmt==='score'||MBY[k].fmt==='pct'&&Math.abs(v)<10)?String(+v.toFixed(2)):String(Math.round(v*100)/100);
@@ -1152,7 +1205,7 @@ function renderBowler(force){
     return}
   const wrapOld=$('#main .bgridwrap'),sx=wrapOld?.scrollLeft||0,sy=wrapOld?.scrollTop||0;
   const qhead=[0,1,2,3,4].map(q=>`<th colspan="${q?13:1}" class="q">${q?'Q'+q:'Prior'}</th>`).join('');
-  let h=`<div class="mhead">${yearNav()}<p class="mhelp">Type into any cell, or paste a row of weeks copied from Excel. Numbers save as you go. Enter percentages as plain numbers (20 for 20%) and dollars in millions.</p></div>
+  let h=`<div class="mhead">${yearNav()}<p class="mhelp">Type into any cell, or select a block (drag, or Shift+click) and copy, cut, paste or delete it as in Excel. Pasting a block from Excel fills across weeks and down metrics. Numbers save as you go. Enter percentages as plain numbers (20 for 20%) and dollars in millions.</p></div>
   <details class="bpaste"><summary>Paste the whole bowler from Excel</summary>
     <p class="mhelp">In Excel, copy the bowler from the Quarter row down to the last metric, including the Metric, Owner, Target and Plan/Act columns. Paste it below and click Import. Rows are matched by metric name, and blank cells stay blank.</p>
     <textarea id="b-paste" rows="5" placeholder="Paste here"></textarea>
@@ -1185,11 +1238,7 @@ function setCell(k,r,w,v){const md=(BW[myr]??={year:myr,metrics:{}}).metrics[k]?
 document.addEventListener('change',e=>{
   const c=e.target.closest('.bgrid [data-k]');if(c){setCell(c.dataset.k,c.dataset.r,+c.dataset.w,parseNum(c.value));return}
   const m=e.target.closest('.bgrid [data-meta]');if(m){const k=m.dataset.meta,f=m.dataset.f,v=f==='target'?parseNum(m.value):m.value.trim();((BW[myr]??={year:myr,metrics:{}}).metrics[k]??={})[f]=v;queueWrite(k,{[f]:v})}});
-document.addEventListener('paste',e=>{
-  const c=e.target.closest('.bgrid [data-k]');if(!c)return;const t=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/\t/.test(t))return;
-  e.preventDefault();const vals=t.replace(/\r/g,'').split('\n')[0].split('\t');const k=c.dataset.k,r=c.dataset.r,w0=+c.dataset.w;
-  const md=(BW[myr]??={year:myr,metrics:{}}).metrics[k]??={};const arr=WEEKS.map(i=>md[r]?.[i]??null);
-  vals.forEach((v,j)=>{if(w0+j<NW)arr[w0+j]=parseNum(v)});md[r]=arr;queueWrite(k,{[r]:arr});renderBowler(true);toast(`Pasted ${Math.min(vals.length,NW-w0)} weeks`)});
+XL.add({table:'table.bgrid',cell:'input[data-k]',write:(c,v)=>setCell(c.dataset.k,c.dataset.r,+c.dataset.w,parseNum(v))});
 
 /* Whole-bowler paste: tab-separated text with quoted multi-line labels, as Excel copies it. */
 function parseTSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
@@ -1725,13 +1774,7 @@ document.addEventListener('change',e=>{
   const c=e.target.closest('[data-curve]');if(c){let v=num(c.value);if(v!=null&&v>1)v=r3(v/100);const d=cur();d.curve=[...curve()];d.curve[+c.dataset.curve]=v??0;queue('curve');
     const t=sum(d.curve),el=q$('#fx-curve-tot');el.className=Math.abs(t-1)<1e-6?'ok':'bad';el.textContent=`Total ${Math.round(t*1000)/10}%${Math.abs(t-1)<1e-6?'':' · must be 100%'}`;return}
   const i=e.target.closest('[data-g]');if(i&&canWrite){setCell(i.dataset.g,+i.dataset.r,+i.dataset.c,num(i.value));retotal(i.dataset.g,+i.dataset.r)}});
-document.addEventListener('paste',e=>{const i=e.target.closest('#fx [data-g]');if(!i||!canWrite)return;
-  const t=(e.clipboardData||window.clipboardData)?.getData('text')||'';if(!/[\t\n]/.test(t.replace(/\r?\n$/,'')))return;e.preventDefault();
-  const g=i.dataset.g,r0=+i.dataset.r,c0=+i.dataset.c,n=isMonthly(g)?12:4;let cells=0;
-  parseRows(t).forEach((cols,k)=>{const ri=r0+k;if(ri>=gridRows(g).length)return;cols.forEach((v,j)=>{const ci=c0+j;if(ci>=n)return;const el=q$(`[data-g="${g}"][data-r="${ri}"][data-c="${ci}"]`);if(el){el.value=v;setCell(g,ri,ci,num(v));cells++}});retotal(g,ri)});
-  toast(`Pasted ${cells} cells`)});
-document.addEventListener('keydown',e=>{const i=e.target.closest('#fx [data-g]');if(!i||e.key!=='Enter')return;e.preventDefault();
-  q$(`[data-g="${i.dataset.g}"][data-r="${+i.dataset.r+1}"][data-c="${i.dataset.c}"]`)?.focus()});
+XL.add({table:'#fx table.fx-in',cell:'input[data-g]',write:(i,v)=>{setCell(i.dataset.g,+i.dataset.r,+i.dataset.c,num(v));retotal(i.dataset.g,+i.dataset.r)}});
 
 function render(){destroy();M=model();if(tab==='finput')inputs();else dashboard()}
 function onData(snapDocs){const keep=Object.keys(pend),old=docs[String(fyr)];docs={};snapDocs.forEach(d=>docs[d.id]=d.data());
