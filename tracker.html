@@ -624,13 +624,20 @@ function openPop(btn){
 }
 /* Marking a month Complete completes the action on that date: today for this month (or a future one), the month's last day for a past month. */
 function doneIn(y,m){const end=new Date(y,M.indexOf(m)+1,0,12),now=new Date();return (end<now?end:now).toISOString()}
-const donePatch=(y,m,code)=>code==='complete'?{status:'completed',completedAt:doneIn(y,m)}:{};
-const doneMsg=(a,code)=>code==='complete'?(a.status==='completed'?' · completion date updated':' · action marked Completed'):'';
+/* Un-marking a Complete month reopens a completed action, unless another month is still Complete: then the date moves to the latest one. */
+function lastDone(a,y,m){const all={...(a.monthsY||{}),2026:a.months||{}};let best=null;
+  for(const [yy,mo] of Object.entries(all))for(const [mm,c] of Object.entries(mo||{}))if(c==='complete'&&!(+yy===y&&mm===m)){const k=+yy*12+M.indexOf(mm);if(!best||k>best.k)best={k,y:+yy,m:mm}}
+  return best}
+function donePatch(a,y,m,code){
+  if(code==='complete')return {status:'completed',completedAt:doneIn(y,m)};
+  if(a.status!=='completed'||monthsOf(a,y)[m]!=='complete')return {};
+  const o=lastDone(a,y,m);return o?{completedAt:doneIn(o.y,o.m)}:{status:'open',completedAt:''}}
+const doneMsg=(a,p)=>p.status==='completed'?(a.status==='completed'?' · completion date updated':' · action marked Completed'):p.status==='open'?' · action reopened':p.completedAt?' · completion date updated':'';
 async function pickCode(code){
   if(!popFor)return;const {id,m,y}=popFor;closePop();const a=S.act[id];
-  const patch={...monthsPatch(a,y,{...monthsOf(a,y),[m]:code}),...donePatch(y,m,code),...stamp()};
+  const dp=donePatch(a,y,m,code),patch={...monthsPatch(a,y,{...monthsOf(a,y),[m]:code}),...dp,...stamp()};
   if(M.indexOf(m)===nowIn(y)&&HCODE[code])patch.health=HCODE[code];
-  await write('actions',id,patch,`${m} ${y} set to ${CODES[code]}${doneMsg(a,code)}`);
+  await write('actions',id,patch,`${m} ${y} ${code?'set to '+CODES[code]:'cleared'}${doneMsg(a,dp)}`);
 }
 
 /* ---------- drawer ---------- */
@@ -704,7 +711,7 @@ async function onField(e){
     if(t.id==='d-date'&&t.value!==a.targetDate){
       const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:uid||'',reason:$('#d-reason').value.trim()}];
       await write('actions',a.id,{targetDate:t.value,originalDate:a.originalDate||a.targetDate||t.value,dateHistory:hist,...stamp()},'Target date changed and logged');return}
-    if(t.dataset.month){await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...donePatch(yr,t.dataset.month,t.value),...stamp()},'Saved'+doneMsg(a,t.value));return}
+    if(t.dataset.month){const dp=donePatch(a,yr,t.dataset.month,t.value);await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...dp,...stamp()},'Saved'+doneMsg(a,dp));return}
   }else{
     const col=S.pri[openId]?'priorities':'objectives',it=S.pri[openId]||S.obj[openId];
     if(t.id==='d-name'&&t.value.trim()!==it.name)await write(col,openId,{name:t.value.trim()},'Saved');
