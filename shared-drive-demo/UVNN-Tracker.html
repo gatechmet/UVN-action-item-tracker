@@ -836,11 +836,15 @@ function openPop(btn){
   placePop(el,btn,true);
   (el.querySelector('button.sel')||el.querySelector('button'))?.focus();
 }
+/* Marking a month Complete completes the action on that date: today for this month (or a future one), the month's last day for a past month. */
+function doneIn(y,m){const end=new Date(y,M.indexOf(m)+1,0,12),now=new Date();return (end<now?end:now).toISOString()}
+const donePatch=(y,m,code)=>code==='complete'?{status:'completed',completedAt:doneIn(y,m)}:{};
+const doneMsg=(a,code)=>code==='complete'?(a.status==='completed'?' · completion date updated':' · action marked Completed'):'';
 async function pickCode(code){
   if(!popFor)return;const {id,m,y}=popFor;closePop();const a=S.act[id];
-  const patch={...monthsPatch(a,y,{...monthsOf(a,y),[m]:code}),...stamp()};
+  const patch={...monthsPatch(a,y,{...monthsOf(a,y),[m]:code}),...donePatch(y,m,code),...stamp()};
   if(M.indexOf(m)===nowIn(y)&&HCODE[code])patch.health=HCODE[code];
-  await write('actions',id,patch,`${m} ${y} set to ${CODES[code]}`);
+  await write('actions',id,patch,`${m} ${y} set to ${CODES[code]}${doneMsg(a,code)}`);
 }
 
 /* ---------- drawer ---------- */
@@ -914,7 +918,7 @@ async function onField(e){
     if(t.id==='d-date'&&t.value!==a.targetDate){
       const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:uid||'',reason:$('#d-reason').value.trim()}];
       await write('actions',a.id,{targetDate:t.value,originalDate:a.originalDate||a.targetDate||t.value,dateHistory:hist,...stamp()},'Target date changed and logged');return}
-    if(t.dataset.month){await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...stamp()},'Saved');return}
+    if(t.dataset.month){await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...donePatch(yr,t.dataset.month,t.value),...stamp()},'Saved'+doneMsg(a,t.value));return}
   }else{
     const col=S.pri[openId]?'priorities':'objectives',it=S.pri[openId]||S.obj[openId];
     if(t.id==='d-name'&&t.value.trim()!==it.name)await write(col,openId,{name:t.value.trim()},'Saved');
