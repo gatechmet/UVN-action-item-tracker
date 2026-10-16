@@ -308,7 +308,7 @@ table.itab td.chk{font-size:12px;padding:4px 8px;line-height:1.3}
   <header class="top">
     <div>
       <h1>UVNN 2026 Strategy Tracker</h1>
-      <div class="sub">Priorities → objectives → actions. Edits save for the whole team. <span class="conn" id="conn">Connecting…</span></div>
+      <div class="sub">Priorities → objectives → actions. Changes save to the shared data folder. <span class="conn" id="conn">Connecting…</span></div>
     </div>
     <div class="kpis" id="kpis"></div>
   </header>
@@ -375,8 +375,77 @@ table.itab td.chk{font-size:12px;padding:4px 8px;line-height:1.3}
 <div id="drawer-root"></div>
 <div id="toast" class="toast" hidden></div>
 
+<script>
+/* Pure data helpers shared by the app and the shared-folder layer. */
+(function(root){
+  'use strict';
+  const copy=x=>x===undefined?undefined:JSON.parse(JSON.stringify(x));
+  const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+  function merge(a,b){const out=object(a)?copy(a):{};for(const k of Object.keys(b||{}))out[k]=object(b[k])?merge(out[k],b[k]):copy(b[k]);return out}
+  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+  const hex=s=>Array.from(new TextEncoder().encode(s),v=>v.toString(16).padStart(2,'0')).join('');
+  const partId=(year,route)=>String(year)+'X'+hex(JSON.stringify(route));
+  function split(collection,year,doc){
+    const records=new Map();
+    const put=(route,value)=>records.set(partId(year,route),{year:+year,route,value:copy(value),updatedAt:doc.updatedAt||''});
+    if(collection==='bowler'){
+      for(const [metric,value] of Object.entries(doc.metrics||{}))put(['metrics',metric],value);
+    }else{
+      for(const [field,value] of Object.entries(doc)){
+        if(field==='year'||field==='updatedAt')continue;
+        if((field==='aop'||field==='act')&&object(value)){
+          for(const [metric,regions] of Object.entries(value))for(const [region,series] of Object.entries(regions||{}))put([field,metric,region],series);
+        }else if(field==='fc'&&object(value)){
+          for(const [version,metrics] of Object.entries(value))for(const [metric,regions] of Object.entries(metrics||{}))for(const [region,series] of Object.entries(regions||{}))put([field,version,metric,region],series);
+        }else if(field==='seg'&&object(value)){
+          for(const [kind,metrics] of Object.entries(value))for(const [metric,segments] of Object.entries(metrics||{}))for(const [segment,series] of Object.entries(segments||{}))put([field,kind,metric,segment],series);
+        }else if(value!==null)put([field],value);
+      }
+    }
+    return records;
+  }
+  function applyPart(doc,part){
+    let parent=doc;const route=part.route,parents=[];
+    if(!Array.isArray(route)||!route.length||route.some(k=>['__proto__','prototype','constructor'].includes(k)))throw new Error('Invalid data route');
+    for(const k of route.slice(0,-1)){if(!object(parent[k]))parent[k]={};parents.push([parent,k]);parent=parent[k]}
+    if(part.deleted)delete parent[route.at(-1)];else parent[route.at(-1)]=copy(part.value);
+    if(part.deleted)for(const [p,k] of parents.reverse()){if(object(p[k])&&!Object.keys(p[k]).length)delete p[k];else break}
+    if(part.updatedAt&&(!doc.updatedAt||part.updatedAt>doc.updatedAt))doc.updatedAt=part.updatedAt;
+    return doc;
+  }
+  function assemble(collection,legacy,parts){
+    const docs=new Map([...legacy].map(([id,d])=>[String(id),copy(d)]));
+    for(const p of parts.values()){
+      if(!Number.isInteger(p.year)||!Array.isArray(p.route))throw new Error('Invalid split record');
+      const id=String(p.year),doc=docs.get(id)||{year:p.year,...(collection==='bowler'?{metrics:{}}:{})};
+      applyPart(doc,p);docs.set(id,doc);
+    }
+    return docs;
+  }
+  function plan(collection,year,before,patch){
+    const old=before||{year:+year},next=collection==='bowler'?merge(old,patch):{...copy(old),...copy(patch),year:+year};
+    const a=split(collection,year,old),b=split(collection,year,next),changes=[];
+    for(const id of new Set([...a.keys(),...b.keys()])){
+      const prev=a.get(id),after=b.get(id);
+      if(same(prev?.value,after?.value)&&!!prev===!!after)continue;
+      const part=after||{year:+year,route:prev.route,deleted:true};
+      changes.push({id,part,expected:prev?.value,expectedExists:!!prev});
+    }
+    return {next,changes};
+  }
+  function atRoute(doc,route){let value=doc;for(const k of route){if(!object(value)||!Object.hasOwn(value,k))return {exists:false};value=value[k]}return {exists:true,value}}
+  function fiscalStart(year){return new Date(Date.UTC(2025,11,29)+(+year-2026)*364*86400000)}
+  function weekStart(year,week){if(!Number.isInteger(+week)||week<0||week>52)throw new RangeError('Week must be 0–52');return new Date(+fiscalStart(year)+(week-1)*7*86400000)}
+  const iso=d=>d.toISOString().slice(0,10);
+  root.TrackerData=Object.freeze({copy,merge,same,split,assemble,plan,atRoute,applyPart,partId,fiscalStart,weekStart,iso});
+})(typeof module!=='undefined'&&module.exports?module.exports:globalThis);
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
+/* claude.ai sandbox stand-in for the shared-folder store. The release's folder layer defines the real TrackerStore first, so this never runs there. */
+window.TrackerStore??=Object.freeze({name:()=>uid||'',setPending(){},refresh:async()=>{},
+  async saveChanges(col,y,before,patch){const ref=(await window.claude.use('db')).collection(col).doc(String(y)),cur=await ref.get(),old=cur.exists?cur.data():{year:+y};
+    const next=col==='bowler'?TrackerData.merge(old,patch):{...old,...TrackerData.copy(patch)};next.year=+y;next.updatedAt=new Date().toISOString();await ref.set(next);return next}});
 const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const HL={on:'On track',risk:'At risk',off:'Off track',none:'Not rated'};
 const HRANK={off:0,risk:1,none:2,on:3};
@@ -408,8 +477,8 @@ const OPTS={pri:[],obj:[],owner:[],region:[],
 const anyFilter=()=>FILTERS.some(k=>$('#f-'+k).value)||MSK.some(k=>SEL[k].size);
 function msText(k){const n=SEL[k].size;if(!n)return 'All';const l=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]);return n===1&&l.length?l[0]:`${n} selected`}
 function paintMs(){MSK.forEach(k=>{const b=$('#f-'+k);b.textContent=msText(k);b.title=OPTS[k].filter(([v])=>SEL[k].has(v)).map(x=>x[1]).join(', ')||'All';b.classList.toggle('on',SEL[k].size>0)})}
-function prefs(){try{return JSON.parse(sessionStorage.getItem('uvnn-f')||'{}')}catch{return{}}}
-function savePrefs(){try{const o={view,tab,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);sessionStorage.setItem('uvnn-f',JSON.stringify(o))}catch{}}
+function prefs(){try{return JSON.parse(sessionStorage.getItem('uvnn-live-v3-f')||'{}')}catch{return{}}}
+function savePrefs(){try{const o={view,tab,sel:{}};[...FILTERS,'group','sort'].forEach(k=>o[k]=$('#f-'+k).value);MSK.forEach(k=>o.sel[k]=[...SEL[k]]);sessionStorage.setItem('uvnn-live-v3-f',JSON.stringify(o))}catch{}}
 
 function sortedPri(){return Object.values(S.pri).sort((a,b)=>a.order-b.order)}
 const pNum=p=>sortedPri().indexOf(p)+1;
@@ -433,6 +502,7 @@ function refreshFilters(){
 function filtered(){
   const f=k=>$('#f-'+k).value, q=f('q').toLowerCase();
   return Object.values(S.act).filter(a=>{
+    if(!!a.archivedAt!==(tab==='archive'))return false;
     if(SEL.pri.size&&!SEL.pri.has(a.priorityId))return false;
     if(SEL.obj.size&&!SEL.obj.has(a.objectiveId))return false;
     if(SEL.owner.size){const o=split(a.owner);if(![...SEL.owner].some(v=>v==='__none'?!o.length:o.includes(v)))return false}
@@ -532,7 +602,7 @@ function dashboard(list){
   return h}
 
 /* Two-tier tabs: section -> its views. The first view of each section opens when the section is picked. */
-const SECTIONS={act:[['tracker','Action Items'],['dash','Dashboard']],kpi:[['perf','Dashboard'],['bowler','Inputs']],fx:[['fdash','Dashboard'],['finput','Inputs']]};
+const SECTIONS={act:[['tracker','Action Items'],['dash','Dashboard'],['archive','Archive']],kpi:[['perf','Dashboard'],['bowler','Inputs']],fx:[['fdash','Dashboard'],['finput','Inputs']]};
 const sectionOf=t=>Object.keys(SECTIONS).find(k=>SECTIONS[k].some(([v])=>v===t))||'act';
 function paintNav(){const sec=sectionOf(tab);
   document.querySelectorAll('[data-top]').forEach(b=>b.setAttribute('aria-selected',b.dataset.top===sec));
@@ -542,6 +612,7 @@ function render(){
   if(tab==='fdash'||tab==='finput'){['#filters','#kpis','#viewbar','#legend'].forEach(q=>$(q).hidden=true);charts.forEach(c=>c.destroy());charts=[];return FX.render()}
   FX.destroy();
   document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
+  if(tab==='archive'){['#filters','#kpis','#viewbar','#legend'].forEach(q=>$(q).hidden=q!=='#filters');charts.forEach(c=>c.destroy());charts=[];renderArchive();return}
   const mt=tab==='perf'||tab==='bowler';
   ['#filters','#kpis','#viewbar'].forEach(q=>$(q).hidden=mt);
   if(mt){$('#legend').hidden=true;renderMetrics();return}
@@ -587,6 +658,31 @@ function render(){
   if(openId)drawer(openId,true);
 }
 
+function renderArchive(){
+  const list=filtered().sort((a,b)=>(b.archivedAt||'').localeCompare(a.archivedAt||''));
+  const query=$('#f-q').value.trim().toLowerCase();
+  const orphanIds=[...new Set(Object.values(S.notes).filter(n=>!S.act[n.parentId]&&!S.obj[n.parentId]&&!S.pri[n.parentId]).map(n=>n.parentId))];
+  const orphan=orphanIds.filter(id=>{const seed=window.SEED?.actions?.[id];return !query||[id,seed?.title,...notesFor(id).map(n=>n.text)].join(' ').toLowerCase().includes(query)});
+  $('#main').innerHTML=`<section><div class="band"><h2>Archived actions</h2><span class="stmt">Actions and their updates stay accessible here. Restore an action to return it to the tracker.</span><span>${list.length} actions</span></div>
+    <div class="pri"><div class="tblwrap"><table><thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Archived</th><th>Updates</th></tr></thead><tbody>
+    ${list.map(a=>`<tr class="act" data-id="${esc(a.id)}" tabindex="0"><td>${esc(a.title)}</td><td>${esc(a.owner)}</td><td>${esc(a.region)}</td><td>${fmt(a.archivedAt.slice(0,10))}${a.archivedBy?' · '+esc(a.archivedBy):''}</td><td>${notesFor(a.id).length+(a.history||[]).length}</td></tr>`).join('')||'<tr><td colspan="5">No archived actions match these filters.</td></tr>'}
+    </tbody></table></div></div></section>
+    ${orphan.length?`<section><div class="band"><h2>Updates for previously removed actions</h2><span class="stmt">These notes were already present without their action. Available original titles and spreadsheet history are shown when opened.</span></div><div class="pri">${orphan.map(id=>`<div class="objhead"><button class="btn" data-orphan="${esc(id)}">${esc(window.SEED?.actions?.[id]?.title||'Removed action '+id)}</button><span>${notesFor(id).length} saved updates</span></div>`).join('')}</div></section>`:''}`;
+  if(openId&&S.act[openId])drawer(openId,true);
+}
+function orphanDrawer(id){
+  const old=window.SEED?.actions?.[id],item={...old,id,archivedAt:'previously removed'};openId=null;
+  const title=old?.title||'Removed action '+id;
+  $('#drawer-root').innerHTML=shell('Updates retained from a removed action',title,`<p class="ctx">The action was removed before this upgrade. Its saved updates remain readable.</p><ul class="log">${logHtml(item)}</ul>`);
+  resolveNames(notesFor(id).map(n=>n.by)).then(()=>{$('#drawer-root .log')&&($('#drawer-root .log').innerHTML=logHtml(item))});
+}
+async function restoreAction(id){
+  const action=S.act[id];if(!action?.archivedAt)return;
+  if(!S.obj[action.objectiveId]||!S.pri[action.priorityId]){toast('The original priority or objective is missing. Restore that structure first.');return}
+  if(await write('actions',id,{archivedAt:'',archivedBy:'',...stamp()},'Action restored')){closeDrawer();render();}
+}
+document.addEventListener('click',e=>{const orphan=e.target.closest('[data-orphan]');if(orphan)return orphanDrawer(orphan.dataset.orphan);const restore=e.target.closest('[data-restore]');if(restore)return restoreAction(restore.dataset.restore);});
+
 /* ---------- month color picker ---------- */
 let popFor=null;
 function closePop(){document.querySelectorAll('.pop').forEach(e=>e.remove());popFor=null}
@@ -609,7 +705,7 @@ function openStat(btn){
     (a.status==='open'?`<div class="sep"></div><div class="hd">Schedule</div>`+Object.entries(HL).map(([k,l])=>`<button type="button" role="menuitem" data-sethealth="${k}" class="${(a.health||'none')===k?'sel':''}"><span class="pill h-${k}">${l}</span></button>`).join(''):'');
   document.body.appendChild(el);placePop(el,btn,true);(el.querySelector('button.sel')||el.querySelector('button'))?.focus()}
 async function setStatus(a,v){
-  if(a.status===v)return;const patch={status:v,...stamp()};
+  if(a.status===v)return;if(a.archivedAt)return;const patch={status:v,...stamp()};
   if(v==='completed'){patch.completedAt=new Date().toISOString();Object.assign(patch,monthsPatch(a,THISY,{...monthsOf(a,THISY),[M[NOWM]]:'complete'}))}
   else patch.completedAt='';
   await write('actions',a.id,patch,`Marked ${STAT[v]}`)}
@@ -644,10 +740,10 @@ async function pickCode(code){
 async function resolveNames(ids){ids=[...new Set(ids.filter(x=>x&&!(x in names)))];if(!ids.length||!user)return;try{const ps=await user.profiles(ids);ids.forEach(i=>names[i]=ps?.[i]?.name||'')}catch{}}
 const who=id=>id?(names[id]||'Teammate'):'';
 function logHtml(item){
-  const live=notesFor(item.id).sort((a,b)=>b.at.localeCompare(a.at)).map(n=>`<li class="new"><div class="meta">${fmt(n.at.slice(0,10))} · ${esc(who(n.by))}${canWrite?` · <button class="btn ghost" data-delnote="${n.id}">Remove</button>`:''}</div>${esc(n.text)}</li>`);
+  const live=notesFor(item.id).sort((a,b)=>b.at.localeCompare(a.at)).map(n=>`<li class="new"><div class="meta">${fmt(n.at.slice(0,10))} · ${esc(who(n.by))}${canWrite&&!item.archivedAt?` · <button class="btn ghost" data-delnote="${n.id}">Remove</button>`:''}</div>${esc(n.text)}</li>`);
   const old=(item.history||[]).map(n=>`<li><div class="meta">${n.date?fmt(n.date):'Undated'} · from spreadsheet</div>${esc(n.text)}</li>`);
   return live.concat(old).join('')||'<li class="ctx">No updates yet.</li>'}
-function noteForm(){return canWrite?`<div class="full"><textarea id="d-note" rows="3" placeholder="Add a dated update…"></textarea><div style="display:flex;gap:8px;margin-top:6px"><button class="btn primary" id="d-addnote" type="button">Add update</button></div></div>`:''}
+function noteForm(item){return canWrite&&!item?.archivedAt?`<div class="full"><textarea id="d-note" rows="3" placeholder="Add a dated update…"></textarea><div style="display:flex;gap:8px;margin-top:6px"><button class="btn primary" id="d-addnote" type="button">Add update</button></div></div>`:''}
 
 function drawer(id,refresh){
   openId=id;const root=$('#drawer-root');
@@ -657,7 +753,7 @@ function drawer(id,refresh){
   if(refresh&&document.activeElement&&root.contains(document.activeElement)&&document.activeElement.id!=='d-note'&&a){ // don't clobber an in-progress field edit
     $('#d-log').innerHTML=logHtml(item);return}
   resolveNames([...notesFor(id).map(n=>n.by),...(a?.dateHistory||[]).map(d=>d.by)]).then(()=>{if(openId===id&&!refresh)drawer(id,true)});
-  const dis=canWrite?'':'disabled';let body='';
+  const dis=canWrite&&!a?.archivedAt?'':'disabled';let body='';
   if(a){
     const pr=S.pri[a.priorityId],ob=S.obj[a.objectiveId];
     body=`<div class="fgrid">
@@ -675,8 +771,8 @@ function drawer(id,refresh){
     </div>
     <div class="sec"><h4>Monthly status · ${yr}</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
     <div class="sec"><h4>Schedule changes</h4><ul class="log">${(a.dateHistory||[]).slice().reverse().map(d=>`<li><div class="meta">${d.at?fmt(d.at.slice(0,10)):'From spreadsheet'}${d.by?' · '+esc(who(d.by)):''}</div>${fmt(d.from)} → ${fmt(d.to)}${d.reason&&d.reason!=='From spreadsheet'?' · '+esc(d.reason):''}</li>`).join('')||'<li class="ctx">Target date has not changed.</li>'}</ul></div>
-    <div class="sec"><h4>Updates</h4>${noteForm()}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(a)}</ul></div>
-    ${canWrite?`<div class="sec" id="d-danger"><button class="btn" id="d-del" type="button">Delete action</button></div>`:''}`;
+    <div class="sec"><h4>Updates</h4>${noteForm(a)}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(a)}</ul></div>
+    ${canWrite?`<div class="sec" id="d-danger">${a.archivedAt?`<p class="ctx">Archived on ${fmt(a.archivedAt.slice(0,10))}. Its details and updates are preserved.</p><button class="btn primary" type="button" data-restore="${esc(a.id)}">Restore action</button>`:`<button class="btn" id="d-del" type="button">Archive action</button>`}</div>`:''}`;
     root.innerHTML=shell(`${esc(pr?.name||'')} · ${esc(ob?.name||'')}`,a.title,body);
     $('#d-status').value=a.status;$('#d-health').value=a.health||'none';$('#d-obj').value=a.objectiveId;
     root.querySelectorAll('[data-month]').forEach(s=>s.value=monthsOf(a)[s.dataset.month]||'');
@@ -709,7 +805,7 @@ async function onField(e){
       await write('actions',a.id,patch,'Saved');return}
     if(t.id==='d-obj'&&t.value!==a.objectiveId){await write('actions',a.id,{objectiveId:t.value,priorityId:S.obj[t.value].priorityId,...stamp()},'Moved to objective');return}
     if(t.id==='d-date'&&t.value!==a.targetDate){
-      const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:uid||'',reason:$('#d-reason').value.trim()}];
+      const hist=[...(a.dateHistory||[]),{from:a.targetDate||'',to:t.value,at:new Date().toISOString(),by:TrackerStore.name(),reason:$('#d-reason').value.trim()}];
       await write('actions',a.id,{targetDate:t.value,originalDate:a.originalDate||a.targetDate||t.value,dateHistory:hist,...stamp()},'Target date changed and logged');return}
     if(t.dataset.month){const dp=donePatch(a,yr,t.dataset.month,t.value);await write('actions',a.id,{...monthsPatch(a,yr,{...monthsOf(a),[t.dataset.month]:t.value}),...dp,...stamp()},'Saved'+doneMsg(a,dp));return}
   }else{
@@ -718,14 +814,15 @@ async function onField(e){
     if(t.id==='d-stmt'&&t.value.trim()!==it.statement)await write(col,openId,{statement:t.value.trim()},'Saved');
   }}
 async function addNote(){
-  const txt=$('#d-note').value.trim();if(!txt||!db)return;
+  const txt=$('#d-note').value.trim();if(!txt||!db)return;uid=TrackerStore.name();
   try{await db.collection('notes').add({parentId:openId,text:txt,at:new Date().toISOString(),by:uid||''});$('#d-note').value='';
     if(S.act[openId])await write('actions',openId,stamp());toast('Update added')}catch(e){toast('Could not add the update.')}}
 let pendingDel=null;
 async function delItem(btn){
-  if(pendingDel!==openId){pendingDel=openId;btn.textContent='Click again to confirm delete';btn.style.color='var(--off)';return}
+  if(pendingDel!==openId){pendingDel=openId;btn.textContent=S.act[openId]?'Click again to archive':'Click again to confirm delete';btn.style.color='var(--off)';return}
   pendingDel=null;const id=openId;
   const col=S.act[id]?'actions':S.obj[id]?'objectives':'priorities';
+  if(col==='actions'){if(await write('actions',id,{archivedAt:new Date().toISOString(),archivedBy:TrackerStore.name(),...stamp()},'Action archived; updates preserved')){closeDrawer();render()}return}
   if(col!=='actions'){const kids=col==='objectives'?Object.values(S.act).filter(a=>a.objectiveId===id):Object.values(S.obj).filter(o=>o.priorityId===id);
     if(kids.length){toast(`Move or delete its ${kids.length} ${col==='objectives'?'actions':'objectives'} first.`);return}}
   try{await db.collection(col).doc(id).delete();closeDrawer();toast('Deleted')}catch{toast('Could not delete.')}}
@@ -743,8 +840,8 @@ async function addItem(b){
 const ICOLS=['t','o','r','d','ob'];
 let irows=[];
 const blankRow=()=>({t:'',o:'',r:'',d:'',ob:'',st:'',msg:''});
-function loadDraft(){try{irows=JSON.parse(sessionStorage.getItem('uvnn-intake')||'[]')}catch{irows=[]}if(!Array.isArray(irows))irows=[];while(irows.length<8)irows.push(blankRow())}
-function saveDraft(){try{sessionStorage.setItem('uvnn-intake',JSON.stringify(irows))}catch{}}
+function loadDraft(){try{irows=JSON.parse(sessionStorage.getItem('uvnn-live-v3-intake')||'[]')}catch{irows=[]}if(!Array.isArray(irows))irows=[];while(irows.length<8)irows.push(blankRow())}
+function saveDraft(){try{sessionStorage.setItem('uvnn-live-v3-intake',JSON.stringify(irows))}catch{}}
 const rowFilled=r=>ICOLS.some(k=>String(r[k]||'').trim());
 function renderIntake(){
   $('#i-body').innerHTML=irows.map((r,i)=>`<tr class="${r.st}"><td class="rn">${i+1}</td>${ICOLS.map((k,c)=>`<td><input id="i-${i}-${k}" data-ir="${i}" data-ic="${c}" value="${esc(r[k])}" aria-label="Row ${i+1} ${['action','owner','region','target date','objective number'][c]}" ${k==='d'?'placeholder="m/d/yyyy"':''}${k==='ob'?'placeholder="1.3"':''}></td>`).join('')}<td class="chk">${esc(r.msg||liveChk(r))}</td></tr>`).join('')}
@@ -821,7 +918,7 @@ const MBY=Object.fromEntries(MDEF.map(d=>[d[0],{key:d[0],label:d[1],unit:d[2],fm
 const NW=53,WEEKS=[...Array(NW).keys()];
 let BW={},myr=THISY,mmode='week',mprev=null,charts=[];
 const qOf=w=>w<1?0:Math.ceil(w/13);
-const wDate=(y,w)=>{const d=new Date(y,0,1+7*w);return `${d.getDate()}-${M[d.getMonth()]}`};
+const wDate=(y,w)=>{const d=TrackerData.weekStart(y,w);return `${d.getUTCDate()}-${M[d.getUTCMonth()]}`};
 const mdoc=()=>BW[myr]?.metrics||{};
 function series(k,row){const a=mdoc()[k]?.[row];return Array.isArray(a)?WEEKS.map(i=>a[i]??null):WEEKS.map(()=>null)}
 const fmtV=(k,v)=>{if(v==null||isNaN(v))return '—';const f=MBY[k]?.fmt;
@@ -915,7 +1012,7 @@ const MCARDS=[
   {id:'c-price',title:'Price improvement',sub:'% of revenue, rolling average',small:true,defs:[{key:'price',name:'Actual',color:'--s1'}],note:m=>m==='ytd'?'Running average of all weeks so far.':m==='quarter'?'Average of the weeks in each quarter.':'Weekly value as reported.'},
   {id:'c-bb',modes:NORUN,title:'Book & burn and backlogs',sub:'$M',wide:true,zero:false,defs:[{key:'bb',name:'Book & burn',color:'--s1'},{key:'msn',name:'MSN backlog',color:'--s2'},{key:'cmc',name:'CMC backlog',color:'--s3'}],note:()=>'Backlogs: lower is better, so a backlog below plan shows green.'}];
 const MODES=[['week','Weekly'],['ytd','Run rate'],['quarter','Quarters']];
-function yearNav(){return `<div class="yr mnav"><button type="button" data-myr="-1" aria-label="Previous year">‹</button><span>${myr}</span><button type="button" data-myr="1" aria-label="Next year">›</button></div>`}
+function yearNav(){return `<div class="yr mnav"><button type="button" data-myr="-1" aria-label="Previous year">‹</button><span>FY${myr}</span><button type="button" data-myr="1" aria-label="Next year">›</button></div><p class="mhelp">Week commencing dates · 13 weeks per quarter, 52 weeks per year. FY2026: 29 Dec 2025–27 Dec 2026; Q4 starts 28 Sep 2026.${myr!==2026?" Calendar for this year is a 52-week projection; confirm before use.":""}</p>`}
 const cmodes=c=>MODES.filter(([k])=>(c.modes||['week','ytd','quarter']).includes(k));
 const modeOf=c=>{const m=cmode[c.id];return cmodes(c).some(([k])=>k===m)?m:'week'};
 function cardHTML(c){const mode=modeOf(c),z=mode==='quarter'?0:(czoom[c.id]||0);
@@ -1024,14 +1121,40 @@ function stickCols(){const head=document.querySelectorAll('.bgrid thead tr:nth-c
   const top=document.querySelector('.bgrid thead tr:first-child th');if(top){const h=top.getBoundingClientRect().height;document.querySelectorAll('.bgrid thead tr:nth-child(2) th').forEach(th=>th.style.top=h+'px')}
   const first=document.querySelector('.bgrid thead tr:first-child th.st');if(first)first.style.left='0px'}
 const parseNum=s=>{s=String(s??'').trim().replace(/[$,\s]/g,'');if(!s||s==='-')return null;const neg=/^\(.*\)$/.test(s);s=s.replace(/[()%]/g,'');const x=parseFloat(s);return isNaN(x)?null:neg?-x:x};
-const pendingM={};let mTimer=null;
-function queueWrite(k,patch){pendingM[k]=Object.assign(pendingM[k]||{},patch);clearTimeout(mTimer);mTimer=setTimeout(flushM,700)}
+const pendingM={},baseBW={};let mTimer=null,mSaving=false;
+function queueWrite(k,patch){
+  const y=String(myr),jobs=pendingM[y]??={};
+  const job=jobs[k]??={base:TrackerData.copy(baseBW[y]?.metrics?.[k]),patch:{}};
+  Object.assign(job.patch,TrackerData.copy(patch));
+  clearTimeout(mTimer);mTimer=setTimeout(flushM,700);TrackerStore.setPending();
+}
 async function flushM(){
-  if(!db||!Object.keys(pendingM).length)return;const y=String(myr),metrics={};for(const k in pendingM){metrics[k]=pendingM[k];delete pendingM[k]}
-  try{const ref=db.collection('bowler').doc(y);const cur=await ref.get();
-    if(cur.exists)await ref.update({metrics,updatedAt:new Date().toISOString()});else await ref.set({year:+y,metrics,updatedAt:new Date().toISOString()});toast('Saved')}
-  catch(e){toast('Couldn’t save the bowler. Check your access.')}}
-function setCell(k,r,w,v){const md=(BW[myr]??={year:myr,metrics:{}}).metrics[k]??={};const arr=WEEKS.map(i=>md[r]?.[i]??null);arr[w]=v;md[r]=arr;queueWrite(k,{[r]:arr})}
+  if(!db||mSaving)return;mSaving=true;let failed=false;
+  try{for(const [y,jobs] of Object.entries(pendingM))for(const [k,job] of Object.entries(jobs)){
+    const take=TrackerData.copy(job.patch),before={year:+y,metrics:job.base===undefined?{}:{[k]:job.base}};
+    try{
+      const saved=await TrackerStore.saveChanges('bowler',y,before,{metrics:{[k]:take}});
+      job.base=TrackerData.copy(saved.metrics?.[k]);
+      for(const field of Object.keys(take))if(TrackerData.same(job.patch[field],take[field]))delete job.patch[field];
+      if(!Object.keys(job.patch).length)delete jobs[k];
+      if(!Object.keys(jobs).length)delete pendingM[y];
+      toast('Saved locally');
+    }catch(e){failed=true;toast(e.code==='record_conflict'?e.message:'Could not save locally. Your KPI draft is retained.');}
+  }}finally{mSaving=false;TrackerStore.setPending();await TrackerStore.refresh();if(!failed&&Object.keys(pendingM).length){clearTimeout(mTimer);mTimer=setTimeout(flushM,700)}}
+}
+function setCell(k,r,w,v){
+  const md=((BW[myr]??={year:myr,metrics:{}}).metrics??={})[k]??={};
+  const arr=WEEKS.map(i=>md[r]?.[i]??null);arr[w]=v;md[r]=arr;queueWrite(k,{[r]:arr});
+}
+window.addEventListener('tracker-save-pending',flushM);
+window.trackerHasPending=()=>Object.keys(pendingM).length>0||mSaving||FX.hasPending();
+window.TrackerConflictDrafts??={};
+window.TrackerConflictDrafts.bowlerParts={
+  get(info){const job=pendingM[info.year]?.[info.route[1]];return job?{year:info.year,route:info.route,value:TrackerData.merge(job.base,job.patch)}:null;},
+  resolved(info,merged){const y=String(info.year),k=info.route[1];if(pendingM[y]){delete pendingM[y][k];if(!Object.keys(pendingM[y]).length)delete pendingM[y];}if(baseBW[y])TrackerData.applyPart(baseBW[y],merged);}
+};
+
+
 document.addEventListener('change',e=>{
   const c=e.target.closest('.bgrid [data-k]');if(c){setCell(c.dataset.k,c.dataset.r,+c.dataset.w,parseNum(c.value));return}
   const m=e.target.closest('.bgrid [data-meta]');if(m){const k=m.dataset.meta,f=m.dataset.f,v=f==='target'?parseNum(m.value):m.value.trim();((BW[myr]??={year:myr,metrics:{}}).metrics[k]??={})[f]=v;queueWrite(k,{[f]:v})}});
@@ -1055,8 +1178,7 @@ async function doImport(){
   const {metrics,rows}=importBowler(t);const keys=Object.keys(metrics);
   if(!rows){$('#b-msg').textContent='No Plan or Act rows were recognized. Copy from the Metric column through the last week.';return}
   if(!db||!canWrite){$('#b-msg').textContent='You need edit access to import.';return}
-  try{const ref=db.collection('bowler').doc(String(myr));const cur=await ref.get();
-    if(cur.exists)await ref.update({metrics,updatedAt:new Date().toISOString()});else await ref.set({year:myr,metrics,updatedAt:new Date().toISOString()});
+  try{for(const [k,patch] of Object.entries(metrics)){((BW[myr]??={year:myr,metrics:{}}).metrics??={})[k]=TrackerData.merge(BW[myr].metrics[k],patch);queueWrite(k,patch)}await flushM();if(pendingM[String(myr)])throw new Error('Some entries could not save. Your draft is retained.');
     $('#b-paste').value='';toast(`Imported ${keys.length} metrics`);$('#b-msg').textContent=`Imported ${keys.length} metrics (${rows} rows) into ${myr}.`}
   catch(e){$('#b-msg').textContent='Import failed. Check your access and try again.'}}
 document.addEventListener('click',e=>{
@@ -1066,8 +1188,13 @@ document.addEventListener('click',e=>{
   if(e.target.closest('#b-import'))return doImport()});
 function renderMetrics(){tab==='perf'?renderPerf():renderBowler()}
 window.addEventListener('resize',()=>{if(tab==='bowler')stickCols()});
-function subBowler(){db.collection('bowler').onSnapshot(snap=>{BW={};snap.docs.forEach(d=>BW[d.id]=d.data());
-  if(tab==='perf')renderPerf();else if(tab==='bowler'&&!document.activeElement?.closest?.('.bgrid,.bpaste'))renderBowler()},()=>{})}
+function subBowler(){db.collection('bowler').onSnapshot(snap=>{
+  BW={};snap.docs.forEach(d=>{BW[d.id]=d.data();baseBW[d.id]=TrackerData.copy(BW[d.id]);});
+  for(const [y,jobs] of Object.entries(pendingM))for(const [k,job] of Object.entries(jobs)){
+    const doc=BW[y]??={year:+y,metrics:{}};doc.metrics??={};doc.metrics[k]=TrackerData.merge(doc.metrics[k],job.patch);
+  }
+  if(tab==='perf')renderPerf();else if(tab==='bowler')renderBowler();
+},()=>{})}
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
@@ -1105,11 +1232,11 @@ document.addEventListener('change',e=>{const i=e.target.closest('[data-msk]');if
   i.checked?SEL[k].add(i.value):SEL[k].delete(i.value);if(k==='pri')refreshFilters();paintMs();savePrefs();render()});
 
 /* ---------- boot ---------- */
-(function(){const p=prefs();view=p.view||'';tab=['dash','perf','bowler','fdash','finput'].includes(p.tab)?p.tab:'tracker';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
+(function(){const p=prefs();view=p.view||'';tab=['dash','archive','perf','bowler','fdash','finput'].includes(p.tab)?p.tab:'tracker';MSK.forEach(k=>(p.sel?.[k]||[]).forEach(v=>SEL[k].add(v)));[...FILTERS,'group','sort'].forEach(k=>{if(p[k]!=null)$('#f-'+k).value=p[k]});refreshFilters()})();
 let loaded={pri:false,obj:false,act:false};
 function sub(col,key){
   db.collection(col).onSnapshot(snap=>{S[key]={};snap.docs.forEach(d=>{const r={id:d.id,...d.data()};if(key==='act'&&isLate(r)&&r.health!=='off'){r.setHealth=r.health;r.health='off';r.autoOff=true}S[key][d.id]=r});loaded[key]=true;
-    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Live · changes sync for everyone';refreshFilters();render()}},
+    if(loaded.pri&&loaded.obj&&loaded.act){$('#conn').textContent='Connected · reads shared folder';refreshFilters();render()}},
     err=>{$('#conn').textContent='Connection lost. Reload the page to reconnect.'})}
 (async()=>{
   const [d,u]=await Promise.all([window.claude?.use('db'),window.claude?.use('user')].map(p=>Promise.resolve(p).catch(()=>null)));
@@ -1146,8 +1273,8 @@ const kidsOf=r=>r==='APJ'?APJC:[r];
 let docs={},fyr=new Date().getFullYear(),charts=[];
 let metric='bookings',selTop=new Set(TOPR),selSub=new Set(APJC),hmUnit='pct',expAPJ=false,lead=0,b2bMode='m',fcPick='';
 const per={walk:'fy',gap:'fy',seg:'m'};
-try{const p=JSON.parse(sessionStorage.getItem('uvnn-fx')||'{}');if(p.metric)metric=p.metric;if(p.per)Object.assign(per,p.per);if(p.hmUnit)hmUnit=p.hmUnit;if(p.b2bMode)b2bMode=p.b2bMode;if(p.lead!=null)lead=p.lead;if(p.fyr)fyr=p.fyr}catch{}
-const saveP=()=>{try{sessionStorage.setItem('uvnn-fx',JSON.stringify({metric,per,hmUnit,b2bMode,lead,fyr}))}catch{}};
+try{const p=JSON.parse(sessionStorage.getItem('uvnn-live-v3-fx')||'{}');if(p.metric)metric=p.metric;if(p.per)Object.assign(per,p.per);if(p.hmUnit)hmUnit=p.hmUnit;if(p.b2bMode)b2bMode=p.b2bMode;if(p.lead!=null)lead=p.lead;if(p.fyr)fyr=p.fyr}catch{}
+const saveP=()=>{try{sessionStorage.setItem('uvnn-live-v3-fx',JSON.stringify({metric,per,hmUnit,b2bMode,lead,fyr}))}catch{}};
 const r3=x=>Math.round(x*1000)/1000;
 const sum=xs=>xs.reduce((s,x)=>s+(x||0),0);
 const money=v=>{const x=Math.abs(v);return (v<0&&x>=.005?'−':'')+'$'+x.toFixed(x>0&&x<1?2:1)+'M'};
@@ -1444,7 +1571,7 @@ function inputs(){
   const fv=vOf(fcPick),closedQ=ci=>(ci+1)*3<=Math.min(fv,mdl.CLOSED);
   const fcOpts=MONS.slice(1).map((m,i)=>{const k=keyOf(i+1);return `<option value="${k}" ${k===fcPick?'selected':''}>${m} ${fyr} forecast${keys.includes(k)?' ✓':''}</option>`}).join('');
   q$('#main').innerHTML=`<div id="fx">
-  <div class="fx-controls">${yearNav()}<p class="how">One person enters these numbers. Everything saves as you type. Amounts are $M. Paste a block copied from Excel into any cell to fill from there.</p></div>
+  <div class="fx-controls">${yearNav()}<p class="how">Stakeholders enter their own numbers. Changes save locally by metric and region. Amounts are $M. Paste a block copied from Excel into any cell to fill from there.</p></div>
   ${canWrite?'':'<p class="ro">View only: you can read but not edit.</p>'}
   <section class="fx-card"><header><h2>Curve</h2><span class="ask">Share of a quarter that lands in its 1st, 2nd and 3rd month. One curve for everything.</span></header>
     <div class="fx-curve">${cv.map((x,i)=>`<label>${['1st month','2nd month','3rd month'][i]}<input data-curve="${i}" value="${Math.round(x*1000)/10}" ${ro()} inputmode="decimal" aria-label="${['1st','2nd','3rd'][i]} month share, percent"><span>%</span></label>`).join('')}
@@ -1476,14 +1603,31 @@ function inputs(){
 let impKind='fc',impMsg='';
 
 /* ---------- saving ---------- */
-const pend={};let tmr=null;
+const pend={},baseFX={};let tmr=null,fxSaving=false;
 function cur(){const k=String(fyr);return docs[k]??={year:fyr}}
-function queue(field){pend[field]=true;clearTimeout(tmr);tmr=setTimeout(flush,600)}
+function queue(field){
+  const y=String(fyr),job=pend[y]??={base:TrackerData.copy(baseFX[y]||{year:+y}),fields:new Set()};
+  job.fields.add(field);clearTimeout(tmr);tmr=setTimeout(flush,600);TrackerStore.setPending();
+}
 async function flush(){
-  if(!db||!canWrite)return;const fields=Object.keys(pend);if(!fields.length)return;fields.forEach(f=>delete pend[f]);
-  const d=cur(),patch={updatedAt:new Date().toISOString()};fields.forEach(f=>patch[f]=d[f]??null);
-  try{const ref=db.collection('forecast').doc(String(fyr)),ex=await ref.get();if(ex.exists)await ref.update(patch);else await ref.set({year:fyr,...patch});toast('Saved')}
-  catch(e){toast(e?.code==='quota_exceeded'?'Storage is full.':'Couldn’t save the forecast inputs. Check your access.')}}
+  if(!db||!canWrite||fxSaving)return;fxSaving=true;let failed=false;
+  try{for(const [y,job] of Object.entries(pend)){
+    const fields=[...job.fields],patch={};fields.forEach(f=>patch[f]=TrackerData.copy(docs[y]?.[f]??null));
+    try{
+      await TrackerStore.saveChanges('forecast',y,job.base,patch);
+      job.base={...job.base,...TrackerData.copy(patch)};
+      for(const f of fields)if(TrackerData.same(docs[y]?.[f]??null,patch[f]))job.fields.delete(f);
+      if(!job.fields.size)delete pend[y];toast('Saved locally');
+    }catch(e){failed=true;toast(e.code==='record_conflict'?e.message:'Could not save locally. Your forecast draft is retained.');}
+  }}finally{fxSaving=false;TrackerStore.setPending();await TrackerStore.refresh();if(!failed&&Object.keys(pend).length){clearTimeout(tmr);tmr=setTimeout(flush,600)}}
+}
+window.addEventListener('tracker-save-pending',flush);
+window.TrackerConflictDrafts??={};
+window.TrackerConflictDrafts.forecastParts={
+  get(info){const job=pend[info.year];if(!job)return null;const patch={};job.fields.forEach(f=>patch[f]=TrackerData.copy(docs[info.year]?.[f]??null));return TrackerData.plan('forecast',info.year,job.base,patch).changes.find(x=>x.id===info.id)?.part||null;},
+  resolved(info,merged){const y=String(info.year),job=pend[y];if(!job)return;TrackerData.applyPart(job.base,merged);TrackerData.applyPart(docs[y],merged);const f=info.route[0];if(!TrackerData.plan('forecast',y,job.base,{[f]:docs[y]?.[f]??null}).changes.length)job.fields.delete(f);if(!job.fields.size)delete pend[y];}
+};
+
 const num=s=>{const v=parseNum(s);return v==null?null:r3(v)};
 function setCell(g,ri,ci,v){const x=gridRows(g)[ri],d=cur();
   if(g==='g-aop'){((d.aop??={})[x.m]??={})[x.c]??=[null,null,null,null];d.aop[x.m][x.c][ci]=v;queue('aop')}
@@ -1574,8 +1718,28 @@ document.addEventListener('change',e=>{
 XL.add({table:'#fx table.fx-in',cell:'input[data-g]',write:(i,v)=>{setCell(i.dataset.g,+i.dataset.r,+i.dataset.c,num(v));retotal(i.dataset.g,+i.dataset.r)}});
 
 function render(){destroy();M=model();if(tab==='finput')inputs();else dashboard()}
-function onData(snapDocs){const keep=Object.keys(pend),old=docs[String(fyr)];docs={};snapDocs.forEach(d=>docs[d.id]=d.data());
-  if(keep.length&&old){const n=docs[String(fyr)]??={year:fyr};keep.forEach(f=>n[f]=old[f])} // edits typed but not saved yet win
-  if(tab==='fdash')render();else if(tab==='finput'&&!document.activeElement?.closest?.('#fx input,#fx textarea,#fx select'))render()}
-return {render,destroy,onData}})();
+function onData(snapDocs){
+  const old=docs;docs={};snapDocs.forEach(d=>{docs[d.id]=d.data();baseFX[d.id]=TrackerData.copy(docs[d.id]);});
+  for(const [y,job] of Object.entries(pend)){
+    const doc=docs[y]??={year:+y};for(const f of job.fields)doc[f]=TrackerData.copy(old[y]?.[f]??null);
+  }
+  if(tab==='fdash')render();else if(tab==='finput'){if(!document.activeElement?.closest?.('#fx input,#fx textarea,#fx select'))render();else refreshInputValues();}
+}
+function refreshInputValues(){
+  const d=D(),changed=new Map();M=model();
+  for(const input of document.querySelectorAll('#fx input[data-g]')){
+    if(input===document.activeElement)continue;
+    const g=input.dataset.g,x=gridRows(g)[+input.dataset.r],i=+input.dataset.c;
+    let value;
+    if(g==='g-aop')value=d.aop?.[x.m]?.[x.c]?.[i];
+    if(g==='g-act')value=d.act?.[x.m]?.[x.c]?.[i];
+    if(g==='g-fc')value=d.fc?.[fcPick]?.[x.m]?.[x.c]?.[i];
+    if(g.startsWith('g-s')){const field={'g-saop':'aop','g-sfc':'fc','g-sact':'act'}[g];value=d.seg?.[field]?.[x.m]?.[x.s]?.[i];}
+    const text=fmtIn(value);if(input.value!==text){input.value=text;changed.set(g+':'+input.dataset.r,[g,+input.dataset.r]);}
+  }
+  for(const [g,row] of changed.values())retotal(g,row);
+  for(const input of document.querySelectorAll('#fx input[data-curve]'))if(input!==document.activeElement)input.value=String(Math.round(curve()[+input.dataset.curve]*1000)/10);
+}
+
+return {render,destroy,onData,flushPending:flush,hasPending:()=>Object.keys(pend).length>0||fxSaving}})();
 </script>
