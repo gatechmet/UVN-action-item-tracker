@@ -17,10 +17,27 @@ demanded a claude.ai sign-in instead of the folder setup screen.
 | File | What it is | Edit it? |
 |---|---|---|
 | `tracker.html` | App source: all tracker UI and logic. Also what the claude.ai sandbox artifact runs. | **Yes**, this is where changes go |
-| `shared-drive-demo/build/head.html`, `folder-layer.html`, `tail.html` | The shared-folder layer: setup screen, folder storage, seed data | Only for folder or setup-screen changes |
+| `shared-drive-demo/build/head.html`, `folder-layer.html`, `tail.html` | The shared-folder layer: setup screen, folder storage (`TrackerStore`), conflict review, seed data | Only for folder or setup-screen changes |
+| `shared-drive-demo/build/chart.umd.min.js` | Chart.js 4.4.1, inlined into the release in place of the CDN tag so it works offline | No |
 | `shared-drive-demo/UVNN-Tracker.html` | **The release.** Built from the two rows above. | **Never by hand**, always run the build |
 | `shared-drive-demo/Strategy-Tracker.zip` | Release HTML plus the `tracker-data` folder, for setting up the shared folder | Refreshed by the build |
 | `shared-drive-demo/tracker-data/` | Snapshot of the team's data | Only when the user asks for a data update |
+
+## Storage format (schema 3, since Oct 2026)
+
+- Actions, objectives, priorities, notes: one JSON file per record, as before. Deleting an action now
+  **archives** it (`archivedAt`); the Archive tab restores it.
+- KPI (`bowler`) and Forecasting (`forecast`) data are saved as small part files
+  (`bowlerParts__…`, `forecastParts__…`) so two people editing different cells don't overwrite each
+  other. The layer still reads the older whole-year files.
+- `TrackerData` (pure helpers) lives in `tracker.html`. `TrackerStore` is defined by the folder layer;
+  `tracker.html` has a small stand-in so the claude.ai preview still saves.
+
+## If the team's running copy differs from the repo
+
+The user may send a `UVNN-Tracker.html` changed outside this repo. Never release over it. Split it back
+into `tracker.html` and the build pieces, rebuild, and diff the result against their copy: only the
+intended differences may remain.
 
 ## Workflow for any change
 
@@ -34,7 +51,8 @@ demanded a claude.ai sign-in instead of the folder setup screen.
 4. **Build the release:** `python3 shared-drive-demo/build/build.py`
 5. **Test the release, not the source:** open `UVNN-Tracker.html`, confirm the
    setup screen appears, connect a *copy* of `tracker-data`, and exercise the change.
-   (Headless: stub `window.showDirectoryPicker` with an OPFS folder loaded from a copy of `tracker-data`.)
+   (Headless: stub `window.showDirectoryPicker` with an OPFS folder loaded from a copy of `tracker-data`.
+   Use the team's latest data when you have it: the repo snapshot predates schema 3.)
 6. **Check:** `python3 shared-drive-demo/build/build.py --check` must print `OK`.
 7. **Commit `tracker.html`, `UVNN-Tracker.html` and the zip together, then push.**
 8. **Send the user `shared-drive-demo/UVNN-Tracker.html`** (plus the zip if asked).

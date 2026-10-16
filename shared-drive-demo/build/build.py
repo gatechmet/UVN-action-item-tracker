@@ -2,7 +2,8 @@
 """Build the RELEASE tracker (shared-folder version) from the app source.
 
     tracker.html                        app source (also what the claude.ai sandbox artifact runs)
-  + shared-drive-demo/build/*.html      the shared-folder layer (setup screen, folder storage, seed data)
+  + shared-drive-demo/build/*.html      the shared-folder layer (setup screen, folder storage, conflict review, seed data)
+  + shared-drive-demo/build/chart.umd.min.js  Chart.js 4.4.1, inlined so the release works without the CDN
   = shared-drive-demo/UVNN-Tracker.html the RELEASE the team uses, also copied into Strategy-Tracker.zip
 
 Usage (from the repo root):
@@ -22,9 +23,9 @@ ZIP = os.path.join(ROOT, 'shared-drive-demo', 'Strategy-Tracker.zip')
 ZIP_HTML = 'Strategy Tracker/UVNN-Tracker.html'
 
 SRC_TITLE = '<title>UVNN Strategy Tracker</title>\n'
-CHART = 'chart.umd.min.js"></script>\n<script>\n'
+CHART = '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>\n<script>\n'
 # Markers that prove a file is the shared-folder version, not the claude.ai one.
-MARKERS = ['showDirectoryPicker', 'id="sp-connect"', 'FIRST TIME - Click here to connect folder', 'window.SEED=']
+MARKERS = ['showDirectoryPicker', 'id="sp-connect"', 'window.TrackerStore=', 'window.SEED=']
 
 
 def read(p):
@@ -40,10 +41,11 @@ def build():
         sys.exit('tracker.html already contains the folder layer. It must be the plain app source.')
     if src.count(CHART) != 1:
         sys.exit('Could not find the single Chart.js <script> anchor in tracker.html.')
-    head, layer, tail = (read(os.path.join(B, n)) for n in ('head.html', 'folder-layer.html', 'tail.html'))
+    head, layer, chart, tail = (read(os.path.join(B, n)) for n in ('head.html', 'folder-layer.html', 'chart.umd.min.js', 'tail.html'))
     body = src[len(SRC_TITLE):]
-    i = body.index(CHART) + len(CHART)
-    return head + body[:i] + layer + body[i:] + tail
+    i = body.index(CHART)
+    # The CDN tag becomes inline Chart.js; the folder layer (which ends by opening the app's <script>) follows it.
+    return head + body[:i] + '<script>\n' + chart + '</script>\n' + layer + body[i + len(CHART):] + tail
 
 
 def zip_html():
