@@ -201,8 +201,8 @@ table.otab .bar{width:100%;height:10px}
 .dkey i{display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 .counts{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
 .tblwrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:1180px;table-layout:fixed}
-col.c-own{width:120px}col.c-reg{width:110px}col.c-tgt{width:118px}col.c-mon{width:236px}col.c-st{width:136px}col.c-upd{width:300px}
+table{width:100%;border-collapse:collapse;min-width:1240px;table-layout:fixed}
+col.c-cad{width:58px}col.c-own{width:120px}col.c-reg{width:110px}col.c-tgt{width:118px}col.c-mon{width:236px}col.c-st{width:136px}col.c-upd{width:300px}
 td{overflow-wrap:anywhere}
 th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);text-align:left;font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line)}
 td{padding:6px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
@@ -236,6 +236,16 @@ tr.grp td{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var
 td.upd{font-size:12px;color:var(--muted)}
 td.upd .clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink)}
 td.upd .d{font:11px var(--f-mono)}
+td.upd .mst{display:flex;gap:6px;align-items:baseline;min-height:1.45em;color:var(--ink)}
+td.upd .mst .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+td.upd .mst .t::before{content:'▸ ';color:var(--accent)}
+td.upd .mst .dd{font:11px var(--f-mono);white-space:nowrap;color:var(--muted)}td.upd .mst .dd.late{color:var(--off);font-weight:600}
+th.cadh{cursor:pointer;line-height:1.2;text-align:center}th.cadh:hover,th.cadh.on{color:var(--accent)}
+td.cad{text-align:center}.cadn{display:inline-block;min-width:24px;padding:1px 6px;border-radius:10px;font:600 12px var(--f-mono);background:var(--accent);color:var(--accent-ink)}
+.cadsec{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--soft)}
+.stamp{font-size:10px;text-transform:none;letter-spacing:0;color:var(--muted)}.stamp.old{color:var(--off)}
+.fwarn{color:var(--off);font-size:12px;text-transform:none;letter-spacing:0}
+.msrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .s-completed{background:var(--comp);color:var(--panel)}.s-paused{background:var(--pause-bg);color:var(--pause)}
 tr.act.completed td{background:var(--comp-row)}tr.act.completed .ttl{color:var(--muted)}tr.act.closed .ttl{color:var(--muted)}
 tr.act.closed td{opacity:.75}
@@ -334,8 +344,9 @@ table.itab td.chk{font-size:12px;padding:4px 8px;line-height:1.3}
     <label>Updated in<select id="f-upd"><option value="">Any time</option><option value="1">Last 24 hours</option><option value="3">Last 3 days</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option></select></label>
     <label>Completed in<select id="f-done"><option value="">Any time</option><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="60">Last 60 days</option><option value="90">Last 90 days</option></select></label>
     <div class="fl"><span>Schedule</span><button type="button" class="msb" id="f-health" data-ms="health" aria-haspopup="true">All</button></div>
+    <label>CAD priority<select id="f-cad"><option value="">All actions</option><option value="y">CAD priorities only</option><option value="n">Not CAD priorities</option></select></label>
     <label>Group by<select id="f-group"><option value="tree">Priority &amp; objective</option><option value="owner">Owner</option><option value="region">Region</option><option value="flat">None</option></select></label>
-    <label>Sort<select id="f-sort"><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option><option value="done">Recently completed</option></select></label>
+    <label>Sort<select id="f-sort"><option value="date">Target date</option><option value="health">Schedule risk</option><option value="updated">Recently updated</option><option value="done">Recently completed</option><option value="cad">CAD priority</option></select></label>
     <button class="btn" id="f-clear" type="button">Clear</button>
   </div>
   <div class="legend" id="legend">
@@ -497,7 +508,7 @@ window.createTrackerConflictUI=function(api){
     #fs-issues .btn{border:1px solid var(--line);color:var(--accent);background:var(--panel);margin-left:8px}#fs-resolution-history{color:var(--band-ink)}
   `;document.head.appendChild(style);
   let review=null,busy=false;
-  const names={health:'Schedule',status:'Status',title:'Action',owner:'Owner',region:'Region',targetDate:'Target date',originalDate:'Original date',targetGoal:'Target goal',group:'Group',objectiveId:'Objective',priorityId:'Priority',months:'Monthly status',monthsY:'Monthly status',history:'Spreadsheet updates',dateHistory:'Schedule-change history',completedAt:'Completed on',archivedAt:'Archived on',archivedBy:'Archived by',text:'Update text',at:'Update date',by:'Author',act:'Actual',plan:'Plan',ytd:'Year to date',aop:'AOP',fc:'Forecast',curve:'Quarter distribution',sample:'Sample data',deleted:'Record removed'};
+  const names={health:'Schedule',status:'Status',title:'Action',owner:'Owner',region:'Region',targetDate:'Target date',originalDate:'Original date',targetGoal:'Target goal',group:'Group',objectiveId:'Objective',priorityId:'Priority',months:'Monthly status',monthsY:'Monthly status',history:'Spreadsheet updates',dateHistory:'Schedule-change history',completedAt:'Completed on',archivedAt:'Archived on',archivedBy:'Archived by',text:'Update text',at:'Update date',by:'Author',act:'Actual',plan:'Plan',ytd:'Year to date',aop:'AOP',fc:'Forecast',curve:'Quarter distribution',sample:'Sample data',deleted:'Record removed',milestone:'Next milestone',milestoneDate:'Milestone due',cadPri:'CAD priority #',cadId:'CAD action ID',cadFn:'Function',cadTarget:'Target Q4 outcome',cadResult:'Latest result vs target',cadResultAt:'Result updated on',cadRisk:'Risk / dependency',cadHelp:'Help / decision needed',cadHelpOwner:'Support / decision owner',cadHelpBy:'Help needed by',cadNext7:'Action next 7 days',cadNext7At:'Next 7 days updated on'};
   const values={on:'On track',risk:'At risk',off:'Off track',none:'Not rated',green:'On track',yellow:'At risk',red:'Off track',planned:'Planned',complete:'Completed',na:'Not active',open:'Open',paused:'Paused',completed:'Completed',closed:"Closed (won't do)"};
   const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const date=x=>{if(!x)return 'Not recorded';const d=new Date(x.length===10?x+'T12:00:00':x);return Number.isNaN(+d)?String(x):d.toLocaleString(undefined,x.length===10?{dateStyle:'medium'}:{dateStyle:'medium',timeStyle:'short'})};
@@ -782,7 +793,7 @@ const daysAhead=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOSt
 const isSoon=a=>a.status==='open'&&!!a.targetDate&&a.targetDate<=daysAhead(28);
 const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10)};
 
-const FILTERS=['q','done','stale','upd'];
+const FILTERS=['q','done','stale','upd','cad'];
 const MSK=['pri','obj','owner','region','status','health'];
 const MSL={pri:'Priority',obj:'Objective',owner:'Owner',region:'Region',status:'Status',health:'Schedule'};
 const SEL={};MSK.forEach(k=>SEL[k]=new Set());
@@ -826,8 +837,9 @@ function filtered(){
     if(f('stale')&&!((a.status==='open'||a.status==='paused')&&lastUpd(a)<daysAgo(+f('stale'))))return false;
     if(f('upd')&&!(lastUpd(a)>=daysAgo(+f('upd'))))return false;
     if(f('done')&&!(a.status==='completed'&&(a.completedAt||'').slice(0,10)>=daysAgo(+f('done'))))return false;
+    if(f('cad')==='y'&&!a.cadPri||f('cad')==='n'&&a.cadPri)return false;
     if(SEL.health.size&&![...SEL.health].some(h=>h==='late'?isLate(a):h==='soon'?isSoon(a):h==='moved'?isMoved(a):a.status==='open'&&(a.health||'none')===h))return false;
-    if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    if(q){const hay=[a.title,a.owner,a.region,a.group,a.targetGoal,a.milestone,a.cadId,a.cadTarget,a.cadResult,a.cadRisk,a.cadHelp,a.cadNext7,...(a.history||[]).map(n=>n.text),...notesFor(a.id).map(n=>n.text)].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true});
 }
 /* Count tiles are a view on top of the filtered set. Clicking one never changes the counts. */
@@ -840,6 +852,7 @@ function sorter(){const s=$('#f-sort').value;const rank={open:0,paused:1,complet
   if(s==='health')return (rank[a.status]??0)-(rank[b.status]??0)||HRANK[a.health]-HRANK[b.health]||(a.targetDate||'9').localeCompare(b.targetDate||'9');
   if(s==='updated')return (b.updatedAt||'').localeCompare(a.updatedAt||'');
   if(s==='done')return (b.completedAt||'').localeCompare(a.completedAt||'');
+  if(s==='cad')return (a.cadPri||1e9)-(b.cadPri||1e9)||(a.targetDate||'9999').localeCompare(b.targetDate||'9999');
   return (a.targetDate||'9999').localeCompare(b.targetDate||'9999')||(a.order||0)-(b.order||0)}}
 
 function notesFor(pid){return Object.values(S.notes).filter(n=>n.parentId===pid)}
@@ -853,6 +866,7 @@ function kpis(base){
   if($('#f-stale').value)act.push('Open or paused, not updated in '+$('#f-stale').selectedOptions[0].text.toLowerCase());
   if($('#f-upd').value)act.push('Updated in '+$('#f-upd').selectedOptions[0].text.toLowerCase());
   if($('#f-done').value)act.push('Completed in '+$('#f-done').selectedOptions[0].text.toLowerCase());
+  if($('#f-cad').value)act.push($('#f-cad').selectedOptions[0].text);
   $('#viewbar').textContent=(act.length?'Filters: '+act.join(' · '):'No filters applied')+(view?`. Showing ${VIEWS[view][0]} only (click the tile again to show all).`:'');
 }
 
@@ -867,17 +881,22 @@ function strip(a){const open=a.status==='open',due=open&&(a.targetDate||'').star
   return `<span class="strip">${M.map((m,i)=>`<button type="button" class="c ${mo[m]||''}${open&&i===NW?' now':''}${i===due?' due'+(late?' late':''):''}" data-cell="${a.id}" data-m="${m}" aria-label="${m} ${yr}: ${CODES[mo[m]||'']}${i===due?' · due':''}" title="${m} ${yr}: ${CODES[mo[m]||'']}${i===due?(late?' · due (past due)':' · due this month'):''}"></button>`).join('')}</span>`}
 function statusPill(a){const lbl=a.status==='open'?HL[a.health||'none']:a.status==='completed'?'✓ Completed':a.status==='closed'?'Closed':STAT[a.status]||a.status;
   return `<button type="button" class="pill ${a.status==='open'?'h-'+(a.health||'none'):'s-'+a.status}" data-stat="${a.id}" title="${a.autoOff?'Past its target date, so shown as off track. Click to change status':'Change status'}" aria-haspopup="true">${lbl}</button>`}
+const msLate=a=>a.status==='open'&&a.milestoneDate&&a.milestoneDate<today();
+function msLine(a){if(!a.milestone&&!a.milestoneDate)return '<div class="mst"></div>';
+  return `<div class="mst" title="Next milestone: ${esc(a.milestone||'')}${a.milestoneDate?' · due '+fmt(a.milestoneDate):''}"><span class="t">${esc(a.milestone||'Milestone')}</span>${a.milestoneDate?`<span class="dd ${msLate(a)?'late':''}">${fmt(a.milestoneDate)}</span>`:''}</div>`}
 function row(a,ctx){
   const ln=lastNote(a);
   return `<tr class="act ${a.status}" data-id="${a.id}" tabindex="0">
+   <td class="cad" title="${a.cadPri?'CAD priority '+a.cadPri:'Not a CAD priority. Click to set one'}">${a.cadPri?`<span class="cadn">${a.cadPri}</span>`:''}</td>
    <td class="ttl"><div>${a.status==='completed'?'<span class="tick" aria-label="Completed">✓</span> ':''}${esc(a.title)}</div>${ctx?`<div class="ctx">${esc(ctx)}</div>`:''}</td>
    <td>${esc(a.owner)||'<span class="ctx">—</span>'}</td>
    <td>${esc(a.region)||'<span class="ctx">—</span>'}</td>
    <td><span class="date ${isLate(a)?'late':''}">${fmt(a.targetDate)}</span>${isMoved(a)?` <span class="pill moved" title="Originally ${fmt(a.originalDate)}">moved</span>`:''}${a.status==='completed'&&a.completedAt?`<div class="ctx">Done ${fmt(a.completedAt.slice(0,10))}</div>`:''}</td>
    <td>${strip(a)}</td>
    <td>${statusPill(a)}</td>
-   <td class="upd">${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
-const THEAD=()=>`<colgroup><col><col class="c-own"><col class="c-reg"><col class="c-tgt"><col class="c-mon"><col class="c-st"><col class="c-upd"></colgroup><thead><tr><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><div class="yr"><button type="button" data-yr="-1" aria-label="Previous year" ${yr<=YMIN?'disabled':''}>‹</button><span>${yr}</span><button type="button" data-yr="1" aria-label="Next year" ${yr>=YMAX?'disabled':''}>›</button></div><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
+   <td class="upd">${msLine(a)}${ln?`<div class="clamp" title="${esc(ln.text)}">${ln.date?`<span class="d">${fmt(ln.date)}</span> `:''}${esc(ln.text)}</div>`:'<span class="ctx">No updates</span>'}</td></tr>`}
+const cadOn=()=>$('#f-sort').value==='cad'&&$('#f-cad').value==='y';
+const THEAD=()=>`<colgroup><col class="c-cad"><col><col class="c-own"><col class="c-reg"><col class="c-tgt"><col class="c-mon"><col class="c-st"><col class="c-upd"></colgroup><thead><tr><th class="cadh${cadOn()?' on':''}" data-cadsort title="${cadOn()?'Click to go back to the full tracker':'Click to list CAD priorities in rank order'}">CAD<br>Priority</th><th>Action</th><th>Owner</th><th>Region</th><th>Target</th><th><div class="yr"><button type="button" data-yr="-1" aria-label="Previous year" ${yr<=YMIN?'disabled':''}>‹</button><span>${yr}</span><button type="button" data-yr="1" aria-label="Next year" ${yr>=YMAX?'disabled':''}>›</button></div><span class="strip mh">${M.map(m=>`<span>${m[0]}</span>`).join('')}</span></th><th>Status</th><th>Latest update</th></tr></thead>`;
 function healthBar(list){const n=list.length||1,c=k=>list.filter(k).length/n*100;
   return `<span class="bar" title="Completed · on track · at risk · off track · paused"><i style="width:${c(a=>a.status==='completed')}%;background:var(--comp)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='on')}%;background:var(--on)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='risk')}%;background:var(--risk)"></i><i style="width:${c(a=>a.status==='open'&&a.health==='off')}%;background:var(--off)"></i><i style="width:${c(a=>a.status==='paused')}%;background:var(--pause)"></i></span>`}
 
@@ -954,7 +973,7 @@ function render(){
         if(filtersOn&&!ol.length)continue;
         h+=`<div class="obj"><div class="objhead"><h3><span class="num">${oNum(o)}</span>${esc(o.name)}</h3>${healthBar(ol)}<span class="counts">${cnt(ol)}</span><button class="btn ghost" data-open="${o.id}">Notes (${(o.history||[]).length+notesFor(o.id).length})</button></div>`;
         if(ol.length){h+=`<div class="tblwrap"><table>${THEAD()}<tbody>`;let grp=null;
-          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="7">${esc(grp)}</td></tr>`}h+=row(a)}
+          for(const a of ol){if($('#f-sort').value==='order'&&a.group&&a.group!==grp){grp=a.group;h+=`<tr class="grp"><td colspan="8">${esc(grp)}</td></tr>`}h+=row(a)}
           h+='</tbody></table></div>'}
         if(canWrite)h+=`<div class="addrow"><button class="btn ghost" data-add="act" data-obj="${o.id}">+ Add action</button></div>`;
         h+='</div>'}
@@ -1073,6 +1092,10 @@ function drawer(id,refresh){
     const pr=S.pri[a.priorityId],ob=S.obj[a.objectiveId];
     body=`<div class="fgrid">
       <label class="full">Action<textarea id="d-title" rows="2" ${dis}>${esc(a.title)}</textarea></label>
+      <label class="full">Next milestone<input data-f="milestone" value="${esc(a.milestone)}" placeholder="Interim task or checkpoint" ${dis}></label>
+      <label>Milestone due<input type="date" data-f="milestoneDate" value="${esc(a.milestoneDate)}" ${dis}></label>
+      <label>CAD priority #<input type="number" min="1" step="1" id="d-cad" value="${a.cadPri||''}" placeholder="Not a CAD priority" ${dis}>${cadDup(a)}</label>
+      ${canWrite&&!a.archivedAt&&(a.milestone||a.milestoneDate)?`<div class="full msrow"><button class="btn" id="d-msdone" type="button">Mark milestone done</button><span class="ctx">Saves it as a dated update and clears it for the next one.</span></div>`:''}
       <label>Owner(s)<input id="d-owner" value="${esc(a.owner)}" placeholder="e.g. Justin, Kyle" ${dis}></label>
       <label>Region(s)<input id="d-region" value="${esc(a.region)}" placeholder="Global, NA, EMEA…" ${dis}></label>
       <label>Status<select id="d-status" ${dis}>${Object.entries(STAT).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>
@@ -1084,6 +1107,7 @@ function drawer(id,refresh){
       <label class="full">Sub-group<input id="d-group" value="${esc(a.group)}" placeholder="Optional heading inside the objective" ${dis}></label>
       <label class="full">Objective<select id="d-obj" ${dis}>${sortedPri().map(pp=>`<optgroup label="${esc(pp.name)}">${objsOf(pp.id).map(oo=>`<option value="${oo.id}">${esc(oo.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>
     </div>
+    ${a.cadPri?cadSection(a,dis):''}
     <div class="sec"><h4>Monthly status · ${yr}</h4><div class="monthsel">${M.map(m=>`<label>${m}<select data-month="${m}" ${dis}>${Object.entries(CODES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label>`).join('')}</div></div>
     <div class="sec"><h4>Schedule changes</h4><ul class="log">${(a.dateHistory||[]).slice().reverse().map(d=>`<li><div class="meta">${d.at?fmt(d.at.slice(0,10)):'From spreadsheet'}${d.by?' · '+esc(who(d.by)):''}</div>${fmt(d.from)} → ${fmt(d.to)}${d.reason&&d.reason!=='From spreadsheet'?' · '+esc(d.reason):''}</li>`).join('')||'<li class="ctx">Target date has not changed.</li>'}</ul></div>
     <div class="sec"><h4>Updates</h4>${noteForm(a)}<ul class="log" id="d-log" style="margin-top:10px">${logHtml(a)}</ul></div>
@@ -1101,6 +1125,21 @@ function drawer(id,refresh){
   }
   if(keepNote&&$('#d-note'))$('#d-note').value=keepNote;
 }
+/* CAD execution tracker: shown only for actions with a CAD priority #. Values are kept if the # is removed. */
+const CADFN=['Commercial','Marketing','Product Management','Operations','Supply Chain','Service','R&D','Quality/Regulatory','Finance','HR','PMO','Cross-functional','Other'];
+const STAMPED={cadResult:'cadResultAt',cadNext7:'cadNext7At'};
+function cadDup(a){const d=a.cadPri?Object.values(S.act).filter(x=>x.id!==a.id&&!x.archivedAt&&x.cadPri===a.cadPri):[];
+  return d.length?`<span class="fwarn">Also used by: ${d.map(x=>esc(x.title.slice(0,50))).join('; ')}</span>`:''}
+function stampTag(at){if(!at)return '';const d=at.slice(0,10);return `<span class="stamp ${d<daysAgo(7)?'old':''}">· updated ${fmt(d)}</span>`}
+function cadSection(a,dis){
+  const ta=(f,l,r=2)=>`<label class="full">${l} ${STAMPED[f]?stampTag(a[STAMPED[f]]):''}<textarea data-f="${f}" rows="${r}" ${dis}>${esc(a[f])}</textarea></label>`;
+  return `<div class="sec cadsec"><h4>CAD execution tracker · Priority ${a.cadPri}</h4><div class="fgrid">
+    <label>CAD action ID<input data-f="cadId" value="${esc(a.cadId)}" placeholder="From the leadership tracker" ${dis}></label>
+    <label>Function<select data-f="cadFn" ${dis}><option value="">—</option>${CADFN.map(f=>`<option ${a.cadFn===f?'selected':''}>${esc(f)}</option>`).join('')}</select></label>
+    ${ta('cadTarget','Target Q4 outcome')}${ta('cadResult','Latest result vs target')}${ta('cadRisk','Risk / dependency')}${ta('cadHelp','Help / decision needed')}
+    <label>Support / decision owner<input data-f="cadHelpOwner" value="${esc(a.cadHelpOwner)}" ${dis}></label>
+    <label>Help needed by<input type="date" data-f="cadHelpBy" value="${esc(a.cadHelpBy)}" ${dis}></label>
+    ${ta('cadNext7','Action next 7 days',3)}</div></div>`}
 function shell(crumb,title,body){return `<div class="scrim" data-close></div><aside class="drawer" role="dialog" aria-label="Details"><div class="dhead"><div style="flex:1;min-width:0"><div class="crumb">${crumb}</div><h3 style="font-size:17px">${esc(title)}</h3>${canWrite?'':'<div class="ro">View only: you can read but not edit.</div>'}</div><button class="btn" data-close type="button">Close</button></div><div class="dbody">${body}</div></aside>`}
 function closeDrawer(){openId=null;$('#drawer-root').innerHTML=''}
 
@@ -1114,6 +1153,13 @@ async function onField(e){
   const t=e.target;if(!openId||!canWrite)return;const a=S.act[openId];
   if(a){
     const map={'d-title':'title','d-owner':'owner','d-region':'region','d-status':'status','d-health':'health','d-goal':'targetGoal','d-group':'group','d-orig':'originalDate'};
+    if(t.dataset.f){const f=t.dataset.f,v=t.value.trim();if(v===(a[f]||''))return;
+      const patch={[f]:v,...stamp()};if(STAMPED[f])patch[STAMPED[f]]=new Date().toISOString();
+      if(await write('actions',a.id,patch,f==='milestone'||f==='milestoneDate'?'Milestone saved':'Saved')&&STAMPED[f]){const l=t.closest('label');l.querySelector('.stamp')?.remove();l.firstChild.after(document.createRange().createContextualFragment(' '+stampTag(patch[STAMPED[f]])))}return}
+    if(t.id==='d-cad'){const raw=t.value.trim(),n=raw===''?'':Math.round(+raw);if(n!==''&&!(n>=1)){toast('Use a whole number from 1 up, or leave it blank.');return}
+      if(n===(a.cadPri||''))return;
+      if(await write('actions',a.id,{cadPri:n,...stamp()},n?`CAD priority set to ${n}`:'CAD priority removed. Its CAD details are kept.')){
+        Object.assign(a,{cadPri:n});if(cadDup(a))toast(`CAD priority ${n} is also used by another action.`);drawer(a.id)}return}
     if(map[t.id]){const v=t.value.trim();if(v===(a[map[t.id]]||''))return;
       const patch={[map[t.id]]:v,...stamp()};
       if(t.id==='d-status'){await setStatus(a,v);return}
@@ -1132,6 +1178,11 @@ async function addNote(){
   const txt=$('#d-note').value.trim();if(!txt||!db)return;uid=TrackerStore.name();
   try{await db.collection('notes').add({parentId:openId,text:txt,at:new Date().toISOString(),by:uid||''});$('#d-note').value='';
     if(S.act[openId])await write('actions',openId,stamp());toast('Update added')}catch(e){toast('Could not add the update.')}}
+async function msDone(){
+  const a=S.act[openId];if(!a||!db||(!a.milestone&&!a.milestoneDate))return;uid=TrackerStore.name();
+  try{await db.collection('notes').add({parentId:a.id,text:`Milestone done: ${a.milestone||'(no description)'}${a.milestoneDate?' (due '+fmt(a.milestoneDate)+')':''}`,at:new Date().toISOString(),by:uid||''});
+    if(await write('actions',a.id,{milestone:'',milestoneDate:'',...stamp()},'Milestone logged as an update and cleared')){Object.assign(a,{milestone:'',milestoneDate:''});drawer(a.id)}}
+  catch(e){toast('Could not log the milestone.')}}
 let pendingDel=null;
 async function delItem(btn){
   if(pendingDel!==openId){pendingDel=openId;btn.textContent=S.act[openId]?'Click again to archive':'Click again to confirm delete';btn.style.color='var(--off)';return}
@@ -1525,10 +1576,12 @@ document.addEventListener('click',e=>{
   if(st){e.stopPropagation();return popFor?.kind==='stat'&&popFor.id===st.dataset.stat?closePop():openStat(st)}
   if(ms){return popFor?.kind==='ms'&&popFor.k===ms.dataset.ms?closePop():openMs(ms)}
   if(!e.target.closest('.pop'))closePop();
-  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-tab],[data-top],[data-goobj],[data-delnote],tr.act,#d-addnote,#d-del,#f-clear');if(!t)return;
+  const t=e.target.closest('[data-close],[data-open],[data-add],[data-k],[data-tab],[data-top],[data-goobj],[data-delnote],[data-cadsort],tr.act,#d-addnote,#d-msdone,#d-del,#f-clear');if(!t)return;
   if(t.matches('[data-close]'))return closeDrawer();
   if(t.matches('[data-open]'))return drawer(t.dataset.open);
-  if(t.matches('tr.act'))return drawer(t.dataset.id);
+  if(t.matches('[data-cadsort]'))return cadSort();
+  if(t.matches('tr.act')){drawer(t.dataset.id);if(e.target.closest('td.cad'))$('#d-cad')?.focus();return}
+  if(t.id==='d-msdone')return msDone();
   if(t.matches('[data-add]'))return addItem(t);
   if(t.id==='d-addnote')return addNote();
   if(t.id==='d-del')return delItem(t);
@@ -1539,6 +1592,12 @@ document.addEventListener('click',e=>{
   if(t.matches('[data-tab]')){tab=t.dataset.tab;closePop();savePrefs();render();window.scrollTo(0,0)}
   if(t.matches('[data-goobj]')){const o=S.obj[t.dataset.goobj];SEL.obj=new Set([o.id]);SEL.pri=new Set([o.priorityId]);tab='tracker';refreshFilters();savePrefs();render();window.scrollTo(0,0)}
 });
+/* CAD Priority header: one click shows only CAD priorities, ranked, in one list; the next click restores the previous view. */
+let cadPrev=null;
+function cadSort(){
+  if(cadOn()){const p=cadPrev||{sort:'date',cad:'',group:'tree'};['sort','cad','group'].forEach(k=>$('#f-'+k).value=p[k]);cadPrev=null}
+  else{cadPrev={sort:$('#f-sort').value,cad:$('#f-cad').value,group:$('#f-group').value};$('#f-sort').value='cad';$('#f-cad').value='y';$('#f-group').value='flat'}
+  savePrefs();render()}
 window.addEventListener('resize',closePop);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&popFor){closePop();return}if(e.key==='Escape'&&openId)closeDrawer();if(e.key==='Enter'&&e.target.matches('tr.act'))drawer(e.target.dataset.id);if(e.key==='Enter'&&e.target.matches('[data-goobj]'))e.target.click()});
 $('#drawer-root').addEventListener('change',onField);
