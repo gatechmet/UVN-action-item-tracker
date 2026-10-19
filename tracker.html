@@ -821,6 +821,7 @@ function drawer(id,refresh){
 }
 /* CAD execution tracker: shown only for actions with a CAD priority #. Values are kept if the # is removed. */
 const CADFN=['Commercial','Marketing','Product management','Operations','Supply chain','Service','R&D','Quality / Regulatory','Finance','HR','PMO','Cross-functional','Other'];
+const CADBU=['UVNN','VIB','FSI-Radiation','FSI-Molecular','FSI-Elemental'];
 const STAMPED={cadResult:'cadResultAt',cadNext7:'cadNext7At'};
 function cadDup(a){const d=a.cadPri?Object.values(S.act).filter(x=>x.id!==a.id&&!x.archivedAt&&x.cadPri===a.cadPri):[];
   return d.length?`<span class="fwarn">Also used by: ${d.map(x=>esc(x.title.slice(0,50))).join('; ')}</span>`:''}
@@ -829,6 +830,7 @@ function cadSection(a,dis){
   const ta=(f,l,r=2)=>`<label class="full">${l} ${STAMPED[f]?stampTag(a[STAMPED[f]]):''}<textarea data-f="${f}" rows="${r}" ${dis}>${esc(a[f])}</textarea></label>`;
   return `<div class="sec cadsec"><h4>CAD execution tracker · Priority ${a.cadPri}</h4><div class="fgrid">
     <label>CAD action ID<input data-f="cadId" value="${esc(a.cadId)}" placeholder="From the leadership tracker" ${dis}></label>
+    <label>Business unit<select data-f="cadBU" ${dis}>${CADBU.map(b=>`<option ${(a.cadBU||'UVNN')===b?'selected':''}>${b}</option>`).join('')}</select></label>
     <label>Function<select data-f="cadFn" ${dis}><option value="">—</option>${CADFN.map(f=>`<option ${a.cadFn===f?'selected':''}>${esc(f)}</option>`).join('')}</select></label>
     ${ta('cadTarget','Target Q4 outcome')}${ta('cadResult','Latest result vs target')}${ta('cadRisk','Risk / dependency')}${ta('cadHelp','Help / decision needed')}
     <label>Support / decision owner<input data-f="cadHelpOwner" value="${esc(a.cadHelpOwner)}" ${dis}></label>
@@ -1294,7 +1296,7 @@ function xStatus(a){return a.status==='completed'?'Complete':a.status==='closed'
 function xRows(){
   const d=x=>x?{d:x.slice(0,10)}:'';
   return Object.values(S.act).filter(a=>a.cadPri&&!a.archivedAt).sort((a,b)=>a.cadPri-b.cadPri||(a.targetDate||'').localeCompare(b.targetDate||'')).map(a=>[
-    a.cadId||'','UVNN',XFN[a.cadFn]||a.cadFn||'',a.prioLevel||'',a.title||'',a.cadTarget||'',a.owner||'',d(a.originalDate),d(a.targetDate),xStatus(a),
+    a.cadId||'',a.cadBU||'UVNN',XFN[a.cadFn]||a.cadFn||'',a.prioLevel||'',a.title||'',a.cadTarget||'',a.owner||'',d(a.originalDate),d(a.targetDate),xStatus(a),
     a.milestone||'',d(a.milestoneDate),a.cadRisk||'',a.cadHelp||'',a.cadHelpOwner||'',d(a.cadHelpBy),a.cadResult||'',a.cadNext7||'',
     d([lastUpd(a),(a.cadResultAt||'').slice(0,10),(a.cadNext7At||'').slice(0,10)].sort().pop()),
     d(a.status==='completed'?a.completedAt:a.status==='closed'?(a.closedAt||a.updatedAt):'')])}
