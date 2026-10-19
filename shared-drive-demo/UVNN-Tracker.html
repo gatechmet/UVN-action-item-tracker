@@ -1613,7 +1613,7 @@ function xRows(){
   return Object.values(S.act).filter(a=>a.cadPri&&!a.archivedAt).sort((a,b)=>a.cadPri-b.cadPri||(a.targetDate||'').localeCompare(b.targetDate||'')).map(a=>[
     a.cadId||'',a.cadBU||'UVNN',XFN[a.cadFn]||a.cadFn||'',a.prioLevel||'',a.title||'',a.cadTarget||'',a.owner||'',d(a.originalDate),d(a.targetDate),xStatus(a),
     a.milestone||'',d(a.milestoneDate),a.cadRisk||'',a.cadHelp||'',a.cadHelpOwner||'',d(a.cadHelpBy),a.cadResult||'',a.cadNext7||'',
-    d([lastUpd(a),(a.cadResultAt||'').slice(0,10),(a.cadNext7At||'').slice(0,10)].sort().pop()),
+    d(lastNote(a)?.date||''),  /* Last updated = date of the latest saved update (note) on the action */
     d(a.status==='completed'?a.completedAt:a.status==='closed'?(a.closedAt||a.updatedAt):'')])}
 function copyCad(){
   const rows=xRows();if(!rows.length){toast('No CAD priorities to copy. Set a CAD priority # on an action first.');return}
